@@ -49,7 +49,7 @@
     // Do any additional setup after loading the view.
 }
 
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
@@ -62,7 +62,7 @@
 
 #pragma mark - Init Views
 
--(void)initSubViews{
+- (void)initSubViews{
     
     _registerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 35)];
     _registerLabel.text = @"注册";
@@ -150,11 +150,11 @@
 
 #pragma mark - Actions
 
--(void)backBtnClicked:(UIButton*)sender{
+- (void)backBtnClicked:(UIButton*)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)registerBtnClicked:(UIButton*)sender{
+- (void)registerBtnClicked:(UIButton*)sender{
     
     [self.view endEditing:YES];
     

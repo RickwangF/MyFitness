@@ -53,7 +53,7 @@
     return self;
 }
     
--(void)initValueProperty{
+- (void)initValueProperty{
     _subViewControllers = [[NSMutableArray alloc] init];
     _transportMode = TransportModeRunning;
     NSString *path = [[NSBundle mainBundle] pathForResource:@"map_config.json" ofType:@""];
@@ -86,7 +86,7 @@
     // Do any additional setup after loading the view.
 }
 	
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
 	[BMKMapView enableCustomMapStyle:YES];
 	[_locationManager startUpdatingHeading];
@@ -94,7 +94,7 @@
 	
 }
     
--(void)viewWillDisappear:(BOOL)animated{
+- (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [BMKMapView enableCustomMapStyle:NO];
 	[_locationManager stopUpdatingHeading];
@@ -103,7 +103,7 @@
     
 #pragma mark - Init View
     
--(void)initLeftSideBtn{
+- (void)initLeftSideBtn{
     UIButton *leftSideBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
     [leftSideBtn setImage:[UIImage imageNamed:@"mine_25#ff"] forState:UIControlStateNormal];
     [leftSideBtn addTarget:self action:@selector(leftSideBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -111,9 +111,9 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftSideBtn];
 }
     
--(void)initMapView{
+- (void)initMapView{
     _mapView = [[BMKMapView alloc] initWithFrame: UIScreen.mainScreen.bounds];
-    [self.view addSubview: self.mapView];
+    [self.view addSubview: _mapView];
     [BMKMapView enableCustomMapStyle:YES];
     [_mapView setMapType:BMKMapTypeStandard];
     _mapView.delegate = self;
@@ -132,7 +132,7 @@
     }];
 }
     
--(void) updateLocationViewParam{
+- (void)updateLocationViewParam{
     BMKLocationViewDisplayParam *displayParam = [[BMKLocationViewDisplayParam alloc] init];
     displayParam.isRotateAngleValid = YES;
     displayParam.isAccuracyCircleShow = NO;
@@ -144,7 +144,7 @@
 	
 #pragma mark - Init Property
 
--(void)initlocationManager{
+- (void)initlocationManager{
     _locationManager = [[BMKLocationManager alloc] init];
     _locationManager.delegate = self;
     _locationManager.coordinateType = BMKLocationCoordinateTypeBMK09LL;
@@ -157,7 +157,7 @@
     _locationManager.reGeocodeTimeout = 10;
 }
 	
--(void)initPageMenu{
+- (void)initPageMenu{
 	PageItemViewController *runningVC = [[PageItemViewController alloc] init];
 	runningVC.title = @"跑步";
 	runningVC.delegate = self;
@@ -194,7 +194,7 @@
     
 #pragma mark - Action
     
--(void)leftSideBtnClicked:(UIButton*)sender{
+- (void)leftSideBtnClicked:(UIButton*)sender{
     [self presentViewController:SideMenuManager.defaultManager.menuLeftNavigationController animated:YES completion:nil];
 }
     
@@ -240,7 +240,7 @@
 
 #pragma mark - SubViewControllerDelegate
 	
--(void)subViewControllerMakePush{
+- (void)subViewControllerMakePush{
 	
 	if([AVUser currentUser] == nil) {
 		LoginViewController *loginVC = [[LoginViewController alloc] init];
@@ -253,7 +253,7 @@
 	[self.navigationController pushViewController:counterVC animated:YES];
 }
 	
--(void)leftSideViewControllerMakePush{
+- (void)leftSideViewControllerMakePush{
 	if([AVUser currentUser] == nil) {
 		LoginViewController *loginVC = [[LoginViewController alloc] init];
 		UINavigationController *naviVC = [[UINavigationController alloc] initWithRootViewController:loginVC];

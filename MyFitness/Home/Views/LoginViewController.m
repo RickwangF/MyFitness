@@ -51,7 +51,7 @@
     // Do any additional setup after loading the view.
 }
 
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
@@ -64,7 +64,7 @@
 
 #pragma mark - Init Views
 
--(void)initSubViews{
+- (void)initSubViews{
     
     _loginLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 35)];
     _loginLabel.text = @"登录";
@@ -164,16 +164,16 @@
 
 #pragma mark - Actions
 
--(void)backBtnClicked:(UIButton*)sender{
+- (void)backBtnClicked:(UIButton*)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)registerBtnClicked:(UIButton*)sender{
+- (void)registerBtnClicked:(UIButton*)sender{
     RegisterViewController *registerVC = [[RegisterViewController alloc] init];
     [self.navigationController pushViewController:registerVC animated:YES];
 }
 
--(void)loginBtnClicked:(UIButton*)sender{
+- (void)loginBtnClicked:(UIButton*)sender{
     [self.view endEditing:YES];
     
     NSString *loginName = self.loginNameTextField.text;

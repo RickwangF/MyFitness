@@ -18,6 +18,7 @@
 #import "MZTimerLabel.h"
 #import "AppStyleSetting.h"
 #import "CircleProgressButton.h"
+#import "TrackDetailViewController.h"
 
 @interface CounterViewController ()<BTKTraceDelegate, BMKLocationManagerDelegate>
 
@@ -106,7 +107,7 @@
 	
 #pragma mark - Init Property
 	
--(void)initValueProperty{
+- (void)initValueProperty{
 	_number = 3;
 	_firstLoad = YES;
 	_lastLocation = [[BMKLocation alloc] init];
@@ -117,7 +118,7 @@
 	_speed = 0;
 }
 	
--(void)initlocationManager{
+- (void)initlocationManager{
 	_locationManager = [[BMKLocationManager alloc] init];
 	_locationManager.delegate = self;
 	_locationManager.coordinateType = BMKLocationCoordinateTypeBMK09LL;
@@ -176,6 +177,7 @@
 	
 	// 第一次加载的时候默认开始
 	if (_firstLoad) {
+		_firstLoad = NO;
 		[_timeCountingLabel start];
 		[_locationManager startUpdatingLocation];
 		[self startService];
@@ -192,7 +194,7 @@
 	
 #pragma mark - Init Views
 	
--(void) initBackgroundView{
+- (void)initBackgroundView{
 	_bottomBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 375, 140)];
 	_bottomBackgroundView.backgroundColor = [UIColor blackColor];
 	[self.view addSubview:_bottomBackgroundView];
@@ -213,7 +215,7 @@
 	}];
 }
 	
--(void) initPauseBtn{
+- (void)initPauseBtn{
 	CGFloat bottomXcenter = self.view.center.x - 52.5;
 	CGFloat originY = self.view.bounds.size.height - 140 - 52.5;
 	_pauseBtn = [[UIButton alloc] initWithFrame:CGRectMake(bottomXcenter, originY, 105, 105)];
@@ -225,7 +227,7 @@
 	[self.view addSubview:_pauseBtn];
 }
 	
--(void) initResumeBtn{
+- (void)initResumeBtn{
 	_resumeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.centerOriginX, self.centerOriginY, 80, 80)];
 	_resumeBtn.backgroundColor = [UIColor whiteColor];
 	[_resumeBtn setImage:[UIImage imageNamed:@"start_24#17b35d"] forState:UIControlStateNormal];
@@ -237,7 +239,7 @@
 	[self.view addSubview:_resumeBtn];
 }
 	
--(void) initStopBtn{
+- (void)initStopBtn{
 	_stopBtn = [[CircleProgressButton alloc] initWithFrame:CGRectMake(self.centerOriginX - 10, self.centerOriginY - 10, 100, 100)];
 	[_stopBtn setProgressBtnBackgroundColor:AppStyleSetting.sharedInstance.viewBgColor];
 	[_stopBtn setProgressColor:UIColor.whiteColor];
@@ -250,7 +252,7 @@
 }
 	
 	//104 158 144
--(void) initDistanceLabel{
+- (void)initDistanceLabel{
 	_distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 100)];
 	_distanceLabel.text = @"0.00";
 	_distanceLabel.font = [UIFont systemFontOfSize:100];
@@ -276,7 +278,7 @@
 	}];
 }
 	
--(void) initTimeCountingLabel{
+- (void)initTimeCountingLabel{
 	_timeCountingLabel = [[MZTimerLabel alloc] initWithTimerType:MZTimerLabelTypeStopWatch];
 	_timeCountingLabel.frame = CGRectMake(0, 0, 100, 26);
 	_timeCountingLabel.textColor = [UIColor whiteColor];
@@ -303,7 +305,7 @@
 	}];
 }
 	
--(void) initSpeedLabel{
+- (void)initSpeedLabel{
 	_speedLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 26)];
 	_speedLabel.text = @"0";
 	_speedLabel.font = [UIFont systemFontOfSize:24];
@@ -331,7 +333,7 @@
 	
 #pragma mark - Action
 	
--(void) startService{
+- (void)startService{
 	NSString *userName = [AVUser currentUser].username;
 	BTKStartServiceOption *opt = [[BTKStartServiceOption alloc] initWithEntityName:userName];
 	[[BTKAction sharedInstance] startService:opt delegate:self];
@@ -339,23 +341,23 @@
 	[self.view makeToast:@"开始服务并开始采集轨迹"];
 }
 	
--(void) stopGather{
+- (void)stopGather{
 	[[BTKAction sharedInstance] stopGather:self];
 	[self.view makeToast:@"停止采集轨迹"];
 }
 	
--(void) startGather{
+- (void)startGather{
 	[[BTKAction sharedInstance] startGather:self];
 	[self.view makeToast:@"开始采集轨迹"];
 }
 	
--(void) stopService{
+- (void)stopService{
 	[[BTKAction sharedInstance] stopGather:self];
 	[[BTKAction sharedInstance] stopService:self];
 	[self.view makeToast:@"关闭轨迹采集服务"];
 }
 	
--(void) constructTrackRecord{
+- (void)constructTrackRecord{
 	_trackRecord = [AVObject objectWithClassName:@"TrackRecord"];
 	
 	double timeInterval = [_timeCountingLabel getTimeCounted];
@@ -390,16 +392,16 @@
 	[_trackRecord setObject:[NSNumber numberWithInt: _transportMode] forKey:@"transportMode"];
 }
 	
--(void) saveTrackRecord{
+- (void)saveTrackRecord{
 	// 构造轨迹记录模型
 	[self constructTrackRecord];
 	
 	[_trackRecord saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
 		if (succeeded) {
 			[self.view makeToast:@"记录保存成功"];
-			// 打开轨迹记录的详细VC
-			//TrackDetailViewController *detailVC = [[TrackDetailViewController alloc] initWithStartTime:self.startTime FinishedTime:self.finishedTime TrackId:self.trackRecord.objectId TransportMode:self.transportMode];
-			//[self.navigationController pushViewController:detailVC animated:YES];
+			// 打开轨迹记录的详细
+			TrackDetailViewController *detailVC = [[TrackDetailViewController alloc] initWithStartTime:self.startDate FinishTime:self.finishDate TransportMode:self.transportMode TrackId:self.trackRecord.objectId];
+			[self.navigationController pushViewController:detailVC animated:YES];
 		}
 		else{
 			if (error == nil) {
@@ -413,7 +415,7 @@
 }
 
 	
--(void) pauseBtnClicked:(UIButton*)sender{
+- (void)pauseBtnClicked:(UIButton*)sender{
 	[_timeCountingLabel pause];
 	_resumeBtn.alpha = 1;
 	_stopBtn.alpha = 1;
@@ -434,7 +436,7 @@
 	}];
 }
 	
--(void) resumeBtnClicked:(UIButton*)sender{
+- (void)resumeBtnClicked:(UIButton*)sender{
 	[_timeCountingLabel start];
 	
 	[_locationManager startUpdatingLocation];
@@ -453,14 +455,20 @@
 	}];
 }
 	
--(void) stopBtnClicked{
+- (void)stopBtnClicked{
 	_finishDate = [NSDate date];
 	[self stopService];
 	[_locationManager stopUpdatingLocation];
-	[self saveTrackRecord];
+	
+	// 测试代码
+	TrackDetailViewController *detailVC = [[TrackDetailViewController alloc] initWithStartTime:self.startDate FinishTime:self.finishDate TransportMode:self.transportMode TrackId:@"12312312398787"];
+	[self.navigationController pushViewController:detailVC animated:YES];
+	
+	// 正式代码
+	//[self saveTrackRecord];
 }
 	
--(void) calculateDistance{
+- (void)calculateDistance{
 	CLLocation *last = _lastLocation.location;
 	CLLocation *current = _currentLocation.location;
 	CLLocationDistance pointsDistance = [current distanceFromLocation:last];
@@ -469,7 +477,7 @@
 	}
 }
 	
--(void) refreshDisplayData{
+- (void)refreshDisplayData{
 	_distanceLabel.text = [NSString stringWithFormat:@"%.2f", _distance / 1000];
 	_speedLabel.text = [NSString stringWithFormat:@"%.1f", _speed];
 }

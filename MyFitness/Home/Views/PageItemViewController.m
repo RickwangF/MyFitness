@@ -47,7 +47,7 @@
 	
 #pragma mark - Init View
 	
--(void)initStartBtn{
+- (void)initStartBtn{
 	self.startBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
 	[self.startBtn setTitle:@"开始" forState:UIControlStateNormal];
 	[self.startBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
@@ -67,7 +67,7 @@
 	
 #pragma mark - Action
 	
--(void)startBtnClicked:(UIButton*)sender{
+- (void)startBtnClicked:(UIButton*)sender{
 	if (self.delegate != nil) {
 		[self.delegate subViewControllerMakePush];
 	}

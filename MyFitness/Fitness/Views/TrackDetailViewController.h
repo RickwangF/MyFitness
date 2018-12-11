@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TransportModeEnum.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TrackDetailViewController : UIViewController
+	
+- (instancetype)initWithStartTime:(NSDate*)start FinishTime:(NSDate*)finish TransportMode:(TransportModeEnum)mode TrackId:(NSString*)objectId;
 
 @end
 

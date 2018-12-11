@@ -21,7 +21,13 @@ NS_ASSUME_NONNULL_BEGIN
 	
 @property (nonatomic, strong) UIColor *textColor;
 	
+@property (nonatomic, strong) UIColor *smallTextColor;
+	
 @property (nonatomic, strong) UIColor *mainColor;
+	
+@property (nonatomic, strong) UIColor *separatorColor;
+	
+@property (nonatomic, strong) UIColor *lightSeparatorColor;
 	
 +(AppStyleSetting*)sharedInstance;
 
