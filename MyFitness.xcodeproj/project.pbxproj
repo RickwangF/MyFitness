@@ -30,6 +30,14 @@
 		0F2AB5C121BDFC55006FB503 /* MZTimerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5BD21BDFC55006FB503 /* MZTimerLabel.m */; };
 		0F2AB5C421BDFE57006FB503 /* UIDevice+Type.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5C321BDFE57006FB503 /* UIDevice+Type.m */; };
 		0F2AB5CA21BE0ECA006FB503 /* UIViewController+topVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5C921BE0ECA006FB503 /* UIViewController+topVC.m */; };
+		0F2AB5CD21BE2EFD006FB503 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5CC21BE2EFD006FB503 /* HomeViewController.m */; };
+		0F2AB5CF21BE326B006FB503 /* map_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F2AB5CE21BE326A006FB503 /* map_config.json */; };
+		0F2AB5D321BE3B86006FB503 /* AppStyleSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5D221BE3B86006FB503 /* AppStyleSetting.m */; };
+		0F2AB5D621BE41F4006FB503 /* PageItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5D521BE41F4006FB503 /* PageItemViewController.m */; };
+		0F2AB5DA21BE54C8006FB503 /* CounterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5D921BE54C8006FB503 /* CounterViewController.m */; };
+		0F2AB5DF21BE8BEB006FB503 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5DC21BE8BEB006FB503 /* RegisterViewController.m */; };
+		0F2AB5E021BE8BEB006FB503 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5DE21BE8BEB006FB503 /* LoginViewController.m */; };
+		0F2AB5E321BF59E7006FB503 /* TrackDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5E221BF59E7006FB503 /* TrackDetailViewController.m */; };
 		1D71F247864DED889DD73337 /* Pods_MyFitness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 813B8380172CDC392FFEE040 /* Pods_MyFitness.framework */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +99,22 @@
 		0F2AB5C321BDFE57006FB503 /* UIDevice+Type.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Type.m"; sourceTree = "<group>"; };
 		0F2AB5C821BE0ECA006FB503 /* UIViewController+topVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+topVC.h"; sourceTree = "<group>"; };
 		0F2AB5C921BE0ECA006FB503 /* UIViewController+topVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+topVC.m"; sourceTree = "<group>"; };
+		0F2AB5CB21BE2EFD006FB503 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		0F2AB5CC21BE2EFD006FB503 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		0F2AB5CE21BE326A006FB503 /* map_config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = map_config.json; sourceTree = "<group>"; };
+		0F2AB5D121BE3B86006FB503 /* AppStyleSetting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppStyleSetting.h; sourceTree = "<group>"; };
+		0F2AB5D221BE3B86006FB503 /* AppStyleSetting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppStyleSetting.m; sourceTree = "<group>"; };
+		0F2AB5D421BE41F4006FB503 /* PageItemViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PageItemViewController.h; sourceTree = "<group>"; };
+		0F2AB5D521BE41F4006FB503 /* PageItemViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PageItemViewController.m; sourceTree = "<group>"; };
+		0F2AB5D721BE42C1006FB503 /* SubViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubViewControllerDelegate.h; sourceTree = "<group>"; };
+		0F2AB5D821BE54C8006FB503 /* CounterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CounterViewController.h; sourceTree = "<group>"; };
+		0F2AB5D921BE54C8006FB503 /* CounterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CounterViewController.m; sourceTree = "<group>"; };
+		0F2AB5DB21BE8BEB006FB503 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		0F2AB5DC21BE8BEB006FB503 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		0F2AB5DD21BE8BEB006FB503 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		0F2AB5DE21BE8BEB006FB503 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		0F2AB5E121BF59E7006FB503 /* TrackDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrackDetailViewController.h; sourceTree = "<group>"; };
+		0F2AB5E221BF59E7006FB503 /* TrackDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackDetailViewController.m; sourceTree = "<group>"; };
 		59F9445866E2F2A94B5B1C20 /* Pods-MyFitness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFitness.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFitness/Pods-MyFitness.release.xcconfig"; sourceTree = "<group>"; };
 		813B8380172CDC392FFEE040 /* Pods_MyFitness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFitness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDD294776D9E4C7A886FEFC /* Pods-MyFitness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFitness.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFitness/Pods-MyFitness.debug.xcconfig"; sourceTree = "<group>"; };
@@ -112,6 +136,7 @@
 		0F2AB56221BDF1FD006FB503 = {
 			isa = PBXGroup;
 			children = (
+				0F2AB5CE21BE326A006FB503 /* map_config.json */,
 				0F2AB59021BDF99F006FB503 /* BaiduTraceSDK.framework */,
 				0F2AB58921BDF6C4006FB503 /* mapapi.bundle */,
 				0F2AB56D21BDF1FD006FB503 /* MyFitness */,
@@ -134,12 +159,12 @@
 			children = (
 				0F2AB59B21BDFB19006FB503 /* UserCenter */,
 				0F2AB59821BDFAD6006FB503 /* Fitness */,
-				0F2AB59621BDFA89006FB503 /* Utils */,
 				0F2AB59321BDFA2D006FB503 /* Home */,
-				0F2AB56E21BDF1FD006FB503 /* AppDelegate.h */,
-				0F2AB56F21BDF1FD006FB503 /* AppDelegate.m */,
+				0F2AB59621BDFA89006FB503 /* Utils */,
 				0F2AB57121BDF1FD006FB503 /* ViewController.h */,
 				0F2AB57221BDF1FD006FB503 /* ViewController.m */,
+				0F2AB56F21BDF1FD006FB503 /* AppDelegate.m */,
+				0F2AB56E21BDF1FD006FB503 /* AppDelegate.h */,
 				0F2AB57421BDF1FD006FB503 /* Main.storyboard */,
 				0F2AB57721BDF1FF006FB503 /* Assets.xcassets */,
 				0F2AB57921BDF1FF006FB503 /* LaunchScreen.storyboard */,
@@ -162,6 +187,14 @@
 		0F2AB59421BDFA4A006FB503 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0F2AB5CB21BE2EFD006FB503 /* HomeViewController.h */,
+				0F2AB5CC21BE2EFD006FB503 /* HomeViewController.m */,
+				0F2AB5D421BE41F4006FB503 /* PageItemViewController.h */,
+				0F2AB5D521BE41F4006FB503 /* PageItemViewController.m */,
+				0F2AB5DD21BE8BEB006FB503 /* LoginViewController.h */,
+				0F2AB5DE21BE8BEB006FB503 /* LoginViewController.m */,
+				0F2AB5DB21BE8BEB006FB503 /* RegisterViewController.h */,
+				0F2AB5DC21BE8BEB006FB503 /* RegisterViewController.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -176,6 +209,9 @@
 		0F2AB59621BDFA89006FB503 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				0F2AB5D721BE42C1006FB503 /* SubViewControllerDelegate.h */,
+				0F2AB5D121BE3B86006FB503 /* AppStyleSetting.h */,
+				0F2AB5D221BE3B86006FB503 /* AppStyleSetting.m */,
 				0F2AB5C821BE0ECA006FB503 /* UIViewController+topVC.h */,
 				0F2AB5C921BE0ECA006FB503 /* UIViewController+topVC.m */,
 				0F2AB5C221BDFE57006FB503 /* UIDevice+Type.h */,
@@ -186,12 +222,10 @@
 				0F2AB5AA21BDFC42006FB503 /* NSString+NSDate.m */,
 				0F2AB5A821BDFC42006FB503 /* ProjectConst.h */,
 				0F2AB5A321BDFC41006FB503 /* ProjectConst.m */,
-				0F2AB5A021BDFC41006FB503 /* TransportModeEnum.h */,
 				0F2AB5AC21BDFC42006FB503 /* UIColor+UIColor_Hex.h */,
 				0F2AB5A921BDFC42006FB503 /* UIColor+UIColor_Hex.m */,
 				0F2AB5A121BDFC41006FB503 /* UIImage+UIColor.h */,
 				0F2AB59F21BDFC41006FB503 /* UIImage+UIColor.m */,
-				0F2AB58721BDF5DF006FB503 /* RootNaviViewController.swift */,
 				0F2AB59721BDFAB2006FB503 /* Views */,
 			);
 			path = Utils;
@@ -200,6 +234,7 @@
 		0F2AB59721BDFAB2006FB503 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0F2AB58721BDF5DF006FB503 /* RootNaviViewController.swift */,
 				0F2AB5BA21BDFC55006FB503 /* CAPSPageMenu.h */,
 				0F2AB5BC21BDFC55006FB503 /* CAPSPageMenu.m */,
 				0F2AB5B521BDFC55006FB503 /* CircleProgressButton.h */,
@@ -225,6 +260,10 @@
 		0F2AB59921BDFB03006FB503 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0F2AB5D821BE54C8006FB503 /* CounterViewController.h */,
+				0F2AB5D921BE54C8006FB503 /* CounterViewController.m */,
+				0F2AB5E121BF59E7006FB503 /* TrackDetailViewController.h */,
+				0F2AB5E221BF59E7006FB503 /* TrackDetailViewController.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -232,6 +271,7 @@
 		0F2AB59A21BDFB0B006FB503 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0F2AB5A021BDFC41006FB503 /* TransportModeEnum.h */,
 				0F2AB5AD21BDFC42006FB503 /* MFLocation.h */,
 				0F2AB5A521BDFC42006FB503 /* MFLocation.m */,
 				0F2AB59E21BDFC41006FB503 /* RegionInsets.h */,
@@ -350,6 +390,7 @@
 			files = (
 				0F2AB57B21BDF1FF006FB503 /* LaunchScreen.storyboard in Resources */,
 				0F2AB58A21BDF6C4006FB503 /* mapapi.bundle in Resources */,
+				0F2AB5CF21BE326B006FB503 /* map_config.json in Resources */,
 				0F2AB57821BDF1FF006FB503 /* Assets.xcassets in Resources */,
 				0F2AB57621BDF1FD006FB503 /* Main.storyboard in Resources */,
 			);
@@ -406,6 +447,7 @@
 				"${BUILT_PRODUCTS_DIR}/CHIPageControl/CHIPageControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/MBCircularProgressBar/MBCircularProgressBar.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/STPopup/STPopup.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
@@ -418,6 +460,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHIPageControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBCircularProgressBar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/STPopup.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
@@ -435,14 +478,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F2AB5DA21BE54C8006FB503 /* CounterViewController.m in Sources */,
+				0F2AB5E021BE8BEB006FB503 /* LoginViewController.m in Sources */,
 				0F2AB58821BDF5DF006FB503 /* RootNaviViewController.swift in Sources */,
 				0F2AB5B221BDFC42006FB503 /* TrackRecord.m in Sources */,
+				0F2AB5D621BE41F4006FB503 /* PageItemViewController.m in Sources */,
 				0F2AB57321BDF1FD006FB503 /* ViewController.m in Sources */,
 				0F2AB57E21BDF1FF006FB503 /* main.m in Sources */,
 				0F2AB5BE21BDFC55006FB503 /* CircleProgressButton.m in Sources */,
+				0F2AB5CD21BE2EFD006FB503 /* HomeViewController.m in Sources */,
 				0F2AB5C421BDFE57006FB503 /* UIDevice+Type.m in Sources */,
 				0F2AB5B121BDFC42006FB503 /* MFLocation.m in Sources */,
 				0F2AB5C021BDFC55006FB503 /* CAPSPageMenu.m in Sources */,
+				0F2AB5DF21BE8BEB006FB503 /* RegisterViewController.m in Sources */,
+				0F2AB5E321BF59E7006FB503 /* TrackDetailViewController.m in Sources */,
 				0F2AB5B321BDFC42006FB503 /* UIColor+UIColor_Hex.m in Sources */,
 				0F2AB5CA21BE0ECA006FB503 /* UIViewController+topVC.m in Sources */,
 				0F2AB5B021BDFC42006FB503 /* NSDate+NSString.m in Sources */,
@@ -452,6 +501,7 @@
 				0F2AB5B421BDFC42006FB503 /* NSString+NSDate.m in Sources */,
 				0F2AB5AE21BDFC42006FB503 /* UIImage+UIColor.m in Sources */,
 				0F2AB5BF21BDFC55006FB503 /* UIScrollView+GestureRecognizer.m in Sources */,
+				0F2AB5D321BE3B86006FB503 /* AppStyleSetting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,7 +658,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kmzj.MyFitness;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rickwang.MyFitness;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyFitness/MyFitness-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -636,7 +686,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kmzj.MyFitness;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rickwang.MyFitness;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyFitness/MyFitness-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

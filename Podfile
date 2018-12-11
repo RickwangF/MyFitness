@@ -15,5 +15,6 @@ pod 'AVOSCloud'
 pod 'Hero'
 pod 'CHIPageControl', :git => 'https://github.com/RickwangF/CHIPageControl'
 pod 'MBCircularProgressBar'
+pod 'MBProgressHUD', '~> 1.1.0'
 
 end

@@ -13,6 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - SDK ID
 
 extern NSInteger const EagleEyeServiceID;
+extern NSString * const EagleEyeMcode;
+extern NSString * const BaiduMapAppID;
+extern NSString * const AVOSCloudAppID;
+extern NSString * const AVOSCloudClientKey;
 
 #pragma mark - Device
 extern NSString * const iPhone5S;

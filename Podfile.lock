@@ -37,6 +37,7 @@ PODS:
   - Hero (1.4.0)
   - Masonry (1.1.0)
   - MBCircularProgressBar (0.3.5)
+  - MBProgressHUD (1.1.0)
   - SideMenu (4.0.0)
   - STPopup (1.8.3)
   - Toast (4.0.0)
@@ -50,6 +51,7 @@ DEPENDENCIES:
   - Hero
   - Masonry
   - MBCircularProgressBar
+  - MBProgressHUD (~> 1.1.0)
   - SideMenu (~> 4.0)
   - STPopup
   - Toast (~> 4.0.0)
@@ -63,6 +65,7 @@ SPEC REPOS:
     - Hero
     - Masonry
     - MBCircularProgressBar
+    - MBProgressHUD
     - SideMenu
     - STPopup
     - Toast
@@ -85,10 +88,11 @@ SPEC CHECKSUMS:
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBCircularProgressBar: 0b795b722a5eb5b0923822f90474e2576a1a7855
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   SideMenu: 70ee5657df63ec3382660ec4ef470bf1cf5db07d
   STPopup: da1167250a01584af7bcccb898653185f223ec46
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: 5fc9aadc408f28b07a0af80e4697ca6e1b2a9e4b
+PODFILE CHECKSUM: 61e0b76b5929260cb853fe17616a9124a55322f5
 
 COCOAPODS: 1.5.3

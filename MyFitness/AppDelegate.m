@@ -7,17 +7,57 @@
 //
 
 #import "AppDelegate.h"
+#import <BaiduTraceSDK/BaiduTraceSDK.h>
+#import <BaiduMapAPI_Base/BMKMapManager.h>
+#import <BMKLocationKit/BMKLocationComponent.h>
+#import <AVOSCloud/AVOSCloud.h>
+#import <SideMenu/SideMenu-Swift.h>
 #import "UIDevice+Type.h"
 #import "ProjectConst.h"
+#import "AppStyleSetting.h"
+#import "HomeViewController.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<BMKLocationAuthDelegate, BMKGeneralDelegate>
+    
+@property (nonatomic, strong) BMKMapManager *mapManager; // 地图的主引擎
 
 @end
 
 @implementation AppDelegate
+    
+@synthesize mapManager;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    BTKServiceOption *sop = [[BTKServiceOption alloc] initWithAK:BaiduMapAppID mcode:EagleEyeMcode serviceID:EagleEyeServiceID keepAlive:YES];
+    [[BTKAction sharedInstance] initInfo:sop];
+    
+    [[BMKLocationAuth sharedInstance] checkPermisionWithKey:BaiduMapAppID authDelegate:self];
+    
+    mapManager = [[BMKMapManager alloc] init];
+    
+    BOOL result = [mapManager start:BaiduMapAppID generalDelegate:self];
+    if (!result) {
+        NSLog(@"引擎启动失败");
+    }
+    
+    [AVOSCloud setApplicationId:AVOSCloudAppID clientKey:AVOSCloudClientKey];
+    [AVOSCloud setAllLogsEnabled:YES];
+	
+	[UINavigationBar appearance].translucent = NO;
+	[UINavigationBar appearance].barTintColor = AppStyleSetting.sharedInstance.naviBarTintColor;
+	[UINavigationBar appearance].tintColor = AppStyleSetting.sharedInstance.naviTintColor;
+	[UINavigationBar appearance].barStyle = UIBarStyleBlack;
+	[[UINavigationBar appearance] setShadowImage:[UIImage new]];
+	
+	_window = [[UIWindow alloc] init];
+	_window.frame = UIScreen.mainScreen.bounds;
+	
+	HomeViewController *homeVC = [[HomeViewController alloc] init];
+	UINavigationController *naviVC = [[UINavigationController alloc] initWithRootViewController:homeVC];
+	
+	_window.rootViewController = naviVC;
+	[_window makeKeyAndVisible];
     // Override point for customization after application launch.
     return YES;
 }

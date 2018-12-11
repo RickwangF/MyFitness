@@ -20,7 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *finishedTime;
 
-@property (nonatomic, assign) double minutes;
+@property (nonatomic, copy) NSString *minute;
+	
+@property (nonatomic, assign) double interval;
 
 @property (nonatomic, strong) NSMutableArray *locationArray;
 

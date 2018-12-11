@@ -20,8 +20,8 @@
     NSDate *finishDate = [obj objectForKey:@"finishedTime"];
     trackRecord.startTime = [TrackRecord stringFromDate: startDate];
     trackRecord.finishedTime = [TrackRecord stringFromDate: finishDate];
-    NSTimeInterval timeInterval = [finishDate timeIntervalSinceDate: startDate];
-    trackRecord.minutes = timeInterval / 60;
+    trackRecord.minute = [obj objectForKey:@"minute"];
+	trackRecord.interval = [[obj objectForKey:@"interval"] doubleValue];
     trackRecord.locationArray = [[NSMutableArray alloc] init];
     trackRecord.mileage = [[obj objectForKey:@"mileage"] doubleValue];
     trackRecord.avgSpeed = [[obj objectForKey:@"avgSpeed"] doubleValue];

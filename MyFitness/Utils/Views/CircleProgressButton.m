@@ -33,8 +33,7 @@ BOOL triggerFlag = NO;
 -(void)initTextBtnWithFrame:(CGRect)frame{
     _textBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, frame.size.width - 20, frame.size.height - 20)];
     _textBtn.backgroundColor = UIColor.blueColor;
-    [_textBtn setTitle:@"长按" forState:UIControlStateNormal];
-    [_textBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    [_textBtn setImage:[UIImage imageNamed:@"stop_24#51"] forState:UIControlStateNormal];
     _textBtn.layer.cornerRadius = (frame.size.width - 20) / 2;
     _textBtn.layer.masksToBounds = YES;
     [self addSubview:_textBtn];
@@ -86,7 +85,9 @@ BOOL triggerFlag = NO;
         _count = 20;
         if (triggerFlag == NO) {
             triggerFlag = YES;
-            self.longPressedBlock();
+			if (_longPressedBlock != NULL) {
+				self.longPressedBlock();
+			}
         }
     }
     

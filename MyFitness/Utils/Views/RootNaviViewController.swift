@@ -10,9 +10,7 @@ import UIKit
 import Hero
 
 /*
- 导游助考宝项的根导航控制器
- 在第一次启动应用的时候，根导航中嵌入的是引导页，登录过后回到首页
- 不是第一次启动应用的话，根导航中嵌入的是TabbarController
+ 根导航控制器
  根导航中设置了一个屏幕边框侧滑的手势识别器，用于为Present打开的ViewController添加侧滑返回功能
  而侧滑返回的转场动画由Hero来实现，动画效果和系统内置的Push和Pull一样
  */

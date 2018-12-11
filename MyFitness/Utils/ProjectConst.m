@@ -10,7 +10,11 @@
 
 #pragma mark - SDK ID
 
-NSInteger const EagleEyeServiceID = 206645;
+NSInteger const EagleEyeServiceID = 207343;
+NSString * const EagleEyeMcode = @"com.rickwang.MyFitness";
+NSString * const BaiduMapAppID = @"kUNoaNGSIqaa9oy5HPm3t2UAAgqFmZhm";
+NSString * const AVOSCloudAppID = @"gytbbDN5bBBNQgxO3rRggbhd-gzGzoHsz";
+NSString * const AVOSCloudClientKey = @"XSUXCsDcbPGYc9DdsJy8nytS";
 
 #pragma mark - Device
 NSString * const iPhone5S = @"iPhone5S";
