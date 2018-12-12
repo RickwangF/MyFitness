@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIColor *naviTintColor;
 	
 @property (nonatomic, strong) UIColor *viewBgColor;
+
+@property (nonatomic, strong) UIColor *leftSideVCBgColor;
 	
 @property (nonatomic, strong) UIColor *textColor;
 	
