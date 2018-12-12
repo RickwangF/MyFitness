@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TransportModeEnum.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,10 +16,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *objectId;
 
 @property (nonatomic, copy) NSString *userName;
+	
+@property (nonatomic, strong) NSDate *startTime;
+	
+@property (nonatomic, strong) NSDate *finishedTime;
 
-@property (nonatomic, copy) NSString *startTime;
+@property (nonatomic, copy) NSString *startTimeString;
 
-@property (nonatomic, copy) NSString *finishedTime;
+@property (nonatomic, copy) NSString *finishedTimeString;
 
 @property (nonatomic, copy) NSString *minute;
 	
@@ -30,11 +35,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) double avgSpeed;
 
+@property (nonatomic, assign) double paceSpeed;
+
 @property (nonatomic, assign) double calorie;
 
 @property (nonatomic, assign) double carbonSaving;
 
-@property (nonatomic, assign) int transportMode;
+@property (nonatomic, assign) TransportModeEnum transportMode;
 
 +(instancetype)trackWithDictionary:(NSDictionary*)obj;
 

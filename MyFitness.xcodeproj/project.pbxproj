@@ -39,6 +39,7 @@
 		0F2AB5E021BE8BEB006FB503 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5DE21BE8BEB006FB503 /* LoginViewController.m */; };
 		0F2AB5E321BF59E7006FB503 /* TrackDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5E221BF59E7006FB503 /* TrackDetailViewController.m */; };
 		0F2AB5E621BF8D12006FB503 /* FitnessItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5E521BF8D12006FB503 /* FitnessItemView.m */; };
+		0F2AB5E921BFEB30006FB503 /* TrackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5E821BFEB30006FB503 /* TrackListViewController.m */; };
 		1D71F247864DED889DD73337 /* Pods_MyFitness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 813B8380172CDC392FFEE040 /* Pods_MyFitness.framework */; };
 /* End PBXBuildFile section */
 
@@ -118,6 +119,8 @@
 		0F2AB5E221BF59E7006FB503 /* TrackDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackDetailViewController.m; sourceTree = "<group>"; };
 		0F2AB5E421BF8D12006FB503 /* FitnessItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FitnessItemView.h; sourceTree = "<group>"; };
 		0F2AB5E521BF8D12006FB503 /* FitnessItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FitnessItemView.m; sourceTree = "<group>"; };
+		0F2AB5E721BFEB30006FB503 /* TrackListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrackListViewController.h; sourceTree = "<group>"; };
+		0F2AB5E821BFEB30006FB503 /* TrackListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackListViewController.m; sourceTree = "<group>"; };
 		59F9445866E2F2A94B5B1C20 /* Pods-MyFitness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFitness.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFitness/Pods-MyFitness.release.xcconfig"; sourceTree = "<group>"; };
 		813B8380172CDC392FFEE040 /* Pods_MyFitness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFitness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDD294776D9E4C7A886FEFC /* Pods-MyFitness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFitness.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFitness/Pods-MyFitness.debug.xcconfig"; sourceTree = "<group>"; };
@@ -269,6 +272,8 @@
 				0F2AB5E221BF59E7006FB503 /* TrackDetailViewController.m */,
 				0F2AB5E421BF8D12006FB503 /* FitnessItemView.h */,
 				0F2AB5E521BF8D12006FB503 /* FitnessItemView.m */,
+				0F2AB5E721BFEB30006FB503 /* TrackListViewController.h */,
+				0F2AB5E821BFEB30006FB503 /* TrackListViewController.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -489,6 +494,7 @@
 				0F2AB5B221BDFC42006FB503 /* TrackRecord.m in Sources */,
 				0F2AB5D621BE41F4006FB503 /* PageItemViewController.m in Sources */,
 				0F2AB57321BDF1FD006FB503 /* ViewController.m in Sources */,
+				0F2AB5E921BFEB30006FB503 /* TrackListViewController.m in Sources */,
 				0F2AB5E621BF8D12006FB503 /* FitnessItemView.m in Sources */,
 				0F2AB57E21BDF1FF006FB503 /* main.m in Sources */,
 				0F2AB5BE21BDFC55006FB503 /* CircleProgressButton.m in Sources */,

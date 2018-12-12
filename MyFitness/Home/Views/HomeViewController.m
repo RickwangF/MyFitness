@@ -23,6 +23,7 @@
 #import "UIDevice+Type.h"
 #import "CounterViewController.h"
 #import "LoginViewController.h"
+#import "TrackListViewController.h"
 
 
 @interface HomeViewController ()<BMKMapViewDelegate, BMKLocationManagerDelegate, SubViewControllerDelegate, CAPSPageMenuDelegate>
@@ -38,6 +39,8 @@
 @property (nonatomic, strong) NSMutableArray *subViewControllers;
     
 @property (nonatomic, assign) TransportModeEnum transportMode;
+
+@property (nonatomic, assign) BOOL needRefreshMap;
 
 @end
 
@@ -56,6 +59,7 @@
 - (void)initValueProperty{
     _subViewControllers = [[NSMutableArray alloc] init];
     _transportMode = TransportModeRunning;
+	_needRefreshMap = NO;
     NSString *path = [[NSBundle mainBundle] pathForResource:@"map_config.json" ofType:@""];
     [BMKMapView customMapStyle:path];
 }
@@ -91,7 +95,12 @@
 	[BMKMapView enableCustomMapStyle:YES];
 	[_locationManager startUpdatingHeading];
 	[_locationManager startUpdatingLocation];
-	
+	if (_needRefreshMap) {
+		_needRefreshMap = NO;
+		[self initMapView];
+		[self.view sendSubviewToBack:_mapView];
+		[self updateLocationViewParam];
+	}
 }
     
 - (void)viewWillDisappear:(BOOL)animated{
@@ -99,6 +108,9 @@
     [BMKMapView enableCustomMapStyle:NO];
 	[_locationManager stopUpdatingHeading];
 	[_locationManager stopUpdatingLocation];
+	[_mapView removeFromSuperview];
+	_mapView = nil;
+	_needRefreshMap = YES;
 }
     
 #pragma mark - Init View
@@ -195,7 +207,9 @@
 #pragma mark - Action
     
 - (void)leftSideBtnClicked:(UIButton*)sender{
-    [self presentViewController:SideMenuManager.defaultManager.menuLeftNavigationController animated:YES completion:nil];
+	TrackListViewController *listVC = [[TrackListViewController alloc] init];
+	[self.navigationController pushViewController:listVC animated:YES];
+    //[self presentViewController:SideMenuManager.defaultManager.menuLeftNavigationController animated:YES completion:nil];
 }
     
 #pragma mark - BMKMapViewDelegate

@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TrackDetailViewController : UIViewController
 	
-- (instancetype)initWithStartTime:(NSDate*)start FinishTime:(NSDate*)finish TransportMode:(TransportModeEnum)mode TrackId:(NSString*)objectId;
+- (instancetype)initWithStartTime:(NSDate*)start FinishedTime:(NSDate*)finish TransportMode:(TransportModeEnum)mode TrackId:(NSString*)objectId;
 
 @end
 

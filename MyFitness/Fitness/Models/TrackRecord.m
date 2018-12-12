@@ -7,6 +7,7 @@
 //
 
 #import "TrackRecord.h"
+#import "TransportModeEnum.h"
 #import <AVOSCloud/AVOSCloud.h>
 
 @implementation TrackRecord
@@ -17,17 +18,20 @@
     AVUser *user = [obj objectForKey:@"user"];
     trackRecord.userName = user.username;
     NSDate *startDate = [obj objectForKey:@"startTime"];
-    NSDate *finishDate = [obj objectForKey:@"finishedTime"];
-    trackRecord.startTime = [TrackRecord stringFromDate: startDate];
-    trackRecord.finishedTime = [TrackRecord stringFromDate: finishDate];
+    NSDate *finishedDate = [obj objectForKey:@"finishedTime"];
+	trackRecord.startTime = startDate;
+	trackRecord.finishedTime = finishedDate;
+    trackRecord.startTimeString = [TrackRecord stringFromDate: startDate];
+    trackRecord.finishedTimeString = [TrackRecord stringFromDate: finishedDate];
     trackRecord.minute = [obj objectForKey:@"minute"];
 	trackRecord.interval = [[obj objectForKey:@"interval"] doubleValue];
     trackRecord.locationArray = [[NSMutableArray alloc] init];
     trackRecord.mileage = [[obj objectForKey:@"mileage"] doubleValue];
     trackRecord.avgSpeed = [[obj objectForKey:@"avgSpeed"] doubleValue];
+	trackRecord.paceSpeed = [[obj objectForKey:@"paceSpeed"] doubleValue];
     trackRecord.calorie = [[obj objectForKey:@"calorie"] doubleValue];
     trackRecord.carbonSaving = [[obj objectForKey:@"carbonSaving"] doubleValue];
-    trackRecord.transportMode = [[obj objectForKey:@"transportMode"] doubleValue];
+    trackRecord.transportMode = (TransportModeEnum)[[obj objectForKey:@"transportMode"] integerValue];
     return trackRecord;
 }
 

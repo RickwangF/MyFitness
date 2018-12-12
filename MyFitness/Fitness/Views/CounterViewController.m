@@ -379,6 +379,7 @@
 	CLLocationSpeed avgSpeed = (_distance / 1000) / (minDouble / 60);
 	double calorie = 41 * _distance / 1000;
 	double carbon = 115 * _distance / 1000;
+	double intervalKm = timeInterval / (_distance / 1000);
 	
 	[_trackRecord setObject:[AVUser currentUser] forKey:@"user"];
 	[_trackRecord setObject:_startDate forKey:@"startTime"];
@@ -387,6 +388,7 @@
 	[_trackRecord setObject:minuteString forKey:@"minuteString"];
 	[_trackRecord setObject:[NSNumber numberWithDouble:_distance] forKey:@"mileage"];
 	[_trackRecord setObject:[NSNumber numberWithDouble: avgSpeed] forKey:@"avgSpeed"];
+	[_trackRecord setObject:[NSNumber numberWithDouble:intervalKm] forKey:@"paceSpeed"];
 	[_trackRecord setObject:[NSNumber numberWithDouble:calorie] forKey:@"calorie"];
 	[_trackRecord setObject:[NSNumber numberWithDouble:carbon] forKey:@"carbonSaving"];
 	[_trackRecord setObject:[NSNumber numberWithInt: _transportMode] forKey:@"transportMode"];
@@ -400,7 +402,7 @@
 		if (succeeded) {
 			[self.view makeToast:@"记录保存成功"];
 			// 打开轨迹记录的详细
-			TrackDetailViewController *detailVC = [[TrackDetailViewController alloc] initWithStartTime:self.startDate FinishTime:self.finishDate TransportMode:self.transportMode TrackId:self.trackRecord.objectId];
+			TrackDetailViewController *detailVC = [[TrackDetailViewController alloc] initWithStartTime:self.startDate FinishedTime:self.finishDate TransportMode:self.transportMode TrackId:self.trackRecord.objectId];
 			[self.navigationController pushViewController:detailVC animated:YES];
 		}
 		else{
@@ -461,11 +463,11 @@
 	[_locationManager stopUpdatingLocation];
 	
 	// 测试代码
-	TrackDetailViewController *detailVC = [[TrackDetailViewController alloc] initWithStartTime:self.startDate FinishTime:self.finishDate TransportMode:self.transportMode TrackId:@"12312312398787"];
-	[self.navigationController pushViewController:detailVC animated:YES];
+	//TrackDetailViewController *detailVC = [[TrackDetailViewController alloc] initWithStartTime:self.startDate FinishedTime:self.finishDate TransportMode:self.transportMode TrackId:@"12312312398787"];
+	//[self.navigationController pushViewController:detailVC animated:YES];
 	
-	// 正式代码
-	//[self saveTrackRecord];
+	//正式代码
+	[self saveTrackRecord];
 }
 	
 - (void)calculateDistance{

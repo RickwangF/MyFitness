@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "__49-[TrackDetailViewController onQueryHistoryTrack:]_block_invoke.443:TrackDetailViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[TrackDetailViewController onQueryHistoryTrack:]:TrackDetailViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.locationArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[TrackDetailViewController queryHistoryTrack]:TrackDetailViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.transportMode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
