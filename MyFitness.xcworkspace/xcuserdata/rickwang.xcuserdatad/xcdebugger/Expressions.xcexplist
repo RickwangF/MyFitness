@@ -21,5 +21,19 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "__49-[TrackDetailViewController onQueryHistoryTrack:]_block_invoke.445:TrackDetailViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ShadowCircleButton setShadow]:ShadowCircleButton.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.bounds;">
+            </PersistentString>
+            <PersistentString
+               value = "self.backgroundColor">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

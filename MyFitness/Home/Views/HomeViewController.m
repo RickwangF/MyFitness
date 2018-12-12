@@ -24,19 +24,27 @@
 #import "CounterViewController.h"
 #import "LoginViewController.h"
 #import "TrackListViewController.h"
+#import <HMSegmentedControl/HMSegmentedControl.h>
+#import "NSString+NSDate.h"
+#import "TrackRecord.h"
+#import "ShadowCircleButton.h"
 
 
 @interface HomeViewController ()<BMKMapViewDelegate, BMKLocationManagerDelegate, SubViewControllerDelegate, CAPSPageMenuDelegate>
     
 @property (nonatomic, strong) BMKMapView *mapView;
 
+@property (nonatomic, strong) UIView *controlContainerView;
+
+@property (nonatomic, strong) HMSegmentedControl *modeControl;
+
+@property (nonatomic, strong) UIButton *todayDistanceBtn;
+
+@property (nonatomic, strong) ShadowCircleButton *startBtn;
+
 @property (nonatomic, strong) BMKLocationManager *locationManager;
     
 @property (nonatomic, strong) BMKUserLocation *userLocation;
-	
-@property (nonatomic, strong) CAPSPageMenu *pageMenu;
-    
-@property (nonatomic, strong) NSMutableArray *subViewControllers;
     
 @property (nonatomic, assign) TransportModeEnum transportMode;
 
@@ -57,11 +65,23 @@
 }
     
 - (void)initValueProperty{
-    _subViewControllers = [[NSMutableArray alloc] init];
-    _transportMode = TransportModeRunning;
+    _transportMode = TransportModeWalking;
 	_needRefreshMap = NO;
     NSString *path = [[NSBundle mainBundle] pathForResource:@"map_config.json" ofType:@""];
     [BMKMapView customMapStyle:path];
+}
+
+- (void)initlocationManager{
+	_locationManager = [[BMKLocationManager alloc] init];
+	_locationManager.delegate = self;
+	_locationManager.coordinateType = BMKLocationCoordinateTypeBMK09LL;
+	_locationManager.distanceFilter = kCLDistanceFilterNone;
+	_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+	_locationManager.activityType = CLActivityTypeAutomotiveNavigation;
+	_locationManager.pausesLocationUpdatesAutomatically = NO;
+	_locationManager.allowsBackgroundLocationUpdates = YES;
+	_locationManager.locationTimeout = 10;
+	_locationManager.reGeocodeTimeout = 10;
 }
     
 #pragma mark - Lift Circle
@@ -80,13 +100,19 @@
 	
 	[self initLeftSideBtn];
 	
+	[self initTodayDistanceBtn];
+	
+	[self getTodayDistance];
+	
 	[self initMapView];
 	
 	[self updateLocationViewParam];
 	
-	[self initlocationManager];
+	[self initModeControl];
 	
-	[self initPageMenu];
+	[self initStartBtn];
+	
+	[self initlocationManager];
     // Do any additional setup after loading the view.
 }
 	
@@ -116,10 +142,13 @@
 #pragma mark - Init View
     
 - (void)initLeftSideBtn{
-    UIButton *leftSideBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
-    [leftSideBtn setImage:[UIImage imageNamed:@"mine_25#ff"] forState:UIControlStateNormal];
+    UIButton *leftSideBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [leftSideBtn setImage:[UIImage imageNamed:@"avatar_20#ff"] forState:UIControlStateNormal];
+	leftSideBtn.backgroundColor = [UIColor colorWithRed:220.0/255 green:214.0/255 blue:214.0/255 alpha:1.0];
+	leftSideBtn.layer.cornerRadius = 15;
+	leftSideBtn.layer.masksToBounds = YES;
     [leftSideBtn addTarget:self action:@selector(leftSideBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [leftSideBtn sizeToFit];
+//    [leftSideBtn sizeToFit];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftSideBtn];
 }
     
@@ -140,7 +169,8 @@
         else{
             make.top.equalTo(self.mas_topLayoutGuideTop);
         }
-        make.left.right.bottom.equalTo(self.view);
+        make.left.right.equalTo(self.view);
+		make.bottom.equalTo(self.view).offset(20);
     }];
 }
     
@@ -153,55 +183,117 @@
     displayParam.locationViewImgName = @"bnavi_icon_location_fixed";
     [self.mapView updateLocationViewWithParam:displayParam];
 }
-	
-#pragma mark - Init Property
 
-- (void)initlocationManager{
-    _locationManager = [[BMKLocationManager alloc] init];
-    _locationManager.delegate = self;
-    _locationManager.coordinateType = BMKLocationCoordinateTypeBMK09LL;
-    _locationManager.distanceFilter = kCLDistanceFilterNone;
-    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    _locationManager.activityType = CLActivityTypeAutomotiveNavigation;
-    _locationManager.pausesLocationUpdatesAutomatically = NO;
-    _locationManager.allowsBackgroundLocationUpdates = YES;
-    _locationManager.locationTimeout = 10;
-    _locationManager.reGeocodeTimeout = 10;
+- (void)initModeControl{
+	_controlContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+	_controlContainerView.backgroundColor = AppStyleSetting.sharedInstance.naviBarTintColor;
+	[self.view addSubview:_controlContainerView];
+	
+	[_controlContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+		if (@available(iOS 11.0, *)) {
+			make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+		} else {
+			make.top.equalTo(self.mas_topLayoutGuideTop);
+		}
+		make.left.right.equalTo(self.view);
+		make.height.equalTo(@50);
+	}];
+	
+	_modeControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+	_modeControl.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	[_modeControl setSectionTitles:@[@"健走", @"跑步", @"骑行"]];
+	_modeControl.backgroundColor = AppStyleSetting.sharedInstance.naviBarTintColor;
+	_modeControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
+	_modeControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe;
+	_modeControl.selectionIndicatorColor = AppStyleSetting.sharedInstance.textColor;
+	_modeControl.selectionIndicatorHeight = 2.0;
+	_modeControl.selectedSegmentIndex = 0;
+	[_modeControl addTarget:self action:@selector(modeControlValueChanged:) forControlEvents:UIControlEventValueChanged];
+	[_controlContainerView addSubview:_modeControl];
+	
+	[_modeControl mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.center.equalTo(self.controlContainerView);
+		make.width.equalTo(@200);
+		make.height.equalTo(@40);
+	}];
 }
+
+- (void)initTodayDistanceBtn{
+	UIView *bottomContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 25)];
+	UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(30, 0, 130, 25)];
+	containerView.backgroundColor = AppStyleSetting.sharedInstance.viewBgColor;
+	containerView.layer.cornerRadius = 12.5;
+	containerView.layer.masksToBounds = YES;
+	[bottomContainerView addSubview:containerView];
 	
-- (void)initPageMenu{
-	PageItemViewController *runningVC = [[PageItemViewController alloc] init];
-	runningVC.title = @"跑步";
-	runningVC.delegate = self;
-	PageItemViewController *walingVC = [[PageItemViewController alloc] init];
-	walingVC.title = @"健走";
-	walingVC.view.backgroundColor = AppStyleSetting.sharedInstance.viewBgColor;
-	walingVC.delegate = self;
-	PageItemViewController *ridingVC = [[PageItemViewController alloc] init];
-	ridingVC.title = @"骑行";
-	ridingVC.delegate = self;
+	_todayDistanceBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 25)];
+	[_todayDistanceBtn setTitle:@"今日0km" forState:UIControlStateNormal];
+	[_todayDistanceBtn setTitleColor:AppStyleSetting.sharedInstance.textColor forState:UIControlStateNormal];
+	_todayDistanceBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+	[_todayDistanceBtn addTarget:self action:@selector(todayDistanceBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+	[containerView addSubview:_todayDistanceBtn];
 	
-	[self.subViewControllers addObject:runningVC];
-	[self.subViewControllers addObject:walingVC];
-	[self.subViewControllers addObject:ridingVC];
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:bottomContainerView];
+}
+
+- (void)initStartBtn{
+	_startBtn = [[ShadowCircleButton alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+	_startBtn.backgroundColor = AppStyleSetting.sharedInstance.mainColor;
+	[_startBtn setTitle:@"GO!" forState:UIControlStateNormal];
+	[_startBtn setTitleColor:AppStyleSetting.sharedInstance.textColor forState:UIControlStateNormal];
+	_startBtn.titleLabel.font = [UIFont systemFontOfSize:35 weight:UIFontWeightSemibold];
+	[_startBtn setShadow];
+	[_startBtn addTarget:self action:@selector(startBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+	[self.view addSubview:_startBtn];
 	
-	NSDictionary *dic =
-	@{
-	  CAPSPageMenuOptionMenuMargin: @(0),
-	  CAPSPageMenuOptionMenuHeight: @(40),
-	  CAPSPageMenuOptionMenuItemWidth: @(70),
-	  CAPSPageMenuOptionCenterMenuItems: @(YES),
-	  CAPSPageMenuOptionViewBackgroundColor: [UIColor colorWithWhite:1.0 alpha:0.0],
-	  CAPSPageMenuOptionScrollMenuBackgroundColor: [UIColor colorWithWhite:1.0 alpha:1.0],
-	  CAPSPageMenuOptionSelectionIndicatorColor: AppStyleSetting.sharedInstance.mainColor,
-	  CAPSPageMenuOptionSelectedMenuItemLabelColor: AppStyleSetting.sharedInstance.mainColor,
-	  CAPSPageMenuOptionUnselectedMenuItemLabelColor: UIColor.darkGrayColor
-	  };
+	[_startBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.bottom.equalTo(self.view).offset(-65);
+		make.centerX.equalTo(self.view);
+		make.width.height.equalTo(@100);
+	}];
+}
+
+#pragma mark - Request
+
+- (void)getTodayDistance{
+	if ([AVUser currentUser] == nil) {
+		return;
+	}
 	
-	_pageMenu = [[CAPSPageMenu alloc] initWithViewControllers:self.subViewControllers frame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) options:dic];
-	_pageMenu.delegate = self;
+	NSDate *date = [NSDate date];
+	NSCalendar *calendar = [NSCalendar currentCalendar];
+	NSDateComponents *components = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
 	
-	[self.view addSubview:self.pageMenu.view];
+	NSDate *toady = [calendar dateFromComponents:components];
+	NSDate *tomorrow = [NSDate dateWithTimeInterval:24*60*60 sinceDate:toady];
+	
+	AVQuery *query = [AVQuery queryWithClassName:@"TrackRecord"];
+	[query whereKey:@"user" equalTo:[AVUser currentUser]];
+	[query whereKey:@"startTime" greaterThanOrEqualTo:toady];
+	[query whereKey:@"finishedTime" lessThan:tomorrow];
+	
+	[query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+		if (error != nil) {
+			[self.view makeToast:error.localizedDescription];
+			return;
+		}
+		else{
+			if (objects == nil || objects.count == 0) {
+				return;
+			}
+			
+			double mileage = 0;
+			for (NSDictionary *dic in objects) {
+				double trackDistance = [dic[@"mileage"] doubleValue];
+				if (trackDistance > 0) {
+					mileage += trackDistance;
+				}
+			}
+			mileage = mileage / 1000;
+			NSString *mileString = [NSString stringWithFormat:@"今日%.1fkm", mileage];
+			[self.todayDistanceBtn setTitle:mileString forState:UIControlStateNormal];
+		}
+	}];
 }
     
 #pragma mark - Action
@@ -210,6 +302,43 @@
 	TrackListViewController *listVC = [[TrackListViewController alloc] init];
 	[self.navigationController pushViewController:listVC animated:YES];
     //[self presentViewController:SideMenuManager.defaultManager.menuLeftNavigationController animated:YES completion:nil];
+}
+
+- (void)todayDistanceBtnClicked:(UIButton*)sender{
+	if ([AVUser currentUser] == nil) {
+		LoginViewController *loginVC = [[LoginViewController alloc] init];
+		UINavigationController *naviVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+		[self presentViewController:naviVC animated:YES completion:nil];
+		return;
+	}
+}
+
+- (void)modeControlValueChanged:(HMSegmentedControl*)sender{
+	NSInteger index = sender.selectedSegmentIndex;
+	switch (index) {
+		case 0:
+			_transportMode = TransportModeWalking;
+			break;
+		case 1:
+			_transportMode = TransportModeRunning;
+			break;
+		case 2:
+			_transportMode = TransportModeRiding;
+		default:
+			break;
+	}
+}
+
+- (void)startBtnClicked:(UIButton*)sender{
+	if ([AVUser currentUser] == nil) {
+		LoginViewController *loginVC = [[LoginViewController alloc] init];
+		UINavigationController *naviVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+		[self presentViewController:naviVC animated:YES completion:nil];
+		return;
+	}
+	
+	CounterViewController *counterVC = [[CounterViewController alloc] initWithTransportMode:_transportMode];
+	[self.navigationController pushViewController:counterVC animated:YES];
 }
     
 #pragma mark - BMKMapViewDelegate
@@ -253,19 +382,6 @@
 }
 
 #pragma mark - SubViewControllerDelegate
-	
-- (void)subViewControllerMakePush{
-	
-	if([AVUser currentUser] == nil) {
-		LoginViewController *loginVC = [[LoginViewController alloc] init];
-		UINavigationController *naviVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
-		[self presentViewController:naviVC animated:YES completion:nil];
-		return;
-	}
-	
-	CounterViewController *counterVC = [[CounterViewController alloc] initWithTransportMode:_transportMode];
-	[self.navigationController pushViewController:counterVC animated:YES];
-}
 	
 - (void)leftSideViewControllerMakePush{
 	if([AVUser currentUser] == nil) {

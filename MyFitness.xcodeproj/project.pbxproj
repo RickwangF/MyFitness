@@ -40,6 +40,7 @@
 		0F2AB5E321BF59E7006FB503 /* TrackDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5E221BF59E7006FB503 /* TrackDetailViewController.m */; };
 		0F2AB5E621BF8D12006FB503 /* FitnessItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5E521BF8D12006FB503 /* FitnessItemView.m */; };
 		0F2AB5E921BFEB30006FB503 /* TrackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5E821BFEB30006FB503 /* TrackListViewController.m */; };
+		0F37102A21C0F21E00C334C8 /* ShadowCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102921C0F21E00C334C8 /* ShadowCircleButton.m */; };
 		1D71F247864DED889DD73337 /* Pods_MyFitness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 813B8380172CDC392FFEE040 /* Pods_MyFitness.framework */; };
 /* End PBXBuildFile section */
 
@@ -121,6 +122,8 @@
 		0F2AB5E521BF8D12006FB503 /* FitnessItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FitnessItemView.m; sourceTree = "<group>"; };
 		0F2AB5E721BFEB30006FB503 /* TrackListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrackListViewController.h; sourceTree = "<group>"; };
 		0F2AB5E821BFEB30006FB503 /* TrackListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackListViewController.m; sourceTree = "<group>"; };
+		0F37102821C0F21E00C334C8 /* ShadowCircleButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShadowCircleButton.h; sourceTree = "<group>"; };
+		0F37102921C0F21E00C334C8 /* ShadowCircleButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShadowCircleButton.m; sourceTree = "<group>"; };
 		59F9445866E2F2A94B5B1C20 /* Pods-MyFitness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFitness.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFitness/Pods-MyFitness.release.xcconfig"; sourceTree = "<group>"; };
 		813B8380172CDC392FFEE040 /* Pods_MyFitness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFitness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDD294776D9E4C7A886FEFC /* Pods-MyFitness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFitness.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFitness/Pods-MyFitness.debug.xcconfig"; sourceTree = "<group>"; };
@@ -169,8 +172,8 @@
 				0F2AB59621BDFA89006FB503 /* Utils */,
 				0F2AB57121BDF1FD006FB503 /* ViewController.h */,
 				0F2AB57221BDF1FD006FB503 /* ViewController.m */,
-				0F2AB56F21BDF1FD006FB503 /* AppDelegate.m */,
 				0F2AB56E21BDF1FD006FB503 /* AppDelegate.h */,
+				0F2AB56F21BDF1FD006FB503 /* AppDelegate.m */,
 				0F2AB57421BDF1FD006FB503 /* Main.storyboard */,
 				0F2AB57721BDF1FF006FB503 /* Assets.xcassets */,
 				0F2AB57921BDF1FF006FB503 /* LaunchScreen.storyboard */,
@@ -250,6 +253,8 @@
 				0F2AB5BD21BDFC55006FB503 /* MZTimerLabel.m */,
 				0F2AB5B821BDFC55006FB503 /* UIScrollView+GestureRecognizer.h */,
 				0F2AB5B921BDFC55006FB503 /* UIScrollView+GestureRecognizer.m */,
+				0F37102821C0F21E00C334C8 /* ShadowCircleButton.h */,
+				0F37102921C0F21E00C334C8 /* ShadowCircleButton.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -455,6 +460,7 @@
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/AVOSCloud/AVOSCloud.framework",
 				"${BUILT_PRODUCTS_DIR}/CHIPageControl/CHIPageControl.framework",
+				"${BUILT_PRODUCTS_DIR}/HMSegmentedControl/HMSegmentedControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/MBCircularProgressBar/MBCircularProgressBar.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
@@ -468,6 +474,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AVOSCloud.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHIPageControl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HMSegmentedControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBCircularProgressBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
@@ -501,6 +508,7 @@
 				0F2AB5CD21BE2EFD006FB503 /* HomeViewController.m in Sources */,
 				0F2AB5C421BDFE57006FB503 /* UIDevice+Type.m in Sources */,
 				0F2AB5B121BDFC42006FB503 /* MFLocation.m in Sources */,
+				0F37102A21C0F21E00C334C8 /* ShadowCircleButton.m in Sources */,
 				0F2AB5C021BDFC55006FB503 /* CAPSPageMenu.m in Sources */,
 				0F2AB5DF21BE8BEB006FB503 /* RegisterViewController.m in Sources */,
 				0F2AB5E321BF59E7006FB503 /* TrackDetailViewController.m in Sources */,

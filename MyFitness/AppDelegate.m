@@ -47,7 +47,7 @@
 	[UINavigationBar appearance].translucent = NO;
 	[UINavigationBar appearance].barTintColor = AppStyleSetting.sharedInstance.naviBarTintColor;
 	[UINavigationBar appearance].tintColor = AppStyleSetting.sharedInstance.naviTintColor;
-	[UINavigationBar appearance].barStyle = UIBarStyleBlack;
+	[UINavigationBar appearance].barStyle = UIBarStyleDefault;
 	[[UINavigationBar appearance] setShadowImage:[UIImage new]];
 	
 	_window = [[UIWindow alloc] init];

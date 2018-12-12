@@ -134,7 +134,7 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 	if (self) {
 		_startTime = [NSDate new];
 		_finishedTime = [NSDate new];
-		_transportMode = TransportModeRunning;
+		_transportMode = TransportModeWalking;
 		_trackId = @"";
 		[self initValueProperty];
 		[self initTimer];

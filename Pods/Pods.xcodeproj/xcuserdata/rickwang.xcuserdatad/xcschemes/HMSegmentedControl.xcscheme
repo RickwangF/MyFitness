@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EC5A3E88586327585268A83F81628CB2"
-               BlueprintName = "SideMenu"
+               BlueprintIdentifier = "7891E2B724C54EF58FB1692B34F1455C"
+               BlueprintName = "HMSegmentedControl"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "SideMenu.framework">
+               BuildableName = "HMSegmentedControl.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

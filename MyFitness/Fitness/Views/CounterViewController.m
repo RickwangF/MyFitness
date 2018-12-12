@@ -90,7 +90,7 @@
 - (instancetype)init{
 	self = [super initWithNibName:nil bundle:nil];
 	if (self) {
-		_transportMode = TransportModeRunning;
+		_transportMode = TransportModeWalking;
 		[self initValueProperty];
 	}
 	return self;

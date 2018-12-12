@@ -18,12 +18,12 @@ static AppStyleSetting *sharedInstance;
 	dispatch_once(&onceToken, ^{
 		if (sharedInstance == nil) {
 			sharedInstance = [[AppStyleSetting alloc] init];
-			sharedInstance.naviBarTintColor = [UIColor colorWithRed:23.0/255 green:179.0/255 blue:93.0/255 alpha:1.0];
-			sharedInstance.naviTintColor = UIColor.whiteColor;
+			sharedInstance.naviBarTintColor = [UIColor colorWithHexString:@"ffe617"];
+			sharedInstance.naviTintColor = UIColor.blackColor;
 			sharedInstance.viewBgColor = UIColor.whiteColor;
 			sharedInstance.textColor = UIColor.blackColor;
 			sharedInstance.smallTextColor = UIColor.darkGrayColor;
-			sharedInstance.mainColor = [UIColor colorWithRed:23.0/255 green:179.0/255 blue:93.0/255 alpha:1.0];
+			sharedInstance.mainColor = [UIColor colorWithHexString:@"ffe617"];
 			sharedInstance.separatorColor = UIColor.lightGrayColor;
 			sharedInstance.lightSeparatorColor = [UIColor colorWithHexString:@"#e1e1e1"];
 		}
