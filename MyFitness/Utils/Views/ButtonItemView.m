@@ -39,7 +39,8 @@
 - (instancetype)initWithFrame:(CGRect)frame{
 	self = [super initWithFrame:frame];
 	if (self) {
-		
+		[self initImageViewWithFrame:frame];
+		[self initTextLabelWithFrame:frame];
 	}
 	return self;
 }
@@ -67,18 +68,26 @@
 	
 	[_textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.top.bottom.right.equalTo(self);
-		make.left.equalTo(self.imageView);
+		make.left.equalTo(self.imageView.mas_right);
 	}];
 }
 
 #pragma mark - Action
 
 - (void)setImage:(UIImage *)image{
-	
+	_imageView.image = image;
 }
 
 - (void)setTitle:(NSString *)title{
-	
+	_textLabel.text = title;
+}
+
+- (void)setTitleColor:(UIColor *)color{
+	_textLabel.textColor = color;
+}
+
+- (void)setTitleFont:(UIFont *)font{
+	_textLabel.font = font;
 }
 
 /*

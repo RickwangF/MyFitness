@@ -12,9 +12,13 @@
 @protocol SubViewControllerDelegate <NSObject>
 
 @optional
--(void)subViewControllerMakePush;
+- (void)subViewControllerMakePush;
 
--(void)leftSideViewControllerMakePush;
+- (void)subViewControllerMakePushWithFlag:(NSInteger)flag;
+
+- (void)leftSideViewControllerMakePush;
+
+- (void)leftSideViewControllerMakePushWithFlag:(NSInteger)flag;
 
 @end
 

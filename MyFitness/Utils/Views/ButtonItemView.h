@@ -16,6 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setTitle:(NSString*)title;
 
+- (void)setTitleColor:(UIColor*)color;
+
+- (void)setTitleFont:(UIFont*)font;
+
 @end
 
 NS_ASSUME_NONNULL_END

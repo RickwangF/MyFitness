@@ -28,6 +28,8 @@
 #import "NSString+NSDate.h"
 #import "TrackRecord.h"
 #import "ShadowCircleButton.h"
+#import "LeftSideViewController.h"
+#import "UIDevice+Type.h"
 
 
 @interface HomeViewController ()<BMKMapViewDelegate, BMKLocationManagerDelegate, SubViewControllerDelegate, CAPSPageMenuDelegate>
@@ -41,6 +43,10 @@
 @property (nonatomic, strong) UIButton *todayDistanceBtn;
 
 @property (nonatomic, strong) ShadowCircleButton *startBtn;
+
+@property (nonatomic, strong) UIButton *setBtn;
+
+@property (nonatomic, strong) UIButton *muteBtn;
 
 @property (nonatomic, strong) BMKLocationManager *locationManager;
     
@@ -112,7 +118,13 @@
 	
 	[self initStartBtn];
 	
+	[self initSetBtn];
+	
+	[self initMuteBtn];
+	
 	[self initlocationManager];
+	
+	[self initLeftSideViewController];
     // Do any additional setup after loading the view.
 }
 	
@@ -170,7 +182,12 @@
             make.top.equalTo(self.mas_topLayoutGuideTop);
         }
         make.left.right.equalTo(self.view);
-		make.bottom.equalTo(self.view).offset(20);
+		if ([[UIDevice currentDevice] fullScreen]) {
+			make.bottom.equalTo(self.view).offset(45);
+		}
+		else{
+			make.bottom.equalTo(self.view).offset(20);
+		}
     }];
 }
     
@@ -253,6 +270,54 @@
 	}];
 }
 
+- (void)initSetBtn{
+	_setBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 55, 55)];
+	_setBtn.backgroundColor = UIColor.whiteColor;
+	_setBtn.layer.cornerRadius = 27.5;
+	[_setBtn setImage:[UIImage imageNamed:@"set_27#42"] forState:UIControlStateNormal];
+	_setBtn.layer.shadowColor = UIColor.lightGrayColor.CGColor;
+	_setBtn.layer.shadowOffset = CGSizeMake(0, 15);
+	_setBtn.layer.shadowOpacity = 0.8;
+	_setBtn.layer.shadowRadius = 15;
+	[self.view addSubview:_setBtn];
+	
+	[_setBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.right.equalTo(self.startBtn.mas_left).offset(-20);
+		make.centerY.equalTo(self.startBtn);
+		make.width.height.equalTo(@55);
+	}];
+}
+
+- (void)initMuteBtn{
+	_muteBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 55, 55)];
+	_muteBtn.backgroundColor = UIColor.whiteColor;
+	_muteBtn.layer.cornerRadius = 27.5;
+	[_muteBtn setImage:[UIImage imageNamed:@"mute_27#42"] forState:UIControlStateNormal];
+	_muteBtn.layer.shadowColor = UIColor.lightGrayColor.CGColor;
+	_muteBtn.layer.shadowOffset = CGSizeMake(0, 15);
+	_muteBtn.layer.shadowOpacity = 0.8;
+	_muteBtn.layer.shadowRadius = 15;
+	[self.view addSubview:_muteBtn];
+	
+	[_muteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.left.equalTo(self.startBtn.mas_right).offset(20);
+		make.centerY.equalTo(self.startBtn);
+		make.width.height.equalTo(@55);
+	}];
+}
+
+- (void)initLeftSideViewController{
+	LeftSideViewController *leftSideVC = [[LeftSideViewController alloc] init];
+	leftSideVC.delegate = self;
+	UISideMenuNavigationController *leftNaviVC = [[UISideMenuNavigationController alloc] initWithRootViewController:leftSideVC];
+	
+	[SideMenuManager defaultManager].menuLeftNavigationController = leftNaviVC;
+	[SideMenuManager defaultManager].menuPresentMode = MenuPresentModeMenuSlideIn;
+	[SideMenuManager defaultManager].menuFadeStatusBar = NO;
+	[SideMenuManager defaultManager].menuAnimationFadeStrength = 0.6;
+	[SideMenuManager defaultManager].menuWidth = self.view.frame.size.width * 0.7;
+}
+
 #pragma mark - Request
 
 - (void)getTodayDistance{
@@ -299,9 +364,7 @@
 #pragma mark - Action
     
 - (void)leftSideBtnClicked:(UIButton*)sender{
-	TrackListViewController *listVC = [[TrackListViewController alloc] init];
-	[self.navigationController pushViewController:listVC animated:YES];
-    //[self presentViewController:SideMenuManager.defaultManager.menuLeftNavigationController animated:YES completion:nil];
+    [self presentViewController:SideMenuManager.defaultManager.menuLeftNavigationController animated:YES completion:nil];
 }
 
 - (void)todayDistanceBtnClicked:(UIButton*)sender{
@@ -383,14 +446,26 @@
 
 #pragma mark - SubViewControllerDelegate
 	
-- (void)leftSideViewControllerMakePush{
+- (void)leftSideViewControllerMakePushWithFlag:(NSInteger)flag{
 	if([AVUser currentUser] == nil) {
 		LoginViewController *loginVC = [[LoginViewController alloc] init];
 		UINavigationController *naviVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
 		[self presentViewController:naviVC animated:YES completion:nil];
 		return;
 	}
+	
+	switch (flag) {
+		case 1:{
+			TrackListViewController *trackListVC = [[TrackListViewController alloc] init];
+			[self.navigationController pushViewController:trackListVC animated:YES];
+		}
+		break;
+			
+		default:
+			break;
+	}
 }
+
 	
 #pragma mark - CAPSPageMenuDelegate
 - (void)didMoveToPage:(UIViewController *)controller index:(NSInteger)index{

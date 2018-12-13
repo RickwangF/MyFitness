@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SubViewControllerDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LeftSideViewController : UIViewController
+
+@property (nonatomic, weak) id<SubViewControllerDelegate> delegate;
 
 @end
 
