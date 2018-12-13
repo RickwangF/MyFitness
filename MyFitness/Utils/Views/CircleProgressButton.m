@@ -18,12 +18,13 @@ BOOL triggerFlag = NO;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
+		
+		self.layer.cornerRadius = frame.size.width / 2;
+		self.backgroundColor = UIColor.blueColor;
         [self initProgressViewWithFrame:frame];
         [self initTextBtnWithFrame:frame];
         [self initTimer];
-        
-        self.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0];
+		
         [_textBtn addTarget:self action:@selector(progressBtnTouchedDown:) forControlEvents:UIControlEventTouchDown];
         [_textBtn addTarget:self action:@selector(progressBtnTouchedUp:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -32,8 +33,8 @@ BOOL triggerFlag = NO;
 
 -(void)initTextBtnWithFrame:(CGRect)frame{
     _textBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, frame.size.width - 20, frame.size.height - 20)];
-    _textBtn.backgroundColor = UIColor.blueColor;
-    [_textBtn setImage:[UIImage imageNamed:@"stop_24#51"] forState:UIControlStateNormal];
+    _textBtn.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0];
+	[_textBtn setImage:[UIImage imageNamed:@"stop_25#ff"] forState:UIControlStateNormal];
     _textBtn.layer.cornerRadius = (frame.size.width - 20) / 2;
     _textBtn.layer.masksToBounds = YES;
     [self addSubview:_textBtn];
@@ -44,7 +45,8 @@ BOOL triggerFlag = NO;
 }
 
 -(void)initProgressViewWithFrame:(CGRect)frame{
-    _progressView = [[MBCircularProgressBarView alloc] initWithFrame:frame];
+	
+    _progressView = [[MBCircularProgressBarView alloc] initWithFrame:CGRectMake(5, 5, frame.size.width - 10, frame.size.height - 10)];
     _progressView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0];
     _progressView.progressAngle = 100;
     _progressView.progressRotationAngle = 50;
@@ -54,7 +56,8 @@ BOOL triggerFlag = NO;
     _progressView.progressStrokeColor = UIColor.cyanColor;
     _progressView.emptyLineColor = [UIColor colorWithWhite:1.0 alpha:0];
     _progressView.emptyLineStrokeColor = [UIColor colorWithWhite:1.0 alpha:0];
-    _progressView.progressLineWidth = 3.0;
+    _progressView.progressLineWidth = 1.0;
+	_progressView.emptyLineWidth = 0.5;
     _progressView.value = 0;
     _progressView.maxValue = 100;
     _progressView.showValueString = NO;
@@ -62,7 +65,7 @@ BOOL triggerFlag = NO;
     [self addSubview:_progressView];
     
     [_progressView mas_makeConstraints:^(MASConstraintMaker *make) {
-       make.edges.equalTo(self);
+       make.edges.equalTo(self).insets(UIEdgeInsetsMake(5, 5, 5, 5));
     }];
 }
 
@@ -81,6 +84,7 @@ BOOL triggerFlag = NO;
 
 -(void)timerIsTicking{
     _count++;
+	_progressView.emptyLineColor = _progressView.progressColor;
     if (_count >= 20) {
         _count = 20;
         if (triggerFlag == NO) {
@@ -102,13 +106,14 @@ BOOL triggerFlag = NO;
 
 -(void)progressBtnTouchedUp:(UIControl*)sender{
     _progressView.value = 0;
+	_progressView.emptyLineColor = [UIColor colorWithWhite:1.0 alpha:0];
     triggerFlag = NO;
     [_timer invalidate];
     [self resetTimer];
 }
 
 -(void)setProgressBtnBackgroundColor:(UIColor *)color{
-    _textBtn.backgroundColor = color;
+    self.backgroundColor = color;
 }
 
 -(void)setProgressColor:(UIColor *)color{

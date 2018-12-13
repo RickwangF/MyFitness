@@ -19,20 +19,28 @@
 #import "AppStyleSetting.h"
 #import "CircleProgressButton.h"
 #import "TrackDetailViewController.h"
+#import "UIColor+UIColor_Hex.h"
+#import "UIDevice+Type.h"
 
 @interface CounterViewController ()<BTKTraceDelegate, BMKLocationManagerDelegate>
 
+@property (nonatomic, strong) UIButton *backBtn;
+
+@property (nonatomic, strong) UILabel *modeLabel;
+
+@property (nonatomic, strong) UIView *topContainerView;
+
 @property (nonatomic, strong) BMKLocationManager *locationManager;
 	
-@property (nonatomic, strong) UIView *topBackgroundView;
-
-@property (nonatomic, strong) UIView *bottomBackgroundView;
+@property (nonatomic, strong) UIView *backgroundView;
 
 @property (nonatomic, strong) MZTimerLabel *timeCountingLabel;
 
 @property (nonatomic, strong) UILabel *speedLabel;
 
 @property (nonatomic, strong) UILabel *distanceLabel;
+
+@property (nonatomic, strong) UILabel *disUnitLabel;
 
 @property (nonatomic, strong) UIButton *pauseBtn;
 
@@ -80,10 +88,6 @@
 @end
 
 @implementation CounterViewController
-	
-- (UIStatusBarStyle)preferredStatusBarStyle{
-	return UIStatusBarStyleLightContent;
-}
 
 #pragma  mark - Init
 	
@@ -147,6 +151,7 @@
 	
 	[self initlocationManager];
 	[self initBackgroundView];
+	[self initTopContainerView];
 	[self initPauseBtn];
 	
 	[self initDistanceLabel];
@@ -163,14 +168,14 @@
 	
 - (void)viewDidAppear:(BOOL)animated{
 	[super viewDidAppear:animated];
-	_centerOriginX = self.view.frame.size.width / 2 - 40;
-	_centerOriginY = self.view.frame.size.height - 140 - 40;
+	_centerOriginX = self.view.frame.size.width / 2 - 45;
+	_centerOriginY = self.view.frame.size.height - 80 - 90;
 	
-	_resumeOriginX = self.view.frame.size.width / 2 - 10 - 80;
-	_resumeOriginY = self.view.frame.size.height - 140 - 40;
+	_resumeOriginX = self.view.frame.size.width / 2 - 30 - 90;
+	_resumeOriginY = self.view.frame.size.height - 80 - 90;
 	
-	_stopOriginX = self.view.frame.size.width / 2 + 10;
-	_stopOriginY = self.view.frame.size.height - 140 - 50;
+	_stopOriginX = self.view.frame.size.width / 2 + 30;
+	_stopOriginY = self.view.frame.size.height - 80 - 90;
 	
 	[self initResumeBtn];
 	[self initStopBtn];
@@ -193,55 +198,170 @@
 	
 	
 #pragma mark - Init Views
-	
+
 - (void)initBackgroundView{
-	_bottomBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 375, 140)];
-	_bottomBackgroundView.backgroundColor = [UIColor blackColor];
-	[self.view addSubview:_bottomBackgroundView];
+	_backgroundView = [[UIView alloc] initWithFrame:self.view.frame];
+	_backgroundView.backgroundColor = [UIColor colorWithHexString:@"#f0c800"];
+	[self.view addSubview:_backgroundView];
+}
+
+- (void)initTopContainerView{
+	_topContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+	[self.view addSubview:_topContainerView];
 	
-	[_bottomBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.left.right.bottom.equalTo(self.view);
-		make.height.equalTo(@140);
+	[_topContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+		if ([[UIDevice currentDevice] fullScreen]){
+			make.top.equalTo(self.view).offset(44);
+		}
+		else{
+			make.top.equalTo(self.view).offset(20);
+		}
+		make.left.right.equalTo(self.view);
+		make.height.equalTo(@44);
 	}];
 	
-	//0x17b35d
-	_topBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 375, 500)];
-	_topBackgroundView.backgroundColor = AppStyleSetting.sharedInstance.mainColor;
-	[self.view addSubview:_topBackgroundView];
+	_backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+	[_backBtn setImage:[UIImage imageNamed:@"left_25#00"] forState:UIControlStateNormal];
+	[_backBtn addTarget:self action:@selector(backBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+	[_topContainerView addSubview:_backBtn];
 	
-	[_topBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.left.top.right.equalTo(self.view);
-		make.bottom.equalTo(self.bottomBackgroundView.mas_top);
+	[_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.left.equalTo(self.topContainerView).offset(8);
+		make.centerY.equalTo(self.topContainerView);
+		make.width.height.equalTo(@40);
+	}];
+	
+	_modeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 25)];
+	_modeLabel.textColor = AppStyleSetting.sharedInstance.textColor;
+	_modeLabel.font = [UIFont systemFontOfSize:20 weight:UIFontWeightSemibold];
+	switch (_transportMode) {
+		case TransportModeWalking:
+			_modeLabel.text = @"健走";
+			break;
+		case TransportModeRunning:
+			_modeLabel.text = @"跑步";
+			break;
+		case TransportModeRiding:
+			_modeLabel.text = @"骑行";
+			break;
+		default:
+			break;
+	}
+	[_topContainerView addSubview:_modeLabel];
+	
+	[_modeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.center.equalTo(self.topContainerView);
+		make.height.equalTo(@25);
+	}];
+}
+
+- (void)initDistanceLabel{
+	_distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 100)];
+	_distanceLabel.text = @"0.00";
+	_distanceLabel.font = [UIFont systemFontOfSize:100];
+	_distanceLabel.textColor = [UIColor whiteColor];
+	[self.view addSubview:_distanceLabel];
+	
+	[_distanceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.equalTo(self.topContainerView.mas_bottom).offset(70);
+		make.centerX.equalTo(self.backgroundView).offset(-10);
+		make.height.equalTo(@90);
+	}];
+	
+	_disUnitLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 25)];
+	_disUnitLabel.text = @"公里";
+	_disUnitLabel.textColor = UIColor.whiteColor;
+	_disUnitLabel.font = [UIFont systemFontOfSize:20 weight:UIFontWeightSemibold];
+	[self.view addSubview:_disUnitLabel];
+	
+	[_disUnitLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.left.equalTo(self.distanceLabel.mas_right).offset(5);
+		make.bottom.equalTo(self.distanceLabel).offset(-5);
+		make.width.equalTo(@50);
+		make.height.equalTo(@25);
+	}];
+}
+
+- (void)initTimeCountingLabel{
+	_timeCountingLabel = [[MZTimerLabel alloc] initWithTimerType:MZTimerLabelTypeStopWatch];
+	_timeCountingLabel.frame = CGRectMake(0, 0, 100, 26);
+	_timeCountingLabel.textColor = UIColor.whiteColor;
+	_timeCountingLabel.timeFormat = @"mm:ss";
+	_timeCountingLabel.font = [UIFont systemFontOfSize:24 weight:UIFontWeightSemibold];
+	[_backgroundView addSubview:self.timeCountingLabel];
+	
+	[_timeCountingLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.equalTo(self.distanceLabel.mas_bottom).offset(70);
+		make.centerX.equalTo(self.view.mas_centerX).offset(-100);
+		make.height.equalTo(@26);
+	}];
+	
+	UILabel *displayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 18)];
+	displayLabel.text = @"用时";
+	displayLabel.textColor = UIColor.whiteColor;
+	displayLabel.font = [UIFont systemFontOfSize:25 weight:UIFontWeightSemibold];
+	[self.backgroundView addSubview:displayLabel];
+	
+	[displayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.equalTo(self.timeCountingLabel.mas_bottom).offset(15);
+		make.centerX.equalTo(self.timeCountingLabel);
+		make.height.equalTo(@25);
+	}];
+}
+
+- (void)initSpeedLabel{
+	_speedLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 26)];
+	_speedLabel.text = @"0";
+	_speedLabel.font = [UIFont systemFontOfSize:24 weight:UIFontWeightSemibold];
+	_speedLabel.textColor = UIColor.whiteColor;
+	[_backgroundView addSubview:self.speedLabel];
+	
+	[_speedLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.equalTo(self.distanceLabel.mas_bottom).offset(70);
+		make.centerX.equalTo(self.view.mas_centerX).offset(100);
+		make.height.equalTo(@26);
+	}];
+	
+	UILabel *displayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 18)];
+	displayLabel.text = @"km/h";
+	displayLabel.textColor = UIColor.whiteColor;
+	displayLabel.font = [UIFont systemFontOfSize:25 weight:UIFontWeightSemibold];
+	[self.backgroundView addSubview:displayLabel];
+	
+	[displayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.equalTo(self.speedLabel.mas_bottom).offset(15);
+		make.centerX.equalTo(self.speedLabel);
+		make.height.equalTo(@25);
 	}];
 }
 	
 - (void)initPauseBtn{
-	CGFloat bottomXcenter = self.view.center.x - 52.5;
-	CGFloat originY = self.view.bounds.size.height - 140 - 52.5;
-	_pauseBtn = [[UIButton alloc] initWithFrame:CGRectMake(bottomXcenter, originY, 105, 105)];
-	_pauseBtn.backgroundColor = [UIColor whiteColor];
-	[_pauseBtn setImage:[UIImage imageNamed:@"pause_30#51"] forState:UIControlStateNormal];
+	CGFloat bottomXcenter = self.view.center.x - 45;
+	CGFloat originY = self.view.bounds.size.height - 80 - 90;
+	_pauseBtn = [[UIButton alloc] initWithFrame:CGRectMake(bottomXcenter, originY, 90, 90)];
+	_pauseBtn.backgroundColor = AppStyleSetting.sharedInstance.mainColor;
+	[_pauseBtn setImage:[UIImage imageNamed:@"pause_25#ff"] forState:UIControlStateNormal];
 	[_pauseBtn addTarget:self action:@selector(pauseBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-	_pauseBtn.layer.cornerRadius = 52.5;
+	_pauseBtn.layer.cornerRadius = 45;
 	_pauseBtn.clipsToBounds = YES;
 	[self.view addSubview:_pauseBtn];
 }
 	
 - (void)initResumeBtn{
-	_resumeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.centerOriginX, self.centerOriginY, 80, 80)];
-	_resumeBtn.backgroundColor = [UIColor whiteColor];
-	[_resumeBtn setImage:[UIImage imageNamed:@"start_24#17b35d"] forState:UIControlStateNormal];
+	_resumeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.centerOriginX, self.centerOriginY, 90, 90)];
+	_resumeBtn.backgroundColor = AppStyleSetting.sharedInstance.mainColor;
+	[_resumeBtn setImage:[UIImage imageNamed:@"play_25#ff"] forState:UIControlStateNormal];
 	[_resumeBtn addTarget:self action:@selector(resumeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
 	_resumeBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
-	_resumeBtn.layer.cornerRadius = 40;
+	_resumeBtn.layer.cornerRadius = 45;
 	_resumeBtn.clipsToBounds = YES;
 	_resumeBtn.alpha = 0;
 	[self.view addSubview:_resumeBtn];
 }
 	
 - (void)initStopBtn{
-	_stopBtn = [[CircleProgressButton alloc] initWithFrame:CGRectMake(self.centerOriginX - 10, self.centerOriginY - 10, 100, 100)];
-	[_stopBtn setProgressBtnBackgroundColor:AppStyleSetting.sharedInstance.viewBgColor];
+	_stopBtn = [[CircleProgressButton alloc] initWithFrame:CGRectMake(self.centerOriginX, self.centerOriginY, 90, 90)];
+	[_stopBtn setProgressBtnBackgroundColor:[UIColor colorWithHexString:@"#e43e45"]];
 	[_stopBtn setProgressColor:UIColor.whiteColor];
 	__weak typeof(self) weakSelf = self;
 	_stopBtn.longPressedBlock = ^{
@@ -251,87 +371,11 @@
 	[self.view addSubview:_stopBtn];
 }
 	
-	//104 158 144
-- (void)initDistanceLabel{
-	_distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 100)];
-	_distanceLabel.text = @"0.00";
-	_distanceLabel.font = [UIFont systemFontOfSize:100];
-	_distanceLabel.textColor = [UIColor whiteColor];
-	[_topBackgroundView addSubview:_distanceLabel];
-	
-	[_distanceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.top.equalTo(self.topBackgroundView).offset(250);
-		make.centerX.equalTo(self.topBackgroundView);
-		make.height.equalTo(@110);
-	}];
-	
-	UILabel *displayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 18)];
-	displayLabel.text = @"距离（公里）";
-	displayLabel.textColor = [UIColor colorWithRed:241.0/255 green:241.0/255 blue:241.0/255 alpha:1.0];
-	displayLabel.font = [UIFont systemFontOfSize:16];
-	[self.topBackgroundView addSubview:displayLabel];
-	
-	[displayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.top.equalTo(self.distanceLabel.mas_bottom).offset(20);
-		make.centerX.equalTo(self.topBackgroundView);
-		make.height.equalTo(@18);
-	}];
-}
-	
-- (void)initTimeCountingLabel{
-	_timeCountingLabel = [[MZTimerLabel alloc] initWithTimerType:MZTimerLabelTypeStopWatch];
-	_timeCountingLabel.frame = CGRectMake(0, 0, 100, 26);
-	_timeCountingLabel.textColor = [UIColor whiteColor];
-	_timeCountingLabel.timeFormat = @"HH:mm:ss";
-	_timeCountingLabel.font = [UIFont systemFontOfSize:26];
-	[_topBackgroundView addSubview:self.timeCountingLabel];
-	
-	[_timeCountingLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.top.equalTo(self.distanceLabel.mas_bottom).offset(100);
-		make.centerX.equalTo(self.topBackgroundView).offset(-90);
-		make.height.equalTo(@26);
-	}];
-	
-	UILabel *displayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 18)];
-	displayLabel.text = @"时：分：秒";
-	displayLabel.textColor = [UIColor colorWithRed:241.0/255 green:241.0/255 blue:241.0/255 alpha:1.0];
-	displayLabel.font = [UIFont systemFontOfSize:14];
-	[self.topBackgroundView addSubview:displayLabel];
-	
-	[displayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.top.equalTo(self.timeCountingLabel.mas_bottom).offset(15);
-		make.centerX.equalTo(self.timeCountingLabel);
-		make.height.equalTo(@16);
-	}];
-}
-	
-- (void)initSpeedLabel{
-	_speedLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 26)];
-	_speedLabel.text = @"0";
-	_speedLabel.font = [UIFont systemFontOfSize:24];
-	_speedLabel.textColor = [UIColor whiteColor];
-	[_topBackgroundView addSubview:self.speedLabel];
-	
-	[_speedLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.top.equalTo(self.distanceLabel.mas_bottom).offset(100);
-		make.centerX.equalTo(self.topBackgroundView).offset(90);
-		make.height.equalTo(@26);
-	}];
-	
-	UILabel *displayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 18)];
-	displayLabel.text = @"实时速度（公里/时）";
-	displayLabel.textColor = [UIColor colorWithRed:241.0/255 green:241.0/255 blue:241.0/255 alpha:1.0];
-	displayLabel.font = [UIFont systemFontOfSize:14];
-	[self.topBackgroundView addSubview:displayLabel];
-	
-	[displayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.top.equalTo(self.speedLabel.mas_bottom).offset(15);
-		make.centerX.equalTo(self.speedLabel);
-		make.height.equalTo(@16);
-	}];
-}
-	
 #pragma mark - Action
+
+- (void)backBtnClicked:(UIButton*)sender{
+	[self.navigationController popViewControllerAnimated:YES];
+}
 	
 - (void)startService{
 	NSString *userName = [AVUser currentUser].username;
@@ -429,8 +473,8 @@
 	
 	[UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
 		self.pauseBtn.alpha = 0;
-		self.resumeBtn.frame = CGRectMake(self.resumeOriginX, self.resumeOriginY, 80, 80);
-		self.stopBtn.frame = CGRectMake(self.stopOriginX, self.stopOriginY, 100, 100);
+		self.resumeBtn.frame = CGRectMake(self.resumeOriginX, self.resumeOriginY, 90, 90);
+		self.stopBtn.frame = CGRectMake(self.stopOriginX, self.stopOriginY, 90, 90);
 	} completion:^(BOOL finish){
 		if (finish) {
 			[self stopGather];
@@ -448,8 +492,8 @@
 		self.pauseBtn.alpha = 1;
 		self.resumeBtn.alpha = 0;
 		self.stopBtn.alpha = 0;
-		self.resumeBtn.frame = CGRectMake(self.centerOriginX, self.centerOriginY, 80, 80);
-		self.stopBtn.frame = CGRectMake(self.centerOriginX - 10, self.centerOriginY - 10, 100, 100);
+		self.resumeBtn.frame = CGRectMake(self.centerOriginX, self.centerOriginY, 90, 90);
+		self.stopBtn.frame = CGRectMake(self.centerOriginX, self.centerOriginY, 90, 90);
 	} completion:^(BOOL finish){
 		if (finish) {
 			[self startGather];
@@ -461,10 +505,6 @@
 	_finishDate = [NSDate date];
 	[self stopService];
 	[_locationManager stopUpdatingLocation];
-	
-	// 测试代码
-	//TrackDetailViewController *detailVC = [[TrackDetailViewController alloc] initWithStartTime:self.startDate FinishedTime:self.finishDate TransportMode:self.transportMode TrackId:@"12312312398787"];
-	//[self.navigationController pushViewController:detailVC animated:YES];
 	
 	//正式代码
 	[self saveTrackRecord];

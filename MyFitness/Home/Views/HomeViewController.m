@@ -160,7 +160,6 @@
 	leftSideBtn.layer.cornerRadius = 15;
 	leftSideBtn.layer.masksToBounds = YES;
     [leftSideBtn addTarget:self action:@selector(leftSideBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    [leftSideBtn sizeToFit];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftSideBtn];
 }
     

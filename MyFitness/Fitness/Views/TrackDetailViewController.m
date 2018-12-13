@@ -24,6 +24,8 @@
 #import "RegionInsets.h"
 #import "ProjectConst.h"
 #import "NSDate+NSString.h"
+#import "UIColor+UIColor_Hex.h"
+#import "UIDevice+Type.h"
 
 static NSString* const startLocIdentifier = @"startLoc";
 static NSString* const stopLocIdentifier = @"stopLoc";
@@ -195,6 +197,8 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 	
 	[self initMapView];
 	
+	[self initBackBtn];
+	
 	[self initBottomContainerView];
 	
 	[self setUpTopInfoView];
@@ -230,11 +234,37 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 	_mapView.delegate = self;
 	_mapView.showsUserLocation = NO;
 	_mapView.userTrackingMode = BMKUserTrackingModeNone;
-	_mapView.mapPadding = UIEdgeInsetsMake(10, 10, 200, 10);
+	if ([[UIDevice currentDevice] fullScreen]) {
+		_mapView.mapPadding = UIEdgeInsetsMake(10, 10, 210, 10);
+	}
+	else{
+		_mapView.mapPadding = UIEdgeInsetsMake(10, 10, 200, 10);
+	}
+	
 	_mapView.updateTargetScreenPtWhenMapPaddingChanged = YES;
 	
 	[_mapView mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.edges.equalTo(self.view);
+	}];
+}
+
+- (void)initBackBtn{
+	_backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+	_backBtn.layer.cornerRadius = 20;
+	_backBtn.backgroundColor = [UIColor colorWithHexString:@"#d7d7d7"];
+	[_backBtn setImage:[UIImage imageNamed:@"left_25#00"] forState:UIControlStateNormal];
+	[_backBtn addTarget:self action:@selector(backBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+	[self.view addSubview:_backBtn];
+	
+	[_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+		if([[UIDevice currentDevice] fullScreen]){
+			make.top.equalTo(self.view).offset(46);
+		}
+		else{
+			make.top.equalTo(self.view).offset(22);
+		}
+		make.left.equalTo(self.view).offset(8);
+		make.width.height.equalTo(@40);
 	}];
 }
 	
@@ -247,7 +277,13 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 	[self.view addSubview:_bottomContainerView];
 	
 	[_bottomContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.bottom.equalTo(self.view).offset(-10);
+		if ([[UIDevice currentDevice] fullScreen]) {
+			make.bottom.equalTo(self.view).offset(-25);
+		}
+		else{
+			make.bottom.equalTo(self.view).offset(-10);
+		}
+		
 		make.left.equalTo(self.view).offset(10);
 		make.right.equalTo(self.view).offset(-10);
 		make.height.equalTo(@225);
@@ -539,6 +575,10 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 }
 	
 #pragma mark - Action
+
+- (void)backBtnClicked:(UIButton*)sender{
+	[self.navigationController popViewControllerAnimated:YES];
+}
 	
 - (void)locationArrayToCoordinateArray{
 	if (self.locationArray != nil && self.locationArray.count > 0) {
@@ -613,8 +653,8 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 - (BMKCoordinateRegion)minMaxRegionToCoordinateRegion{
 	RegionInsets regionInsets = [self getMinMaxRegionCoordinate];
 	CLLocationCoordinate2D center = CLLocationCoordinate2DMake((regionInsets.maxLatitude + regionInsets.minLatitude)/2, (regionInsets.maxLongitude+regionInsets.minLongitude)/2);
-	CLLocationDegrees latitudeOffset = fabs(center.latitude - regionInsets.minLatitude)*2 + 0.02;
-	CLLocationDegrees longitudeOffset = fabs(center.longitude-regionInsets.minLongitude)*2 + 0.02;
+	CLLocationDegrees latitudeOffset = fabs(center.latitude - regionInsets.minLatitude)*2 + 0.03;
+	CLLocationDegrees longitudeOffset = fabs(center.longitude-regionInsets.minLongitude)*2 + 0.03;
 	BMKCoordinateSpan span = {latitudeOffset, longitudeOffset};
 	BMKCoordinateRegion region = {center, span};
 	return region;
@@ -634,8 +674,8 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 	
 	NSString *speedString = [NSString stringWithFormat:@"%.1fkm/h", kmHSpeed];
 	NSString *distanceString = [NSString stringWithFormat:@"%.1f公里", mileage / 1000];
-	int floorMin = floor(minKmValue);
-	int roundSecond = round((minKmValue - floorMin) * 60);
+	int floorMin = floor(minKmValue/60);
+	int roundSecond = round(minKmValue - (floorMin * 60));
 	NSMutableString *formatString = [NSMutableString stringWithString:@"%d':%d\""];
 	if (roundSecond < 10) {
 		formatString = [NSMutableString stringWithString:@"%d':0%d\""];
@@ -796,10 +836,8 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 				annoView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:startLocIdentifier];
 			}
 			
-			//annoView.image = [UIImage imageNamed:@"start_25#ff3312"];
-			annoView.pinColor = BMKPinAnnotationColorRed;
+			annoView.image = [UIImage imageNamed:@"start_35#2199e6"];
 			annoView.canShowCallout = YES;
-			annoView.animatesDrop = YES;
 			annoView.draggable = NO;
 		}
 		else{
@@ -809,10 +847,8 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 				annoView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:stopLocIdentifier];
 			}
 			
-			//annoView.image = [UIImage imageNamed:@"end_25#00ff46"];
-			annoView.pinColor = BMKPinAnnotationColorGreen;
+			annoView.image = [UIImage imageNamed:@"end_35#21c479"];
 			annoView.canShowCallout = YES;
-			annoView.animatesDrop = YES;
 			annoView.draggable = NO;
 		}
 		return annoView;
