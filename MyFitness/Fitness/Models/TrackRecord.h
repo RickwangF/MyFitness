@@ -25,6 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *finishedTimeString;
 
+@property (nonatomic, assign) NSInteger year;
+
+@property (nonatomic, assign) NSInteger month;
+
 @property (nonatomic, copy) NSString *minuteString;
 	
 @property (nonatomic, assign) double interval;
@@ -36,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) double avgSpeed;
 
 @property (nonatomic, assign) double paceSpeed;
+
+@property (nonatomic, strong) NSString *paceString;
 
 @property (nonatomic, assign) double calorie;
 

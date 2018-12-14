@@ -18,12 +18,30 @@
 #import "MonthSectionHeader.h"
 #import "TrackTableCell.h"
 #import "NSString+NSDate.h"
+#import "AppStyleSetting.h"
+
+/*
+ 里程页面的数据按照“年-月”组成的键分类，存储在字典中，有多少个“年-月”的组合就有多少个section
+ “年-月”的组合存储在yearMonthArray中，在trackDic中“年-月”是键，值是该年改月的轨迹记录数组
+ */
 
 @interface TrackListViewController ()<UITableViewDelegate, UITableViewDataSource>
 	
-@property (nonatomic, strong) NSMutableArray *trackList;
+@property (nonatomic, strong) NSMutableArray<TrackRecord*> *trackList;
 	
 @property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, assign) NSInteger year;
+
+@property (nonatomic, assign) NSInteger month;
+
+@property (nonatomic, strong) NSMutableArray *yearMonthArray;
+
+@property (nonatomic, strong) NSMutableDictionary *trackDic;
+
+@property (nonatomic, strong) NSMutableString *avgPaceString;
+
+@property (nonatomic, strong) NSMutableString *totalDistanceString;
 
 @end
 
@@ -43,6 +61,15 @@
 	
 - (void)initValueProperty{
 	_trackList = [[NSMutableArray alloc] init];
+	NSDate *today = [NSDate date];
+	NSCalendar *calendar = [NSCalendar currentCalendar];
+	NSDateComponents *components = [calendar components: NSCalendarUnitYear | NSCalendarUnitMonth fromDate:today];
+	_year = components.year;
+	_month = components.month;
+	_yearMonthArray = [[NSMutableArray alloc] init];
+	_trackDic = [[NSMutableDictionary alloc] init];
+	_avgPaceString = [NSMutableString string];
+	_totalDistanceString = [NSMutableString string];
 }
 
 #pragma mark - Life Circle
@@ -65,6 +92,14 @@
 	
 	[self getAllMyTrackRecords];
     // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+	[super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+	[super viewWillDisappear:animated];
 }
 	
 #pragma mark - Init Views
@@ -115,6 +150,7 @@
 	AVQuery *query = [AVQuery queryWithClassName:@"TrackRecord"];
 	[query whereKey:@"user" equalTo:[AVUser currentUser]];
 	[query includeKey:@"user"];
+	[query orderByDescending:@"startTime"];
 	[query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
 		if (error != nil) {
 			[self.view makeToast:[NSString stringWithFormat:@"获取记录失败 ==> %@", error.localizedDescription]];
@@ -132,6 +168,7 @@
 				[self.trackList addObject:trackRecord];
 			}];
 			
+			[self constructTrackDictionary];
 			[self.tableView reloadData];
 		}
 	}];
@@ -139,66 +176,82 @@
 
 #pragma mark - Action
 
-- (NSString*)calculateAllDistance{
-	double allDistance = 0;
-	
+- (void)constructTrackDictionary{
 	if (_trackList.count == 0) {
-		return @"0:00";
+		return;
 	}
 	
-	for (TrackRecord *record in _trackList) {
-		allDistance += record.mileage;
-	}
+	__block double totalDistance = 0;
+	__block double totalInterval = 0;
+	[_trackList enumerateObjectsUsingBlock:^(TrackRecord * _Nonnull record, NSUInteger idx, BOOL * _Nonnull stop) {
+		totalDistance += record.mileage;
+		totalInterval += record.interval;
+		NSString *monthKey = [NSString stringWithFormat:@"%ld-%ld", (long)record.year, (long)record.month];
+		if (![self.yearMonthArray containsObject:monthKey]) {
+			[self.yearMonthArray addObject:monthKey];
+		}
+	}];
+	// 转换总里程为NSString
+	[self totalDistanceToNSString:totalDistance];
+	// 计算平均配速
+	[self calculateAvgPaceSpeedWithTime:totalInterval Distance:totalDistance];
 	
-	NSString *distanceString = [NSString stringWithFormat:@"%.2f", allDistance / 1000];
-	return distanceString;
+	for (NSMutableString *monthKey in _yearMonthArray) {
+		NSArray *keyArray = [monthKey componentsSeparatedByString:@"-"];
+		NSInteger intYear = [keyArray[0] integerValue];
+		NSInteger intMon = [keyArray[1] integerValue];
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.year == %ld && SELF.month == %ld", intYear, intMon];
+		NSArray<TrackRecord*> *monthTrackArray = [_trackList filteredArrayUsingPredicate:predicate];
+		[_trackDic setObject:monthTrackArray forKey:monthKey];
+	}
 }
 
-- (NSString*)calculateAvgPaceSpeed{
-	double allDistance = 0;
-	double allInterval = 0;
+- (void)totalDistanceToNSString:(double)distance{
 	
-	if (_trackList.count == 0) {
-		return @"0'00\"";
+	if (distance == 0) {
+		_totalDistanceString = [NSMutableString stringWithString:@"0:00"];
 	}
 	
-	for (TrackRecord *record in _trackList) {
-		allDistance += record.mileage;
-		allInterval += record.interval;
+	_totalDistanceString = [NSMutableString stringWithFormat:@"%.2f", distance / 1000];
+}
+
+- (void)calculateAvgPaceSpeedWithTime:(double)interval Distance:(double)distance{
+	
+	if (interval == 0) {
+		_avgPaceString = [NSMutableString stringWithString:@"0'00\""];
 	}
 	
-	double minKmValue = allInterval / (allDistance / 1000);
+	double minKmValue = interval / (distance / 1000);
 	int floorMin = floor(minKmValue/60);
 	int roundSec = round(minKmValue - (floorMin*60));
+	if (roundSec == 60){
+		floorMin += 1;
+		roundSec = 0;
+	}
 	
 	NSMutableString *formatt = [NSMutableString stringWithString:@"%d':%d\""];
 	if (roundSec < 10) {
 		formatt = [NSMutableString stringWithString:@"%d':0%d\""];
 	}
 	
-	NSString *avgPaceString = [NSString stringWithFormat:formatt, floorMin, roundSec];
-	
-	return avgPaceString;
+	_avgPaceString = [NSMutableString stringWithFormat:formatt, floorMin, roundSec];
 }
 	
 #pragma mark - UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-	return 2;
+	return 1 + _yearMonthArray.count;
 }
 	
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-	NSInteger count = 0;
-	switch (section) {
-		case 0:
-			count = 1;
-			break;
-		case 1:
-			count = _trackList.count;
-		default:
-			break;
+	if (section == 0){
+		return 1;
 	}
-	return count;
+	else{
+		NSString *key = _yearMonthArray[section - 1];
+		NSArray *array = _trackDic[key];
+		return array.count;
+	}
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -206,8 +259,6 @@
 		case 0:
 			return 210;
 			break;
-		case 1:
-			return 100;
 		default:
 			return 100;
 			break;
@@ -215,53 +266,72 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-	if (section == 1) {
-		return 50;
+	if (section == 0) {
+		return 0;
 	}
 	else{
-		return 0;
+		return 50;
 	}
 }
 	
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 	
-	switch (indexPath.section) {
-		case 0:{
-			SummaryTableCell *cell = [_tableView dequeueReusableCellWithIdentifier:@"summaryCell" forIndexPath:indexPath];
-			cell.distanceLabel.text = [self calculateAllDistance];
-			cell.timesLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)_trackList.count];
-			cell.paceSpeedLabel.text = [self calculateAvgPaceSpeed];
-			return cell;
-		}
-		break;
-		case 1:{
-			TrackTableCell *cell = [_tableView dequeueReusableCellWithIdentifier:@"trackCell" forIndexPath:indexPath];
-			TrackRecord *record = _trackList[indexPath.row];
-			cell.trackImageView.image = [UIImage imageNamed:@"default_track"];
-			cell.startTimeLabel.text = record.startTimeString;
-			cell.distanceLabel.text = [NSString stringWithFormat:@"%.1f公里", record.mileage / 1000];
-			int floorPaceMin = floor(record.paceSpeed/60);
-			int roundPaceSec = round(record.paceSpeed - (floorPaceMin*60));
-			NSMutableString *paceFormatt = [NSMutableString stringWithString:@"%d':%d\""];
-			if (roundPaceSec < 10) {
-				paceFormatt = [NSMutableString stringWithString:@"%d':0%d\""];
-			}
-			cell.paceSpeedLabel.text = [NSString stringWithFormat:paceFormatt, floorPaceMin, roundPaceSec];
-			cell.durationLabel.text = record.minuteString;
-			
-			return cell;
-		}
-		default:
-			return [UITableViewCell new];
-			break;
+	if (indexPath.section == 0){
+		SummaryTableCell *cell = [_tableView dequeueReusableCellWithIdentifier:@"summaryCell" forIndexPath:indexPath];
+		cell.distanceLabel.text = _totalDistanceString;
+		cell.timesLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)_trackList.count];
+		cell.paceSpeedLabel.text = _avgPaceString;
+		return cell;
+	}
+	else{
+		NSString *key = _yearMonthArray[indexPath.section - 1];
+		NSArray *array = _trackDic[key];
+		TrackRecord *record = array[indexPath.row];
+		TrackTableCell *cell = [_tableView dequeueReusableCellWithIdentifier:@"trackCell" forIndexPath:indexPath];
+		cell.trackImageView.image = [UIImage imageNamed:@"default_track"];
+		cell.startTimeLabel.text = record.startTimeString;
+		cell.distanceLabel.text = [NSString stringWithFormat:@"%.1f公里", record.mileage / 1000];
+		cell.paceSpeedLabel.text = record.paceString;
+		cell.durationLabel.text = record.minuteString;
+		return cell;
 	}
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-	if (section == 1) {
+	if (section > 0) {
 		MonthSectionHeader *header = [_tableView dequeueReusableHeaderFooterViewWithIdentifier:@"monthHeader"];
-		header.monthLabel.text = @"2018年12月";
-		header.infoLabel.text = @"5次跑步 4'35\"配速";
+		NSString *key = _yearMonthArray[section - 1];
+		NSArray *keyArray = [key componentsSeparatedByString:@"-"];
+		NSArray *recordArray = _trackDic[key];
+		NSString *monthString = [NSString stringWithFormat:@"%@年%@月",keyArray[0], keyArray[1]];
+		
+		header.monthLabel.text = monthString;
+		
+		double distance = 0;
+		double interval = 0;
+		for (TrackRecord *record in recordArray) {
+			distance += record.mileage;
+			interval += record.interval;
+		}
+		
+		if (interval == 0) {
+			header.infoLabel.text = [NSString stringWithFormat:@"%lu次运动 0':00\"配速", (unsigned long)recordArray.count];
+		}
+		
+		double minKmValue = interval / (distance / 1000);
+		int floorMin = floor(minKmValue/60);
+		int roundSec = round(minKmValue - (floorMin*60));
+		if (roundSec == 60){
+			floorMin += 1;
+			roundSec = 0;
+		}
+		NSMutableString *formatt = [NSMutableString stringWithString:@"%d':%d\""];
+		if (roundSec < 10) {
+			formatt = [NSMutableString stringWithString:@"%d':0%d\""];
+		}
+		
+		NSString *paceString = [NSString stringWithFormat:formatt, floorMin, roundSec];
+		header.infoLabel.text = [NSString stringWithFormat:@"%lu次运动 %@配速", (unsigned long)recordArray.count, paceString];
 		return header;
 	}
 	return nil;

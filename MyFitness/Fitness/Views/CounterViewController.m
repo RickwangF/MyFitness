@@ -402,37 +402,72 @@
 }
 	
 - (void)constructTrackRecord{
+	// 创建类名是TrackRecord的AVObject
 	_trackRecord = [AVObject objectWithClassName:@"TrackRecord"];
-	
+	// 获取定时器的时间
 	double timeInterval = [_timeCountingLabel getTimeCounted];
+	// 构造用时的NSString
 	double minDouble = timeInterval / 60;
 	int minFloor = floor(minDouble);
 	int secRound = round(timeInterval - (minFloor * 60));
-	
-	NSMutableString *formattString = [NSMutableString stringWithString:@"%d:%d"];
+	if (secRound == 60) {
+		minFloor += 1;
+		secRound = 0;
+	}
+	// 用时String的format
+	NSMutableString *formatString = [NSMutableString stringWithString:@"%d:%d"];
 	if (minFloor < 10) {
-		formattString = [NSMutableString stringWithString:@"0%d:%d"];
+		formatString = [NSMutableString stringWithString:@"0%d:%d"];
 		
 		if (secRound < 10) {
-			formattString = [NSMutableString stringWithString:@"0%d:0%d"];
+			formatString = [NSMutableString stringWithString:@"0%d:0%d"];
 		}
 	}
+	else {
+		if (secRound < 10) {
+			formatString = [NSMutableString stringWithString:@"%d:0%d"];
+		}
+	}
+	NSMutableString *minuteString = [NSMutableString stringWithFormat:formatString,minFloor, secRound];
 	
-	NSMutableString *minuteString = [NSMutableString stringWithFormat:formattString,minFloor, secRound];
-	
+	// 计算平均速度
 	CLLocationSpeed avgSpeed = (_distance / 1000) / (minDouble / 60);
+	// 计算卡路里量
 	double calorie = 41 * _distance / 1000;
+	// 计算碳排放量
 	double carbon = 115 * _distance / 1000;
+	// 计算配速的值
 	double intervalKm = timeInterval / (_distance / 1000);
-	
+	// 构造配速的NSString
+	int paceMinFloor = floor(intervalKm / 60);
+	int paceSecRound = round(intervalKm - (paceMinFloor * 60));
+	if (paceSecRound == 60){
+		paceMinFloor += 1;
+		paceSecRound = 0;
+	}
+	// 配速的Format
+	NSMutableString *paceFormat = [NSMutableString stringWithString:@"%d':%d\""];
+	if (paceSecRound < 10){
+		paceFormat = [NSMutableString stringWithString:@"%d':0%d\""];
+	}
+	NSString *paceSpeedString = [NSString stringWithFormat:paceFormat, paceMinFloor, paceSecRound];
+	// 获取年份，月份
+	NSCalendar *calendar = [NSCalendar currentCalendar];
+	NSDateComponents *components = [calendar components: NSCalendarUnitYear | NSCalendarUnitMonth fromDate:_startDate];
+	NSInteger year = components.year;
+	NSInteger month = components.month;
+	// 设置AVObject的键值
 	[_trackRecord setObject:[AVUser currentUser] forKey:@"user"];
 	[_trackRecord setObject:_startDate forKey:@"startTime"];
 	[_trackRecord setObject:_finishDate forKey:@"finishedTime"];
+	[_trackRecord setObject:[NSNumber numberWithInteger:year] forKey:@"year"];
+	[_trackRecord setObject:[NSNumber numberWithInteger:month] forKey:@"month"];
 	[_trackRecord setObject:[NSNumber numberWithDouble:timeInterval] forKey:@"interval"];
 	[_trackRecord setObject:minuteString forKey:@"minuteString"];
 	[_trackRecord setObject:[NSNumber numberWithDouble:_distance] forKey:@"mileage"];
 	[_trackRecord setObject:[NSNumber numberWithDouble: avgSpeed] forKey:@"avgSpeed"];
 	[_trackRecord setObject:[NSNumber numberWithDouble:intervalKm] forKey:@"paceSpeed"];
+	[_trackRecord setObject:paceSpeedString forKey:@"paceString"];
 	[_trackRecord setObject:[NSNumber numberWithDouble:calorie] forKey:@"calorie"];
 	[_trackRecord setObject:[NSNumber numberWithDouble:carbon] forKey:@"carbonSaving"];
 	[_trackRecord setObject:[NSNumber numberWithInt: _transportMode] forKey:@"transportMode"];

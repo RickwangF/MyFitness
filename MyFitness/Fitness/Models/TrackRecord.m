@@ -23,12 +23,15 @@
 	trackRecord.finishedTime = finishedDate;
     trackRecord.startTimeString = [TrackRecord stringFromDate: startDate];
     trackRecord.finishedTimeString = [TrackRecord stringFromDate: finishedDate];
+	trackRecord.year = [[obj objectForKey:@"year"] integerValue];
+	trackRecord.month = [[obj objectForKey:@"month"] integerValue];
     trackRecord.minuteString = [obj objectForKey:@"minuteString"];
 	trackRecord.interval = [[obj objectForKey:@"interval"] doubleValue];
     trackRecord.locationArray = [[NSMutableArray alloc] init];
     trackRecord.mileage = [[obj objectForKey:@"mileage"] doubleValue];
     trackRecord.avgSpeed = [[obj objectForKey:@"avgSpeed"] doubleValue];
 	trackRecord.paceSpeed = [[obj objectForKey:@"paceSpeed"] doubleValue];
+	trackRecord.paceString = [obj objectForKey:@"paceString"];
     trackRecord.calorie = [[obj objectForKey:@"calorie"] doubleValue];
     trackRecord.carbonSaving = [[obj objectForKey:@"carbonSaving"] doubleValue];
     trackRecord.transportMode = (TransportModeEnum)[[obj objectForKey:@"transportMode"] integerValue];

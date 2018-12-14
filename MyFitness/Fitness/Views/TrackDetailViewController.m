@@ -670,17 +670,18 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 	double kmHSpeed = [[_trackRecord objectForKey:@"avgSpeed"] doubleValue];
 	NSString *duration = [_trackRecord objectForKey:@"minuteString"];
 	double calorie = [[_trackRecord objectForKey:@"calorie"] doubleValue];
-	double minKmValue = [[_trackRecord objectForKey:@"paceSpeed"] doubleValue];
 	
+//	double minKmValue = [[_trackRecord objectForKey:@"paceSpeed"] doubleValue];
+	
+//	int floorMin = floor(minKmValue/60);
+//	int roundSecond = round(minKmValue - (floorMin * 60));
+//	NSMutableString *formatString = [NSMutableString stringWithString:@"%d':%d\""];
+//	if (roundSecond < 10) {
+//		formatString = [NSMutableString stringWithString:@"%d':0%d\""];
+//	}
 	NSString *speedString = [NSString stringWithFormat:@"%.1fkm/h", kmHSpeed];
 	NSString *distanceString = [NSString stringWithFormat:@"%.1f公里", mileage / 1000];
-	int floorMin = floor(minKmValue/60);
-	int roundSecond = round(minKmValue - (floorMin * 60));
-	NSMutableString *formatString = [NSMutableString stringWithString:@"%d':%d\""];
-	if (roundSecond < 10) {
-		formatString = [NSMutableString stringWithString:@"%d':0%d\""];
-	}
-	NSString *minKmString = [NSString stringWithFormat:formatString, floorMin, roundSecond];
+	NSString *minKmString = [_trackRecord objectForKey:@"paceString"];
 	NSString *calorieString = [NSString stringWithFormat:@"%d", (int)calorie];
 	
 	_avgSpeedLabel.text = speedString;
