@@ -23,7 +23,7 @@
 	trackRecord.finishedTime = finishedDate;
     trackRecord.startTimeString = [TrackRecord stringFromDate: startDate];
     trackRecord.finishedTimeString = [TrackRecord stringFromDate: finishedDate];
-    trackRecord.minute = [obj objectForKey:@"minute"];
+    trackRecord.minuteString = [obj objectForKey:@"minuteString"];
 	trackRecord.interval = [[obj objectForKey:@"interval"] doubleValue];
     trackRecord.locationArray = [[NSMutableArray alloc] init];
     trackRecord.mileage = [[obj objectForKey:@"mileage"] doubleValue];

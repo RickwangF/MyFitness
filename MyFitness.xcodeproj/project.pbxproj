@@ -43,6 +43,12 @@
 		0F37102A21C0F21E00C334C8 /* ShadowCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102921C0F21E00C334C8 /* ShadowCircleButton.m */; };
 		0F37102D21C0FEE100C334C8 /* LeftSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102C21C0FEE100C334C8 /* LeftSideViewController.m */; };
 		0F37103021C101B000C334C8 /* ButtonItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102F21C101B000C334C8 /* ButtonItemView.m */; };
+		0FA2EA1321C339C100A3DC4E /* SummaryTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1121C339C100A3DC4E /* SummaryTableCell.m */; };
+		0FA2EA1421C339C100A3DC4E /* SummaryTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1221C339C100A3DC4E /* SummaryTableCell.xib */; };
+		0FA2EA1721C340A200A3DC4E /* MonthSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1621C340A200A3DC4E /* MonthSectionHeader.m */; };
+		0FA2EA1921C340ED00A3DC4E /* MonthSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1821C340ED00A3DC4E /* MonthSectionHeader.xib */; };
+		0FA2EA1D21C342B400A3DC4E /* TrackTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1B21C342B400A3DC4E /* TrackTableCell.m */; };
+		0FA2EA1E21C342B400A3DC4E /* TrackTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1C21C342B400A3DC4E /* TrackTableCell.xib */; };
 		1D71F247864DED889DD73337 /* Pods_MyFitness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 813B8380172CDC392FFEE040 /* Pods_MyFitness.framework */; };
 /* End PBXBuildFile section */
 
@@ -130,6 +136,15 @@
 		0F37102C21C0FEE100C334C8 /* LeftSideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeftSideViewController.m; sourceTree = "<group>"; };
 		0F37102E21C101B000C334C8 /* ButtonItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ButtonItemView.h; sourceTree = "<group>"; };
 		0F37102F21C101B000C334C8 /* ButtonItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ButtonItemView.m; sourceTree = "<group>"; };
+		0FA2EA1021C339C100A3DC4E /* SummaryTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SummaryTableCell.h; sourceTree = "<group>"; };
+		0FA2EA1121C339C100A3DC4E /* SummaryTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SummaryTableCell.m; sourceTree = "<group>"; };
+		0FA2EA1221C339C100A3DC4E /* SummaryTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SummaryTableCell.xib; sourceTree = "<group>"; };
+		0FA2EA1521C340A200A3DC4E /* MonthSectionHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonthSectionHeader.h; sourceTree = "<group>"; };
+		0FA2EA1621C340A200A3DC4E /* MonthSectionHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonthSectionHeader.m; sourceTree = "<group>"; };
+		0FA2EA1821C340ED00A3DC4E /* MonthSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MonthSectionHeader.xib; sourceTree = "<group>"; };
+		0FA2EA1A21C342B400A3DC4E /* TrackTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrackTableCell.h; sourceTree = "<group>"; };
+		0FA2EA1B21C342B400A3DC4E /* TrackTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackTableCell.m; sourceTree = "<group>"; };
+		0FA2EA1C21C342B400A3DC4E /* TrackTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackTableCell.xib; sourceTree = "<group>"; };
 		59F9445866E2F2A94B5B1C20 /* Pods-MyFitness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFitness.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFitness/Pods-MyFitness.release.xcconfig"; sourceTree = "<group>"; };
 		813B8380172CDC392FFEE040 /* Pods_MyFitness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFitness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDD294776D9E4C7A886FEFC /* Pods-MyFitness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFitness.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFitness/Pods-MyFitness.debug.xcconfig"; sourceTree = "<group>"; };
@@ -289,6 +304,15 @@
 				0F2AB5E521BF8D12006FB503 /* FitnessItemView.m */,
 				0F2AB5E721BFEB30006FB503 /* TrackListViewController.h */,
 				0F2AB5E821BFEB30006FB503 /* TrackListViewController.m */,
+				0FA2EA1021C339C100A3DC4E /* SummaryTableCell.h */,
+				0FA2EA1121C339C100A3DC4E /* SummaryTableCell.m */,
+				0FA2EA1221C339C100A3DC4E /* SummaryTableCell.xib */,
+				0FA2EA1521C340A200A3DC4E /* MonthSectionHeader.h */,
+				0FA2EA1621C340A200A3DC4E /* MonthSectionHeader.m */,
+				0FA2EA1821C340ED00A3DC4E /* MonthSectionHeader.xib */,
+				0FA2EA1A21C342B400A3DC4E /* TrackTableCell.h */,
+				0FA2EA1B21C342B400A3DC4E /* TrackTableCell.m */,
+				0FA2EA1C21C342B400A3DC4E /* TrackTableCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -413,10 +437,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FA2EA1E21C342B400A3DC4E /* TrackTableCell.xib in Resources */,
 				0F2AB57B21BDF1FF006FB503 /* LaunchScreen.storyboard in Resources */,
 				0F2AB58A21BDF6C4006FB503 /* mapapi.bundle in Resources */,
 				0F2AB5CF21BE326B006FB503 /* map_config.json in Resources */,
+				0FA2EA1421C339C100A3DC4E /* SummaryTableCell.xib in Resources */,
 				0F2AB57821BDF1FF006FB503 /* Assets.xcassets in Resources */,
+				0FA2EA1921C340ED00A3DC4E /* MonthSectionHeader.xib in Resources */,
 				0F2AB57621BDF1FD006FB503 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -513,6 +540,7 @@
 				0F2AB5D621BE41F4006FB503 /* PageItemViewController.m in Sources */,
 				0F2AB57321BDF1FD006FB503 /* ViewController.m in Sources */,
 				0F2AB5E921BFEB30006FB503 /* TrackListViewController.m in Sources */,
+				0FA2EA1D21C342B400A3DC4E /* TrackTableCell.m in Sources */,
 				0F2AB5E621BF8D12006FB503 /* FitnessItemView.m in Sources */,
 				0F2AB57E21BDF1FF006FB503 /* main.m in Sources */,
 				0F2AB5BE21BDFC55006FB503 /* CircleProgressButton.m in Sources */,
@@ -528,10 +556,12 @@
 				0F2AB5B021BDFC42006FB503 /* NSDate+NSString.m in Sources */,
 				0F37103021C101B000C334C8 /* ButtonItemView.m in Sources */,
 				0F2AB5AF21BDFC42006FB503 /* ProjectConst.m in Sources */,
+				0FA2EA1321C339C100A3DC4E /* SummaryTableCell.m in Sources */,
 				0F2AB5C121BDFC55006FB503 /* MZTimerLabel.m in Sources */,
 				0F2AB57021BDF1FD006FB503 /* AppDelegate.m in Sources */,
 				0F2AB5B421BDFC42006FB503 /* NSString+NSDate.m in Sources */,
 				0F2AB5AE21BDFC42006FB503 /* UIImage+UIColor.m in Sources */,
+				0FA2EA1721C340A200A3DC4E /* MonthSectionHeader.m in Sources */,
 				0F2AB5BF21BDFC55006FB503 /* UIScrollView+GestureRecognizer.m in Sources */,
 				0F2AB5D321BE3B86006FB503 /* AppStyleSetting.m in Sources */,
 			);

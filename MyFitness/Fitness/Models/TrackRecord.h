@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *finishedTimeString;
 
-@property (nonatomic, copy) NSString *minute;
+@property (nonatomic, copy) NSString *minuteString;
 	
 @property (nonatomic, assign) double interval;
 

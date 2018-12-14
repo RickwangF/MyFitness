@@ -14,6 +14,10 @@
 #import "TrackRecord.h"
 #import "TransportModeEnum.h"
 #import "TrackDetailViewController.h"
+#import "SummaryTableCell.h"
+#import "MonthSectionHeader.h"
+#import "TrackTableCell.h"
+#import "NSString+NSDate.h"
 
 @interface TrackListViewController ()<UITableViewDelegate, UITableViewDataSource>
 	
@@ -53,6 +57,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	self.title = @"里程";
+	
 	[self initValueProperty];
 	
 	[self initTrackTableView];
@@ -64,16 +70,25 @@
 #pragma mark - Init Views
 	
 -(void) initTrackTableView{
-	_tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 200, 300)];
+	_tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 300, 300) style:UITableViewStyleGrouped];
 	_tableView.delegate = self;
 	_tableView.dataSource = self;
 	_tableView.backgroundColor = [UIColor whiteColor];
-	_tableView.rowHeight = 50;
+	_tableView.sectionFooterHeight = 0;
 	_tableView.estimatedRowHeight = 0;
 	_tableView.estimatedSectionHeaderHeight = 0;
 	_tableView.estimatedSectionFooterHeight = 0;
+	_tableView.separatorInset = UIEdgeInsetsMake(0, 16, 0, 0);
+	_tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0.00001)];
 	_tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-	[_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+	
+	UINib *summaryNib = [UINib nibWithNibName:@"SummaryTableCell" bundle:NSBundle.mainBundle];
+	UINib *headerNib = [UINib nibWithNibName:@"MonthSectionHeader" bundle:NSBundle.mainBundle];
+	UINib *trackNib = [UINib nibWithNibName:@"TrackTableCell" bundle:NSBundle.mainBundle];
+	
+	[_tableView registerNib:summaryNib forCellReuseIdentifier:@"summaryCell"];
+	[_tableView registerNib:headerNib forHeaderFooterViewReuseIdentifier:@"monthHeader"];
+	[_tableView registerNib:trackNib forCellReuseIdentifier:@"trackCell"];
 	
 	if (@available(iOS 11.0, *)) {
 		_tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -121,18 +136,135 @@
 		}
 	}];
 }
+
+#pragma mark - Action
+
+- (NSString*)calculateAllDistance{
+	double allDistance = 0;
+	
+	if (_trackList.count == 0) {
+		return @"0:00";
+	}
+	
+	for (TrackRecord *record in _trackList) {
+		allDistance += record.mileage;
+	}
+	
+	NSString *distanceString = [NSString stringWithFormat:@"%.2f", allDistance / 1000];
+	return distanceString;
+}
+
+- (NSString*)calculateAvgPaceSpeed{
+	double allDistance = 0;
+	double allInterval = 0;
+	
+	if (_trackList.count == 0) {
+		return @"0'00\"";
+	}
+	
+	for (TrackRecord *record in _trackList) {
+		allDistance += record.mileage;
+		allInterval += record.interval;
+	}
+	
+	double minKmValue = allInterval / (allDistance / 1000);
+	int floorMin = floor(minKmValue/60);
+	int roundSec = round(minKmValue - (floorMin*60));
+	
+	NSMutableString *formatt = [NSMutableString stringWithString:@"%d':%d\""];
+	if (roundSec < 10) {
+		formatt = [NSMutableString stringWithString:@"%d':0%d\""];
+	}
+	
+	NSString *avgPaceString = [NSString stringWithFormat:formatt, floorMin, roundSec];
+	
+	return avgPaceString;
+}
 	
 #pragma mark - UITableViewDelegate
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+	return 2;
+}
 	
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-	return _trackList.count;
+	NSInteger count = 0;
+	switch (section) {
+		case 0:
+			count = 1;
+			break;
+		case 1:
+			count = _trackList.count;
+		default:
+			break;
+	}
+	return count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+	switch (indexPath.section) {
+		case 0:
+			return 210;
+			break;
+		case 1:
+			return 100;
+		default:
+			return 100;
+			break;
+	}
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+	if (section == 1) {
+		return 50;
+	}
+	else{
+		return 0;
+	}
 }
 	
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-	TrackRecord *trackRecord = self.trackList[indexPath.row];
-	cell.textLabel.text = [NSString stringWithFormat:@"Record:%@  startTime:%@  finishedTime:%@",trackRecord.objectId, trackRecord.startTimeString, trackRecord.finishedTimeString];
-	return cell;
+	
+	switch (indexPath.section) {
+		case 0:{
+			SummaryTableCell *cell = [_tableView dequeueReusableCellWithIdentifier:@"summaryCell" forIndexPath:indexPath];
+			cell.distanceLabel.text = [self calculateAllDistance];
+			cell.timesLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)_trackList.count];
+			cell.paceSpeedLabel.text = [self calculateAvgPaceSpeed];
+			return cell;
+		}
+		break;
+		case 1:{
+			TrackTableCell *cell = [_tableView dequeueReusableCellWithIdentifier:@"trackCell" forIndexPath:indexPath];
+			TrackRecord *record = _trackList[indexPath.row];
+			cell.trackImageView.image = [UIImage imageNamed:@"default_track"];
+			cell.startTimeLabel.text = record.startTimeString;
+			cell.distanceLabel.text = [NSString stringWithFormat:@"%.1f公里", record.mileage / 1000];
+			int floorPaceMin = floor(record.paceSpeed/60);
+			int roundPaceSec = round(record.paceSpeed - (floorPaceMin*60));
+			NSMutableString *paceFormatt = [NSMutableString stringWithString:@"%d':%d\""];
+			if (roundPaceSec < 10) {
+				paceFormatt = [NSMutableString stringWithString:@"%d':0%d\""];
+			}
+			cell.paceSpeedLabel.text = [NSString stringWithFormat:paceFormatt, floorPaceMin, roundPaceSec];
+			cell.durationLabel.text = record.minuteString;
+			
+			return cell;
+		}
+		default:
+			return [UITableViewCell new];
+			break;
+	}
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+	if (section == 1) {
+		MonthSectionHeader *header = [_tableView dequeueReusableHeaderFooterViewWithIdentifier:@"monthHeader"];
+		header.monthLabel.text = @"2018年12月";
+		header.infoLabel.text = @"5次跑步 4'35\"配速";
+		return header;
+	}
+	return nil;
 }
 	
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
