@@ -50,6 +50,7 @@
 		0FA2EA1D21C342B400A3DC4E /* TrackTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1B21C342B400A3DC4E /* TrackTableCell.m */; };
 		0FA2EA1E21C342B400A3DC4E /* TrackTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1C21C342B400A3DC4E /* TrackTableCell.xib */; };
 		0FED06CA21C743A7000D41AC /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FED06C921C743A7000D41AC /* NavigationViewController.m */; };
+		0FED06CD21C7963C000D41AC /* MKDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FED06CB21C7963C000D41AC /* MKDropdownMenu.m */; };
 		1D71F247864DED889DD73337 /* Pods_MyFitness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 813B8380172CDC392FFEE040 /* Pods_MyFitness.framework */; };
 /* End PBXBuildFile section */
 
@@ -148,6 +149,8 @@
 		0FA2EA1C21C342B400A3DC4E /* TrackTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackTableCell.xib; sourceTree = "<group>"; };
 		0FED06C821C743A7000D41AC /* NavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		0FED06C921C743A7000D41AC /* NavigationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
+		0FED06CB21C7963C000D41AC /* MKDropdownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDropdownMenu.m; sourceTree = "<group>"; };
+		0FED06CC21C7963C000D41AC /* MKDropdownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDropdownMenu.h; sourceTree = "<group>"; };
 		59F9445866E2F2A94B5B1C20 /* Pods-MyFitness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFitness.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFitness/Pods-MyFitness.release.xcconfig"; sourceTree = "<group>"; };
 		813B8380172CDC392FFEE040 /* Pods_MyFitness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFitness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDD294776D9E4C7A886FEFC /* Pods-MyFitness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFitness.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFitness/Pods-MyFitness.debug.xcconfig"; sourceTree = "<group>"; };
@@ -269,6 +272,8 @@
 		0F2AB59721BDFAB2006FB503 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0FED06CC21C7963C000D41AC /* MKDropdownMenu.h */,
+				0FED06CB21C7963C000D41AC /* MKDropdownMenu.m */,
 				0F2AB58721BDF5DF006FB503 /* RootNaviViewController.swift */,
 				0F2AB5BA21BDFC55006FB503 /* CAPSPageMenu.h */,
 				0F2AB5BC21BDFC55006FB503 /* CAPSPageMenu.m */,
@@ -502,6 +507,7 @@
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/AVOSCloud/AVOSCloud.framework",
 				"${BUILT_PRODUCTS_DIR}/CHIPageControl/CHIPageControl.framework",
+				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
 				"${BUILT_PRODUCTS_DIR}/HMSegmentedControl/HMSegmentedControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/KMNavigationBarTransition/KMNavigationBarTransition.framework",
@@ -517,6 +523,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AVOSCloud.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHIPageControl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HMSegmentedControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KMNavigationBarTransition.framework",
@@ -540,6 +547,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F2AB5DA21BE54C8006FB503 /* CounterViewController.m in Sources */,
+				0FED06CD21C7963C000D41AC /* MKDropdownMenu.m in Sources */,
 				0F2AB5E021BE8BEB006FB503 /* LoginViewController.m in Sources */,
 				0F37102D21C0FEE100C334C8 /* LeftSideViewController.m in Sources */,
 				0F2AB58821BDF5DF006FB503 /* RootNaviViewController.swift in Sources */,

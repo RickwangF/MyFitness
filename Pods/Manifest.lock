@@ -34,6 +34,7 @@ PODS:
   - CHIPageControl/Jaloro (0.1.7)
   - CHIPageControl/Paprika (0.1.7)
   - CHIPageControl/Puya (0.1.7)
+  - DropDown (2.3.12)
   - Hero (1.4.0)
   - HMSegmentedControl (1.5.5)
   - KMNavigationBarTransition (1.1.5)
@@ -50,6 +51,7 @@ DEPENDENCIES:
   - BaiduMapKit
   - BMKLocationKit
   - CHIPageControl (from `https://github.com/RickwangF/CHIPageControl`)
+  - DropDown (~> 2.3.2)
   - Hero
   - HMSegmentedControl
   - KMNavigationBarTransition
@@ -66,6 +68,7 @@ SPEC REPOS:
     - AVOSCloud
     - BaiduMapKit
     - BMKLocationKit
+    - DropDown
     - Hero
     - HMSegmentedControl
     - KMNavigationBarTransition
@@ -91,6 +94,7 @@ SPEC CHECKSUMS:
   BaiduMapKit: b6a8f31b3d2e4e5cad4084512a0d9a3878638272
   BMKLocationKit: 6c47273f985609be0a0785f2f6f12bb7c1b7e8b6
   CHIPageControl: bbe1ddd0c688c02ec65b7f7e7d34551a3d16f37c
+  DropDown: 0bcc278799ec11a3d34ce1aac9367fbbaf5423d9
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
   HMSegmentedControl: f514c6dad47aa3065e0ed2e8046b73efc71221b9
   KMNavigationBarTransition: 7a52c9bc25b39b6e3343e980b453facee1591b82
@@ -101,6 +105,6 @@ SPEC CHECKSUMS:
   STPopup: da1167250a01584af7bcccb898653185f223ec46
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: 57cea5d5d96cb019f34a7fcb878db8cb98fcb020
+PODFILE CHECKSUM: 51f3308eb844309bc770c674580324b6db758ad4
 
 COCOAPODS: 1.5.3

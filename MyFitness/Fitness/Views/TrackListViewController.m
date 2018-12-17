@@ -20,6 +20,7 @@
 #import "NSString+NSDate.h"
 #import "AppStyleSetting.h"
 #import "UIImage+UIColor.h"
+#import <DropDown/DropDown-Swift.h>
 
 /*
  里程页面的数据按照“年-月”组成的键分类，存储在字典中，有多少个“年-月”的组合就有多少个section
@@ -31,6 +32,8 @@
 @property (nonatomic, strong) NSMutableArray<TrackRecord*> *trackList;
 	
 @property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, assign) TransportModeEnum transportMode;
 
 @property (nonatomic, assign) NSInteger year;
 
@@ -53,7 +56,7 @@
 - (instancetype)init{
 	self = [super initWithNibName:nil bundle:nil];
 	if (self) {
-		
+		[self initValueProperty];
 	}
 	return self;
 }
@@ -71,6 +74,7 @@
 	_trackDic = [[NSMutableDictionary alloc] init];
 	_avgPaceString = [NSMutableString string];
 	_totalDistanceString = [NSMutableString string];
+	_transportMode = TransportModeNone;
 }
 
 #pragma mark - Life Circle
@@ -85,10 +89,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	self.title = @"里程";
-	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithUIColor:UIColor.whiteColor] forBarMetrics:UIBarMetricsDefault];
+	self.title = @"所有运动";
 	
-	[self initValueProperty];
+	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithUIColor:UIColor.whiteColor] forBarMetrics:UIBarMetricsDefault];
 	
 	[self initTrackTableView];
 	
@@ -98,7 +101,7 @@
 	
 #pragma mark - Init Views
 	
--(void) initTrackTableView{
+- (void)initTrackTableView{
 	_tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 300, 300) style:UITableViewStyleGrouped];
 	_tableView.delegate = self;
 	_tableView.dataSource = self;
@@ -196,9 +199,30 @@
 		NSInteger intYear = [keyArray[0] integerValue];
 		NSInteger intMon = [keyArray[1] integerValue];
 		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.year == %ld && SELF.month == %ld", intYear, intMon];
-		NSArray<TrackRecord*> *monthTrackArray = [_trackList filteredArrayUsingPredicate:predicate];
+		NSMutableArray<TrackRecord*> *monthTrackArray = [[_trackList filteredArrayUsingPredicate:predicate] mutableCopy];
 		[_trackDic setObject:monthTrackArray forKey:monthKey];
 	}
+}
+
+- (void)updateTableViewSummaryCell{
+	__weak typeof(self) weakSelf = self;
+	__block double totalDistance = 0;
+	__block double totalInterval = 0;
+	// 构造“年-月”的键数组
+	[weakSelf.trackList enumerateObjectsUsingBlock:^(TrackRecord * _Nonnull record, NSUInteger idx, BOOL * _Nonnull stop) {
+		totalDistance += record.mileage;
+		totalInterval += record.interval;
+	}];
+	// 转换总里程为NSString
+	[weakSelf totalDistanceToNSString:totalDistance];
+	// 计算平均配速
+	[weakSelf calculateAvgPaceSpeedWithTime:totalInterval Distance:totalDistance];
+	
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+	SummaryTableCell *cell = [weakSelf.tableView cellForRowAtIndexPath:indexPath];
+	cell.distanceLabel.text = weakSelf.totalDistanceString;
+	cell.timesLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)_trackList.count];
+	cell.paceSpeedLabel.text = weakSelf.avgPaceString;
 }
 
 - (void)totalDistanceToNSString:(double)distance{
@@ -230,6 +254,33 @@
 	}
 	
 	_avgPaceString = [NSMutableString stringWithFormat:formatt, floorMin, roundSec];
+}
+
+- (void)presentDeleteComfirmDialogWithIndexPath:(NSIndexPath*)indexPath{
+	UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请确认删除" message:@"删除记录将无法恢复" preferredStyle:UIAlertControllerStyleAlert];
+	
+	UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
+	__weak typeof(self) weakSelf = self;
+	UIAlertAction *delete = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+		NSMutableArray *monthTrackArray = weakSelf.trackDic[weakSelf.yearMonthArray[indexPath.section - 1]];
+		TrackRecord *record = monthTrackArray[indexPath.row];
+		[weakSelf.trackList removeObject:record];
+		AVObject *recordObj = [AVObject objectWithClassName:@"TrackRecord" objectId:record.objectId];
+		[recordObj deleteInBackground];
+		AVQuery *query = [AVQuery queryWithClassName:@"MFLocation"];
+		[query whereKey:@"trackId" equalTo:record.objectId];
+		[query deleteAllInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+			
+		}];
+		[monthTrackArray removeObjectAtIndex:indexPath.row];
+		[weakSelf.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+		[weakSelf updateTableViewSummaryCell];
+	}];
+	
+	[alertController addAction:cancel];
+	[alertController addAction:delete];
+	
+	[self presentViewController:alertController animated:YES completion:nil];
 }
 	
 #pragma mark - UITableViewDelegate
@@ -292,6 +343,16 @@
 	}
 }
 
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
+	
+	__weak typeof(self) weakSelf = self;
+	UITableViewRowAction *delete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+		[weakSelf presentDeleteComfirmDialogWithIndexPath:indexPath];
+	}];
+	
+	return @[delete];
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 	if (section > 0) {
 		MonthSectionHeader *header = [_tableView dequeueReusableHeaderFooterViewWithIdentifier:@"monthHeader"];
@@ -333,9 +394,11 @@
 }
 	
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-	TrackRecord *trackRecord = self.trackList[indexPath.row];
-	TrackDetailViewController *detailVC = [[TrackDetailViewController alloc] initWithStartTime:trackRecord.startTime FinishedTime:trackRecord.finishedTime TransportMode:trackRecord.transportMode TrackId:trackRecord.objectId];
-	[self.navigationController pushViewController:detailVC animated:YES];
+	if (indexPath.section > 0) {
+		TrackRecord *trackRecord = self.trackList[indexPath.row];
+		TrackDetailViewController *detailVC = [[TrackDetailViewController alloc] initWithStartTime:trackRecord.startTime FinishedTime:trackRecord.finishedTime TransportMode:trackRecord.transportMode TrackId:trackRecord.objectId];
+		[self.navigationController pushViewController:detailVC animated:YES];
+	}
 	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

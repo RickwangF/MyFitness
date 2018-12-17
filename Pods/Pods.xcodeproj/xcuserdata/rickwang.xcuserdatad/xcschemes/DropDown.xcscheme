@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "84138A9256022BE6502D0DE1B0237E02"
-               BlueprintName = "Toast"
+               BlueprintIdentifier = "5168099F2EBFC99A707C03C9EADE01A5"
+               BlueprintName = "DropDown"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "Toast.framework">
+               BuildableName = "DropDown.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -8,8 +8,8 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSInteger, TransportModeEnum) {
-    
-    TransportModeWalking = 0,
+    TransportModeNone = -1,
+    TransportModeWalking,
     TransportModeRunning,
     TransportModeRiding
 };
