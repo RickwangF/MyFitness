@@ -20,7 +20,7 @@
 #import "NSString+NSDate.h"
 #import "AppStyleSetting.h"
 #import "UIImage+UIColor.h"
-#import <DropDown/DropDown-Swift.h>
+#import "MyFitness-Swift.h"
 
 /*
  里程页面的数据按照“年-月”组成的键分类，存储在字典中，有多少个“年-月”的组合就有多少个section
@@ -34,6 +34,10 @@
 @property (nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic, assign) TransportModeEnum transportMode;
+
+@property (nonatomic, strong) UIButton *dropdownBtn;
+
+@property (nonatomic, strong) DropDownMenu *dropdownMenu;
 
 @property (nonatomic, assign) NSInteger year;
 
@@ -89,9 +93,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	self.title = @"所有运动";
-	
 	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithUIColor:UIColor.whiteColor] forBarMetrics:UIBarMetricsDefault];
+	
+	[self initDropdownMenu];
 	
 	[self initTrackTableView];
 	
@@ -100,6 +104,27 @@
 }
 	
 #pragma mark - Init Views
+
+- (void)initDropdownMenu{
+	_dropdownBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 120, 44)];
+	[_dropdownBtn setTitle:@"所有运动" forState:UIControlStateNormal];
+	[_dropdownBtn setImage:[UIImage imageNamed:@"down_10#00"] forState:UIControlStateNormal];
+	[_dropdownBtn setTitleColor:AppStyleSetting.sharedInstance.textColor forState:UIControlStateNormal];
+	_dropdownBtn.titleLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightSemibold];
+	[_dropdownBtn addTarget:self action:@selector(dropdownBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+	self.navigationItem.titleView = _dropdownBtn;
+	
+	_dropdownMenu = [[DropDownMenu alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 210)];
+	[_dropdownMenu setAnchorView:_dropdownBtn];
+	_dropdownMenu.backgroundColor = AppStyleSetting.sharedInstance.viewBgColor;
+	[_dropdownMenu setDataSource:@[@"所有运动",@"健走",@"跑步",@"骑行"]];
+	[_dropdownMenu setWidth: self.view.frame.size.width];
+	[_dropdownMenu setDirectionBottom];
+	[_dropdownMenu setBottomOffset:CGPointMake(0, 44)];
+	[_dropdownMenu setSelectionCallback:^(NSInteger index,  NSString * _Nonnull textString){
+		NSLog(@"select text string is %@", textString);
+	}];
+}
 	
 - (void)initTrackTableView{
 	_tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 300, 300) style:UITableViewStyleGrouped];
@@ -172,6 +197,10 @@
 }
 
 #pragma mark - Action
+	 
+- (void)dropdownBtnClicked:(UIButton*)sender{
+	[_dropdownMenu showMenu];
+}
 
 - (void)constructTrackDictionary{
 	if (_trackList.count == 0) {

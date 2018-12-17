@@ -41,7 +41,7 @@ extension UIBarButtonItem: AnchorView {
 }
 
 /// A Material Design drop down in replacement for `UIPickerView`.
-public final class DropDown: UIView {
+open class DropDown: UIView {
 
 	//TODO: handle iOS 7 landscape mode
 
@@ -188,7 +188,7 @@ public final class DropDown: UIView {
         }
 	}
 
-	public override var backgroundColor: UIColor? {
+	open override var backgroundColor: UIColor? {
 		get { return tableViewBackgroundColor }
 		set { tableViewBackgroundColor = newValue! }
 	}
@@ -548,7 +548,7 @@ private extension DropDown {
 
 extension DropDown {
 
-	public override func updateConstraints() {
+	open override func updateConstraints() {
 		if !didSetupConstraints {
 			setupConstraints()
 		}
@@ -639,7 +639,7 @@ extension DropDown {
 		tableViewContainer.addUniversalConstraints(format: "|[tableView]|", views: ["tableView": tableView])
 	}
 
-	public override func layoutSubviews() {
+	open override func layoutSubviews() {
 		super.layoutSubviews()
 
 		// When orientation changes, layoutSubviews is called
@@ -886,7 +886,7 @@ extension DropDown {
 		return (layout.canBeDisplayed, layout.offscreenHeight)
 	}
 
-	public override func accessibilityPerformEscape() -> Bool {
+	open override func accessibilityPerformEscape() -> Bool {
 		switch dismissMode {
 		case .automatic, .onTap:
 			cancel()
@@ -1129,7 +1129,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 
 extension DropDown {
 
-	public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+	open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
 		let view = super.hitTest(point, with: event)
 
 		if dismissMode == .automatic && view === dismissableView {

@@ -51,7 +51,7 @@ DEPENDENCIES:
   - BaiduMapKit
   - BMKLocationKit
   - CHIPageControl (from `https://github.com/RickwangF/CHIPageControl`)
-  - DropDown (~> 2.3.2)
+  - DropDown (from `https://github.com/RickwangF/DropDown`)
   - Hero
   - HMSegmentedControl
   - KMNavigationBarTransition
@@ -68,7 +68,6 @@ SPEC REPOS:
     - AVOSCloud
     - BaiduMapKit
     - BMKLocationKit
-    - DropDown
     - Hero
     - HMSegmentedControl
     - KMNavigationBarTransition
@@ -82,11 +81,16 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   CHIPageControl:
     :git: https://github.com/RickwangF/CHIPageControl
+  DropDown:
+    :git: https://github.com/RickwangF/DropDown
 
 CHECKOUT OPTIONS:
   CHIPageControl:
     :commit: d4a636b87e84e466ce7347ad67afe945a6ce075e
     :git: https://github.com/RickwangF/CHIPageControl
+  DropDown:
+    :commit: 809459b04a0c5746e88bdac99dea03e66ced83c6
+    :git: https://github.com/RickwangF/DropDown
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
@@ -105,6 +109,6 @@ SPEC CHECKSUMS:
   STPopup: da1167250a01584af7bcccb898653185f223ec46
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: 51f3308eb844309bc770c674580324b6db758ad4
+PODFILE CHECKSUM: 4fd78eb8da77a819033c3f05e2a64839f1da106a
 
 COCOAPODS: 1.5.3
