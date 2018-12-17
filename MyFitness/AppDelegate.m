@@ -16,6 +16,8 @@
 #import "ProjectConst.h"
 #import "AppStyleSetting.h"
 #import "HomeViewController.h"
+#import "UIImage+UIColor.h"
+#import "NavigationViewController.h"
 
 @interface AppDelegate ()<BMKLocationAuthDelegate, BMKGeneralDelegate>
     
@@ -44,8 +46,8 @@
     [AVOSCloud setApplicationId:AVOSCloudAppID clientKey:AVOSCloudClientKey];
     [AVOSCloud setAllLogsEnabled:YES];
 	
-	[UINavigationBar appearance].translucent = NO;
-	[UINavigationBar appearance].barTintColor = AppStyleSetting.sharedInstance.naviBarTintColor;
+	[UINavigationBar appearance].translucent = YES;
+	[[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithUIColor:AppStyleSetting.sharedInstance.naviBarTintColor] forBarMetrics:UIBarMetricsDefault];
 	[UINavigationBar appearance].tintColor = AppStyleSetting.sharedInstance.naviTintColor;
 	[UINavigationBar appearance].barStyle = UIBarStyleDefault;
 	[[UINavigationBar appearance] setShadowImage:[UIImage new]];
@@ -54,7 +56,7 @@
 	_window.frame = UIScreen.mainScreen.bounds;
 	
 	HomeViewController *homeVC = [[HomeViewController alloc] init];
-	UINavigationController *naviVC = [[UINavigationController alloc] initWithRootViewController:homeVC];
+	NavigationViewController *naviVC = [[NavigationViewController alloc] initWithRootViewController:homeVC];
 	
 	_window.rootViewController = naviVC;
 	[_window makeKeyAndVisible];

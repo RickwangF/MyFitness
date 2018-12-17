@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyFitness/Fitness/Views/CounterViewController.m"
-            timestampString = "566469446.633352"
+            timestampString = "566711679.163551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "406"
-            endingLineNumber = "406"
+            startingLineNumber = "386"
+            endingLineNumber = "386"
             landmarkName = "-constructTrackRecord"
             landmarkType = "7">
          </BreakpointContent>

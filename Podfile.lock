@@ -36,6 +36,7 @@ PODS:
   - CHIPageControl/Puya (0.1.7)
   - Hero (1.4.0)
   - HMSegmentedControl (1.5.5)
+  - KMNavigationBarTransition (1.1.5)
   - Masonry (1.1.0)
   - MBCircularProgressBar (0.3.5)
   - MBProgressHUD (1.1.0)
@@ -51,6 +52,7 @@ DEPENDENCIES:
   - CHIPageControl (from `https://github.com/RickwangF/CHIPageControl`)
   - Hero
   - HMSegmentedControl
+  - KMNavigationBarTransition
   - Masonry
   - MBCircularProgressBar
   - MBProgressHUD (~> 1.1.0)
@@ -66,6 +68,7 @@ SPEC REPOS:
     - BMKLocationKit
     - Hero
     - HMSegmentedControl
+    - KMNavigationBarTransition
     - Masonry
     - MBCircularProgressBar
     - MBProgressHUD
@@ -90,6 +93,7 @@ SPEC CHECKSUMS:
   CHIPageControl: bbe1ddd0c688c02ec65b7f7e7d34551a3d16f37c
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
   HMSegmentedControl: f514c6dad47aa3065e0ed2e8046b73efc71221b9
+  KMNavigationBarTransition: 7a52c9bc25b39b6e3343e980b453facee1591b82
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBCircularProgressBar: 0b795b722a5eb5b0923822f90474e2576a1a7855
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
@@ -97,6 +101,6 @@ SPEC CHECKSUMS:
   STPopup: da1167250a01584af7bcccb898653185f223ec46
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: 2e04599cbd5bca7e6f14ac4f4f8222292e55b248
+PODFILE CHECKSUM: 57cea5d5d96cb019f34a7fcb878db8cb98fcb020
 
 COCOAPODS: 1.5.3

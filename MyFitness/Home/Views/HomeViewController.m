@@ -30,6 +30,7 @@
 #import "ShadowCircleButton.h"
 #import "LeftSideViewController.h"
 #import "UIDevice+Type.h"
+#import "NavigationViewController.h"
 
 
 @interface HomeViewController ()<BMKMapViewDelegate, BMKLocationManagerDelegate, SubViewControllerDelegate, CAPSPageMenuDelegate>
@@ -146,9 +147,10 @@
     [BMKMapView enableCustomMapStyle:NO];
 	[_locationManager stopUpdatingHeading];
 	[_locationManager stopUpdatingLocation];
+	_needRefreshMap = YES;
 	[_mapView removeFromSuperview];
 	_mapView = nil;
-	_needRefreshMap = YES;
+	
 }
     
 #pragma mark - Init View
@@ -366,11 +368,16 @@
     [self presentViewController:SideMenuManager.defaultManager.menuLeftNavigationController animated:YES completion:nil];
 }
 
+- (void)presentLoginVC{
+	LoginViewController *loginVC = [[LoginViewController alloc] init];
+	NavigationViewController *naviVC = [[NavigationViewController alloc] initWithRootViewController:loginVC];
+	[naviVC.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+	[self presentViewController:naviVC animated:YES completion:nil];
+}
+
 - (void)todayDistanceBtnClicked:(UIButton*)sender{
 	if ([AVUser currentUser] == nil) {
-		LoginViewController *loginVC = [[LoginViewController alloc] init];
-		UINavigationController *naviVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
-		[self presentViewController:naviVC animated:YES completion:nil];
+		[self presentLoginVC];
 		return;
 	}
 }
@@ -392,10 +399,9 @@
 }
 
 - (void)startBtnClicked:(UIButton*)sender{
+	
 	if ([AVUser currentUser] == nil) {
-		LoginViewController *loginVC = [[LoginViewController alloc] init];
-		UINavigationController *naviVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
-		[self presentViewController:naviVC animated:YES completion:nil];
+		[self presentLoginVC];
 		return;
 	}
 	
@@ -446,10 +452,8 @@
 #pragma mark - SubViewControllerDelegate
 	
 - (void)leftSideViewControllerMakePushWithFlag:(NSInteger)flag{
-	if([AVUser currentUser] == nil) {
-		LoginViewController *loginVC = [[LoginViewController alloc] init];
-		UINavigationController *naviVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
-		[self presentViewController:naviVC animated:YES completion:nil];
+	if ([AVUser currentUser] == nil) {
+		[self presentLoginVC];
 		return;
 	}
 	

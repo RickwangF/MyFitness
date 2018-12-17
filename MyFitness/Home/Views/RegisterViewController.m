@@ -38,7 +38,7 @@
 - (void)loadView{
     UIView *mainView = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
     mainView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    mainView.backgroundColor = [UIColor whiteColor];
+    mainView.backgroundColor = UIColor.whiteColor;
     self.view = mainView;
 }
 
@@ -46,18 +46,23 @@
     [super viewDidLoad];
     
     [self initSubViews];
+	
+	_backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 35)];
+	[_backBtn setTitle:@"关闭" forState:UIControlStateNormal];
+	[_backBtn setTitleColor:[UIColor colorWithRed:32.0/255 green:38.0/255 blue:45.0/255 alpha:1] forState:UIControlStateNormal];
+	_backBtn.titleLabel.font = [UIFont systemFontOfSize:20];
+	[_backBtn addTarget:self action:@selector(backBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_backBtn];
     // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
-    self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
+//    [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 #pragma mark - Init Views
@@ -78,23 +83,6 @@
         }
         make.centerX.equalTo(self.view);
         make.height.equalTo(@35);
-    }];
-    
-    _backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 35)];
-    [_backBtn setTitle:@"关闭" forState:UIControlStateNormal];
-    [_backBtn setTitleColor:[UIColor colorWithRed:32.0/255 green:38.0/255 blue:45.0/255 alpha:1] forState:UIControlStateNormal];
-    _backBtn.titleLabel.font = [UIFont systemFontOfSize:20];
-    [_backBtn addTarget:self action:@selector(backBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_backBtn];
-    
-    [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        if (@available(iOS 11.0, *)) {
-            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(40);
-        } else {
-            make.top.equalTo(self.mas_topLayoutGuideTop).offset(40);
-        }
-        make.left.equalTo(self.view).offset(16);
-        make.height.equalTo(@30);
     }];
     
     _loginNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 200, 45)];

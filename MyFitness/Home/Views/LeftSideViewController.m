@@ -68,6 +68,7 @@
 	[self initButtonItemView];
 	
 	[self initBottomContainerView];
+	
     // Do any additional setup after loading the view.
 }
 
@@ -78,7 +79,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
 	[super viewWillDisappear:animated];
-	[self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 #pragma mark - Init Views
@@ -133,56 +133,56 @@
 }
 
 - (void)initButtonItemView{
-	_mileageItemView = [[ButtonItemView alloc] initWithFrame:CGRectMake(0, 0, 80, 25)];
+	_mileageItemView = [[ButtonItemView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
 	[_mileageItemView setImage:[UIImage imageNamed:@"mileage_25#00"]];
 	[_mileageItemView setTitle:@"里程"];
 	[_mileageItemView addTarget:self action:@selector(mileageItemViewClicked:) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:_mileageItemView];
 	
 	[_mileageItemView mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.top.equalTo(self.topContainerView.mas_bottom).offset(30);
-		make.left.equalTo(self.view).offset(30);
-		make.width.equalTo(@80);
-		make.height.equalTo(@25);
+		make.top.equalTo(self.topContainerView.mas_bottom).offset(22.5);
+		make.left.equalTo(self.view);
+		make.width.equalTo(self.view);
+		make.height.equalTo(@40);
 	}];
 	
-	_recordItemView = [[ButtonItemView alloc] initWithFrame:CGRectMake(0, 0, 80, 25)];
+	_recordItemView = [[ButtonItemView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
 	[_recordItemView setImage:[UIImage imageNamed:@"record_25#00"]];
 	[_recordItemView setTitle:@"记录"];
 	[_recordItemView addTarget:self action:@selector(recordItemViewClicked:) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:_recordItemView];
 	
 	[_recordItemView mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.top.equalTo(self.mileageItemView.mas_bottom).offset(30);
-		make.left.equalTo(self.view).offset(30);
-		make.width.equalTo(@80);
-		make.height.equalTo(@25);
+		make.top.equalTo(self.mileageItemView.mas_bottom).offset(15);
+		make.left.equalTo(self.view);
+		make.width.equalTo(self.view);
+		make.height.equalTo(@40);
 	}];
 	
-	_cooperateItemView = [[ButtonItemView alloc] initWithFrame:CGRectMake(0, 0, 80, 25)];
+	_cooperateItemView = [[ButtonItemView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
 	[_cooperateItemView setImage:[UIImage imageNamed:@"cooperate_25#00"]];
 	[_cooperateItemView setTitle:@"合作"];
 	[_cooperateItemView addTarget:self action:@selector(cooperateItemViewClicked:) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:_cooperateItemView];
 	
 	[_cooperateItemView mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.top.equalTo(self.recordItemView.mas_bottom).offset(30);
-		make.left.equalTo(self.view).offset(30);
-		make.width.equalTo(@80);
-		make.height.equalTo(@25);
+		make.top.equalTo(self.recordItemView.mas_bottom).offset(15);
+		make.left.equalTo(self.view);
+		make.width.equalTo(self.view);
+		make.height.equalTo(@40);
 	}];
 	
-	_settingItemView = [[ButtonItemView alloc] initWithFrame:CGRectMake(0, 0, 80, 25)];
+	_settingItemView = [[ButtonItemView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
 	[_settingItemView setImage:[UIImage imageNamed:@"setting_25#00"]];
 	[_settingItemView setTitle:@"设置"];
 	[_settingItemView addTarget:self action:@selector(settingItemViewClicked:) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:_settingItemView];
 	
 	[_settingItemView mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.top.equalTo(self.cooperateItemView.mas_bottom).offset(30);
-		make.left.equalTo(self.view).offset(30);
-		make.width.equalTo(@80);
-		make.height.equalTo(@25);
+		make.top.equalTo(self.cooperateItemView.mas_bottom).offset(15);
+		make.left.equalTo(self.view);
+		make.width.equalTo(self.view);
+		make.height.equalTo(@40);
 	}];
 }
 
@@ -204,7 +204,10 @@
 	separator.backgroundColor = AppStyleSetting.sharedInstance.lightSeparatorColor;
 	[_bottomContainerView addSubview:separator];
 	
-	_privacyItemView = [[ButtonItemView alloc] initWithFrame:CGRectMake(0, 0, 80, 20)];
+	_privacyItemView = [[ButtonItemView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
+	[_privacyItemView setItemHeight:16];
+	[_privacyItemView setImageViewMarginLeft:20];
+	[_privacyItemView setImageViewMarginRight:5];
 	[_privacyItemView setTitle:@"隐私协议"];
 	[_privacyItemView setImage:[UIImage imageNamed:@"privacy_16#00"]];
 	[_privacyItemView setTitleFont:[UIFont systemFontOfSize:14]];
@@ -212,8 +215,8 @@
 	[_bottomContainerView addSubview:_privacyItemView];
 	
 	[_privacyItemView mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.left.equalTo(self.bottomContainerView).offset(20);
-		make.width.equalTo(@80);
+		make.left.equalTo(self.bottomContainerView);
+		make.width.equalTo(self.view);
 		make.height.equalTo(@20);
 		if ([[UIDevice currentDevice] fullScreen]) {
 			make.centerY.equalTo(self.bottomContainerView).offset(-12.5);
@@ -262,7 +265,7 @@
 }
 
 - (void)privacyItemViewClicked:(UIControl*)sender{
-	
+	NSLog(@"privacyItemView Clicked");
 }
 
 /*

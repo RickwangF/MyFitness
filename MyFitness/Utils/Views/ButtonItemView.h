@@ -20,6 +20,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setTitleFont:(UIFont*)font;
 
+- (void)setImageViewMarginLeft:(CGFloat)left;
+
+- (void)setImageViewMarginRight:(CGFloat)right;
+
+- (void)setItemHeight:(CGFloat)height;
+
 @end
 
 NS_ASSUME_NONNULL_END

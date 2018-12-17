@@ -147,11 +147,11 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	self.automaticallyAdjustsScrollViewInsets = NO;
-	self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
+	[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 	
 	[self initlocationManager];
 	[self initBackgroundView];
-	[self initTopContainerView];
+	[self setUpNavigationBar];
 	[self initPauseBtn];
 	
 	[self initDistanceLabel];
@@ -163,7 +163,6 @@
 	
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
-	[self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 	
 - (void)viewDidAppear:(BOOL)animated{
@@ -191,7 +190,6 @@
 	
 - (void)viewWillDisappear:(BOOL)animated{
 	[super viewWillDisappear:animated];
-	[self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 	
 #pragma mark - Animation
@@ -205,34 +203,16 @@
 	[self.view addSubview:_backgroundView];
 }
 
-- (void)initTopContainerView{
-	_topContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
-	[self.view addSubview:_topContainerView];
-	
-	[_topContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-		if ([[UIDevice currentDevice] fullScreen]){
-			make.top.equalTo(self.view).offset(44);
-		}
-		else{
-			make.top.equalTo(self.view).offset(20);
-		}
-		make.left.right.equalTo(self.view);
-		make.height.equalTo(@44);
-	}];
-	
+- (void)setUpNavigationBar{
+
 	_backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
 	[_backBtn setImage:[UIImage imageNamed:@"left_25#00"] forState:UIControlStateNormal];
 	[_backBtn addTarget:self action:@selector(backBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-	[_topContainerView addSubview:_backBtn];
-	
-	[_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.left.equalTo(self.topContainerView).offset(8);
-		make.centerY.equalTo(self.topContainerView);
-		make.width.height.equalTo(@40);
-	}];
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_backBtn];
 	
 	_modeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 25)];
 	_modeLabel.textColor = AppStyleSetting.sharedInstance.textColor;
+	_modeLabel.textAlignment = NSTextAlignmentCenter;
 	_modeLabel.font = [UIFont systemFontOfSize:20 weight:UIFontWeightSemibold];
 	switch (_transportMode) {
 		case TransportModeWalking:
@@ -247,12 +227,7 @@
 		default:
 			break;
 	}
-	[_topContainerView addSubview:_modeLabel];
-	
-	[_modeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.center.equalTo(self.topContainerView);
-		make.height.equalTo(@25);
-	}];
+	self.navigationItem.titleView = _modeLabel;
 }
 
 - (void)initDistanceLabel{
@@ -263,7 +238,12 @@
 	[self.view addSubview:_distanceLabel];
 	
 	[_distanceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.top.equalTo(self.topContainerView.mas_bottom).offset(70);
+		if (@available(iOS 11.0, *)) {
+			make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(70);
+		}
+		else{
+			make.top.equalTo(self.mas_topLayoutGuideTop).offset(70);
+		}
 		make.centerX.equalTo(self.backgroundView).offset(-10);
 		make.height.equalTo(@90);
 	}];

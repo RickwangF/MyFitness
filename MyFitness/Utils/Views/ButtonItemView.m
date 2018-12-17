@@ -14,6 +14,10 @@
 
 @property (nonatomic, strong) UIImageView *imageView;
 
+@property (nonatomic, assign) CGFloat imageViewMarginLeft;
+
+@property (nonatomic, assign) CGFloat imageViewMarginRight;
+
 @property (nonatomic, strong) UILabel *textLabel;
 
 @property (nonatomic, assign) CGFloat itemHeight;
@@ -30,6 +34,9 @@
 {
 	self = [super init];
 	if (self) {
+		_itemHeight = 25;
+		_imageViewMarginLeft = 30;
+		_imageViewMarginRight = 30;
 		_imageView = [UIImageView new];
 		_textLabel = [UILabel new];
 	}
@@ -39,36 +46,40 @@
 - (instancetype)initWithFrame:(CGRect)frame{
 	self = [super initWithFrame:frame];
 	if (self) {
-		[self initImageViewWithFrame:frame];
-		[self initTextLabelWithFrame:frame];
+		_itemHeight = 25;
+		_imageViewMarginLeft = 30;
+		_imageViewMarginRight = 30;
+		[self initImageView];
+		[self initTextLabel];
 	}
 	return self;
 }
 
 #pragma mark - Init View
 
-- (void)initImageViewWithFrame:(CGRect)frame{
-	_itemHeight = frame.size.height;
-	_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _itemHeight, _itemHeight)];
+- (void)initImageView{
+	_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(_imageViewMarginLeft, 0, _itemHeight, _itemHeight)];
 	_imageView.contentMode = UIViewContentModeScaleAspectFill;
 	[self addSubview:_imageView];
 	
 	[_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.top.left.bottom.equalTo(self);
+		make.left.equalTo(self).offset(self.imageViewMarginLeft);
+		make.centerY.equalTo(self);
 		make.width.equalTo(@(self.itemHeight));
 	}];
 }
 
-- (void)initTextLabelWithFrame:(CGRect)frame{
-	_textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width - _itemHeight, _itemHeight)];
+- (void)initTextLabel{
+	_textLabel = [[UILabel alloc] initWithFrame:CGRectMake(_imageViewMarginLeft + _imageViewMarginRight + _itemHeight, 0, 100, _itemHeight)];
 	_textLabel.textColor = AppStyleSetting.sharedInstance.textColor;
 	_textLabel.font = [UIFont systemFontOfSize:16];
 	_textLabel.textAlignment = NSTextAlignmentRight;
 	[self addSubview:_textLabel];
 	
 	[_textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.top.bottom.right.equalTo(self);
-		make.left.equalTo(self.imageView.mas_right);
+		make.centerY.equalTo(self);
+		make.left.equalTo(self.imageView.mas_right).offset(self.imageViewMarginRight);
+		make.height.equalTo(@(self.itemHeight));
 	}];
 }
 
@@ -88,6 +99,30 @@
 
 - (void)setTitleFont:(UIFont *)font{
 	_textLabel.font = font;
+}
+
+- (void)setImageViewMarginLeft:(CGFloat)left{
+	_imageViewMarginLeft = left;
+	[_imageView mas_updateConstraints:^(MASConstraintMaker *make) {
+		make.left.equalTo(self).offset(self.imageViewMarginLeft);
+	}];
+}
+
+- (void)setImageViewMarginRight:(CGFloat)right{
+	_imageViewMarginRight = right;
+	[_textLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+		make.left.equalTo(self.imageView.mas_right).offset(self.imageViewMarginRight);
+	}];
+}
+
+- (void)setItemHeight:(CGFloat)height{
+	_itemHeight = height;
+	[_imageView mas_updateConstraints:^(MASConstraintMaker *make) {
+		make.height.width.equalTo(@(self.itemHeight));
+	}];
+	[_textLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+		make.height.equalTo(@(self.itemHeight));
+	}];
 }
 
 /*

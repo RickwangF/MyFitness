@@ -49,6 +49,7 @@
 		0FA2EA1921C340ED00A3DC4E /* MonthSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1821C340ED00A3DC4E /* MonthSectionHeader.xib */; };
 		0FA2EA1D21C342B400A3DC4E /* TrackTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1B21C342B400A3DC4E /* TrackTableCell.m */; };
 		0FA2EA1E21C342B400A3DC4E /* TrackTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1C21C342B400A3DC4E /* TrackTableCell.xib */; };
+		0FED06CA21C743A7000D41AC /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FED06C921C743A7000D41AC /* NavigationViewController.m */; };
 		1D71F247864DED889DD73337 /* Pods_MyFitness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 813B8380172CDC392FFEE040 /* Pods_MyFitness.framework */; };
 /* End PBXBuildFile section */
 
@@ -145,6 +146,8 @@
 		0FA2EA1A21C342B400A3DC4E /* TrackTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrackTableCell.h; sourceTree = "<group>"; };
 		0FA2EA1B21C342B400A3DC4E /* TrackTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackTableCell.m; sourceTree = "<group>"; };
 		0FA2EA1C21C342B400A3DC4E /* TrackTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackTableCell.xib; sourceTree = "<group>"; };
+		0FED06C821C743A7000D41AC /* NavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
+		0FED06C921C743A7000D41AC /* NavigationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
 		59F9445866E2F2A94B5B1C20 /* Pods-MyFitness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFitness.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFitness/Pods-MyFitness.release.xcconfig"; sourceTree = "<group>"; };
 		813B8380172CDC392FFEE040 /* Pods_MyFitness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFitness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDD294776D9E4C7A886FEFC /* Pods-MyFitness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFitness.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFitness/Pods-MyFitness.debug.xcconfig"; sourceTree = "<group>"; };
@@ -280,6 +283,8 @@
 				0F37102921C0F21E00C334C8 /* ShadowCircleButton.m */,
 				0F37102E21C101B000C334C8 /* ButtonItemView.h */,
 				0F37102F21C101B000C334C8 /* ButtonItemView.m */,
+				0FED06C821C743A7000D41AC /* NavigationViewController.h */,
+				0FED06C921C743A7000D41AC /* NavigationViewController.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -499,6 +504,7 @@
 				"${BUILT_PRODUCTS_DIR}/CHIPageControl/CHIPageControl.framework",
 				"${BUILT_PRODUCTS_DIR}/HMSegmentedControl/HMSegmentedControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
+				"${BUILT_PRODUCTS_DIR}/KMNavigationBarTransition/KMNavigationBarTransition.framework",
 				"${BUILT_PRODUCTS_DIR}/MBCircularProgressBar/MBCircularProgressBar.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
@@ -513,6 +519,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHIPageControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HMSegmentedControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KMNavigationBarTransition.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBCircularProgressBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
@@ -564,6 +571,7 @@
 				0FA2EA1721C340A200A3DC4E /* MonthSectionHeader.m in Sources */,
 				0F2AB5BF21BDFC55006FB503 /* UIScrollView+GestureRecognizer.m in Sources */,
 				0F2AB5D321BE3B86006FB503 /* AppStyleSetting.m in Sources */,
+				0FED06CA21C743A7000D41AC /* NavigationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

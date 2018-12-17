@@ -193,7 +193,7 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
+	[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 	
 	[self initMapView];
 	
@@ -212,17 +212,12 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
 	[BMKMapView enableCustomMapStyle:YES];
-	[self.navigationController setNavigationBarHidden:YES animated:NO];
-}
-	
-- (void)viewDidAppear:(BOOL)animated{
-	[super viewDidAppear:animated];
+//	[self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 	
 - (void)viewWillDisappear:(BOOL)animated{
 	[super viewWillDisappear:animated];
 	[BMKMapView enableCustomMapStyle:NO];
-	[self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 	
 #pragma mark - Init Views
@@ -254,18 +249,7 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 	_backBtn.backgroundColor = [UIColor colorWithHexString:@"#d7d7d7"];
 	[_backBtn setImage:[UIImage imageNamed:@"left_25#00"] forState:UIControlStateNormal];
 	[_backBtn addTarget:self action:@selector(backBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-	[self.view addSubview:_backBtn];
-	
-	[_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-		if([[UIDevice currentDevice] fullScreen]){
-			make.top.equalTo(self.view).offset(46);
-		}
-		else{
-			make.top.equalTo(self.view).offset(22);
-		}
-		make.left.equalTo(self.view).offset(8);
-		make.width.height.equalTo(@40);
-	}];
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_backBtn];
 }
 	
 - (void)initBottomContainerView{
@@ -671,14 +655,6 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 	NSString *duration = [_trackRecord objectForKey:@"minuteString"];
 	double calorie = [[_trackRecord objectForKey:@"calorie"] doubleValue];
 	
-//	double minKmValue = [[_trackRecord objectForKey:@"paceSpeed"] doubleValue];
-	
-//	int floorMin = floor(minKmValue/60);
-//	int roundSecond = round(minKmValue - (floorMin * 60));
-//	NSMutableString *formatString = [NSMutableString stringWithString:@"%d':%d\""];
-//	if (roundSecond < 10) {
-//		formatString = [NSMutableString stringWithString:@"%d':0%d\""];
-//	}
 	NSString *speedString = [NSString stringWithFormat:@"%.1fkm/h", kmHSpeed];
 	NSString *distanceString = [NSString stringWithFormat:@"%.1f公里", mileage / 1000];
 	NSString *minKmString = [_trackRecord objectForKey:@"paceString"];

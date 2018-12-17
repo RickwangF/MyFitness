@@ -19,6 +19,7 @@
 #import "TrackTableCell.h"
 #import "NSString+NSDate.h"
 #import "AppStyleSetting.h"
+#import "UIImage+UIColor.h"
 
 /*
  里程页面的数据按照“年-月”组成的键分类，存储在字典中，有多少个“年-月”的组合就有多少个section
@@ -85,6 +86,7 @@
     [super viewDidLoad];
 	
 	self.title = @"里程";
+	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithUIColor:UIColor.whiteColor] forBarMetrics:UIBarMetricsDefault];
 	
 	[self initValueProperty];
 	
@@ -92,14 +94,6 @@
 	
 	[self getAllMyTrackRecords];
     // Do any additional setup after loading the view.
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-	[super viewWillAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated{
-	[super viewWillDisappear:animated];
 }
 	
 #pragma mark - Init Views
@@ -183,6 +177,7 @@
 	
 	__block double totalDistance = 0;
 	__block double totalInterval = 0;
+	// 构造“年-月”的键数组
 	[_trackList enumerateObjectsUsingBlock:^(TrackRecord * _Nonnull record, NSUInteger idx, BOOL * _Nonnull stop) {
 		totalDistance += record.mileage;
 		totalInterval += record.interval;
@@ -195,7 +190,7 @@
 	[self totalDistanceToNSString:totalDistance];
 	// 计算平均配速
 	[self calculateAvgPaceSpeedWithTime:totalInterval Distance:totalDistance];
-	
+	// 遍历键数组组成键值对
 	for (NSMutableString *monthKey in _yearMonthArray) {
 		NSArray *keyArray = [monthKey componentsSeparatedByString:@"-"];
 		NSInteger intYear = [keyArray[0] integerValue];
