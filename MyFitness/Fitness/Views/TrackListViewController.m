@@ -22,6 +22,7 @@
 #import "UIImage+UIColor.h"
 #import "MyFitness-Swift.h"
 #import "RightImageButton.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 /*
  里程页面的数据按照“年-月”组成的键分类，存储在字典中，有多少个“年-月”的组合就有多少个section
@@ -341,8 +342,16 @@
 		NSMutableArray *monthTrackArray = weakSelf.trackDic[weakSelf.yearMonthArray[indexPath.section - 1]];
 		TrackRecord *record = monthTrackArray[indexPath.row];
 		[weakSelf.trackList removeObject:record];
+		
 		AVObject *recordObj = [AVObject objectWithClassName:@"TrackRecord" objectId:record.objectId];
 		[recordObj deleteInBackground];
+		
+		AVObject *imageObj = [AVObject objectWithClassName:@"_File" objectId:record.imageId];
+		AVFile *file = [AVFile fileWithAVObject:imageObj];
+		[file deleteWithCompletionHandler:^(BOOL succeeded, NSError * _Nullable error) {
+			
+		}];
+		
 		AVQuery *query = [AVQuery queryWithClassName:@"MFLocation"];
 		[query whereKey:@"trackId" equalTo:record.objectId];
 		[query deleteAllInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -410,7 +419,13 @@
 		NSArray *array = _trackDic[key];
 		TrackRecord *record = array[indexPath.row];
 		TrackTableCell *cell = [_tableView dequeueReusableCellWithIdentifier:@"trackCell" forIndexPath:indexPath];
-		cell.trackImageView.image = [UIImage imageNamed:@"default_track"];
+		if (record.imageUrl == nil) {
+			cell.trackImageView.image = [UIImage imageNamed:@"default_track"];
+		}
+		else{
+			[cell.trackImageView sd_setImageWithURL:[NSURL URLWithString:record.imageUrl] placeholderImage:[UIImage imageNamed:@"default_track"]];
+		}
+		
 		cell.startTimeLabel.text = record.startTimeString;
 		cell.distanceLabel.text = [NSString stringWithFormat:@"%.1f公里", record.mileage / 1000];
 		cell.paceSpeedLabel.text = record.paceString;

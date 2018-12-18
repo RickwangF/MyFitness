@@ -49,6 +49,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) TransportModeEnum transportMode;
 
+@property (nonatomic, copy) NSString *imageUrl;
+
+@property (nonatomic, copy) NSString *imageId;
+
 +(instancetype)trackWithDictionary:(NSDictionary*)obj;
 
 @end

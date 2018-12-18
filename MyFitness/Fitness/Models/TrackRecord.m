@@ -35,6 +35,8 @@
     trackRecord.calorie = [[obj objectForKey:@"calorie"] doubleValue];
     trackRecord.carbonSaving = [[obj objectForKey:@"carbonSaving"] doubleValue];
     trackRecord.transportMode = (TransportModeEnum)[[obj objectForKey:@"transportMode"] integerValue];
+	trackRecord.imageUrl = [obj objectForKey:@"imageUrl"];
+	trackRecord.imageId = [obj objectForKey:@"imageId"];
     return trackRecord;
 }
 

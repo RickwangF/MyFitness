@@ -6,6 +6,14 @@
          contextName = "__49-[TrackDetailViewController onQueryHistoryTrack:]_block_invoke.443:TrackDetailViewController.m">
       </ContextState>
       <ContextState
+         contextName = "-[TrackDetailViewController viewDidAppear:]:TrackDetailViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "subViewControllers.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[TrackDetailViewController onQueryHistoryTrack:]:TrackDetailViewController.m">
          <PersistentStrings>
             <PersistentString

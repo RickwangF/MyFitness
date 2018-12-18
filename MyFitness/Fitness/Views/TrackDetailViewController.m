@@ -26,6 +26,8 @@
 #import "NSDate+NSString.h"
 #import "UIColor+UIColor_Hex.h"
 #import "UIDevice+Type.h"
+#import "TrackListViewController.h"
+#import "CounterViewController.h"
 
 static NSString* const startLocIdentifier = @"startLoc";
 static NSString* const stopLocIdentifier = @"stopLoc";
@@ -121,6 +123,12 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 // 地图第一次完成绘制的标志
 @property (nonatomic, assign) BOOL firstRendered;
 
+// 打开里程页面的标志
+@property (nonatomic, assign) BOOL openListFlag;
+
+// 截图的矩形范围
+@property (nonatomic, assign) CGRect snapRect;
+
 @end
 
 @implementation TrackDetailViewController
@@ -138,6 +146,7 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 		_finishedTime = [NSDate new];
 		_transportMode = TransportModeWalking;
 		_trackId = @"";
+		_openListFlag = NO;
 		[self initValueProperty];
 		[self initTimer];
 	}
@@ -151,6 +160,21 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 		_finishedTime = finish;
 		_transportMode = mode;
 		_trackId = objectId;
+		_openListFlag = NO;
+		[self initValueProperty];
+		[self initTimer];
+	}
+	return self;
+}
+
+- (instancetype)initWithStartTime:(NSDate*)start FinishedTime:(NSDate*)finish TransportMode:(TransportModeEnum)mode TrackId:(NSString*)objectId openList:(BOOL)open{
+	self = [super initWithNibName:nil bundle:nil];
+	if (self) {
+		_startTime = start;
+		_finishedTime = finish;
+		_transportMode = mode;
+		_trackId = objectId;
+		_openListFlag = open;
 		[self initValueProperty];
 		[self initTimer];
 	}
@@ -173,6 +197,7 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 	_firstRendered = NO;
 	_startIndex = 0;
 	_endIndex = 0;
+	_snapRect = CGRectZero;
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"map_config.json" ofType:@""];
 	[BMKMapView customMapStyle:path];
 }
@@ -213,6 +238,23 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 	[super viewWillAppear:animated];
 	[BMKMapView enableCustomMapStyle:YES];
 //	[self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+	[super viewDidAppear:animated];
+	if (_openListFlag){
+		_openListFlag = NO;
+		NSMutableArray *subViewControllers = [self.navigationController.viewControllers mutableCopy];
+		if (subViewControllers != nil && subViewControllers.count > 1) {
+			TrackListViewController *listVC = [[TrackListViewController alloc] init];
+			CounterViewController *counterVC = subViewControllers[subViewControllers.count-2];
+			if (counterVC != nil) {
+				[subViewControllers removeObject:counterVC];
+			}
+			[subViewControllers insertObject:listVC atIndex:1];
+			self.navigationController.viewControllers = subViewControllers;
+		}
+	}
 }
 	
 - (void)viewWillDisappear:(BOOL)animated{
@@ -484,6 +526,9 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 	option.radiusThreshold = 5;
 	// 设置运动方式
 	switch (self.transportMode) {
+		case TransportModeNone:
+			option.transportMode = BTK_TRACK_PROCESS_OPTION_TRANSPORT_MODE_WALKING;
+			break;
 		case TransportModeWalking:
 			option.transportMode = BTK_TRACK_PROCESS_OPTION_TRANSPORT_MODE_WALKING;
 			break;
@@ -562,6 +607,40 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 
 - (void)backBtnClicked:(UIButton*)sender{
 	[self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)calculateSnapRect{
+	CGFloat height = 0;
+	CGFloat width = self.view.frame.size.width;
+	CGFloat y = 0;
+	if ([[UIDevice currentDevice] fullScreen]){
+		height = self.view.frame.size.height - 250;
+		y = 44;
+	}
+	else{
+		height = self.view.frame.size.height - 235;
+		y = 20;
+	}
+	_snapRect = CGRectMake(0, y, width, height);
+}
+
+- (void)saveSnapImage{
+	[self calculateSnapRect];
+	
+	UIImage *snapImage = [_mapView takeSnapshot:_snapRect];
+	NSData *data = UIImageJPEGRepresentation(snapImage, 0.8);
+	AVFile *file = [AVFile fileWithData:data];
+	
+	[file uploadWithCompletionHandler:^(BOOL succeeded, NSError * _Nullable error) {
+		if (error != nil) {
+			[self.view makeToast:error.localizedDescription];
+		}
+		else{
+			[self.trackRecord setObject:file.objectId forKey:@"imageId"];
+			[self.trackRecord setObject:file.url forKey:@"imageUrl"];
+			[self.trackRecord saveInBackground];
+		}
+	}];
 }
 	
 - (void)locationArrayToCoordinateArray{
@@ -851,6 +930,17 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 		return polylineView;
 	}
 	return nil;
+}
+
+// 已经添加完轨迹的回调
+- (void)mapView:(BMKMapView *)mapView didAddOverlayViews:(NSArray *)overlayViews{
+	if (_trackLine != nil) {
+		NSString *urlString = [_trackRecord objectForKey:@"imageUrl"];
+		
+		if (urlString == nil || [urlString isEqualToString:@""]) {
+			[self saveSnapImage];
+		}
+	}
 }
 	
 #pragma mark - BTKTrackDelegate

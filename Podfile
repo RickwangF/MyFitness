@@ -19,5 +19,6 @@ pod 'MBProgressHUD', '~> 1.1.0'
 pod 'HMSegmentedControl'
 pod 'KMNavigationBarTransition'
 pod 'DropDown', :git => 'https://github.com/RickwangF/DropDown'
+pod 'SDWebImage', '~> 4.0'
 
 end

@@ -28,11 +28,9 @@
 
 @property (nonatomic, strong) UILabel *modeLabel;
 
-@property (nonatomic, strong) UIView *topContainerView;
-
 @property (nonatomic, strong) BMKLocationManager *locationManager;
 	
-@property (nonatomic, strong) UIView *backgroundView;
+@property (nonatomic, strong) UIImageView *backgroundView;
 
 @property (nonatomic, strong) MZTimerLabel *timeCountingLabel;
 
@@ -198,7 +196,8 @@
 #pragma mark - Init Views
 
 - (void)initBackgroundView{
-	_backgroundView = [[UIView alloc] initWithFrame:self.view.frame];
+	_backgroundView = [[UIImageView alloc] initWithFrame:self.view.frame];
+	//_backgroundView.image = [UIImage imageNamed:@"counter_bg"];
 	_backgroundView.backgroundColor = [UIColor colorWithHexString:@"#f0c800"];
 	[self.view addSubview:_backgroundView];
 }
@@ -461,7 +460,7 @@
 		if (succeeded) {
 			[self.view makeToast:@"记录保存成功"];
 			// 打开轨迹记录的详细
-			TrackDetailViewController *detailVC = [[TrackDetailViewController alloc] initWithStartTime:self.startDate FinishedTime:self.finishDate TransportMode:self.transportMode TrackId:self.trackRecord.objectId];
+			TrackDetailViewController *detailVC = [[TrackDetailViewController alloc] initWithStartTime:self.startDate FinishedTime:self.finishDate TransportMode:self.transportMode TrackId:self.trackRecord.objectId openList:YES];
 			[self.navigationController pushViewController:detailVC animated:YES];
 		}
 		else{
