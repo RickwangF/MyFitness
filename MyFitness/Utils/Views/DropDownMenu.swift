@@ -24,8 +24,9 @@ class DropDownMenu: DropDown {
 	
 	fileprivate func setUpUI() {
 		DropDown.appearance().cellHeight = 52.5
-		DropDown.appearance().shadowColor = UIColor(white: 1.0, alpha: 0)
-		DropDown.appearance().shadowOffset = CGSize(width: 0, height: 0)
+		DropDown.appearance().shadowOffset = CGSize(width: 0, height: 10)
+		DropDown.appearance().shadowColor = UIColor.lightGray;
+		DropDown.appearance().shadowRadius = 5
 		DropDown.appearance().selectedTextColor = UIColor(red: 240.0/255, green: 200.0/255, blue: 0, alpha: 1.0)
 		DropDown.appearance().cornerRadius = 0
 		DropDown.appearance().selectionBackgroundColor = UIColor.white;
@@ -49,6 +50,10 @@ class DropDownMenu: DropDown {
 	
 	@objc public func setSelectionCallback(_ callback: SelectionClosure?){
 		self.selectionAction = callback
+	}
+	
+	@objc public func setCancelCallback(_ callback: @escaping Closure){
+		self.cancelAction = callback
 	}
 
 	@objc public func setBottomOffset(_ offset: CGPoint){

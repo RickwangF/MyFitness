@@ -124,6 +124,9 @@
 	[_dropdownMenu setBottomOffset:CGPointMake(0, 44)];
 	[_dropdownMenu selectRow:0 scrollPosition:UITableViewScrollPositionNone];
 	__weak typeof(self) weakSelf = self;
+	[_dropdownMenu setCancelCallback:^{
+		[weakSelf.dropdownBtn cancelRotateImageView];
+	}];
 	[_dropdownMenu setSelectionCallback:^(NSInteger index,  NSString * _Nonnull textString){
 		[weakSelf.dropdownBtn setTitle:textString];
 		[weakSelf.dropdownBtn cancelRotateImageView];

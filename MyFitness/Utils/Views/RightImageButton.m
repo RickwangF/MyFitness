@@ -61,7 +61,7 @@ static CGFloat width = 0;
 
 - (void)layoutContent{
 	CGRect titleFrame = _titleLabel.frame;
-	CGFloat oriTitleX = (self.frame.size.width - titleFrame.size.width - (2*_leftOffset)) / 2;
+	CGFloat oriTitleX = (self.frame.size.width - titleFrame.size.width) / 2;
 	CGFloat oriTitleY = (self.frame.size.height - titleFrame.size.height) / 2;
 	CGFloat oriImageX = oriTitleX + titleFrame.size.width + 3;
 	CGFloat oriImageY = (self.frame.size.height - 8)/2;
@@ -90,7 +90,7 @@ static CGFloat width = 0;
 }
 
 - (void)rotateImageView{
-	[UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+	[UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
 		self.imageView.transform = CGAffineTransformMakeRotation(M_PI);
 	} completion:^(BOOL finished) {
 		
@@ -98,7 +98,7 @@ static CGFloat width = 0;
 }
 
 - (void)cancelRotateImageView{
-	[UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+	[UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
 		self.imageView.transform = CGAffineTransformMakeRotation(0);
 	} completion:^(BOOL finished) {
 		
