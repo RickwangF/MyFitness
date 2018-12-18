@@ -89,7 +89,7 @@ CHECKOUT OPTIONS:
     :commit: d4a636b87e84e466ce7347ad67afe945a6ce075e
     :git: https://github.com/RickwangF/CHIPageControl
   DropDown:
-    :commit: 809459b04a0c5746e88bdac99dea03e66ced83c6
+    :commit: 598f60bc3277c5386992751dae2ad4cc10b16510
     :git: https://github.com/RickwangF/DropDown
 
 SPEC CHECKSUMS:

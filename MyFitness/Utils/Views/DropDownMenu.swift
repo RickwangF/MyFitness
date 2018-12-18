@@ -11,12 +11,24 @@ import DropDown
 
 class DropDownMenu: DropDown {
 	
+	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
+		setUpUI()
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
+		setUpUI()
+	}
+	
+	fileprivate func setUpUI() {
+		DropDown.appearance().cellHeight = 52.5
+		DropDown.appearance().shadowColor = UIColor(white: 1.0, alpha: 0)
+		DropDown.appearance().shadowOffset = CGSize(width: 0, height: 0)
+		DropDown.appearance().selectedTextColor = UIColor(red: 240.0/255, green: 200.0/255, blue: 0, alpha: 1.0)
+		DropDown.appearance().cornerRadius = 0
+		DropDown.appearance().selectionBackgroundColor = UIColor.white;
 	}
 	
 	@objc public func setAnchorView(_ anchorView: AnchorView){

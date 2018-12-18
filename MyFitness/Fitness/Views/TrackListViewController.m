@@ -121,8 +121,27 @@
 	[_dropdownMenu setWidth: self.view.frame.size.width];
 	[_dropdownMenu setDirectionBottom];
 	[_dropdownMenu setBottomOffset:CGPointMake(0, 44)];
+	[_dropdownMenu selectRow:0 scrollPosition:UITableViewScrollPositionNone];
+	__weak typeof(self) weakSelf = self;
 	[_dropdownMenu setSelectionCallback:^(NSInteger index,  NSString * _Nonnull textString){
-		NSLog(@"select text string is %@", textString);
+		[weakSelf.dropdownBtn setTitle:textString forState:UIControlStateNormal];
+		switch (index) {
+			case 0:
+				weakSelf.transportMode = TransportModeNone;
+			break;
+			case 1:
+				weakSelf.transportMode = TransportModeWalking;
+			break;
+			case 2:
+				weakSelf.transportMode = TransportModeRunning;
+			break;
+			case 3:
+				weakSelf.transportMode = TransportModeRiding;
+			break;
+			default:
+				break;
+		}
+		[weakSelf getAllMyTrackRecords];
 	}];
 }
 	
@@ -171,8 +190,22 @@
 -(void) getAllMyTrackRecords{
 	AVQuery *query = [AVQuery queryWithClassName:@"TrackRecord"];
 	[query whereKey:@"user" equalTo:[AVUser currentUser]];
+	switch (_transportMode) {
+		case TransportModeWalking:
+			[query whereKey:@"transportMode" equalTo:@(0)];
+			break;
+		case TransportModeRunning:
+			[query whereKey:@"transportMode" equalTo:@(1)];
+			break;
+		case TransportModeRiding:
+			[query whereKey:@"transportMode" equalTo:@(2)];
+			break;
+		default:
+			break;
+	}
 	[query includeKey:@"user"];
 	[query orderByDescending:@"startTime"];
+	
 	[query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
 		if (error != nil) {
 			[self.view makeToast:[NSString stringWithFormat:@"获取记录失败 ==> %@", error.localizedDescription]];
@@ -182,6 +215,10 @@
 			if (objects == nil || objects.count == 0) {
 				[self.view makeToast:@"记录为空"];
 				return;
+			}
+			
+			if (self.trackList.count > 0){
+				[self.trackList removeAllObjects];
 			}
 			
 			[objects enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -205,6 +242,14 @@
 - (void)constructTrackDictionary{
 	if (_trackList.count == 0) {
 		return;
+	}
+	
+	if (_yearMonthArray.count > 0) {
+		[_yearMonthArray removeAllObjects];
+	}
+	
+	if (_trackDic.count > 0) {
+		[_trackDic removeAllObjects];
 	}
 	
 	__block double totalDistance = 0;
