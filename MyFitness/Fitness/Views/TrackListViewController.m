@@ -21,6 +21,7 @@
 #import "AppStyleSetting.h"
 #import "UIImage+UIColor.h"
 #import "MyFitness-Swift.h"
+#import "RightImageButton.h"
 
 /*
  里程页面的数据按照“年-月”组成的键分类，存储在字典中，有多少个“年-月”的组合就有多少个section
@@ -35,7 +36,7 @@
 
 @property (nonatomic, assign) TransportModeEnum transportMode;
 
-@property (nonatomic, strong) UIButton *dropdownBtn;
+@property (nonatomic, strong) RightImageButton *dropdownBtn;
 
 @property (nonatomic, strong) DropDownMenu *dropdownMenu;
 
@@ -106,11 +107,10 @@
 #pragma mark - Init Views
 
 - (void)initDropdownMenu{
-	_dropdownBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 120, 44)];
-	[_dropdownBtn setTitle:@"所有运动" forState:UIControlStateNormal];
-	[_dropdownBtn setImage:[UIImage imageNamed:@"down_10#00"] forState:UIControlStateNormal];
-	[_dropdownBtn setTitleColor:AppStyleSetting.sharedInstance.textColor forState:UIControlStateNormal];
-	_dropdownBtn.titleLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightSemibold];
+	_dropdownBtn = [[RightImageButton alloc] initWithFrame:CGRectMake(0, 0, 120, 44)];
+	[_dropdownBtn setTitle:@"所有运动"];
+	[_dropdownBtn setImage:[UIImage imageNamed:@"down_10#00"]];
+	[_dropdownBtn setTitleColor:AppStyleSetting.sharedInstance.textColor];
 	[_dropdownBtn addTarget:self action:@selector(dropdownBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
 	self.navigationItem.titleView = _dropdownBtn;
 	
@@ -124,7 +124,8 @@
 	[_dropdownMenu selectRow:0 scrollPosition:UITableViewScrollPositionNone];
 	__weak typeof(self) weakSelf = self;
 	[_dropdownMenu setSelectionCallback:^(NSInteger index,  NSString * _Nonnull textString){
-		[weakSelf.dropdownBtn setTitle:textString forState:UIControlStateNormal];
+		[weakSelf.dropdownBtn setTitle:textString];
+		[weakSelf.dropdownBtn cancelRotateImageView];
 		switch (index) {
 			case 0:
 				weakSelf.transportMode = TransportModeNone;
@@ -236,6 +237,7 @@
 #pragma mark - Action
 	 
 - (void)dropdownBtnClicked:(UIButton*)sender{
+	[_dropdownBtn rotateImageView];
 	[_dropdownMenu showMenu];
 }
 

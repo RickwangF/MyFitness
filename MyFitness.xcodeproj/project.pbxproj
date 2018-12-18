@@ -43,6 +43,7 @@
 		0F37102A21C0F21E00C334C8 /* ShadowCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102921C0F21E00C334C8 /* ShadowCircleButton.m */; };
 		0F37102D21C0FEE100C334C8 /* LeftSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102C21C0FEE100C334C8 /* LeftSideViewController.m */; };
 		0F37103021C101B000C334C8 /* ButtonItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102F21C101B000C334C8 /* ButtonItemView.m */; };
+		0FA2A57D21C897B10035B333 /* RightImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2A57C21C897B10035B333 /* RightImageButton.m */; };
 		0FA2EA1321C339C100A3DC4E /* SummaryTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1121C339C100A3DC4E /* SummaryTableCell.m */; };
 		0FA2EA1421C339C100A3DC4E /* SummaryTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1221C339C100A3DC4E /* SummaryTableCell.xib */; };
 		0FA2EA1721C340A200A3DC4E /* MonthSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1621C340A200A3DC4E /* MonthSectionHeader.m */; };
@@ -139,6 +140,8 @@
 		0F37102C21C0FEE100C334C8 /* LeftSideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeftSideViewController.m; sourceTree = "<group>"; };
 		0F37102E21C101B000C334C8 /* ButtonItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ButtonItemView.h; sourceTree = "<group>"; };
 		0F37102F21C101B000C334C8 /* ButtonItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ButtonItemView.m; sourceTree = "<group>"; };
+		0FA2A57B21C897B10035B333 /* RightImageButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RightImageButton.h; sourceTree = "<group>"; };
+		0FA2A57C21C897B10035B333 /* RightImageButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RightImageButton.m; sourceTree = "<group>"; };
 		0FA2EA1021C339C100A3DC4E /* SummaryTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SummaryTableCell.h; sourceTree = "<group>"; };
 		0FA2EA1121C339C100A3DC4E /* SummaryTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SummaryTableCell.m; sourceTree = "<group>"; };
 		0FA2EA1221C339C100A3DC4E /* SummaryTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SummaryTableCell.xib; sourceTree = "<group>"; };
@@ -293,6 +296,8 @@
 				0FED06C821C743A7000D41AC /* NavigationViewController.h */,
 				0FED06C921C743A7000D41AC /* NavigationViewController.m */,
 				0FED06CE21C7C07E000D41AC /* DropDownMenu.swift */,
+				0FA2A57B21C897B10035B333 /* RightImageButton.h */,
+				0FA2A57C21C897B10035B333 /* RightImageButton.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -551,6 +556,7 @@
 			files = (
 				0F2AB5DA21BE54C8006FB503 /* CounterViewController.m in Sources */,
 				0FED06CD21C7963C000D41AC /* MKDropdownMenu.m in Sources */,
+				0FA2A57D21C897B10035B333 /* RightImageButton.m in Sources */,
 				0F2AB5E021BE8BEB006FB503 /* LoginViewController.m in Sources */,
 				0F37102D21C0FEE100C334C8 /* LeftSideViewController.m in Sources */,
 				0F2AB58821BDF5DF006FB503 /* RootNaviViewController.swift in Sources */,
