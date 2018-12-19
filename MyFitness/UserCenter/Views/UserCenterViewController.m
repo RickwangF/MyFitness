@@ -9,6 +9,7 @@
 #import "UserCenterViewController.h"
 #import <Masonry/Masonry.h>
 #import <Toast/Toast.h>
+#import <SDWebImage/UIView+WebCache.h>
 #import <AVOSCloud/AVOSCloud.h>
 #import "AvatarTableCell.h"
 #import "FounctionTableCell.h"
@@ -67,6 +68,7 @@
 	_infoTableView.estimatedRowHeight = 0;
 	_infoTableView.estimatedSectionHeaderHeight = 0;
 	_infoTableView.estimatedSectionFooterHeight = 0;
+	_infoTableView.sectionFooterHeight = 0;
 	if (@available(iOS 11.0, *)) {
 		_infoTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
 	}
@@ -108,7 +110,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 	if (indexPath.section == 0) {
 		if (indexPath.row == 0) {
-			return 180;
+			if ([[UIDevice currentDevice] fullScreen]){
+				return 280;
+			}
+			return 240;
 		}
 		else{
 			return 100;
@@ -124,6 +129,7 @@
 	if (indexPath.section == 0) {
 		if (indexPath.row == 0) {
 			AvatarTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"avatarCell" forIndexPath:indexPath];
+			cell.avatarImageView.image = [UIImage imageNamed:@"user_70#91"];
 			return cell;
 		}
 		else{
@@ -133,6 +139,24 @@
 	}
 	else{
 		FounctionTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"founctionCell" forIndexPath:indexPath];
+		switch (indexPath.row) {
+			case 0:
+				cell.titleLabel.text = @"运动记录";
+			break;
+			case 1:
+				cell.titleLabel.text = @"身体数据";
+			break;
+			case 2:
+				cell.titleLabel.text = @"个人资料";
+			break;
+			case 3:{
+				cell.titleLabel.text = @"关于我们";
+				[cell setSeparatorEndSection];
+			}
+			break;
+			default:
+				break;
+		}
 		return cell;
 	}
 }
@@ -147,10 +171,14 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 	if (section == 1) {
 		UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 10)];
-		headerView.backgroundColor = AppStyleSetting.sharedInstance.lightSeparatorColor;
+		headerView.backgroundColor = AppStyleSetting.sharedInstance.wideSeparatorColor;
 		return headerView;
 	}
 	return nil;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 /*

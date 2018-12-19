@@ -27,6 +27,7 @@ static AppStyleSetting *sharedInstance;
 			sharedInstance.mainColor = [UIColor colorWithHexString:@"#ffe617"];
 			sharedInstance.separatorColor = UIColor.lightGrayColor;
 			sharedInstance.lightSeparatorColor = [UIColor colorWithHexString:@"#e1e1e1"];
+			sharedInstance.wideSeparatorColor = [UIColor colorWithHexString:@"f1f1f1"];
 			sharedInstance.counterBottomBgColor = [UIColor colorWithHexString:@"#edc915"];
 			sharedInstance.themeTextColor = [UIColor colorWithHexString:@"#f0c800"];
 		}

@@ -18,11 +18,11 @@ IB_DESIGNABLE
 
 @property (nonatomic, strong) IBInspectable UILabel *titleLabel;
 
-@property (nonatomic, assign) CGFloat imageHeight;
+@property (nonatomic, assign) IBInspectable CGFloat imageHeight;
 
-@property (nonatomic, assign) CGFloat labelHeight;
+@property (nonatomic, assign) IBInspectable CGFloat labelHeight;
 
-@property (nonatomic, assign) CGFloat topOffset;
+@property (nonatomic, assign) IBInspectable CGFloat topOffset;
 
 @property (nonatomic, strong) void(^actionBlock)(void);
 

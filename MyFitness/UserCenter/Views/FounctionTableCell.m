@@ -17,8 +17,16 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
+}
+
+- (void)prepareForReuse{
+	[super prepareForReuse];
+	_leadingConstraint.constant = 16;
+}
+
+- (void)setSeparatorEndSection{
+	_leadingConstraint.constant = 0;
 }
 
 @end

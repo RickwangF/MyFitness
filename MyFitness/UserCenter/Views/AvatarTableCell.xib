@@ -23,14 +23,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="179.5"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wXE-UF-6Zj">
-                        <rect key="frame" x="152.5" y="35" width="70" height="70"/>
+                        <rect key="frame" x="152.5" y="55" width="70" height="70"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="70" id="A60-eU-gay"/>
                             <constraint firstAttribute="height" constant="70" id="rzb-Np-J0P"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nN5-WP-EUw">
-                        <rect key="frame" x="163" y="110" width="49" height="20"/>
+                        <rect key="frame" x="163" y="130" width="49" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="OKe-2Y-5Ou"/>
                         </constraints>
@@ -41,7 +41,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="ogv-7R-eeH" secondAttribute="bottom" id="4AW-ju-uNi"/>
-                    <constraint firstItem="wXE-UF-6Zj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-20" id="MfK-u8-mpJ"/>
+                    <constraint firstItem="wXE-UF-6Zj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="MfK-u8-mpJ"/>
                     <constraint firstItem="nN5-WP-EUw" firstAttribute="top" secondItem="wXE-UF-6Zj" secondAttribute="bottom" constant="5" id="Qs1-EP-ZYB"/>
                     <constraint firstItem="nN5-WP-EUw" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Unh-DW-S0k"/>
                     <constraint firstItem="ogv-7R-eeH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="YjB-5Y-bru"/>

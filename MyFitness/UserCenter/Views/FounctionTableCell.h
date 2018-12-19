@@ -13,6 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FounctionTableCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *indicatorView;
+@property (weak, nonatomic) IBOutlet UIView *separator;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leadingConstraint;
+
+- (void)setSeparatorEndSection;
 
 @end
 

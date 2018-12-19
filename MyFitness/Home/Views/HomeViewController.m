@@ -31,6 +31,7 @@
 #import "LeftSideViewController.h"
 #import "UIDevice+Type.h"
 #import "NavigationViewController.h"
+#import "UserCenterViewController.h"
 
 
 @interface HomeViewController ()<BMKMapViewDelegate, BMKLocationManagerDelegate, SubViewControllerDelegate, CAPSPageMenuDelegate>
@@ -458,6 +459,11 @@
 	}
 	
 	switch (flag) {
+		case 0: {
+			UserCenterViewController *userVC = [[UserCenterViewController alloc] init];
+			[self.navigationController pushViewController:userVC animated:YES];
+		}
+		break;
 		case 1:{
 			TrackListViewController *trackListVC = [[TrackListViewController alloc] init];
 			[self.navigationController pushViewController:trackListVC animated:YES];
