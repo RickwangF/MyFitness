@@ -43,6 +43,11 @@
 		0F37102A21C0F21E00C334C8 /* ShadowCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102921C0F21E00C334C8 /* ShadowCircleButton.m */; };
 		0F37102D21C0FEE100C334C8 /* LeftSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102C21C0FEE100C334C8 /* LeftSideViewController.m */; };
 		0F37103021C101B000C334C8 /* ButtonItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102F21C101B000C334C8 /* ButtonItemView.m */; };
+		0F6FD02921CA15360083D590 /* BodyDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6FD02821CA15360083D590 /* BodyDataViewController.m */; };
+		0F6FD02D21CA19530083D590 /* BodyTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6FD02B21CA19530083D590 /* BodyTableCell.m */; };
+		0F6FD02E21CA19530083D590 /* BodyTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6FD02C21CA19530083D590 /* BodyTableCell.xib */; };
+		0F6FD03121CA1B890083D590 /* DescriptionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6FD03021CA1B890083D590 /* DescriptionHeaderView.m */; };
+		0F6FD03321CA1BB80083D590 /* DescriptionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6FD03221CA1BB80083D590 /* DescriptionHeaderView.xib */; };
 		0FA2A57D21C897B10035B333 /* RightImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2A57C21C897B10035B333 /* RightImageButton.m */; };
 		0FA2A58021C9D3040035B333 /* UserCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2A57F21C9D3040035B333 /* UserCenterViewController.m */; };
 		0FA2A58421C9D4870035B333 /* AvatarTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2A58221C9D4870035B333 /* AvatarTableCell.m */; };
@@ -148,6 +153,14 @@
 		0F37102C21C0FEE100C334C8 /* LeftSideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeftSideViewController.m; sourceTree = "<group>"; };
 		0F37102E21C101B000C334C8 /* ButtonItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ButtonItemView.h; sourceTree = "<group>"; };
 		0F37102F21C101B000C334C8 /* ButtonItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ButtonItemView.m; sourceTree = "<group>"; };
+		0F6FD02721CA15360083D590 /* BodyDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BodyDataViewController.h; sourceTree = "<group>"; };
+		0F6FD02821CA15360083D590 /* BodyDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BodyDataViewController.m; sourceTree = "<group>"; };
+		0F6FD02A21CA19530083D590 /* BodyTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BodyTableCell.h; sourceTree = "<group>"; };
+		0F6FD02B21CA19530083D590 /* BodyTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BodyTableCell.m; sourceTree = "<group>"; };
+		0F6FD02C21CA19530083D590 /* BodyTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BodyTableCell.xib; sourceTree = "<group>"; };
+		0F6FD02F21CA1B890083D590 /* DescriptionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DescriptionHeaderView.h; sourceTree = "<group>"; };
+		0F6FD03021CA1B890083D590 /* DescriptionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DescriptionHeaderView.m; sourceTree = "<group>"; };
+		0F6FD03221CA1BB80083D590 /* DescriptionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DescriptionHeaderView.xib; sourceTree = "<group>"; };
 		0FA2A57B21C897B10035B333 /* RightImageButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RightImageButton.h; sourceTree = "<group>"; };
 		0FA2A57C21C897B10035B333 /* RightImageButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RightImageButton.m; sourceTree = "<group>"; };
 		0FA2A57E21C9D3040035B333 /* UserCenterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserCenterViewController.h; sourceTree = "<group>"; };
@@ -381,19 +394,27 @@
 		0F2AB59C21BDFB27006FB503 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0FA2A57E21C9D3040035B333 /* UserCenterViewController.h */,
-				0FA2A57F21C9D3040035B333 /* UserCenterViewController.m */,
 				0FA2A58121C9D4870035B333 /* AvatarTableCell.h */,
 				0FA2A58221C9D4870035B333 /* AvatarTableCell.m */,
 				0FA2A58321C9D4870035B333 /* AvatarTableCell.xib */,
-				0FA2A58621C9D7DE0035B333 /* FounctionTableCell.h */,
-				0FA2A58721C9D7DE0035B333 /* FounctionTableCell.m */,
-				0FA2A58921C9D8040035B333 /* FounctionTableCell.xib */,
 				0FA2A58B21C9DB260035B333 /* RecordTableCell.h */,
 				0FA2A58C21C9DB260035B333 /* RecordTableCell.m */,
 				0FA2A58E21C9DB420035B333 /* RecordTableCell.xib */,
 				0FA2A59021C9DCED0035B333 /* RecordItemView.h */,
 				0FA2A59121C9DCED0035B333 /* RecordItemView.m */,
+				0FA2A58621C9D7DE0035B333 /* FounctionTableCell.h */,
+				0FA2A58721C9D7DE0035B333 /* FounctionTableCell.m */,
+				0FA2A58921C9D8040035B333 /* FounctionTableCell.xib */,
+				0FA2A57E21C9D3040035B333 /* UserCenterViewController.h */,
+				0FA2A57F21C9D3040035B333 /* UserCenterViewController.m */,
+				0F6FD02A21CA19530083D590 /* BodyTableCell.h */,
+				0F6FD02B21CA19530083D590 /* BodyTableCell.m */,
+				0F6FD02C21CA19530083D590 /* BodyTableCell.xib */,
+				0F6FD02F21CA1B890083D590 /* DescriptionHeaderView.h */,
+				0F6FD03021CA1B890083D590 /* DescriptionHeaderView.m */,
+				0F6FD03221CA1BB80083D590 /* DescriptionHeaderView.xib */,
+				0F6FD02721CA15360083D590 /* BodyDataViewController.h */,
+				0F6FD02821CA15360083D590 /* BodyDataViewController.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -493,7 +514,9 @@
 				0FA2EA1E21C342B400A3DC4E /* TrackTableCell.xib in Resources */,
 				0F2AB57B21BDF1FF006FB503 /* LaunchScreen.storyboard in Resources */,
 				0FA2A58F21C9DB420035B333 /* RecordTableCell.xib in Resources */,
+				0F6FD02E21CA19530083D590 /* BodyTableCell.xib in Resources */,
 				0F2AB58A21BDF6C4006FB503 /* mapapi.bundle in Resources */,
+				0F6FD03321CA1BB80083D590 /* DescriptionHeaderView.xib in Resources */,
 				0F2AB5CF21BE326B006FB503 /* map_config.json in Resources */,
 				0FA2EA1421C339C100A3DC4E /* SummaryTableCell.xib in Resources */,
 				0F2AB57821BDF1FF006FB503 /* Assets.xcassets in Resources */,
@@ -599,6 +622,7 @@
 				0F2AB5E021BE8BEB006FB503 /* LoginViewController.m in Sources */,
 				0F37102D21C0FEE100C334C8 /* LeftSideViewController.m in Sources */,
 				0F2AB58821BDF5DF006FB503 /* RootNaviViewController.swift in Sources */,
+				0F6FD03121CA1B890083D590 /* DescriptionHeaderView.m in Sources */,
 				0FA2A59221C9DCED0035B333 /* RecordItemView.m in Sources */,
 				0F2AB5B221BDFC42006FB503 /* TrackRecord.m in Sources */,
 				0F2AB5D621BE41F4006FB503 /* PageItemViewController.m in Sources */,
@@ -607,6 +631,7 @@
 				0FA2EA1D21C342B400A3DC4E /* TrackTableCell.m in Sources */,
 				0FA2A58D21C9DB260035B333 /* RecordTableCell.m in Sources */,
 				0F2AB5E621BF8D12006FB503 /* FitnessItemView.m in Sources */,
+				0F6FD02921CA15360083D590 /* BodyDataViewController.m in Sources */,
 				0FA2A58821C9D7DE0035B333 /* FounctionTableCell.m in Sources */,
 				0F2AB57E21BDF1FF006FB503 /* main.m in Sources */,
 				0F2AB5BE21BDFC55006FB503 /* CircleProgressButton.m in Sources */,
@@ -624,6 +649,7 @@
 				0F2AB5B021BDFC42006FB503 /* NSDate+NSString.m in Sources */,
 				0F37103021C101B000C334C8 /* ButtonItemView.m in Sources */,
 				0F2AB5AF21BDFC42006FB503 /* ProjectConst.m in Sources */,
+				0F6FD02D21CA19530083D590 /* BodyTableCell.m in Sources */,
 				0FA2EA1321C339C100A3DC4E /* SummaryTableCell.m in Sources */,
 				0F2AB5C121BDFC55006FB503 /* MZTimerLabel.m in Sources */,
 				0F2AB57021BDF1FD006FB503 /* AppDelegate.m in Sources */,

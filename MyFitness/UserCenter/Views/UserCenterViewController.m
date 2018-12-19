@@ -17,6 +17,7 @@
 #import "RecordItemView.h"
 #import "UIDevice+Type.h"
 #import "AppStyleSetting.h"
+#import "BodyDataViewController.h"
 
 @interface UserCenterViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -91,6 +92,13 @@
 }
 
 #pragma mark - Request
+
+#pragma mark - Action
+
+- (void)openBodyDataView{
+	BodyDataViewController *bodyVC = [[BodyDataViewController alloc] init];
+	[self.navigationController pushViewController:bodyVC animated:YES];
+}
 
 #pragma mark - UITableViewDelegate
 
@@ -178,6 +186,19 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+	if (indexPath.section == 0) {
+		
+	}
+	else{
+		switch (indexPath.row) {
+			case 1:
+			[self openBodyDataView];
+			break;
+				
+			default:
+			break;
+		}
+	}
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
