@@ -14,6 +14,9 @@
 #import "UIDevice+Type.h"
 #import "ButtonItemView.h"
 #import "SubViewControllerDelegate.h"
+#import "UserCenterViewController.h"
+#import "LoginViewController.h"
+#import "NavigationViewController.h"
 
 @interface LeftSideViewController ()
 
@@ -241,7 +244,14 @@
 #pragma mark - Action
 
 - (void)topContainerBtnClicked:(UIButton*)sender{
+	if ([AVUser currentUser] == nil) {
+		LoginViewController *loginVC = [[LoginViewController alloc] init];
+		NavigationViewController *naviVC = [[NavigationViewController alloc] initWithRootViewController:loginVC];
+		[self.navigationController presentViewController:naviVC animated:YES completion:nil];
+	}
 	
+	UserCenterViewController *userVC = [[UserCenterViewController alloc] init];
+	[self.navigationController pushViewController:userVC animated:YES];
 }
 
 - (void)mileageItemViewClicked:(UIControl*)sender{

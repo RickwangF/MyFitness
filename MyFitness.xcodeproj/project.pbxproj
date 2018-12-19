@@ -44,6 +44,14 @@
 		0F37102D21C0FEE100C334C8 /* LeftSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102C21C0FEE100C334C8 /* LeftSideViewController.m */; };
 		0F37103021C101B000C334C8 /* ButtonItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102F21C101B000C334C8 /* ButtonItemView.m */; };
 		0FA2A57D21C897B10035B333 /* RightImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2A57C21C897B10035B333 /* RightImageButton.m */; };
+		0FA2A58021C9D3040035B333 /* UserCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2A57F21C9D3040035B333 /* UserCenterViewController.m */; };
+		0FA2A58421C9D4870035B333 /* AvatarTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2A58221C9D4870035B333 /* AvatarTableCell.m */; };
+		0FA2A58521C9D4870035B333 /* AvatarTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2A58321C9D4870035B333 /* AvatarTableCell.xib */; };
+		0FA2A58821C9D7DE0035B333 /* FounctionTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2A58721C9D7DE0035B333 /* FounctionTableCell.m */; };
+		0FA2A58A21C9D8040035B333 /* FounctionTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2A58921C9D8040035B333 /* FounctionTableCell.xib */; };
+		0FA2A58D21C9DB260035B333 /* RecordTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2A58C21C9DB260035B333 /* RecordTableCell.m */; };
+		0FA2A58F21C9DB420035B333 /* RecordTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2A58E21C9DB420035B333 /* RecordTableCell.xib */; };
+		0FA2A59221C9DCED0035B333 /* RecordItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2A59121C9DCED0035B333 /* RecordItemView.m */; };
 		0FA2EA1321C339C100A3DC4E /* SummaryTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1121C339C100A3DC4E /* SummaryTableCell.m */; };
 		0FA2EA1421C339C100A3DC4E /* SummaryTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1221C339C100A3DC4E /* SummaryTableCell.xib */; };
 		0FA2EA1721C340A200A3DC4E /* MonthSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1621C340A200A3DC4E /* MonthSectionHeader.m */; };
@@ -142,6 +150,19 @@
 		0F37102F21C101B000C334C8 /* ButtonItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ButtonItemView.m; sourceTree = "<group>"; };
 		0FA2A57B21C897B10035B333 /* RightImageButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RightImageButton.h; sourceTree = "<group>"; };
 		0FA2A57C21C897B10035B333 /* RightImageButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RightImageButton.m; sourceTree = "<group>"; };
+		0FA2A57E21C9D3040035B333 /* UserCenterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserCenterViewController.h; sourceTree = "<group>"; };
+		0FA2A57F21C9D3040035B333 /* UserCenterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCenterViewController.m; sourceTree = "<group>"; };
+		0FA2A58121C9D4870035B333 /* AvatarTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AvatarTableCell.h; sourceTree = "<group>"; };
+		0FA2A58221C9D4870035B333 /* AvatarTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AvatarTableCell.m; sourceTree = "<group>"; };
+		0FA2A58321C9D4870035B333 /* AvatarTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AvatarTableCell.xib; sourceTree = "<group>"; };
+		0FA2A58621C9D7DE0035B333 /* FounctionTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FounctionTableCell.h; sourceTree = "<group>"; };
+		0FA2A58721C9D7DE0035B333 /* FounctionTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FounctionTableCell.m; sourceTree = "<group>"; };
+		0FA2A58921C9D8040035B333 /* FounctionTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FounctionTableCell.xib; sourceTree = "<group>"; };
+		0FA2A58B21C9DB260035B333 /* RecordTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordTableCell.h; sourceTree = "<group>"; };
+		0FA2A58C21C9DB260035B333 /* RecordTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordTableCell.m; sourceTree = "<group>"; };
+		0FA2A58E21C9DB420035B333 /* RecordTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordTableCell.xib; sourceTree = "<group>"; };
+		0FA2A59021C9DCED0035B333 /* RecordItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordItemView.h; sourceTree = "<group>"; };
+		0FA2A59121C9DCED0035B333 /* RecordItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordItemView.m; sourceTree = "<group>"; };
 		0FA2EA1021C339C100A3DC4E /* SummaryTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SummaryTableCell.h; sourceTree = "<group>"; };
 		0FA2EA1121C339C100A3DC4E /* SummaryTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SummaryTableCell.m; sourceTree = "<group>"; };
 		0FA2EA1221C339C100A3DC4E /* SummaryTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SummaryTableCell.xib; sourceTree = "<group>"; };
@@ -360,6 +381,19 @@
 		0F2AB59C21BDFB27006FB503 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0FA2A57E21C9D3040035B333 /* UserCenterViewController.h */,
+				0FA2A57F21C9D3040035B333 /* UserCenterViewController.m */,
+				0FA2A58121C9D4870035B333 /* AvatarTableCell.h */,
+				0FA2A58221C9D4870035B333 /* AvatarTableCell.m */,
+				0FA2A58321C9D4870035B333 /* AvatarTableCell.xib */,
+				0FA2A58621C9D7DE0035B333 /* FounctionTableCell.h */,
+				0FA2A58721C9D7DE0035B333 /* FounctionTableCell.m */,
+				0FA2A58921C9D8040035B333 /* FounctionTableCell.xib */,
+				0FA2A58B21C9DB260035B333 /* RecordTableCell.h */,
+				0FA2A58C21C9DB260035B333 /* RecordTableCell.m */,
+				0FA2A58E21C9DB420035B333 /* RecordTableCell.xib */,
+				0FA2A59021C9DCED0035B333 /* RecordItemView.h */,
+				0FA2A59121C9DCED0035B333 /* RecordItemView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -455,13 +489,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FA2A58A21C9D8040035B333 /* FounctionTableCell.xib in Resources */,
 				0FA2EA1E21C342B400A3DC4E /* TrackTableCell.xib in Resources */,
 				0F2AB57B21BDF1FF006FB503 /* LaunchScreen.storyboard in Resources */,
+				0FA2A58F21C9DB420035B333 /* RecordTableCell.xib in Resources */,
 				0F2AB58A21BDF6C4006FB503 /* mapapi.bundle in Resources */,
 				0F2AB5CF21BE326B006FB503 /* map_config.json in Resources */,
 				0FA2EA1421C339C100A3DC4E /* SummaryTableCell.xib in Resources */,
 				0F2AB57821BDF1FF006FB503 /* Assets.xcassets in Resources */,
 				0FA2EA1921C340ED00A3DC4E /* MonthSectionHeader.xib in Resources */,
+				0FA2A58521C9D4870035B333 /* AvatarTableCell.xib in Resources */,
 				0F2AB57621BDF1FD006FB503 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -562,12 +599,15 @@
 				0F2AB5E021BE8BEB006FB503 /* LoginViewController.m in Sources */,
 				0F37102D21C0FEE100C334C8 /* LeftSideViewController.m in Sources */,
 				0F2AB58821BDF5DF006FB503 /* RootNaviViewController.swift in Sources */,
+				0FA2A59221C9DCED0035B333 /* RecordItemView.m in Sources */,
 				0F2AB5B221BDFC42006FB503 /* TrackRecord.m in Sources */,
 				0F2AB5D621BE41F4006FB503 /* PageItemViewController.m in Sources */,
 				0F2AB57321BDF1FD006FB503 /* ViewController.m in Sources */,
 				0F2AB5E921BFEB30006FB503 /* TrackListViewController.m in Sources */,
 				0FA2EA1D21C342B400A3DC4E /* TrackTableCell.m in Sources */,
+				0FA2A58D21C9DB260035B333 /* RecordTableCell.m in Sources */,
 				0F2AB5E621BF8D12006FB503 /* FitnessItemView.m in Sources */,
+				0FA2A58821C9D7DE0035B333 /* FounctionTableCell.m in Sources */,
 				0F2AB57E21BDF1FF006FB503 /* main.m in Sources */,
 				0F2AB5BE21BDFC55006FB503 /* CircleProgressButton.m in Sources */,
 				0F2AB5CD21BE2EFD006FB503 /* HomeViewController.m in Sources */,
@@ -577,8 +617,10 @@
 				0F2AB5C021BDFC55006FB503 /* CAPSPageMenu.m in Sources */,
 				0F2AB5DF21BE8BEB006FB503 /* RegisterViewController.m in Sources */,
 				0F2AB5E321BF59E7006FB503 /* TrackDetailViewController.m in Sources */,
+				0FA2A58421C9D4870035B333 /* AvatarTableCell.m in Sources */,
 				0F2AB5B321BDFC42006FB503 /* UIColor+UIColor_Hex.m in Sources */,
 				0F2AB5CA21BE0ECA006FB503 /* UIViewController+topVC.m in Sources */,
+				0FA2A58021C9D3040035B333 /* UserCenterViewController.m in Sources */,
 				0F2AB5B021BDFC42006FB503 /* NSDate+NSString.m in Sources */,
 				0F37103021C101B000C334C8 /* ButtonItemView.m in Sources */,
 				0F2AB5AF21BDFC42006FB503 /* ProjectConst.m in Sources */,

@@ -30,7 +30,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIColor *separatorColor;
 	
 @property (nonatomic, strong) UIColor *lightSeparatorColor;
-	
+
+@property (nonatomic, strong) UIColor *counterBottomBgColor;
+
+@property (nonatomic, strong) UIColor *themeTextColor;
+ 
 +(AppStyleSetting*)sharedInstance;
 
 @end

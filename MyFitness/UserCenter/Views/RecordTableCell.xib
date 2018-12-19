@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recordCell" rowHeight="100" id="mVg-XL-wKI" customClass="RecordTableCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mVg-XL-wKI" id="n9m-uM-hXV">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OuN-xE-lbI" customClass="RecordItemView">
+                        <rect key="frame" x="0.0" y="0.0" width="125" height="99.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Byk-sD-sPi" customClass="RecordItemView">
+                        <rect key="frame" x="125" y="0.0" width="125" height="99.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nvU-w9-xRv" customClass="RecordItemView">
+                        <rect key="frame" x="250" y="0.0" width="125" height="99.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="OuN-xE-lbI" secondAttribute="bottom" id="1Xj-ch-aLX"/>
+                    <constraint firstItem="OuN-xE-lbI" firstAttribute="width" secondItem="n9m-uM-hXV" secondAttribute="width" multiplier="0.333" id="5De-l4-5m8"/>
+                    <constraint firstItem="Byk-sD-sPi" firstAttribute="width" secondItem="n9m-uM-hXV" secondAttribute="width" multiplier="0.334" id="DRn-Ix-i76"/>
+                    <constraint firstAttribute="bottom" secondItem="nvU-w9-xRv" secondAttribute="bottom" id="ESc-M7-QUh"/>
+                    <constraint firstItem="Byk-sD-sPi" firstAttribute="top" secondItem="n9m-uM-hXV" secondAttribute="top" id="StU-lx-dYP"/>
+                    <constraint firstItem="OuN-xE-lbI" firstAttribute="leading" secondItem="n9m-uM-hXV" secondAttribute="leading" id="WJg-nB-PLs"/>
+                    <constraint firstAttribute="trailing" secondItem="nvU-w9-xRv" secondAttribute="trailing" id="Zg8-Xs-NPJ"/>
+                    <constraint firstItem="nvU-w9-xRv" firstAttribute="leading" secondItem="Byk-sD-sPi" secondAttribute="trailing" id="fqo-3T-Y3K"/>
+                    <constraint firstItem="OuN-xE-lbI" firstAttribute="top" secondItem="n9m-uM-hXV" secondAttribute="top" id="kxI-Kv-heP"/>
+                    <constraint firstItem="Byk-sD-sPi" firstAttribute="leading" secondItem="OuN-xE-lbI" secondAttribute="trailing" id="pG1-ZP-9i9"/>
+                    <constraint firstAttribute="bottom" secondItem="Byk-sD-sPi" secondAttribute="bottom" id="wbj-EI-ZFF"/>
+                    <constraint firstItem="nvU-w9-xRv" firstAttribute="top" secondItem="n9m-uM-hXV" secondAttribute="top" id="xNB-72-dqb"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="133.59999999999999" y="62.968515742128943"/>
+        </tableViewCell>
+    </objects>
+</document>
