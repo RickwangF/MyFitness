@@ -24,6 +24,8 @@ IB_DESIGNABLE
 
 @property (nonatomic, assign) IBInspectable CGFloat topOffset;
 
+@property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
+
 @property (nonatomic, strong) void(^actionBlock)(void);
 
 - (instancetype)init;

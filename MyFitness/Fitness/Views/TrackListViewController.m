@@ -66,10 +66,20 @@
 	}
 	return self;
 }
-	
+
+- (instancetype)initWithTransportMode:(TransportModeEnum)mode{
+	self = [super initWithNibName:nil bundle:nil];
+	if (self) {
+		[self initValueProperty];
+		_transportMode = mode;
+	}
+	return self;
+}
+
 #pragma mark - Init Property
 	
 - (void)initValueProperty{
+	_transportMode = TransportModeNone;
 	_trackList = [[NSMutableArray alloc] init];
 	NSDate *today = [NSDate date];
 	NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -80,7 +90,6 @@
 	_trackDic = [[NSMutableDictionary alloc] init];
 	_avgPaceString = [NSMutableString string];
 	_totalDistanceString = [NSMutableString string];
-	_transportMode = TransportModeNone;
 }
 
 #pragma mark - Life Circle
@@ -109,7 +118,23 @@
 
 - (void)initDropdownMenu{
 	_dropdownBtn = [[RightImageButton alloc] initWithFrame:CGRectMake(0, 0, 120, 44)];
-	[_dropdownBtn setTitle:@"所有运动"];
+	switch (_transportMode) {
+		case TransportModeNone:
+			[_dropdownBtn setTitle:@"所有运动"];
+			break;
+		case TransportModeWalking:
+			[_dropdownBtn setTitle:@"健走"];
+			break;
+		case TransportModeRunning:
+			[_dropdownBtn setTitle:@"跑步"];
+			break;
+		case TransportModeRiding:
+			[_dropdownBtn setTitle:@"骑行"];
+			break;
+		default:
+			break;
+	}
+	
 	[_dropdownBtn setImage:[UIImage imageNamed:@"down_10#00"]];
 	[_dropdownBtn setTitleColor:AppStyleSetting.sharedInstance.textColor];
 	[_dropdownBtn addTarget:self action:@selector(dropdownBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -122,7 +147,22 @@
 	[_dropdownMenu setWidth: self.view.frame.size.width];
 	[_dropdownMenu setDirectionBottom];
 	[_dropdownMenu setBottomOffset:CGPointMake(0, 44)];
-	[_dropdownMenu selectRow:0 scrollPosition:UITableViewScrollPositionNone];
+	switch (_transportMode) {
+		case TransportModeNone:
+			[_dropdownMenu selectRow:0 scrollPosition:UITableViewScrollPositionNone];
+			break;
+		case TransportModeWalking:
+			[_dropdownMenu selectRow:1 scrollPosition:UITableViewScrollPositionNone];
+			break;
+		case TransportModeRunning:
+			[_dropdownMenu selectRow:2 scrollPosition:UITableViewScrollPositionNone];
+			break;
+		case TransportModeRiding:
+			[_dropdownMenu selectRow:3 scrollPosition:UITableViewScrollPositionNone];
+			break;
+		default:
+			break;
+	}
 	__weak typeof(self) weakSelf = self;
 	[_dropdownMenu setCancelCallback:^{
 		[weakSelf.dropdownBtn cancelRotateImageView];

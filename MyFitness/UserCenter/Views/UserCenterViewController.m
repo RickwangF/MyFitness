@@ -23,6 +23,8 @@
 
 @property (nonatomic, strong) UITableView *infoTableView;
 
+@property (nonatomic, strong) AVUser *user;
+
 @end
 
 @implementation UserCenterViewController
@@ -33,9 +35,13 @@
 {
 	self = [super initWithNibName:nil bundle:nil];
 	if (self) {
-		
+		[self initValueProperty];
 	}
 	return self;
+}
+
+- (void)initValueProperty{
+	_user = [AVUser currentUser];
 }
 
 #pragma mark - Lift Circle
@@ -54,6 +60,18 @@
 	
 	[self initInfoTableView];
     // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+	[super viewWillAppear:animated];
+	[self.navigationController.navigationBar setBarStyle:UIBarStyleBlack];
+	[self.navigationController.navigationBar setTintColor:UIColor.whiteColor];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+	[super viewWillDisappear:animated];
+	[self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
+	[self.navigationController.navigationBar setTintColor:AppStyleSetting.sharedInstance.textColor];
 }
 
 #pragma mark - Init View
@@ -103,15 +121,23 @@
 #pragma mark - UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-	return 2;
+	return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-	if (section == 0) {
-		return 2;
-	}
-	else{
-		return 4;
+	switch (section) {
+		case 0:
+			return 2;
+		break;
+		case 1:
+			return 3;
+		break;
+		case 2:
+			return 1;
+		break;
+		default:
+			return 0;
+		break;
 	}
 }
 
@@ -119,16 +145,16 @@
 	if (indexPath.section == 0) {
 		if (indexPath.row == 0) {
 			if ([[UIDevice currentDevice] fullScreen]){
-				return 280;
+				return 240;
 			}
-			return 240;
+			return 200;
 		}
 		else{
-			return 100;
+			return 110;
 		}
 	}
 	else{
-		return 50;
+		return 55;
 	}
 }
 
@@ -137,15 +163,19 @@
 	if (indexPath.section == 0) {
 		if (indexPath.row == 0) {
 			AvatarTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"avatarCell" forIndexPath:indexPath];
-			cell.avatarImageView.image = [UIImage imageNamed:@"user_70#91"];
+			cell.avatarImageView.image = [UIImage imageNamed:@"user_65#ff"];
+			cell.loginNameLabel.text = _user.username;
 			return cell;
 		}
 		else{
 			RecordTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recordCell" forIndexPath:indexPath];
+			cell.walkingRecView.actionBlock = ^{
+				
+			};
 			return cell;
 		}
 	}
-	else{
+	else if (indexPath.section == 1){
 		FounctionTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"founctionCell" forIndexPath:indexPath];
 		switch (indexPath.row) {
 			case 0:
@@ -156,31 +186,49 @@
 			break;
 			case 2:
 				cell.titleLabel.text = @"个人资料";
-			break;
-			case 3:{
-				cell.titleLabel.text = @"关于我们";
-				[cell setSeparatorEndSection];
-			}
+				[cell hideSeparator];
 			break;
 			default:
 				break;
 		}
 		return cell;
 	}
+	else{
+		FounctionTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"founctionCell" forIndexPath:indexPath];
+		cell.titleLabel.text = @"关于我们";
+		[cell hideSeparator];
+		return cell;
+	}
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-	if (section == 1){
+	if (section != 0){
 		return 10;
 	}
 	return 0;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-	if (section == 1) {
+	if (section != 0) {
 		UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 10)];
 		headerView.backgroundColor = AppStyleSetting.sharedInstance.wideSeparatorColor;
 		return headerView;
+	}
+	return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+	if (section == 2) {
+		return 10;
+	}
+	return 0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+	if (section == 2) {
+		UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 10)];
+		footerView.backgroundColor = AppStyleSetting.sharedInstance.wideSeparatorColor;
+		return footerView;
 	}
 	return nil;
 }
@@ -189,7 +237,7 @@
 	if (indexPath.section == 0) {
 		
 	}
-	else{
+	else if (indexPath.section == 1){
 		switch (indexPath.row) {
 			case 1:
 			[self openBodyDataView];
@@ -198,6 +246,9 @@
 			default:
 			break;
 		}
+	}
+	else{
+		
 	}
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

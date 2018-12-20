@@ -56,6 +56,11 @@
                     <constraint firstItem="nvU-w9-xRv" firstAttribute="top" secondItem="n9m-uM-hXV" secondAttribute="top" id="xNB-72-dqb"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="rideRecView" destination="nvU-w9-xRv" id="OJw-t4-jH8"/>
+                <outlet property="runRecView" destination="Byk-sD-sPi" id="70O-Cr-rhK"/>
+                <outlet property="walkingRecView" destination="OuN-xE-lbI" id="eEd-pk-grL"/>
+            </connections>
             <point key="canvasLocation" x="133.59999999999999" y="62.968515742128943"/>
         </tableViewCell>
     </objects>

@@ -22,11 +22,18 @@
 
 - (void)prepareForReuse{
 	[super prepareForReuse];
-	_leadingConstraint.constant = 16;
+	_leadingConstraint.constant = 20;
+	_trailingConstraint.constant = 20;
+	[_separator setHidden:NO];
 }
 
 - (void)setSeparatorEndSection{
 	_leadingConstraint.constant = 0;
+	_trailingConstraint.constant = 0;
+}
+
+- (void)hideSeparator{
+	[_separator setHidden:YES];
 }
 
 @end

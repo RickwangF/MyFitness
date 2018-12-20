@@ -22,6 +22,7 @@ static AppStyleSetting *sharedInstance;
 			sharedInstance.naviTintColor = UIColor.blackColor;
 			sharedInstance.viewBgColor = UIColor.whiteColor;
 			sharedInstance.leftSideVCBgColor = [UIColor colorWithHexString:@"#ededed"];
+			sharedInstance.userCenterBgColor = [UIColor colorWithHexString:@"#323232"];
 			sharedInstance.textColor = UIColor.blackColor;
 			sharedInstance.smallTextColor = UIColor.darkGrayColor;
 			sharedInstance.mainColor = [UIColor colorWithHexString:@"#ffe617"];

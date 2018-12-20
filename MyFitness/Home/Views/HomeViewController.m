@@ -104,7 +104,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	self.title = @"MyFitness";
+	[self initTitleView];
 	
 	[self initLeftSideBtn];
 	
@@ -155,6 +155,16 @@
 }
     
 #pragma mark - Init View
+
+- (void)initTitleView{
+	UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
+	titleLabel.textColor = AppStyleSetting.sharedInstance.naviTintColor;
+	titleLabel.text = @"MyFitness";
+	titleLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightSemibold];
+	titleLabel.textAlignment = NSTextAlignmentCenter;
+	[titleLabel sizeToFit];
+	self.navigationItem.titleView = titleLabel;
+}
     
 - (void)initLeftSideBtn{
     UIButton *leftSideBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];

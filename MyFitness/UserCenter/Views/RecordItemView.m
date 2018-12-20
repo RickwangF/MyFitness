@@ -45,9 +45,11 @@
 }
 
 - (void)initValueProperty{
-	_imageHeight = 40;
+	_imageHeight = 35;
 	_labelHeight = 20;
-	_topOffset = (self.frame.size.height - _imageHeight - _labelHeight - 5)/2;
+	_topOffset = (self.frame.size.height - _imageHeight - _labelHeight - 10)/2;
+	_tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureRecognized:)];
+	[self addGestureRecognizer:_tapGesture];
 }
 
 - (void)initSubViewWithFrame:(CGRect)frame{
@@ -59,7 +61,7 @@
 	_titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, _labelHeight)];
 	_titleLabel.text = @"未设置";
 	_titleLabel.textColor = AppStyleSetting.sharedInstance.textColor;
-	_titleLabel.font = [UIFont systemFontOfSize:14];
+	_titleLabel.font = [UIFont systemFontOfSize:16];
 	[self addSubview:_titleLabel];
 	
 	[_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -69,7 +71,7 @@
 	}];
 	
 	[_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.top.equalTo(self.imageView.mas_bottom).offset(5);
+		make.top.equalTo(self.imageView.mas_bottom).offset(10);
 		make.centerX.equalTo(self);
 		make.height.equalTo(@(self.labelHeight));
 	}];
@@ -91,6 +93,12 @@
 
 - (void)setTitleFont:(UIFont*)font{
 	_titleLabel.font = font;
+}
+
+- (void)tapGestureRecognized:(UITapGestureRecognizer*)sender{
+	if (_actionBlock != nil) {
+		self.actionBlock();
+	}
 }
 
 @end

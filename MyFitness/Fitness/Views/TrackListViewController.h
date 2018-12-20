@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TransportModeEnum.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TrackListViewController : UIViewController
+
+- (instancetype)initWithTransportMode:(TransportModeEnum)mode;
 
 @end
 

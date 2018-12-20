@@ -40,6 +40,8 @@
 
 @property (nonatomic, strong) NSMutableString *weightString;
 
+@property (nonatomic, strong) AVUser *user;
+
 
 @end
 
@@ -57,6 +59,7 @@
 }
 
 - (void)initValueProperty{
+	_user = [AVUser currentUser];
 	_ageArray = [[NSMutableArray alloc] init];
 	_genderArray = @[@"男",@"女",];
 	_heightArray = [[NSMutableArray alloc] init];
@@ -102,6 +105,8 @@
 	
 	[self initDataTableView];
 	
+	[self getMyBodyData];
+	
     // Do any additional setup after loading the view.
 }
 
@@ -146,10 +151,28 @@
 #pragma mark - Request
 
 - (void)getMyBodyData{
-	AVQuery *query = [AVQuery queryWithClassName:@"_User"];
-	[query whereKey:@"objectId" equalTo:[AVUser currentUser].objectId];
+	NSString *age = [_user objectForKey:@"age"];
+	NSString *gender = [_user objectForKey:@"gender"];
+	NSString *height = [_user  objectForKey:@"height"];
+	NSString *weight = [_user objectForKey:@"weight"];
 	
-	[query getObjectWithId:[AVUser currentUser].objectId];
+	if (age != nil && ![age isEqualToString:@""]) {
+		_ageString = [NSMutableString stringWithString:age];
+	}
+	
+	if (gender != nil && ![age isEqualToString:@""]) {
+		_genderString = [NSMutableString stringWithString:gender];
+	}
+	
+	if (height != nil && ![height isEqualToString:@""]) {
+		_heightString = [NSMutableString stringWithString:height];
+	}
+	
+	if (weight != nil && ![weight isEqualToString:@""]) {
+		_weightString = [NSMutableString stringWithString:weight];
+	}
+	
+	[_dataTableView reloadData];
 }
 
 #pragma mark - Action
@@ -157,21 +180,29 @@
 - (void)setAgeWithString:(NSString*)ageString{
 	BodyTableCell *cell = [_dataTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 	cell.valueLabel.text = ageString;
+	[_user setObject:ageString forKey:@"age"];
+	[_user saveInBackground];
 }
 
 - (void)setGenderWithString:(NSString*)genderString{
 	BodyTableCell *cell = [_dataTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
 	cell.valueLabel.text = genderString;
+	[_user setObject:genderString forKey:@"gender"];
+	[_user saveInBackground];
 }
 
 - (void)setHeightWithString:(NSString*)heightString{
 	BodyTableCell *cell = [_dataTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
 	cell.valueLabel.text = heightString;
+	[_user setObject:heightString forKey:@"height"];
+	[_user saveInBackground];
 }
 
 - (void)setWeightWithString:(NSString*)weightString{
 	BodyTableCell *cell = [_dataTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
 	cell.valueLabel.text = weightString;
+	[_user setObject:weightString forKey:@"weight"];
+	[_user saveInBackground];
 }
 
 - (void)openAgePickerViewWithAgeString:(NSString*)string{
@@ -287,18 +318,30 @@
 		if (indexPath.row == 0) {
 			cell.titleLabel.text = @"年龄";
 			[cell showSeparator];
+			if (![_ageString isEqualToString:@""]) {
+				cell.valueLabel.text = _ageString;
+			}
 		}
 		else{
 			cell.titleLabel.text = @"性别";
+			if (![_genderString isEqualToString:@""]) {
+				cell.valueLabel.text = _genderString;
+			}
 		}
 	}
 	else{
 		if (indexPath.row == 0) {
 			cell.titleLabel.text = @"身高";
 			[cell showSeparator];
+			if (![_heightString isEqualToString:@""]) {
+				cell.valueLabel.text = _heightString;
+			}
 		}
 		else{
 			cell.titleLabel.text = @"体重";
+			if (![_weightString isEqualToString:@""]) {
+				cell.valueLabel.text = _weightString;
+			}
 		}
 	}
 	return cell;

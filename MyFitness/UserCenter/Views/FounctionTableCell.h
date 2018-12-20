@@ -15,8 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIImageView *indicatorView;
 @property (weak, nonatomic) IBOutlet UIView *separator;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leadingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *trailingConstraint;
 
 - (void)setSeparatorEndSection;
+
+- (void)hideSeparator;
 
 @end
 
