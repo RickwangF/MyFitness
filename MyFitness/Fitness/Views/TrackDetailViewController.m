@@ -261,6 +261,12 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 	[super viewWillDisappear:animated];
 	[BMKMapView enableCustomMapStyle:NO];
 }
+
+- (void)dealloc
+{
+	[_timer invalidate];
+	_timer = nil;
+}
 	
 #pragma mark - Init Views
 	

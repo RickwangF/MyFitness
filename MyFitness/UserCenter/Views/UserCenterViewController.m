@@ -18,6 +18,8 @@
 #import "UIDevice+Type.h"
 #import "AppStyleSetting.h"
 #import "BodyDataViewController.h"
+#import "TransportModeEnum.h"
+#import "TrackListViewController.h"
 
 @interface UserCenterViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -113,6 +115,11 @@
 
 #pragma mark - Action
 
+- (void)openTrackListViewWithMode:(TransportModeEnum)mode{
+	TrackListViewController *listVC = [[TrackListViewController alloc] initWithTransportMode:mode];
+	[self.navigationController pushViewController:listVC animated:YES];
+}
+
 - (void)openBodyDataView{
 	BodyDataViewController *bodyVC = [[BodyDataViewController alloc] init];
 	[self.navigationController pushViewController:bodyVC animated:YES];
@@ -170,7 +177,13 @@
 		else{
 			RecordTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recordCell" forIndexPath:indexPath];
 			cell.walkingRecView.actionBlock = ^{
-				
+				[self openTrackListViewWithMode:TransportModeWalking];
+			};
+			cell.runRecView.actionBlock = ^{
+				[self openTrackListViewWithMode:TransportModeRunning];
+			};
+			cell.rideRecView.actionBlock = ^{
+				[self openTrackListViewWithMode:TransportModeRiding];
 			};
 			return cell;
 		}
