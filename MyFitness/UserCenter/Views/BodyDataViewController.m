@@ -18,10 +18,28 @@
 #import "BodyTableCell.h"
 #import "DescriptionHeaderView.h"
 #import "UIImage+UIColor.h"
+#import "ActionSheetPicker.h"
 
 @interface BodyDataViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *dataTableView;
+
+@property (nonatomic, strong) NSMutableArray *ageArray;
+
+@property (nonatomic, strong) NSArray *genderArray;
+
+@property (nonatomic, strong) NSMutableArray *heightArray;
+
+@property (nonatomic, strong) NSMutableArray *weightArray;
+
+@property (nonatomic, strong) NSMutableString *ageString;
+
+@property (nonatomic, strong) NSMutableString *genderString;
+
+@property (nonatomic, strong) NSMutableString *heightString;
+
+@property (nonatomic, strong) NSMutableString *weightString;
+
 
 @end
 
@@ -33,9 +51,38 @@
 {
 	self = [super initWithNibName:nil bundle:nil];
 	if (self) {
-		
+		[self initValueProperty];
 	}
 	return self;
+}
+
+- (void)initValueProperty{
+	_ageArray = [[NSMutableArray alloc] init];
+	_genderArray = @[@"男",@"女",];
+	_heightArray = [[NSMutableArray alloc] init];
+	_weightArray = [[NSMutableArray alloc] init];
+	_ageString = [NSMutableString new];
+	_genderString = [NSMutableString new];
+	_heightString = [NSMutableString new];
+	_weightString = [NSMutableString new];
+	for (int i=4; i<120; i++) {
+		@autoreleasepool {
+			NSString *ageString = [NSString stringWithFormat:@"%d 岁", i];
+			[_ageArray addObject:ageString];
+		}
+	}
+	for (int i=90; i<226; i++) {
+		@autoreleasepool {
+			NSString *heightString = [NSString stringWithFormat:@"%d 厘米", i];
+			[_heightArray addObject:heightString];
+		}
+	}
+	for (int i=13; i<230; i++) {
+		@autoreleasepool {
+			NSString *weightString = [NSString stringWithFormat:@"%d 公斤", i];
+			[_weightArray addObject:weightString];
+		}
+	}
 }
 
 #pragma mark - Lift Circle
@@ -54,6 +101,7 @@
 	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithUIColor:UIColor.whiteColor] forBarMetrics:UIBarMetricsDefault];
 	
 	[self initDataTableView];
+	
     // Do any additional setup after loading the view.
 }
 
@@ -93,6 +141,125 @@
 		}
 		make.left.bottom.right.equalTo(self.view);
 	}];
+}
+
+#pragma mark - Request
+
+- (void)getMyBodyData{
+	AVQuery *query = [AVQuery queryWithClassName:@"_User"];
+	[query whereKey:@"objectId" equalTo:[AVUser currentUser].objectId];
+	
+	[query getObjectWithId:[AVUser currentUser].objectId];
+}
+
+#pragma mark - Action
+
+- (void)setAgeWithString:(NSString*)ageString{
+	BodyTableCell *cell = [_dataTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+	cell.valueLabel.text = ageString;
+}
+
+- (void)setGenderWithString:(NSString*)genderString{
+	BodyTableCell *cell = [_dataTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+	cell.valueLabel.text = genderString;
+}
+
+- (void)setHeightWithString:(NSString*)heightString{
+	BodyTableCell *cell = [_dataTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+	cell.valueLabel.text = heightString;
+}
+
+- (void)setWeightWithString:(NSString*)weightString{
+	BodyTableCell *cell = [_dataTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
+	cell.valueLabel.text = weightString;
+}
+
+- (void)openAgePickerViewWithAgeString:(NSString*)string{
+	NSInteger index = [_ageArray indexOfObject:string];
+	ActionSheetStringPicker *agePicker = [[ActionSheetStringPicker alloc] initWithTitle:nil rows:_ageArray initialSelection:index doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+		[self setAgeWithString:(NSString *)selectedValue];
+	} cancelBlock:nil origin:_dataTableView];
+	agePicker.tapDismissAction = TapActionCancel;
+	
+	UIButton *doneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+	[doneBtn setTitle:@"确定" forState:UIControlStateNormal];
+	[doneBtn setTitleColor:AppStyleSetting.sharedInstance.textColor forState:UIControlStateNormal];
+	UIBarButtonItem *doneBarBtn = [[UIBarButtonItem alloc] initWithCustomView:doneBtn];
+	[agePicker setDoneButton:doneBarBtn];
+	
+	UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+	[cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+	[cancelBtn setTitleColor:AppStyleSetting.sharedInstance.textColor forState:UIControlStateNormal];
+	UIBarButtonItem *cancelBarBtn = [[UIBarButtonItem alloc] initWithCustomView:cancelBtn];
+	[agePicker setCancelButton:cancelBarBtn];
+	
+	[agePicker showActionSheetPicker];
+}
+
+- (void)openGenderPickerViewWithGenderString:(NSString*)string{
+	NSInteger index = [_genderArray indexOfObject:string];
+	ActionSheetStringPicker *genderPicker = [[ActionSheetStringPicker alloc] initWithTitle:nil rows:_genderArray initialSelection:index doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+		[self setGenderWithString:(NSString *)selectedValue];
+	} cancelBlock:nil origin:_dataTableView];
+	genderPicker.tapDismissAction = TapActionCancel;
+	
+	UIButton *doneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+	[doneBtn setTitle:@"确定" forState:UIControlStateNormal];
+	[doneBtn setTitleColor:AppStyleSetting.sharedInstance.textColor forState:UIControlStateNormal];
+	UIBarButtonItem *doneBarBtn = [[UIBarButtonItem alloc] initWithCustomView:doneBtn];
+	[genderPicker setDoneButton:doneBarBtn];
+	
+	UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+	[cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+	[cancelBtn setTitleColor:AppStyleSetting.sharedInstance.textColor forState:UIControlStateNormal];
+	UIBarButtonItem *cancelBarBtn = [[UIBarButtonItem alloc] initWithCustomView:cancelBtn];
+	[genderPicker setCancelButton:cancelBarBtn];
+	
+	[genderPicker showActionSheetPicker];
+}
+
+- (void)openHeightPickerViewWithHeightString:(NSString*)string{
+	NSInteger index = [_heightArray indexOfObject:string];
+	ActionSheetStringPicker *heightPicker = [[ActionSheetStringPicker alloc] initWithTitle:nil rows:_heightArray initialSelection:index doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+		[self setHeightWithString:(NSString *)selectedValue];
+	} cancelBlock:nil origin:_dataTableView];
+	heightPicker.tapDismissAction = TapActionCancel;
+	
+	UIButton *doneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+	[doneBtn setTitle:@"确定" forState:UIControlStateNormal];
+	[doneBtn setTitleColor:AppStyleSetting.sharedInstance.textColor forState:UIControlStateNormal];
+	UIBarButtonItem *doneBarBtn = [[UIBarButtonItem alloc] initWithCustomView:doneBtn];
+	[heightPicker setDoneButton:doneBarBtn];
+	
+	UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+	[cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+	[cancelBtn setTitleColor:AppStyleSetting.sharedInstance.textColor forState:UIControlStateNormal];
+	UIBarButtonItem *cancelBarBtn = [[UIBarButtonItem alloc] initWithCustomView:cancelBtn];
+	[heightPicker setCancelButton:cancelBarBtn];
+	
+	[heightPicker showActionSheetPicker];
+}
+
+- (void)openWeightPickerViewWithWeightString:(NSString*)string{
+	NSInteger index = [_weightArray indexOfObject:string];
+	ActionSheetStringPicker *weightPicker = [[ActionSheetStringPicker alloc] initWithTitle:nil rows:_weightArray initialSelection:index doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+		[self setWeightWithString:(NSString *)selectedValue];
+	} cancelBlock:nil origin:_dataTableView];
+	weightPicker.tapDismissAction = TapActionCancel;
+	
+	UIButton *doneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+	[doneBtn setTitle:@"确定" forState:UIControlStateNormal];
+	[doneBtn setTitleColor:AppStyleSetting.sharedInstance.textColor forState:UIControlStateNormal];
+	UIBarButtonItem *doneBarBtn = [[UIBarButtonItem alloc] initWithCustomView:doneBtn];
+	[weightPicker setDoneButton:doneBarBtn];
+	
+	UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+	[cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+	[cancelBtn setTitleColor:AppStyleSetting.sharedInstance.textColor forState:UIControlStateNormal];
+	UIBarButtonItem *cancelBarBtn = [[UIBarButtonItem alloc] initWithCustomView:cancelBtn];
+	[weightPicker setCancelButton:cancelBarBtn];
+	
+	[weightPicker showActionSheetPicker];
 }
 
 #pragma mark - UITableViewDelegate
@@ -158,9 +325,57 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+	if (indexPath.section == 0) {
+		if (indexPath.row == 0) {
+			BodyTableCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+			NSString *ageString;
+			if (![_ageArray containsObject: cell.valueLabel.text]) {
+				ageString = @"4 岁";
+			}
+			else{
+				ageString = cell.valueLabel.text;
+			}
+			[self openAgePickerViewWithAgeString:ageString];
+		}
+		else{
+			BodyTableCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+			NSString *genderString;
+			if (![_genderArray containsObject: cell.valueLabel.text]) {
+				genderString = @"男";
+			}
+			else{
+				genderString = cell.valueLabel.text;
+			}
+			[self openGenderPickerViewWithGenderString:genderString];
+		}
+	}
+	else{
+		if (indexPath.row == 0) {
+			BodyTableCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+			NSString *heightString;
+			if (![_ageArray containsObject: cell.valueLabel.text]) {
+				heightString = @"175 厘米";
+			}
+			else{
+				heightString = cell.valueLabel.text;
+			}
+			[self openHeightPickerViewWithHeightString:heightString];
+		}
+		else{
+			BodyTableCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+			NSString *weightString;
+			if (![_ageArray containsObject: cell.valueLabel.text]) {
+				weightString = @"65 公斤";
+			}
+			else{
+				weightString = cell.valueLabel.text;
+			}
+			[self openWeightPickerViewWithWeightString:weightString];
+		}
+	}
+	
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
 
 /*
 #pragma mark - Navigation

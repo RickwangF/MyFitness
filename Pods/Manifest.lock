@@ -1,4 +1,5 @@
 PODS:
+  - ActionSheetPicker-3.0 (2.3.0)
   - AFNetworking (3.2.1):
     - AFNetworking/NSURLSession (= 3.2.1)
     - AFNetworking/Reachability (= 3.2.1)
@@ -49,6 +50,7 @@ PODS:
   - Toast (4.0.0)
 
 DEPENDENCIES:
+  - ActionSheetPicker-3.0 (~> 2.3.0)
   - AFNetworking (~> 3.0)
   - AVOSCloud
   - BaiduMapKit
@@ -68,6 +70,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - ActionSheetPicker-3.0
     - AFNetworking
     - AVOSCloud
     - BaiduMapKit
@@ -98,6 +101,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/RickwangF/DropDown
 
 SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   AVOSCloud: e1257f9a7c28e04ae8642d554a37654e8392d1b7
   BaiduMapKit: b6a8f31b3d2e4e5cad4084512a0d9a3878638272
@@ -115,6 +119,6 @@ SPEC CHECKSUMS:
   STPopup: da1167250a01584af7bcccb898653185f223ec46
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: 9229c93b1f018f115d6a676152a7ea75a41fa71a
+PODFILE CHECKSUM: 9afa2413c81541c9828bcd824a72b32c0b9200a8
 
 COCOAPODS: 1.5.3

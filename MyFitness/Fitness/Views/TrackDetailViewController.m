@@ -747,26 +747,27 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 }
 
 - (void)timerIsTicking{
-	if (!self.drawStartPointFlag) {
-		self.drawStartPointFlag = YES;
+	if (!_drawStartPointFlag) {
+		_drawStartPointFlag = YES;
 		[self drawStartPoint];
 		return;
 	}
-	if (!self.drawTrackFlag) {
-		if(self.endIndex == 0 && self.startIndex == 1){
-			self.drawTrackFlag = YES;
+	if (!_drawTrackFlag) {
+		if(_endIndex == 0 && _startIndex == 1){
+			_drawTrackFlag = YES;
 		}
 		[self drawTrack];
 		return;
 	}
-	if (!self.drawEndPointFlag) {
-		self.drawEndPointFlag = YES;
+	if (!_drawEndPointFlag) {
+		_drawEndPointFlag = YES;
 		[self drawEndPoint];
 		return;
 	}
-	if (self.drawStartPointFlag && self.drawTrackFlag && self.drawEndPointFlag) {
+	if (_drawStartPointFlag && _drawTrackFlag && _drawEndPointFlag) {
 		[self drawTrackLine];
-		[self.timer invalidate];
+		[_timer invalidate];
+		_timer = nil;
 	}
 }
 

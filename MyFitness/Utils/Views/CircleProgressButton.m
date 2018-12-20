@@ -89,9 +89,6 @@ BOOL triggerFlag = NO;
         _count = 20;
         if (triggerFlag == NO) {
             triggerFlag = YES;
-			if (_longPressedBlock != NULL) {
-				self.longPressedBlock();
-			}
         }
     }
     
@@ -107,8 +104,14 @@ BOOL triggerFlag = NO;
 -(void)progressBtnTouchedUp:(UIControl*)sender{
     _progressView.value = 0;
 	_progressView.emptyLineColor = [UIColor colorWithWhite:1.0 alpha:0];
-    triggerFlag = NO;
+	if (triggerFlag == YES) {
+		triggerFlag = NO;
+		if (_longPressedBlock != NULL) {
+			self.longPressedBlock();
+		}
+	}
     [_timer invalidate];
+	_timer = nil;
     [self resetTimer];
 }
 
@@ -119,6 +122,12 @@ BOOL triggerFlag = NO;
 -(void)setProgressColor:(UIColor *)color{
     _progressView.progressColor = color;
     _progressView.progressStrokeColor = color;
+}
+
+- (void)dealloc
+{
+	[_timer invalidate];
+	_timer = nil;
 }
 
 /*

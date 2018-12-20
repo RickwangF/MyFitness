@@ -20,5 +20,6 @@ pod 'HMSegmentedControl'
 pod 'KMNavigationBarTransition'
 pod 'DropDown', :git => 'https://github.com/RickwangF/DropDown'
 pod 'SDWebImage', '~> 4.0'
+pod 'ActionSheetPicker-3.0', '~> 2.3.0'
 
 end
