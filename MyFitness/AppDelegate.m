@@ -51,6 +51,8 @@
 	[UINavigationBar appearance].tintColor = AppStyleSetting.sharedInstance.naviTintColor;
 	[UINavigationBar appearance].barStyle = UIBarStyleDefault;
 	[[UINavigationBar appearance] setShadowImage:[UIImage new]];
+	[UINavigationBar appearance].backIndicatorImage = [UIImage imageNamed:@"left_22#00"];
+	[UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName: AppStyleSetting.sharedInstance.textColor, NSFontAttributeName: [UIFont systemFontOfSize:18 weight:UIFontWeightSemibold]};
 	
 	_window = [[UIWindow alloc] init];
 	_window.frame = UIScreen.mainScreen.bounds;

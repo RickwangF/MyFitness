@@ -20,6 +20,8 @@
 
 @property (nonatomic, strong) UIScrollView *mainScrollView;
 
+@property (nonatomic, strong) UIView *firstContainerView;
+
 @property (nonatomic, strong) BarChartView *last7DaysView;
 
 @property (nonatomic, strong) HorizontalBarChartView *longestView;
@@ -72,6 +74,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.title = @"我的记录";
 	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithUIColor:UIColor.whiteColor] forBarMetrics:UIBarMetricsDefault];
 	
 	[self initMainScrollView];
@@ -112,12 +115,39 @@
 }
 
 - (void)initLastSevenDaysView{
+	_firstContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 345, 260)];
+	_firstContainerView.backgroundColor = UIColor.whiteColor;
+	_firstContainerView.layer.cornerRadius = 5;
+	_firstContainerView.layer.masksToBounds = YES;
+	[self.mainScrollView addSubview:_firstContainerView];
+	
+	[_firstContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.equalTo(self.mainScrollView).offset(15);
+		make.left.equalTo(self.mainScrollView).offset(15);
+		make.right.equalTo(self.mainScrollView).offset(-15);
+		make.width.equalTo(@(self.view.frame.size.width - 30));
+		make.height.equalTo(@260);
+	}];
+	
+	UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 18)];
+	titleLabel.text = @"最近7天";
+	titleLabel.textColor = AppStyleSetting.sharedInstance.textColor;
+	titleLabel.font = [UIFont systemFontOfSize:15];
+	[_firstContainerView addSubview:titleLabel];
+	[titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.equalTo(self.firstContainerView).offset(15);
+		make.centerX.equalTo(self.firstContainerView);
+		make.height.equalTo(@18);
+	}];
+	
 	_last7DaysView = [[BarChartView alloc] initWithFrame:CGRectMake(0, 0, 350, 260)];
 	_last7DaysView.backgroundColor = AppStyleSetting.sharedInstance.viewBgColor;
+	[_last7DaysView setNoDataText:@"正在飞速计算中，请稍后...."];
 	_last7DaysView.chartDescription.enabled = NO;
-	_last7DaysView.drawGridBackgroundEnabled = NO;
-	_last7DaysView.dragEnabled = YES;
-	[_last7DaysView setScaleEnabled:YES];
+	_last7DaysView.drawGridBackgroundEnabled = YES;
+	[_last7DaysView setDrawGridBackgroundEnabled:NO];
+	_last7DaysView.dragEnabled = NO;
+	[_last7DaysView setScaleEnabled:NO];
 	_last7DaysView.pinchZoomEnabled = NO;
 	_last7DaysView.rightAxis.enabled = NO;
 	_last7DaysView.drawBarShadowEnabled = NO;
@@ -135,28 +165,40 @@
 	ChartXAxis *xAxis = _last7DaysView.xAxis;
 	xAxis.labelPosition = XAxisLabelPositionBottom;
 	xAxis.labelFont = [UIFont systemFontOfSize:12];
-	xAxis.drawGridLinesEnabled = NO;
+	xAxis.drawGridLinesEnabled = YES;
+	xAxis.gridColor = AppStyleSetting.sharedInstance.wideSeparatorColor;
 	xAxis.granularity = 1;
 	xAxis.labelCount = 7;
 	xAxis.valueFormatter = [[ChartDefaultAxisValueFormatter alloc] initWithDecimals:0];
 	
 	ChartYAxis *yAxis = _last7DaysView.leftAxis;
 	yAxis.enabled = YES;
-	yAxis.drawGridLinesEnabled = NO;
+	yAxis.drawGridLinesEnabled = YES;
+	yAxis.gridColor = AppStyleSetting.sharedInstance.wideSeparatorColor;
 	yAxis.labelFont = [UIFont systemFontOfSize:12];
-	yAxis.labelCount = 8;
+	yAxis.labelCount = 6;
 	yAxis.valueFormatter = [[ChartDefaultAxisValueFormatter alloc] initWithFormatter:yAxisFormatter];
 	yAxis.labelPosition = YAxisLabelPositionOutsideChart;
 	yAxis.spaceTop = 0.1;
 	yAxis.axisMinimum = 0;
 	
-	[self.mainScrollView addSubview:_last7DaysView];
+	[_firstContainerView addSubview:_last7DaysView];
 	[_last7DaysView mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.top.equalTo(self.mainScrollView).offset(20);
-		make.left.equalTo(self.mainScrollView).offset(20);
-		make.right.equalTo(self.mainScrollView).offset(-20);
-		make.width.equalTo(@(self.view.frame.size.width - 40));
-		make.height.equalTo(@260);
+		make.top.equalTo(self.firstContainerView).offset(40);
+		make.left.equalTo(self.firstContainerView).offset(15);
+		make.right.equalTo(self.firstContainerView).offset(-15);
+		make.height.equalTo(@200);
+	}];
+	
+	UILabel *xAxisLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 12)];
+	xAxisLabel.text = @"日期";
+	xAxisLabel.textColor = AppStyleSetting.sharedInstance.textColor;
+	xAxisLabel.font = [UIFont systemFontOfSize:10];
+	[_firstContainerView addSubview:xAxisLabel];
+	[xAxisLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.right.equalTo(self.firstContainerView).offset(-45);
+		make.bottom.equalTo(self.firstContainerView).offset(-27);
+		make.height.equalTo(@12);
 	}];
 }
 

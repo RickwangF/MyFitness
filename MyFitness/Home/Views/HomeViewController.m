@@ -106,6 +106,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithUIColor:AppStyleSetting.sharedInstance.homeNaviBarTintColor] forBarMetrics:UIBarMetricsDefault];
+	self.navigationItem.backBarButtonItem = [UIBarButtonItem new];
 	
 	[self initTitleView];
 	
