@@ -21,6 +21,7 @@ static AppStyleSetting *sharedInstance;
 			sharedInstance.naviBarTintColor = [UIColor colorWithHexString:@"#ffe617"];
 			sharedInstance.naviTintColor = UIColor.blackColor;
 			sharedInstance.viewBgColor = UIColor.whiteColor;
+			sharedInstance.lightGrayViewBgColor = [UIColor colorWithHexString:@"#f1f1f1"];
 			sharedInstance.leftSideVCBgColor = [UIColor colorWithHexString:@"#ededed"];
 			sharedInstance.userCenterBgColor = [UIColor colorWithHexString:@"#323232"];
 			sharedInstance.textColor = UIColor.blackColor;
@@ -29,7 +30,7 @@ static AppStyleSetting *sharedInstance;
 			sharedInstance.separatorColor = UIColor.lightGrayColor;
 			sharedInstance.lightSeparatorColor = [UIColor colorWithHexString:@"#e1e1e1"];
 			sharedInstance.wideSeparatorColor = [UIColor colorWithHexString:@"f1f1f1"];
-			sharedInstance.counterBottomBgColor = [UIColor colorWithHexString:@"#edc915"];
+			sharedInstance.counterBottomBgColor = [UIColor colorWithHexString:@"#1e293d"];
 			sharedInstance.themeTextColor = [UIColor colorWithHexString:@"#f0c800"];
 		}
 	});

@@ -261,7 +261,11 @@
 }
 
 - (void)recordItemViewClicked:(UIControl*)sender{
-	
+	[self dismissViewControllerAnimated:YES completion:^{
+		if (self.delegate != nil) {
+			[self.delegate leftSideViewControllerMakePushWithFlag:2];
+		}
+	}];
 }
 
 - (void)cooperateItemViewClicked:(UIControl*)sender{

@@ -48,6 +48,7 @@
 		0F6FD02E21CA19530083D590 /* BodyTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6FD02C21CA19530083D590 /* BodyTableCell.xib */; };
 		0F6FD03121CA1B890083D590 /* DescriptionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6FD03021CA1B890083D590 /* DescriptionHeaderView.m */; };
 		0F6FD03321CA1BB80083D590 /* DescriptionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6FD03221CA1BB80083D590 /* DescriptionHeaderView.xib */; };
+		0F6FD03721CC84430083D590 /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6FD03621CC84430083D590 /* RecordViewController.m */; };
 		0FA2A57D21C897B10035B333 /* RightImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2A57C21C897B10035B333 /* RightImageButton.m */; };
 		0FA2A58021C9D3040035B333 /* UserCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2A57F21C9D3040035B333 /* UserCenterViewController.m */; };
 		0FA2A58421C9D4870035B333 /* AvatarTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2A58221C9D4870035B333 /* AvatarTableCell.m */; };
@@ -161,6 +162,8 @@
 		0F6FD02F21CA1B890083D590 /* DescriptionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DescriptionHeaderView.h; sourceTree = "<group>"; };
 		0F6FD03021CA1B890083D590 /* DescriptionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DescriptionHeaderView.m; sourceTree = "<group>"; };
 		0F6FD03221CA1BB80083D590 /* DescriptionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DescriptionHeaderView.xib; sourceTree = "<group>"; };
+		0F6FD03521CC84420083D590 /* RecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordViewController.h; sourceTree = "<group>"; };
+		0F6FD03621CC84430083D590 /* RecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordViewController.m; sourceTree = "<group>"; };
 		0FA2A57B21C897B10035B333 /* RightImageButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RightImageButton.h; sourceTree = "<group>"; };
 		0FA2A57C21C897B10035B333 /* RightImageButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RightImageButton.m; sourceTree = "<group>"; };
 		0FA2A57E21C9D3040035B333 /* UserCenterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserCenterViewController.h; sourceTree = "<group>"; };
@@ -365,6 +368,8 @@
 				0FA2EA1A21C342B400A3DC4E /* TrackTableCell.h */,
 				0FA2EA1B21C342B400A3DC4E /* TrackTableCell.m */,
 				0FA2EA1C21C342B400A3DC4E /* TrackTableCell.xib */,
+				0F6FD03521CC84420083D590 /* RecordViewController.h */,
+				0F6FD03621CC84430083D590 /* RecordViewController.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -576,6 +581,7 @@
 				"${BUILT_PRODUCTS_DIR}/AVOSCloud/AVOSCloud.framework",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/CHIPageControl/CHIPageControl.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
 				"${BUILT_PRODUCTS_DIR}/HMSegmentedControl/HMSegmentedControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
@@ -594,6 +600,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AVOSCloud.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHIPageControl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HMSegmentedControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
@@ -642,6 +649,7 @@
 				0F2AB5B121BDFC42006FB503 /* MFLocation.m in Sources */,
 				0F37102A21C0F21E00C334C8 /* ShadowCircleButton.m in Sources */,
 				0F2AB5C021BDFC55006FB503 /* CAPSPageMenu.m in Sources */,
+				0F6FD03721CC84430083D590 /* RecordViewController.m in Sources */,
 				0F2AB5DF21BE8BEB006FB503 /* RegisterViewController.m in Sources */,
 				0F2AB5E321BF59E7006FB503 /* TrackDetailViewController.m in Sources */,
 				0FA2A58421C9D4870035B333 /* AvatarTableCell.m in Sources */,

@@ -32,6 +32,7 @@
 #import "UIDevice+Type.h"
 #import "NavigationViewController.h"
 #import "UserCenterViewController.h"
+#import "RecordViewController.h"
 
 
 @interface HomeViewController ()<BMKMapViewDelegate, BMKLocationManagerDelegate, SubViewControllerDelegate, CAPSPageMenuDelegate>
@@ -479,7 +480,11 @@
 			[self.navigationController pushViewController:trackListVC animated:YES];
 		}
 		break;
-			
+		
+		case 2:{
+			RecordViewController *recordVC = [[RecordViewController alloc] init];
+			[self.navigationController pushViewController:recordVC animated:YES];
+		}
 		default:
 			break;
 	}

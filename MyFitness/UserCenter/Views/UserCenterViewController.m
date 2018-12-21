@@ -20,6 +20,7 @@
 #import "BodyDataViewController.h"
 #import "TransportModeEnum.h"
 #import "TrackListViewController.h"
+#import "RecordViewController.h"
 
 @interface UserCenterViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -120,6 +121,11 @@
 	[self.navigationController pushViewController:listVC animated:YES];
 }
 
+- (void)openRecordView{
+	RecordViewController *recordVC = [[RecordViewController alloc] init];
+	[self.navigationController pushViewController:recordVC animated:YES];
+}
+
 - (void)openBodyDataView{
 	BodyDataViewController *bodyVC = [[BodyDataViewController alloc] init];
 	[self.navigationController pushViewController:bodyVC animated:YES];
@@ -176,14 +182,15 @@
 		}
 		else{
 			RecordTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recordCell" forIndexPath:indexPath];
+			__weak typeof(self) weakSelf = self;
 			cell.walkingRecView.actionBlock = ^{
-				[self openTrackListViewWithMode:TransportModeWalking];
+				[weakSelf openTrackListViewWithMode:TransportModeWalking];
 			};
 			cell.runRecView.actionBlock = ^{
-				[self openTrackListViewWithMode:TransportModeRunning];
+				[weakSelf openTrackListViewWithMode:TransportModeRunning];
 			};
 			cell.rideRecView.actionBlock = ^{
-				[self openTrackListViewWithMode:TransportModeRiding];
+				[weakSelf openTrackListViewWithMode:TransportModeRiding];
 			};
 			return cell;
 		}
@@ -252,6 +259,9 @@
 	}
 	else if (indexPath.section == 1){
 		switch (indexPath.row) {
+			case 0:
+			[self openRecordView];
+			break;
 			case 1:
 			[self openBodyDataView];
 			break;
