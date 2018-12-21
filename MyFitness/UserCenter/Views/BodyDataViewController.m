@@ -101,7 +101,6 @@
     [super viewDidLoad];
 	
 	self.title = @"身体数据";
-	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithUIColor:UIColor.whiteColor] forBarMetrics:UIBarMetricsDefault];
 	
 	[self initDataTableView];
 	

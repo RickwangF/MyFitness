@@ -3,21 +3,27 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "__49-[TrackDetailViewController onQueryHistoryTrack:]_block_invoke.443:TrackDetailViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[TrackDetailViewController viewDidAppear:]:TrackDetailViewController.m">
+         contextName = "-[ShadowCircleButton setShadow]:ShadowCircleButton.m">
          <PersistentStrings>
             <PersistentString
-               value = "subViewControllers.count">
+               value = "self.bounds;">
+            </PersistentString>
+            <PersistentString
+               value = "self.backgroundColor">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[TrackDetailViewController onQueryHistoryTrack:]:TrackDetailViewController.m">
+         contextName = "-[BodyDataViewController openAgePickerViewWithAgeString:]:BodyDataViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__47-[RecordViewController getLast7DaysTrackRecord]_block_invoke:RecordViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[RecordViewController getLastSevenDaysRecord]:RecordViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.locationArray">
+               value = "_last7DayRecords.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -30,16 +36,38 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[TrackDetailViewController viewDidAppear:]:TrackDetailViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "subViewControllers.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__49-[TrackDetailViewController onQueryHistoryTrack:]_block_invoke.445:TrackDetailViewController.m">
       </ContextState>
       <ContextState
-         contextName = "-[ShadowCircleButton setShadow]:ShadowCircleButton.m">
+         contextName = "-[RecordViewController constructLastSevenDaysData]:RecordViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.bounds;">
+               value = "[_dayArray[i] doubleValue]">
             </PersistentString>
             <PersistentString
-               value = "self.backgroundColor">
+               value = "sevenDaysRecord">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[RecordViewController constructTimeSpan]:RecordViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__49-[TrackDetailViewController onQueryHistoryTrack:]_block_invoke.443:TrackDetailViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[TrackDetailViewController onQueryHistoryTrack:]:TrackDetailViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.locationArray">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

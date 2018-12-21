@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AppStyleSetting : NSObject
 	
 @property (nonatomic, strong) UIColor *naviBarTintColor;
+
+@property (nonatomic, strong) UIColor *homeNaviBarTintColor;
 	
 @property (nonatomic, strong) UIColor *naviTintColor;
 	
@@ -40,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIColor *counterBottomBgColor;
 
 @property (nonatomic, strong) UIColor *themeTextColor;
+
+@property (nonatomic, strong) UIColor *last7DaysColor;
  
 +(AppStyleSetting*)sharedInstance;
 

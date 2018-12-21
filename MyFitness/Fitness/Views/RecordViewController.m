@@ -78,7 +78,9 @@
 	
 	[self constructTimeSpan];
 	
-	[self getLast7DaysTrackRecord];
+	[self initLastSevenDaysView];
+	
+	[self getAllMyTrackRecords];
     // Do any additional setup after loading the view.
 }
 
@@ -109,6 +111,55 @@
 	}];
 }
 
+- (void)initLastSevenDaysView{
+	_last7DaysView = [[BarChartView alloc] initWithFrame:CGRectMake(0, 0, 350, 260)];
+	_last7DaysView.backgroundColor = AppStyleSetting.sharedInstance.viewBgColor;
+	_last7DaysView.chartDescription.enabled = NO;
+	_last7DaysView.drawGridBackgroundEnabled = NO;
+	_last7DaysView.dragEnabled = YES;
+	[_last7DaysView setScaleEnabled:YES];
+	_last7DaysView.pinchZoomEnabled = NO;
+	_last7DaysView.rightAxis.enabled = NO;
+	_last7DaysView.drawBarShadowEnabled = NO;
+	_last7DaysView.drawValueAboveBarEnabled = YES;
+	_last7DaysView.maxVisibleCount = 7;
+	_last7DaysView.layer.cornerRadius = 5.0;
+	_last7DaysView.layer.masksToBounds = YES;
+	
+	NSNumberFormatter *yAxisFormatter = [[NSNumberFormatter alloc] init];
+	yAxisFormatter.minimumFractionDigits = 0;
+	yAxisFormatter.maximumFractionDigits = 0;
+	yAxisFormatter.negativeSuffix = @"km";
+	yAxisFormatter.positiveSuffix = @"km";
+	
+	ChartXAxis *xAxis = _last7DaysView.xAxis;
+	xAxis.labelPosition = XAxisLabelPositionBottom;
+	xAxis.labelFont = [UIFont systemFontOfSize:12];
+	xAxis.drawGridLinesEnabled = NO;
+	xAxis.granularity = 1;
+	xAxis.labelCount = 7;
+	xAxis.valueFormatter = [[ChartDefaultAxisValueFormatter alloc] initWithDecimals:0];
+	
+	ChartYAxis *yAxis = _last7DaysView.leftAxis;
+	yAxis.enabled = YES;
+	yAxis.drawGridLinesEnabled = NO;
+	yAxis.labelFont = [UIFont systemFontOfSize:12];
+	yAxis.labelCount = 8;
+	yAxis.valueFormatter = [[ChartDefaultAxisValueFormatter alloc] initWithFormatter:yAxisFormatter];
+	yAxis.labelPosition = YAxisLabelPositionOutsideChart;
+	yAxis.spaceTop = 0.1;
+	yAxis.axisMinimum = 0;
+	
+	[self.mainScrollView addSubview:_last7DaysView];
+	[_last7DaysView mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.equalTo(self.mainScrollView).offset(20);
+		make.left.equalTo(self.mainScrollView).offset(20);
+		make.right.equalTo(self.mainScrollView).offset(-20);
+		make.width.equalTo(@(self.view.frame.size.width - 40));
+		make.height.equalTo(@260);
+	}];
+}
+
 #pragma mark - Action
 
 - (void)constructTimeSpan{
@@ -117,22 +168,59 @@
 	NSDate *todayEarly = [calendar dateFromComponents:components];
 	_today = [todayEarly dateByAddingTimeInterval:(23*60*60+59*60+59)];
 	_last7Day = [todayEarly dateByAddingTimeInterval:-(6*24*60*60)];
-	for (int i=6; i>=1; i--) {
+	NSDateFormatter *format = [[NSDateFormatter alloc] init];
+	format.dateFormat = @"dd";
+	for (int i=6; i>=0; i--) {
 		@autoreleasepool {
 			NSDate *date = [todayEarly dateByAddingTimeInterval:(-i * (24*60*60))];
-			[_dayArray addObject:date];
+			NSInteger day = [[format stringFromDate:date] integerValue];
+			[_dayArray addObject:@(day)];
 		}
 	}
-	[_dayArray addObject:todayEarly];
+}
+
+- (void)constructLastSevenDaysData{
+
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.finishedTime <= %@ && SELF.startTime >= %@", _today, _last7Day];
+	NSArray* last7DayRecords = [_trackArray filteredArrayUsingPredicate:predicate];
+	NSDate *beginDate = _last7Day;
+	NSMutableArray *sevenDaysRecord = [[NSMutableArray alloc] init];
+	for (int i = 0; i<=6; i++) {
+		@autoreleasepool {
+			NSTimeInterval interval = 24*60*60;
+			NSDate *endDate = [beginDate dateByAddingTimeInterval:interval];
+			NSPredicate *predication = [NSPredicate predicateWithFormat:@"SELF.finishedTime <= %@ && SELF.startTime >= %@", endDate, beginDate];
+			NSArray *recordArray = [last7DayRecords filteredArrayUsingPredicate:predication];
+			double mileage = 0;
+			if (recordArray != nil && recordArray.count > 0) {
+				for (TrackRecord *record in recordArray) {
+					mileage += record.mileage;
+				}
+			}
+			mileage = [[NSString stringWithFormat:@"%.1f", mileage / 1000] doubleValue];
+			BarChartDataEntry *entry = [[BarChartDataEntry alloc] initWithX:[_dayArray[i] doubleValue] y:mileage];
+			[sevenDaysRecord addObject:entry];
+			beginDate = endDate;
+		}
+	}
+	
+	BarChartDataSet *dataSet = [[BarChartDataSet alloc] initWithValues:sevenDaysRecord label:@"里程"];
+	[dataSet setColor:AppStyleSetting.sharedInstance.last7DaysColor];
+	dataSet.drawIconsEnabled = NO;
+	
+	NSMutableArray *dataSets = [[NSMutableArray alloc] initWithObjects:dataSet, nil];
+	
+	BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
+	[data setValueFont: [UIFont systemFontOfSize:10]];
+	data.barWidth = 0.5;
+	_last7DaysView.data = data;
 }
 
 #pragma mark - Request
 
-- (void)getLast7DaysTrackRecord{
+- (void)getAllMyTrackRecords{
 	AVQuery *query = [AVQuery queryWithClassName:@"TrackRecord"];
 	[query whereKey:@"user" equalTo:[AVUser currentUser]];
-	[query whereKey:@"startTime" greaterThanOrEqualTo:_last7Day];
-	[query whereKey:@"finishedTime" lessThanOrEqualTo:_today];
 	
 	[query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
 		if (error != nil) {
@@ -149,6 +237,8 @@
 					TrackRecord *track = [TrackRecord trackWithDictionary:dic];
 					[self.trackArray addObject:track];
 				}
+				
+				[self constructLastSevenDaysData];
 			}
 		}
 	}];

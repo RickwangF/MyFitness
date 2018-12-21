@@ -18,7 +18,8 @@ static AppStyleSetting *sharedInstance;
 	dispatch_once(&onceToken, ^{
 		if (sharedInstance == nil) {
 			sharedInstance = [[AppStyleSetting alloc] init];
-			sharedInstance.naviBarTintColor = [UIColor colorWithHexString:@"#ffe617"];
+			sharedInstance.naviBarTintColor = UIColor.whiteColor;
+			sharedInstance.homeNaviBarTintColor = [UIColor colorWithHexString:@"#ffe617"];
 			sharedInstance.naviTintColor = UIColor.blackColor;
 			sharedInstance.viewBgColor = UIColor.whiteColor;
 			sharedInstance.lightGrayViewBgColor = [UIColor colorWithHexString:@"#f1f1f1"];
@@ -32,6 +33,7 @@ static AppStyleSetting *sharedInstance;
 			sharedInstance.wideSeparatorColor = [UIColor colorWithHexString:@"f1f1f1"];
 			sharedInstance.counterBottomBgColor = [UIColor colorWithHexString:@"#1e293d"];
 			sharedInstance.themeTextColor = [UIColor colorWithHexString:@"#f0c800"];
+			sharedInstance.last7DaysColor = [UIColor colorWithHexString:@"#32d882"];
 		}
 	});
 	return sharedInstance;

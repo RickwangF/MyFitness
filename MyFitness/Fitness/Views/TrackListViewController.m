@@ -103,7 +103,6 @@
 	
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
 	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithUIColor:UIColor.whiteColor] forBarMetrics:UIBarMetricsDefault];
 	
 	[self initDropdownMenu];

@@ -33,6 +33,7 @@
 #import "NavigationViewController.h"
 #import "UserCenterViewController.h"
 #import "RecordViewController.h"
+#import "UIImage+UIColor.h"
 
 
 @interface HomeViewController ()<BMKMapViewDelegate, BMKLocationManagerDelegate, SubViewControllerDelegate, CAPSPageMenuDelegate>
@@ -104,6 +105,7 @@
     
 - (void)viewDidLoad {
     [super viewDidLoad];
+	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithUIColor:AppStyleSetting.sharedInstance.homeNaviBarTintColor] forBarMetrics:UIBarMetricsDefault];
 	
 	[self initTitleView];
 	
@@ -216,7 +218,7 @@
 
 - (void)initModeControl{
 	_controlContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
-	_controlContainerView.backgroundColor = AppStyleSetting.sharedInstance.naviBarTintColor;
+	_controlContainerView.backgroundColor = AppStyleSetting.sharedInstance.homeNaviBarTintColor;
 	[self.view addSubview:_controlContainerView];
 	
 	[_controlContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -232,7 +234,7 @@
 	_modeControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
 	_modeControl.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	[_modeControl setSectionTitles:@[@"健走", @"跑步", @"骑行"]];
-	_modeControl.backgroundColor = AppStyleSetting.sharedInstance.naviBarTintColor;
+	_modeControl.backgroundColor = AppStyleSetting.sharedInstance.homeNaviBarTintColor;
 	_modeControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
 	_modeControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe;
 	_modeControl.selectionIndicatorColor = AppStyleSetting.sharedInstance.textColor;
