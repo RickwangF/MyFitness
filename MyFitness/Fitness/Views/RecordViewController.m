@@ -353,7 +353,6 @@
 	yAxis.drawGridLinesEnabled = YES;
 	yAxis.gridColor = AppStyleSetting.sharedInstance.wideSeparatorColor;
 	yAxis.labelFont = [UIFont systemFontOfSize:12];
-	yAxis.labelCount = 4;
 	yAxis.valueFormatter = [[ChartDefaultAxisValueFormatter alloc] initWithFormatter:yAxisFormatter];
 	yAxis.labelPosition = YAxisLabelPositionOutsideChart;
 	yAxis.axisMinimum = 0;
