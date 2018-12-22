@@ -237,7 +237,6 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
 	[BMKMapView enableCustomMapStyle:YES];
-//	[self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -295,7 +294,7 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 	_backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
 	_backBtn.layer.cornerRadius = 20;
 	_backBtn.backgroundColor = [UIColor colorWithHexString:@"#d7d7d7"];
-	[_backBtn setImage:[UIImage imageNamed:@"left_25#00"] forState:UIControlStateNormal];
+	[_backBtn setImage:[UIImage imageNamed:@"left_22#00"] forState:UIControlStateNormal];
 	[_backBtn addTarget:self action:@selector(backBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_backBtn];
 }

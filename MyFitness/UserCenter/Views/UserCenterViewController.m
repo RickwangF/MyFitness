@@ -178,6 +178,7 @@
 			AvatarTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"avatarCell" forIndexPath:indexPath];
 			cell.avatarImageView.image = [UIImage imageNamed:@"user_65#ff"];
 			cell.loginNameLabel.text = _user.username;
+			cell.selectionStyle = UITableViewCellSelectionStyleNone;
 			return cell;
 		}
 		else{

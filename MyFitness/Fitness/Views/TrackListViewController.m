@@ -23,6 +23,7 @@
 #import "MyFitness-Swift.h"
 #import "RightImageButton.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "RecordViewController.h"
 
 /*
  里程页面的数据按照“年-月”组成的键分类，存储在字典中，有多少个“年-月”的组合就有多少个section
@@ -104,6 +105,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithUIColor:UIColor.whiteColor] forBarMetrics:UIBarMetricsDefault];
+	
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"record_25#00"] style:UIBarButtonItemStylePlain target:self action:@selector(openRecordView:)];
 	
 	[self initDropdownMenu];
 	
@@ -282,6 +285,11 @@
 - (void)dropdownBtnClicked:(UIButton*)sender{
 	[_dropdownBtn rotateImageView];
 	[_dropdownMenu showMenu];
+}
+
+- (void)openRecordView:(UIBarButtonItem*)sender{
+	RecordViewController *recordVC = [[RecordViewController alloc] init];
+	[self.navigationController pushViewController:recordVC animated:YES];
 }
 
 - (void)constructTrackDictionary{
