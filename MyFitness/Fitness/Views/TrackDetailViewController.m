@@ -263,8 +263,10 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 
 - (void)dealloc
 {
-	[_timer invalidate];
-	_timer = nil;
+	if (_timer) {
+		[_timer invalidate];
+		_timer = nil;
+	}
 }
 	
 #pragma mark - Init Views

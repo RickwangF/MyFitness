@@ -20,6 +20,7 @@ static AppStyleSetting *sharedInstance;
 			sharedInstance = [[AppStyleSetting alloc] init];
 			sharedInstance.naviBarTintColor = UIColor.whiteColor;
 			sharedInstance.homeNaviBarTintColor = [UIColor colorWithHexString:@"#ffe617"];
+			sharedInstance.homeStepperColor = [UIColor colorWithHexString:@"#424242"];
 			sharedInstance.naviTintColor = UIColor.blackColor;
 			sharedInstance.viewBgColor = UIColor.whiteColor;
 			sharedInstance.lightGrayViewBgColor = [UIColor colorWithHexString:@"#f1f1f1"];

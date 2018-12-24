@@ -34,6 +34,7 @@
 #import "UserCenterViewController.h"
 #import "MyRecordViewController.h"
 #import "UIImage+UIColor.h"
+#import "DistanceStepperView.h"
 
 
 @interface HomeViewController ()<BMKMapViewDelegate, BMKLocationManagerDelegate, SubViewControllerDelegate, CAPSPageMenuDelegate>
@@ -52,6 +53,8 @@
 
 @property (nonatomic, strong) UIButton *muteBtn;
 
+@property (nonatomic, strong) DistanceStepperView *stepper;
+
 @property (nonatomic, strong) BMKLocationManager *locationManager;
     
 @property (nonatomic, strong) BMKUserLocation *userLocation;
@@ -61,6 +64,8 @@
 @property (nonatomic, assign) BOOL needRefreshMap;
 
 @property (nonatomic, assign) BOOL mute;
+
+@property (nonatomic, assign) BOOL showStepper;
 
 @end
 
@@ -80,6 +85,7 @@
     _transportMode = TransportModeWalking;
 	_needRefreshMap = NO;
 	_mute = NO;
+	_showStepper = NO;
     NSString *path = [[NSBundle mainBundle] pathForResource:@"map_config.json" ofType:@""];
     [BMKMapView customMapStyle:path];
 }
@@ -124,6 +130,8 @@
 	[self updateLocationViewParam];
 	
 	[self initModeControl];
+	
+	[self initStepper];
 	
 	[self initStartBtn];
 	
@@ -216,7 +224,7 @@
     displayParam.isAccuracyCircleShow = NO;
     displayParam.locationViewOffsetX = 0;
     displayParam.locationViewOffsetY = 0;
-    displayParam.locationViewImgName = @"bnavi_icon_location_fixed";
+    displayParam.locationViewImgName = @"dot_25#42";
     [self.mapView updateLocationViewWithParam:displayParam];
 }
 
@@ -272,6 +280,19 @@
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:bottomContainerView];
 }
 
+- (void)initStepper{
+	_stepper = [[DistanceStepperView alloc] initWithFrame:CGRectMake(0, 0, 250, 110)];
+	_stepper.hidden = YES;
+	[self.view addSubview:_stepper];
+	
+	[_stepper mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.equalTo(self.controlContainerView.mas_bottom).offset(70);
+		make.centerX.equalTo(self.view);
+		make.height.equalTo(@110);
+		make.width.equalTo(@250);
+	}];
+}
+
 - (void)initStartBtn{
 	_startBtn = [[ShadowCircleButton alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
 	_startBtn.backgroundColor = AppStyleSetting.sharedInstance.mainColor;
@@ -298,6 +319,7 @@
 	_setBtn.layer.shadowOffset = CGSizeMake(0, 15);
 	_setBtn.layer.shadowOpacity = 0.8;
 	_setBtn.layer.shadowRadius = 15;
+	[_setBtn addTarget:self action:@selector(setBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:_setBtn];
 	
 	[_setBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -435,6 +457,16 @@
 	}
 	else{
 		[_muteBtn setImage:[UIImage imageNamed:@"voice_27#42"] forState:UIControlStateNormal];
+	}
+}
+
+- (void)setBtnClicked:(UIButton*)sender{
+	_showStepper = !_showStepper;
+	if (_showStepper) {
+		_stepper.hidden = NO;
+	}
+	else{
+		_stepper.hidden = YES;
 	}
 }
     

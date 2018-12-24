@@ -126,8 +126,10 @@ BOOL triggerFlag = NO;
 
 - (void)dealloc
 {
-	[_timer invalidate];
-	_timer = nil;
+	if (_timer) {
+		[_timer invalidate];
+		_timer = nil;
+	}
 }
 
 /*

@@ -96,6 +96,7 @@
 		0FE8B15F21D06DB000AF75A4 /* AAOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B13F21D06DB000AF75A4 /* AAOptions.m */; };
 		0FE8B16021D06DB000AF75A4 /* AASeriesElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B14021D06DB000AF75A4 /* AASeriesElement.m */; };
 		0FE8B16721D0AF8200AF75A4 /* start.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B16621D0AF8200AF75A4 /* start.m4a */; };
+		0FE8B16C21D0D05500AF75A4 /* DistanceStepperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B16B21D0D05500AF75A4 /* DistanceStepperView.m */; };
 		0FED06CA21C743A7000D41AC /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FED06C921C743A7000D41AC /* NavigationViewController.m */; };
 		0FED06CD21C7963C000D41AC /* MKDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FED06CB21C7963C000D41AC /* MKDropdownMenu.m */; };
 		0FED06CF21C7C07E000D41AC /* DropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FED06CE21C7C07E000D41AC /* DropDownMenu.swift */; };
@@ -285,6 +286,8 @@
 		0FE8B14221D06DB000AF75A4 /* AAChartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAChartModel.h; sourceTree = "<group>"; };
 		0FE8B16121D06EAD00AF75A4 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		0FE8B16621D0AF8200AF75A4 /* start.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = start.m4a; sourceTree = "<group>"; };
+		0FE8B16A21D0D05500AF75A4 /* DistanceStepperView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DistanceStepperView.h; sourceTree = "<group>"; };
+		0FE8B16B21D0D05500AF75A4 /* DistanceStepperView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DistanceStepperView.m; sourceTree = "<group>"; };
 		0FED06C821C743A7000D41AC /* NavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		0FED06C921C743A7000D41AC /* NavigationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
 		0FED06CB21C7963C000D41AC /* MKDropdownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDropdownMenu.m; sourceTree = "<group>"; };
@@ -435,6 +438,8 @@
 				0FED06CE21C7C07E000D41AC /* DropDownMenu.swift */,
 				0FA2A57B21C897B10035B333 /* RightImageButton.h */,
 				0FA2A57C21C897B10035B333 /* RightImageButton.m */,
+				0FE8B16A21D0D05500AF75A4 /* DistanceStepperView.h */,
+				0FE8B16B21D0D05500AF75A4 /* DistanceStepperView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -878,6 +883,7 @@
 				0F2AB5B321BDFC42006FB503 /* UIColor+UIColor_Hex.m in Sources */,
 				0F2AB5CA21BE0ECA006FB503 /* UIViewController+topVC.m in Sources */,
 				0FA2A58021C9D3040035B333 /* UserCenterViewController.m in Sources */,
+				0FE8B16C21D0D05500AF75A4 /* DistanceStepperView.m in Sources */,
 				0F2AB5B021BDFC42006FB503 /* NSDate+NSString.m in Sources */,
 				0FE8B14D21D06DB000AF75A4 /* AASubtitle.m in Sources */,
 				0F37103021C101B000C334C8 /* ButtonItemView.m in Sources */,

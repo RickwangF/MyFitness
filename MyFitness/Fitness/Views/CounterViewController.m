@@ -23,6 +23,18 @@
 #import "UIColor+UIColor_Hex.h"
 #import "UIDevice+Type.h"
 
+typedef NS_ENUM(NSInteger, AlertTypeEnum){
+	AlertTypeEnumStart = 0,
+	AlertTypeEnumPause,
+	AlertTypeEnumResume,
+	AlertTypeEnumOneKilo,
+	AlertTypeEnumTwoKilo,
+	AlertTypeEnumThreeKilo,
+	AlertTypeEnumFourKilo,
+	AlertTypeEnumFiveKilo,
+	AlertTypeEnumStop
+};
+
 @interface CounterViewController ()<BTKTraceDelegate, BMKLocationManagerDelegate, AVAudioPlayerDelegate>
 
 @property (nonatomic, strong) UIButton *backBtn;
@@ -217,6 +229,17 @@
 - (void)viewWillDisappear:(BOOL)animated{
 	[super viewWillDisappear:animated];
 	[self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
+}
+
+- (void)dealloc
+{
+	if (_timer) {
+		[_timer invalidate];
+		_timer = nil;
+	}
+	if (_player) {
+		_player = nil;
+	}
 }
 	
 #pragma mark - Animation
@@ -577,6 +600,92 @@
 - (void)refreshDisplayData{
 	_distanceLabel.text = [NSString stringWithFormat:@"%.2f", _distance / 1000];
 	_speedLabel.text = [NSString stringWithFormat:@"%.1f", _speed];
+}
+
+- (void)playVoiceAlertWithType:(AlertTypeEnum)type{
+	switch (type) {
+		case AlertTypeEnumStart:{
+			NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
+			NSURL *url = [NSURL fileURLWithPath:path];
+			_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+			[self configPlayer];
+			[_player play];
+		}
+		break;
+		case AlertTypeEnumPause:{
+			NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
+			NSURL *url = [NSURL fileURLWithPath:path];
+			_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+			[self configPlayer];
+			[_player play];
+		}
+		break;
+		case AlertTypeEnumResume:{
+			NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
+			NSURL *url = [NSURL fileURLWithPath:path];
+			_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+			[self configPlayer];
+			[_player play];
+		}
+		break;
+		case AlertTypeEnumOneKilo:{
+			NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
+			NSURL *url = [NSURL fileURLWithPath:path];
+			_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+			[self configPlayer];
+			[_player play];
+		}
+		break;
+		case AlertTypeEnumTwoKilo:{
+			NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
+			NSURL *url = [NSURL fileURLWithPath:path];
+			_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+			[self configPlayer];
+			[_player play];
+		}
+		break;
+		case AlertTypeEnumThreeKilo:{
+			NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
+			NSURL *url = [NSURL fileURLWithPath:path];
+			_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+			[self configPlayer];
+			[_player play];
+		}
+		break;
+		case AlertTypeEnumFourKilo:{
+			NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
+			NSURL *url = [NSURL fileURLWithPath:path];
+			_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+			[self configPlayer];
+			[_player play];
+		}
+		break;
+		case AlertTypeEnumFiveKilo:{
+			NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
+			NSURL *url = [NSURL fileURLWithPath:path];
+			_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+			[self configPlayer];
+			[_player play];
+		}
+		break;
+		case AlertTypeEnumStop:{
+			NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
+			NSURL *url = [NSURL fileURLWithPath:path];
+			_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+			[self configPlayer];
+			[_player play];
+		}
+		break;
+		default:
+		break;
+	}
+}
+
+- (void)configPlayer{
+	_player.volume = 1.0;
+	_player.rate = 1.0;
+	_player.numberOfLoops = 0;
+	[_player prepareToPlay];
 }
 	
 #pragma mark - BMKLocationManagerDelegate

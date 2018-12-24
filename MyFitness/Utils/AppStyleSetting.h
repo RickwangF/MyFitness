@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIColor *naviBarTintColor;
 
 @property (nonatomic, strong) UIColor *homeNaviBarTintColor;
+
+@property (nonatomic, strong) UIColor *homeStepperColor;
 	
 @property (nonatomic, strong) UIColor *naviTintColor;
 	
