@@ -60,6 +60,8 @@
 
 @property (nonatomic, assign) BOOL needRefreshMap;
 
+@property (nonatomic, assign) BOOL mute;
+
 @end
 
 @implementation HomeViewController
@@ -77,6 +79,7 @@
 - (void)initValueProperty{
     _transportMode = TransportModeWalking;
 	_needRefreshMap = NO;
+	_mute = NO;
     NSString *path = [[NSBundle mainBundle] pathForResource:@"map_config.json" ofType:@""];
     [BMKMapView customMapStyle:path];
 }
@@ -202,7 +205,7 @@
 			make.bottom.equalTo(self.view).offset(45);
 		}
 		else{
-			make.bottom.equalTo(self.view).offset(20);
+			make.bottom.equalTo(self.view).offset(25);
 		}
     }];
 }
@@ -308,11 +311,12 @@
 	_muteBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 55, 55)];
 	_muteBtn.backgroundColor = UIColor.whiteColor;
 	_muteBtn.layer.cornerRadius = 27.5;
-	[_muteBtn setImage:[UIImage imageNamed:@"mute_27#42"] forState:UIControlStateNormal];
+	[_muteBtn setImage:[UIImage imageNamed:@"voice_27#42"] forState:UIControlStateNormal];
 	_muteBtn.layer.shadowColor = UIColor.lightGrayColor.CGColor;
 	_muteBtn.layer.shadowOffset = CGSizeMake(0, 15);
 	_muteBtn.layer.shadowOpacity = 0.8;
 	_muteBtn.layer.shadowRadius = 15;
+	[_muteBtn addTarget:self action:@selector(muteBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:_muteBtn];
 	
 	[_muteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -420,8 +424,18 @@
 		return;
 	}
 	
-	CounterViewController *counterVC = [[CounterViewController alloc] initWithTransportMode:_transportMode];
+	CounterViewController *counterVC = [[CounterViewController alloc] initWithTransportMode:_transportMode Mute:_mute];
 	[self.navigationController pushViewController:counterVC animated:YES];
+}
+
+- (void)muteBtnClicked:(UIButton*)sender{
+	_mute = !_mute;
+	if (_mute){
+		[_muteBtn setImage:[UIImage imageNamed:@"mute_27#42"] forState:UIControlStateNormal];
+	}
+	else{
+		[_muteBtn setImage:[UIImage imageNamed:@"voice_27#42"] forState:UIControlStateNormal];
+	}
 }
     
 #pragma mark - BMKMapViewDelegate

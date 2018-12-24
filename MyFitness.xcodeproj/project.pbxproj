@@ -95,6 +95,7 @@
 		0FE8B15E21D06DB000AF75A4 /* AAChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B13D21D06DB000AF75A4 /* AAChartModel.m */; };
 		0FE8B15F21D06DB000AF75A4 /* AAOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B13F21D06DB000AF75A4 /* AAOptions.m */; };
 		0FE8B16021D06DB000AF75A4 /* AASeriesElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B14021D06DB000AF75A4 /* AASeriesElement.m */; };
+		0FE8B16721D0AF8200AF75A4 /* start.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B16621D0AF8200AF75A4 /* start.m4a */; };
 		0FED06CA21C743A7000D41AC /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FED06C921C743A7000D41AC /* NavigationViewController.m */; };
 		0FED06CD21C7963C000D41AC /* MKDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FED06CB21C7963C000D41AC /* MKDropdownMenu.m */; };
 		0FED06CF21C7C07E000D41AC /* DropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FED06CE21C7C07E000D41AC /* DropDownMenu.swift */; };
@@ -283,6 +284,7 @@
 		0FE8B14121D06DB000AF75A4 /* AAChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAChartView.h; sourceTree = "<group>"; };
 		0FE8B14221D06DB000AF75A4 /* AAChartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAChartModel.h; sourceTree = "<group>"; };
 		0FE8B16121D06EAD00AF75A4 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		0FE8B16621D0AF8200AF75A4 /* start.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = start.m4a; sourceTree = "<group>"; };
 		0FED06C821C743A7000D41AC /* NavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		0FED06C921C743A7000D41AC /* NavigationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
 		0FED06CB21C7963C000D41AC /* MKDropdownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDropdownMenu.m; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 		0F2AB59621BDFA89006FB503 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				0FE8B16921D0BE3D00AF75A4 /* Audio */,
 				0F2AB5D721BE42C1006FB503 /* SubViewControllerDelegate.h */,
 				0F2AB5D121BE3B86006FB503 /* AppStyleSetting.h */,
 				0F2AB5D221BE3B86006FB503 /* AppStyleSetting.m */,
@@ -622,6 +625,14 @@
 			path = pch;
 			sourceTree = "<group>";
 		};
+		0FE8B16921D0BE3D00AF75A4 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				0FE8B16621D0AF8200AF75A4 /* start.m4a */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
 		4FD9314DA91C4A30D1FBBF63 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -716,6 +727,7 @@
 				0F6FD03321CA1BB80083D590 /* DescriptionHeaderView.xib in Resources */,
 				0F2AB5CF21BE326B006FB503 /* map_config.json in Resources */,
 				0FA2EA1421C339C100A3DC4E /* SummaryTableCell.xib in Resources */,
+				0FE8B16721D0AF8200AF75A4 /* start.m4a in Resources */,
 				0F2AB57821BDF1FF006FB503 /* Assets.xcassets in Resources */,
 				0FA2EA1921C340ED00A3DC4E /* MonthSectionHeader.xib in Resources */,
 				0FA2A58521C9D4870035B333 /* AvatarTableCell.xib in Resources */,

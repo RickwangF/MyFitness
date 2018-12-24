@@ -7,6 +7,7 @@
 //
 
 #import "CounterViewController.h"
+#import <AVFoundation/AVFoundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import <BMKLocationkit/BMKLocationComponent.h>
 #import <BaiduMapAPI_Utils/BMKGeometry.h>
@@ -22,7 +23,7 @@
 #import "UIColor+UIColor_Hex.h"
 #import "UIDevice+Type.h"
 
-@interface CounterViewController ()<BTKTraceDelegate, BMKLocationManagerDelegate>
+@interface CounterViewController ()<BTKTraceDelegate, BMKLocationManagerDelegate, AVAudioPlayerDelegate>
 
 @property (nonatomic, strong) UIButton *backBtn;
 
@@ -84,6 +85,10 @@
 @property (nonatomic, assign) CLLocationSpeed speed;
 	
 @property (nonatomic, strong) AVObject *trackRecord;
+
+@property (nonatomic, assign) BOOL mute;
+
+@property (nonatomic, strong) AVAudioPlayer *player;
 	
 @end
 
@@ -95,15 +100,20 @@
 	self = [super initWithNibName:nil bundle:nil];
 	if (self) {
 		_transportMode = TransportModeWalking;
+		_mute = YES;
 		[self initValueProperty];
 	}
 	return self;
 }
 	
-- (instancetype)initWithTransportMode:(TransportModeEnum)mode{
+- (instancetype)initWithTransportMode:(TransportModeEnum)mode Mute:(BOOL)mute{
 	self = [super initWithNibName:nil bundle:nil];
 	if (self) {
 		_transportMode = mode;
+		_mute = mute;
+		if (!_mute) {
+			[self initPlayer];
+		}
 		[self initValueProperty];
 	}
 	return self;
@@ -120,6 +130,16 @@
 	_startDate = [NSDate date];
 	_finishDate = [NSDate new];
 	_speed = 0;
+}
+
+- (void)initPlayer{
+	NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
+	NSURL *url = [NSURL fileURLWithPath:path];
+	_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+	_player.volume = 1.0;
+	_player.rate = 1.0;
+	_player.numberOfLoops = 0;
+	[_player prepareToPlay];
 }
 	
 - (void)initlocationManager{
@@ -187,6 +207,10 @@
 		[_timeCountingLabel start];
 		[_locationManager startUpdatingLocation];
 		[self startService];
+	}
+	
+	if (_player != nil && !_mute) {
+		[_player play];
 	}
 }
 	
