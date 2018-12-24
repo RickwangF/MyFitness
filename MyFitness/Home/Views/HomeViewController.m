@@ -32,7 +32,7 @@
 #import "UIDevice+Type.h"
 #import "NavigationViewController.h"
 #import "UserCenterViewController.h"
-#import "RecordViewController.h"
+#import "MyRecordViewController.h"
 #import "UIImage+UIColor.h"
 
 
@@ -485,7 +485,7 @@
 		break;
 		
 		case 2:{
-			RecordViewController *recordVC = [[RecordViewController alloc] init];
+			MyRecordViewController *recordVC = [[MyRecordViewController alloc] init];
 			[self.navigationController pushViewController:recordVC animated:YES];
 		}
 		default:

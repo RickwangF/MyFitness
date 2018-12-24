@@ -23,7 +23,7 @@
 #import "MyFitness-Swift.h"
 #import "RightImageButton.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "RecordViewController.h"
+#import "MyRecordViewController.h"
 
 /*
  里程页面的数据按照“年-月”组成的键分类，存储在字典中，有多少个“年-月”的组合就有多少个section
@@ -288,7 +288,7 @@
 }
 
 - (void)openRecordView:(UIBarButtonItem*)sender{
-	RecordViewController *recordVC = [[RecordViewController alloc] init];
+	MyRecordViewController *recordVC = [[MyRecordViewController alloc] init];
 	[self.navigationController pushViewController:recordVC animated:YES];
 }
 

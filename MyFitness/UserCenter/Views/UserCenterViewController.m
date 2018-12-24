@@ -20,7 +20,7 @@
 #import "BodyDataViewController.h"
 #import "TransportModeEnum.h"
 #import "TrackListViewController.h"
-#import "RecordViewController.h"
+#import "MyRecordViewController.h"
 
 @interface UserCenterViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -122,7 +122,7 @@
 }
 
 - (void)openRecordView{
-	RecordViewController *recordVC = [[RecordViewController alloc] init];
+	MyRecordViewController *recordVC = [[MyRecordViewController alloc] init];
 	[self.navigationController pushViewController:recordVC animated:YES];
 }
 
