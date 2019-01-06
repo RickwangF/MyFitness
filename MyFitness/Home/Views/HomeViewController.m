@@ -224,7 +224,7 @@
     displayParam.isAccuracyCircleShow = NO;
     displayParam.locationViewOffsetX = 0;
     displayParam.locationViewOffsetY = 0;
-    displayParam.locationViewImgName = @"dot_25#42";
+    displayParam.locationViewImgName = @"dot_28#blue";
     [self.mapView updateLocationViewWithParam:displayParam];
 }
 
