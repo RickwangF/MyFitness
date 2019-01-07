@@ -12,6 +12,7 @@
 #import <Toast/Toast.h>
 #import "AppStyleSetting.h"
 #import "RegisterViewController.h"
+#import "LoginItemView.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 
@@ -24,6 +25,9 @@
 @property (nonatomic, strong) UITextField *passwordTextField;
 @property (nonatomic, strong) UIButton *forgetBtn;
 @property (nonatomic, strong) UIButton *loginBtn;
+@property (nonatomic, strong) LoginItemView *weiboView;
+@property (nonatomic, strong) LoginItemView *weChatView;
+@property (nonatomic, strong) LoginItemView *qqView;
 
 
 @end
@@ -56,6 +60,8 @@
 	[self initBackBtn];
     
     [self initSubViews];
+	
+	[self initThirdPartyLoginView];
     // Do any additional setup after loading the view.
 }
 
@@ -196,6 +202,31 @@
         make.right.equalTo(self.view).offset(-35);
         make.height.equalTo(@50);
     }];
+}
+
+- (void)initThirdPartyLoginView{
+	CGFloat padding = (self.view.bounds.size.width - 135) / 4;
+	_weiboView = [[LoginItemView alloc] initWithFrame:CGRectMake(0, 0, 45, 72)];
+	[_weiboView setTitle:@"微博"];
+	[_weiboView setImage:[UIImage imageNamed:@"weibo"]];
+	[self.view addSubview:_weiboView];
+	
+	_weChatView = [[LoginItemView alloc] initWithFrame:CGRectMake(0, 0, 45, 72)];
+	[_weChatView setTitle:@"微信"];
+	[_weChatView setImage:[UIImage imageNamed:@"wechat"]];
+	[self.view addSubview:_weChatView];
+	
+	_qqView = [[LoginItemView alloc] initWithFrame:CGRectMake(0, 0, 45, 72)];
+	[_qqView setTitle:@"QQ"];
+	[_qqView setImage:[UIImage imageNamed:@"qq"]];
+	[self.view addSubview:_qqView];
+	
+	[@[_weiboView, _weChatView, _qqView] mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.equalTo(self.loginBtn.mas_bottom).offset(75);
+		make.height.equalTo(@72);
+	}];
+	
+	[@[_weiboView, _weChatView, _qqView] mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:padding leadSpacing:padding tailSpacing:padding];
 }
 
 #pragma mark - Actions
