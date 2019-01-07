@@ -103,14 +103,14 @@
         make.height.equalTo(@30);
     }];
 	
-	_registerBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 25)];
+	_registerBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
 	[_registerBtn setTitle:@"注册新用户" forState:UIControlStateNormal];
 	[_registerBtn setTitleColor:[UIColor colorWithRed:76.0/255 green:76.0/255 blue:76.0/255 alpha:1] forState:UIControlStateNormal];
 	_registerBtn.titleLabel.font = [UIFont systemFontOfSize:18];
 	[_registerBtn addTarget:self action:@selector(registerBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:_registerBtn];
 	
-	[self.registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+	[_registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.bottom.equalTo(self.loginLabel);
 		make.right.equalTo(self.view).offset(-30);
 		make.height.equalTo(@20);
@@ -131,12 +131,12 @@
     
     _loginNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
     _loginNameTextField.placeholder = @"手机号或邮箱";
-    _loginNameTextField.keyboardType = UIKeyboardTypePhonePad;
+    _loginNameTextField.keyboardType = UIKeyboardTypeDefault;
     _loginNameTextField.textColor = [UIColor colorWithRed:38.0/255 green:38.0/255 blue:38.0/255 alpha:1];
     _loginNameTextField.backgroundColor = [UIColor colorWithRed:241.0/255 green:241.0/255 blue:241.0/255 alpha:1];
     [_firstContainerView addSubview:_loginNameTextField];
 	
-	[self.loginNameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+	[_loginNameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.top.bottom.equalTo(self.firstContainerView);
 		make.left.equalTo(self.firstContainerView).offset(15);
 		make.right.equalTo(self.firstContainerView).offset(-15);
@@ -156,7 +156,7 @@
 	}];
     
     _passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
-    _passwordTextField.placeholder = @"密码";
+    _passwordTextField.placeholder = @"输入密码";
     if (@available(iOS 11.0, *)) {
         _passwordTextField.textContentType = UITextContentTypePassword;
     }
