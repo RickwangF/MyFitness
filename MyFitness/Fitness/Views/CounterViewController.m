@@ -22,20 +22,9 @@
 #import "TrackDetailViewController.h"
 #import "UIColor+UIColor_Hex.h"
 #import "UIDevice+Type.h"
+#import "IFlyMSC/IFlyMSC.h"
 
-typedef NS_ENUM(NSInteger, AlertTypeEnum){
-	AlertTypeEnumStart = 0,
-	AlertTypeEnumPause,
-	AlertTypeEnumResume,
-	AlertTypeEnumOneKilo,
-	AlertTypeEnumTwoKilo,
-	AlertTypeEnumThreeKilo,
-	AlertTypeEnumFourKilo,
-	AlertTypeEnumFiveKilo,
-	AlertTypeEnumStop
-};
-
-@interface CounterViewController ()<BTKTraceDelegate, BMKLocationManagerDelegate, AVAudioPlayerDelegate>
+@interface CounterViewController ()<BTKTraceDelegate, BMKLocationManagerDelegate, AVAudioPlayerDelegate, IFlySpeechSynthesizerDelegate>
 
 @property (nonatomic, strong) UIButton *backBtn;
 
@@ -101,6 +90,10 @@ typedef NS_ENUM(NSInteger, AlertTypeEnum){
 @property (nonatomic, assign) BOOL mute;
 
 @property (nonatomic, strong) AVAudioPlayer *player;
+
+@property (nonatomic, strong) IFlySpeechSynthesizer *synthesizer;
+
+@property (nonatomic, strong) NSMutableArray *alertIntArray;
 	
 @end
 
@@ -124,7 +117,8 @@ typedef NS_ENUM(NSInteger, AlertTypeEnum){
 		_transportMode = mode;
 		_mute = mute;
 		if (!_mute) {
-			[self initPlayer];
+			//[self initPlayer];
+			[self initSynthesizer];
 		}
 		[self initValueProperty];
 	}
@@ -142,6 +136,7 @@ typedef NS_ENUM(NSInteger, AlertTypeEnum){
 	_startDate = [NSDate date];
 	_finishDate = [NSDate new];
 	_speed = 0;
+	_alertIntArray = [NSMutableArray arrayWithObjects:@1, @2, @3, @4, @5, @6, @7, @8, @9, @10, nil];
 }
 
 - (void)initPlayer{
@@ -152,6 +147,15 @@ typedef NS_ENUM(NSInteger, AlertTypeEnum){
 	_player.rate = 1.0;
 	_player.numberOfLoops = 0;
 	[_player prepareToPlay];
+}
+
+- (void)initSynthesizer{
+	_synthesizer = [IFlySpeechSynthesizer sharedInstance];
+	_synthesizer.delegate = self;
+	[_synthesizer setParameter:[IFlySpeechConstant TYPE_CLOUD] forKey:[IFlySpeechConstant ENGINE_TYPE]];
+	[_synthesizer setParameter:@"100" forKey:[IFlySpeechConstant VOLUME]];
+	[_synthesizer setParameter:@"aisjinger" forKey:[IFlySpeechConstant VOICE_NAME]];
+	[_synthesizer setParameter:nil forKey:[IFlySpeechConstant TTS_AUDIO_PATH]];
 }
 	
 - (void)initlocationManager{
@@ -221,9 +225,13 @@ typedef NS_ENUM(NSInteger, AlertTypeEnum){
 		[self startService];
 	}
 	
-	if (_player != nil && !_mute) {
-		[_player play];
+	if (_synthesizer != nil && !_mute) {
+		[_synthesizer startSpeaking:@"运动开始"];
 	}
+	
+//	if (_player != nil && !_mute) {
+//		[_player play];
+//	}
 }
 	
 - (void)viewWillDisappear:(BOOL)animated{
@@ -549,6 +557,10 @@ typedef NS_ENUM(NSInteger, AlertTypeEnum){
 	[_locationManager stopUpdatingLocation];
 	[self stopGather];
 	
+	if (_synthesizer != nil && !_mute) {
+		[self playVoiceAlertWithType:10000];
+	}
+	
 	[UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
 		self.pauseBtn.alpha = 0;
 		self.resumeBtn.frame = CGRectMake(self.resumeOriginX, self.resumeOriginY, 90, 90);
@@ -566,6 +578,10 @@ typedef NS_ENUM(NSInteger, AlertTypeEnum){
 	[_locationManager startUpdatingLocation];
 	[self startGather];
 	
+	if (_synthesizer != nil && !_mute) {
+		[self playVoiceAlertWithType:20000];
+	}
+	
 	[UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
 		self.pauseBtn.alpha = 1;
 		self.resumeBtn.alpha = 0;
@@ -580,6 +596,11 @@ typedef NS_ENUM(NSInteger, AlertTypeEnum){
 }
 	
 - (void)stopBtnClicked{
+	
+	if (_synthesizer != nil && !_mute) {
+		[self playVoiceAlertWithType:30000];
+	}
+	
 	_finishDate = [NSDate date];
 	[self stopService];
 	[_locationManager stopUpdatingLocation];
@@ -595,6 +616,13 @@ typedef NS_ENUM(NSInteger, AlertTypeEnum){
 	if (pointsDistance > 0) {
 		_distance += pointsDistance;
 	}
+	
+	NSNumber *numDistance = [NSNumber numberWithDouble: round(_distance / 1000)];
+	
+	if (_synthesizer != nil && !_mute && [_alertIntArray containsObject: numDistance]) {
+		[_alertIntArray removeObject:numDistance];
+		[self playVoiceAlertWithType: [numDistance integerValue]];
+	}
 }
 	
 - (void)refreshDisplayData{
@@ -602,82 +630,35 @@ typedef NS_ENUM(NSInteger, AlertTypeEnum){
 	_speedLabel.text = [NSString stringWithFormat:@"%.1f", _speed];
 }
 
-- (void)playVoiceAlertWithType:(AlertTypeEnum)type{
+/*
+ 根据语音提示的类型来播放语音提示
+ 0: 运动开始提示
+ 1～100: 公里整数提示
+ 10000: 运动暂停提示
+ 20000: 运动继续提示
+ 30000: 运动结束提示
+ */
+- (void)playVoiceAlertWithType:(NSInteger)type{
 	switch (type) {
-		case AlertTypeEnumStart:{
-			NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
-			NSURL *url = [NSURL fileURLWithPath:path];
-			_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-			[self configPlayer];
-			[_player play];
-		}
+		case 0:
+			[_synthesizer startSpeaking:@"运动开始"];
 		break;
-		case AlertTypeEnumPause:{
-			NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
-			NSURL *url = [NSURL fileURLWithPath:path];
-			_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-			[self configPlayer];
-			[_player play];
-		}
+		case 10000:
+			[_synthesizer startSpeaking:@"运动暂停"];
 		break;
-		case AlertTypeEnumResume:{
-			NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
-			NSURL *url = [NSURL fileURLWithPath:path];
-			_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-			[self configPlayer];
-			[_player play];
-		}
+		case 20000:
+			[_synthesizer startSpeaking:@"运动继续"];
 		break;
-		case AlertTypeEnumOneKilo:{
-			NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
-			NSURL *url = [NSURL fileURLWithPath:path];
-			_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-			[self configPlayer];
-			[_player play];
-		}
+		case 30000:
+		[_synthesizer startSpeaking:@"运动结束"];
 		break;
-		case AlertTypeEnumTwoKilo:{
-			NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
-			NSURL *url = [NSURL fileURLWithPath:path];
-			_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-			[self configPlayer];
-			[_player play];
-		}
-		break;
-		case AlertTypeEnumThreeKilo:{
-			NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
-			NSURL *url = [NSURL fileURLWithPath:path];
-			_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-			[self configPlayer];
-			[_player play];
-		}
-		break;
-		case AlertTypeEnumFourKilo:{
-			NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
-			NSURL *url = [NSURL fileURLWithPath:path];
-			_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-			[self configPlayer];
-			[_player play];
-		}
-		break;
-		case AlertTypeEnumFiveKilo:{
-			NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
-			NSURL *url = [NSURL fileURLWithPath:path];
-			_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-			[self configPlayer];
-			[_player play];
-		}
-		break;
-		case AlertTypeEnumStop:{
-			NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
-			NSURL *url = [NSURL fileURLWithPath:path];
-			_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-			[self configPlayer];
-			[_player play];
-		}
-		break;
+			
 		default:
-		break;
+			if (_distance / 1000 > 0) {
+				int intDistance = round(_distance / 1000);
+				[_synthesizer startSpeaking:[NSString stringWithFormat:@"%d公里", intDistance]];
+			}
+			break;
 	}
 }
 
@@ -707,6 +688,18 @@ typedef NS_ENUM(NSInteger, AlertTypeEnum){
 	_speed = fabs(_currentLocation.location.speed);
 	[self calculateDistance];
 	[self refreshDisplayData];
+}
+
+#pragma mark - IFlySpeechSynthesizerDelegate
+
+// 语音合成结束
+- (void)onCompleted:(IFlySpeechError *)error{
+	[self.view makeToast:@"说完话了"];
+}
+
+// 语音合成开始
+- (void)onSpeakBegin{
+	[self.view makeToast:@"开始说话啦"];
 }
 	
 /*

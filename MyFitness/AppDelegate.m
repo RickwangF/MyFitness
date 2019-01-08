@@ -18,6 +18,7 @@
 #import "HomeViewController.h"
 #import "UIImage+UIColor.h"
 #import "NavigationViewController.h"
+#import "IFlyMSC/IFlyMSC.h"
 
 @interface AppDelegate ()<BMKLocationAuthDelegate, BMKGeneralDelegate>
     
@@ -45,6 +46,9 @@
     
     [AVOSCloud setApplicationId:AVOSCloudAppID clientKey:AVOSCloudClientKey];
     [AVOSCloud setAllLogsEnabled:YES];
+	
+	NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@", @"5c2228c2"];
+	[IFlySpeechUtility createUtility:initString];
 	
 	[UINavigationBar appearance].translucent = YES;
 	[[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithUIColor:AppStyleSetting.sharedInstance.naviBarTintColor] forBarMetrics:UIBarMetricsDefault];

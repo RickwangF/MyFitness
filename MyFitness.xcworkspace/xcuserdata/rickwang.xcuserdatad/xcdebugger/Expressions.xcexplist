@@ -17,13 +17,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[RecordViewController constructLastSevenDaysData]:RecordViewController.m">
+         contextName = "-[ShadowCircleButton setShadow]:ShadowCircleButton.m">
          <PersistentStrings>
             <PersistentString
-               value = "[_dayArray[i] doubleValue]">
+               value = "self.bounds;">
             </PersistentString>
             <PersistentString
-               value = "sevenDaysRecord">
+               value = "self.backgroundColor">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -36,6 +36,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[RecordViewController constructLastSevenDaysData]:RecordViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[_dayArray[i] doubleValue]">
+            </PersistentString>
+            <PersistentString
+               value = "sevenDaysRecord">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[TrackDetailViewController onQueryHistoryTrack:]:TrackDetailViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -44,13 +55,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[ShadowCircleButton setShadow]:ShadowCircleButton.m">
+         contextName = "-[CounterViewController calculateDistance]:CounterViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.bounds;">
+               value = "[_alertIntArray containsObject: numDistance]">
             </PersistentString>
             <PersistentString
-               value = "self.backgroundColor">
+               value = "numDistance.integerValue">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
