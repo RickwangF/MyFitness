@@ -30,9 +30,9 @@
 
 - (void)setShadow{
 	self.layer.shadowColor = self.backgroundColor.CGColor;
-	self.layer.shadowOffset = CGSizeMake(0, 15);
+	self.layer.shadowOffset = CGSizeMake(0, 5);
 	self.layer.shadowOpacity = 0.8;
-	self.layer.shadowRadius = 15;
+	self.layer.shadowRadius = 8;
 }
 
 @end

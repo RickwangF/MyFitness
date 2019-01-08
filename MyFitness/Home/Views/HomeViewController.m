@@ -86,7 +86,7 @@
 	_needRefreshMap = NO;
 	_mute = NO;
 	_showStepper = NO;
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"map_config.json" ofType:@""];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"custom_map.json" ofType:@""];
     [BMKMapView customMapStyle:path];
 }
 
@@ -316,9 +316,9 @@
 	_setBtn.layer.cornerRadius = 27.5;
 	[_setBtn setImage:[UIImage imageNamed:@"set_27#42"] forState:UIControlStateNormal];
 	_setBtn.layer.shadowColor = UIColor.lightGrayColor.CGColor;
-	_setBtn.layer.shadowOffset = CGSizeMake(0, 15);
+	_setBtn.layer.shadowOffset = CGSizeMake(0, 5);
 	_setBtn.layer.shadowOpacity = 0.8;
-	_setBtn.layer.shadowRadius = 15;
+	_setBtn.layer.shadowRadius = 8;
 	[_setBtn addTarget:self action:@selector(setBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:_setBtn];
 	
@@ -335,9 +335,9 @@
 	_muteBtn.layer.cornerRadius = 27.5;
 	[_muteBtn setImage:[UIImage imageNamed:@"voice_27#42"] forState:UIControlStateNormal];
 	_muteBtn.layer.shadowColor = UIColor.lightGrayColor.CGColor;
-	_muteBtn.layer.shadowOffset = CGSizeMake(0, 15);
+	_muteBtn.layer.shadowOffset = CGSizeMake(0, 5);
 	_muteBtn.layer.shadowOpacity = 0.8;
-	_muteBtn.layer.shadowRadius = 15;
+	_muteBtn.layer.shadowRadius = 8;
 	[_muteBtn addTarget:self action:@selector(muteBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:_muteBtn];
 	
