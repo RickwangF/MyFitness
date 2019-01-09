@@ -198,7 +198,7 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 	_startIndex = 0;
 	_endIndex = 0;
 	_snapRect = CGRectZero;
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"map_config.json" ofType:@""];
+	NSString *path = [[NSBundle mainBundle] pathForResource:@"custom_map.json" ofType:@""];
 	[BMKMapView customMapStyle:path];
 }
 

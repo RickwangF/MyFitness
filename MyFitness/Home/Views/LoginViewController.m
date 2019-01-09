@@ -28,6 +28,7 @@
 @property (nonatomic, strong) LoginItemView *weiboView;
 @property (nonatomic, strong) LoginItemView *weChatView;
 @property (nonatomic, strong) LoginItemView *qqView;
+@property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 
 
 @end
@@ -44,6 +45,11 @@
 	return self;
 }
 
+- (void)initTapGesture{
+	_tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(UIViewTapped:)];
+	[self.view addGestureRecognizer:_tapGesture];
+}
+
 #pragma mark - Lift Circle
 
 - (void)loadView{
@@ -56,6 +62,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+	
+	[self initTapGesture];
 	
 	[self initBackBtn];
     
@@ -130,6 +138,7 @@
 	}];
     
     _loginNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+	_loginNameTextField.delegate = self;
     _loginNameTextField.placeholder = @"手机号或邮箱";
     _loginNameTextField.keyboardType = UIKeyboardTypeDefault;
     _loginNameTextField.textColor = [UIColor colorWithRed:38.0/255 green:38.0/255 blue:38.0/255 alpha:1];
@@ -156,6 +165,7 @@
 	}];
     
     _passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+	_passwordTextField.delegate = self;
     _passwordTextField.placeholder = @"输入密码";
     if (@available(iOS 11.0, *)) {
         _passwordTextField.textContentType = UITextContentTypePassword;
@@ -231,6 +241,10 @@
 
 #pragma mark - Actions
 
+- (void)UIViewTapped:(UITapGestureRecognizer*)sender{
+	[self.view endEditing:YES];
+}
+
 - (void)backBtnClicked:(UIButton*)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -243,8 +257,8 @@
 - (void)loginBtnClicked:(UIButton*)sender{
     [self.view endEditing:YES];
     
-    NSString *loginName = self.loginNameTextField.text;
-    NSString *password = self.passwordTextField.text;
+    NSString *loginName = [self.loginNameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *password = [self.passwordTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if (loginName.length == 0 || [loginName isEqualToString:@""]) {
         [self.view makeToast:@"登录名不能为空"];
@@ -273,8 +287,9 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-    
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+	[textField resignFirstResponder];
+	return YES;
 }
 
 /*

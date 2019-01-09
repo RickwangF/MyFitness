@@ -103,7 +103,7 @@
 		0FED06CD21C7963C000D41AC /* MKDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FED06CB21C7963C000D41AC /* MKDropdownMenu.m */; };
 		0FED06CF21C7C07E000D41AC /* DropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FED06CE21C7C07E000D41AC /* DropDownMenu.swift */; };
 		0FF56B2721E4C95500891498 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F85CE6321E4C527000BDEC6 /* iflyMSC.framework */; };
-		0FF56B2D21E4ECC000891498 /* custom_map.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FF56B2C21E4ECC000891498 /* custom_map.json */; };
+		0FF56B2F21E609C700891498 /* custom_map.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FF56B2E21E609C600891498 /* custom_map.json */; };
 		1D71F247864DED889DD73337 /* Pods_MyFitness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 813B8380172CDC392FFEE040 /* Pods_MyFitness.framework */; };
 /* End PBXBuildFile section */
 
@@ -302,7 +302,7 @@
 		0FED06CB21C7963C000D41AC /* MKDropdownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDropdownMenu.m; sourceTree = "<group>"; };
 		0FED06CC21C7963C000D41AC /* MKDropdownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDropdownMenu.h; sourceTree = "<group>"; };
 		0FED06CE21C7C07E000D41AC /* DropDownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownMenu.swift; sourceTree = "<group>"; };
-		0FF56B2C21E4ECC000891498 /* custom_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = custom_map.json; sourceTree = "<group>"; };
+		0FF56B2E21E609C600891498 /* custom_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = custom_map.json; sourceTree = "<group>"; };
 		59F9445866E2F2A94B5B1C20 /* Pods-MyFitness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFitness.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFitness/Pods-MyFitness.release.xcconfig"; sourceTree = "<group>"; };
 		813B8380172CDC392FFEE040 /* Pods_MyFitness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFitness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDD294776D9E4C7A886FEFC /* Pods-MyFitness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFitness.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFitness/Pods-MyFitness.debug.xcconfig"; sourceTree = "<group>"; };
@@ -325,9 +325,9 @@
 		0F2AB56221BDF1FD006FB503 = {
 			isa = PBXGroup;
 			children = (
+				0FF56B2E21E609C600891498 /* custom_map.json */,
 				0F85CE6321E4C527000BDEC6 /* iflyMSC.framework */,
 				0F2AB5CE21BE326A006FB503 /* map_config.json */,
-				0FF56B2C21E4ECC000891498 /* custom_map.json */,
 				0F2AB59021BDF99F006FB503 /* BaiduTraceSDK.framework */,
 				0F2AB58921BDF6C4006FB503 /* mapapi.bundle */,
 				0F2AB56D21BDF1FD006FB503 /* MyFitness */,
@@ -754,7 +754,7 @@
 				0FA2EA1921C340ED00A3DC4E /* MonthSectionHeader.xib in Resources */,
 				0FA2A58521C9D4870035B333 /* AvatarTableCell.xib in Resources */,
 				0F2AB57621BDF1FD006FB503 /* Main.storyboard in Resources */,
-				0FF56B2D21E4ECC000891498 /* custom_map.json in Resources */,
+				0FF56B2F21E609C700891498 /* custom_map.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
