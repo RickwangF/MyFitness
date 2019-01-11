@@ -58,13 +58,15 @@
 
 @property (nonatomic, strong) HomeStepperView *timeStepper;
 
-@property (nonatomic, strong) UIView *testContentView;
+@property (nonatomic, strong) UIView *alertView;
 
 @property (nonatomic, strong) BMKLocationManager *locationManager;
     
 @property (nonatomic, strong) BMKUserLocation *userLocation;
     
 @property (nonatomic, assign) TransportModeEnum transportMode;
+
+@property (nonatomic, assign) BOOL firstLoad;
 
 @property (nonatomic, assign) BOOL needRefreshMap;
 
@@ -88,6 +90,7 @@
     
 - (void)initValueProperty{
     _transportMode = TransportModeWalking;
+	_firstLoad = YES;
 	_needRefreshMap = NO;
 	_mute = NO;
 	_showStepper = NO;
@@ -146,21 +149,16 @@
 	
 	[self initLeftSideViewController];
 	
-	[self initTestContentView];
+	[self initAlertView];
+	
+	[_locationManager startUpdatingHeading];
+	[_locationManager startUpdatingLocation];
     // Do any additional setup after loading the view.
 }
 	
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
 	[BMKMapView enableCustomMapStyle:YES];
-	[_locationManager startUpdatingHeading];
-	[_locationManager startUpdatingLocation];
-	if (_needRefreshMap) {
-		_needRefreshMap = NO;
-		[self initMapView];
-		[self.view sendSubviewToBack:_mapView];
-		[self updateLocationViewParam];
-	}
 }
     
 - (void)viewWillDisappear:(BOOL)animated{
@@ -168,10 +166,6 @@
     [BMKMapView enableCustomMapStyle:NO];
 	[_locationManager stopUpdatingHeading];
 	[_locationManager stopUpdatingLocation];
-	_needRefreshMap = YES;
-	[_mapView removeFromSuperview];
-	_mapView = nil;
-	
 }
     
 #pragma mark - Init View
@@ -204,8 +198,8 @@
     _mapView.delegate = self;
     _mapView.showsUserLocation = YES;
     _mapView.userTrackingMode = BMKUserTrackingModeHeading;
-    _mapView.zoomLevel = 20;
-    
+    _mapView.zoomLevel = 19;
+	
     [_mapView mas_makeConstraints:^(MASConstraintMaker *make) {
         if (@available(iOS 11.0, *)) {
             make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
@@ -352,35 +346,35 @@
 	[SideMenuManager defaultManager].menuWidth = self.view.frame.size.width * 0.7;
 }
 
-- (void)initTestContentView{
+- (void)initAlertView{
 	CGFloat width = self.view.bounds.size.width - 30;
 	CGFloat height = 440;
-	_testContentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
-	_testContentView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0];
-	_testContentView.layer.cornerRadius = 5.0;
-	_testContentView.layer.masksToBounds = YES;
+	_alertView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+	_alertView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0];
+	_alertView.layer.cornerRadius = 5.0;
+	_alertView.layer.masksToBounds = YES;
 	
 	UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 20)];
 	titleLabel.text = @"提醒设置";
 	titleLabel.textColor = UIColor.whiteColor;
 	titleLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightSemibold];
-	[_testContentView addSubview:titleLabel];
+	[_alertView addSubview:titleLabel];
 	
 	[titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.top.equalTo(self.testContentView).offset(15);
-		make.centerX.equalTo(self.testContentView);
+		make.top.equalTo(self.alertView).offset(15);
+		make.centerX.equalTo(self.alertView);
 	}];
 	
 	UIView *firstContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width-30, 180)];
 	firstContainerView.backgroundColor = AppStyleSetting.sharedInstance.viewBgColor;
 	firstContainerView.layer.cornerRadius = 5.0;
 	firstContainerView.layer.masksToBounds = YES;
-	[_testContentView addSubview:firstContainerView];
+	[_alertView addSubview:firstContainerView];
 	
 	[firstContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.top.equalTo(self.testContentView).offset(50);
-		make.left.equalTo(self.testContentView).offset(15);
-		make.right.equalTo(self.testContentView).offset(-15);
+		make.top.equalTo(self.alertView).offset(50);
+		make.left.equalTo(self.alertView).offset(15);
+		make.right.equalTo(self.alertView).offset(-15);
 		make.height.equalTo(@180);
 	}];
 	
@@ -400,12 +394,12 @@
 	secondContainerView.backgroundColor = AppStyleSetting.sharedInstance.viewBgColor;
 	secondContainerView.layer.cornerRadius = 5.0;
 	secondContainerView.layer.masksToBounds = YES;
-	[_testContentView addSubview:secondContainerView];
+	[_alertView addSubview:secondContainerView];
 	
 	[secondContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.top.equalTo(firstContainerView.mas_bottom).offset(15);
-		make.left.equalTo(self.testContentView).offset(15);
-		make.right.equalTo(self.testContentView).offset(-15);
+		make.left.equalTo(self.alertView).offset(15);
+		make.right.equalTo(self.alertView).offset(-15);
 		make.height.equalTo(@180);
 	}];
 	
@@ -531,7 +525,7 @@
 	FFPopupMaskType maskType = FFPopupMaskType_Dimmed;
 	
 	FFPopupLayout layout = FFPopupLayoutMake(layoutH, layoutV);
-	FFPopup *popup = [FFPopup popupWithContentView:_testContentView];
+	FFPopup *popup = [FFPopup popupWithContentView:_alertView];
 	popup.showType = showType;
 	popup.dismissType = dismissType;
 	popup.maskType = maskType;
@@ -542,7 +536,17 @@
     
 #pragma mark - BMKMapViewDelegate
 
-    
+- (void)mapViewDidFinishRendering:(BMKMapView *)mapView{
+	if (_firstLoad) {
+		
+		if (_firstLoad) {
+			_firstLoad = NO;
+		}
+		
+		[_mapView setZoomLevel:20];
+	}
+}
+
 #pragma mark - BMKLocationManagerDelegate
 // 更新定位的位置朝向
 - (void)BMKLocationManager:(BMKLocationManager *)manager didUpdateHeading:(CLHeading *)heading{
@@ -574,6 +578,10 @@
     if (_userLocation == nil || _userLocation.location == nil) {
         _userLocation = [[BMKUserLocation alloc] init];
     }
+	
+	if (location.location.coordinate.latitude == 0 && location.location.coordinate.longitude == 0) {
+		return;
+	}
 	
     _userLocation.location = location.location;
     [_mapView updateLocationData:self.userLocation];

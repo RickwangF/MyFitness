@@ -17,13 +17,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[ShadowCircleButton setShadow]:ShadowCircleButton.m">
+         contextName = "-[RecordViewController constructLastSevenDaysData]:RecordViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.bounds;">
+               value = "[_dayArray[i] doubleValue]">
             </PersistentString>
             <PersistentString
-               value = "self.backgroundColor">
+               value = "sevenDaysRecord">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -36,21 +36,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[RecordViewController constructLastSevenDaysData]:RecordViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[_dayArray[i] doubleValue]">
-            </PersistentString>
-            <PersistentString
-               value = "sevenDaysRecord">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "-[TrackDetailViewController onQueryHistoryTrack:]:TrackDetailViewController.m">
          <PersistentStrings>
             <PersistentString
                value = "self.locationArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ShadowCircleButton setShadow]:ShadowCircleButton.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.bounds;">
+            </PersistentString>
+            <PersistentString
+               value = "self.backgroundColor">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -62,6 +62,14 @@
             </PersistentString>
             <PersistentString
                value = "numDistance.integerValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[HomeViewController BMKLocationManager:didUpdateLocation:orError:]:HomeViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "location.location.coordinate">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

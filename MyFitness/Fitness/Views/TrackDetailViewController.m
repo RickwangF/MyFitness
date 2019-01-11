@@ -237,6 +237,7 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
 	[BMKMapView enableCustomMapStyle:YES];
+	[_mapView viewWillAppear];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -258,6 +259,7 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 	
 - (void)viewWillDisappear:(BOOL)animated{
 	[super viewWillDisappear:animated];
+	[_mapView viewWillDisappear];
 	[BMKMapView enableCustomMapStyle:NO];
 }
 
@@ -900,7 +902,7 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 				annoView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:startLocIdentifier];
 			}
 			
-			annoView.image = [UIImage imageNamed:@"start_35#2199e6"];
+			annoView.image = [UIImage imageNamed:@"start_34#blue"];
 			annoView.canShowCallout = YES;
 			annoView.draggable = NO;
 		}
@@ -911,7 +913,7 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 				annoView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:stopLocIdentifier];
 			}
 			
-			annoView.image = [UIImage imageNamed:@"end_35#21c479"];
+			annoView.image = [UIImage imageNamed:@"end_34#red"];
 			annoView.canShowCallout = YES;
 			annoView.draggable = NO;
 		}
