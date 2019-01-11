@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setAlertType:(AlertTypeEnum)type;
 
+- (NSInteger)getNumber;
+
 @end
 
 NS_ASSUME_NONNULL_END

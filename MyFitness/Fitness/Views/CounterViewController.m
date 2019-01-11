@@ -23,6 +23,7 @@
 #import "UIColor+UIColor_Hex.h"
 #import "UIDevice+Type.h"
 #import "IFlyMSC/IFlyMSC.h"
+#import "SportParameter.h"
 
 @interface CounterViewController ()<BTKTraceDelegate, BMKLocationManagerDelegate, AVAudioPlayerDelegate, IFlySpeechSynthesizerDelegate>
 
@@ -66,6 +67,20 @@
 
 @property (nonatomic, assign) TransportModeEnum transportMode;
 
+@property (nonatomic, assign) BOOL mute;
+
+// 目标距离，km
+@property (nonatomic, assign) NSInteger targetDistance;
+
+// 目标时间，min
+@property (nonatomic, assign) NSTimeInterval targetTime;
+
+// 距离提醒已播报
+@property (nonatomic, assign) BOOL alertDistance;
+
+// 时间提醒已播报
+@property (nonatomic, assign) BOOL alertTime;
+
 @property (nonatomic, assign) NSInteger number;
 
 @property (nonatomic, strong) NSTimer *timer;
@@ -86,10 +101,6 @@
 @property (nonatomic, assign) CLLocationSpeed speed;
 	
 @property (nonatomic, strong) AVObject *trackRecord;
-
-@property (nonatomic, assign) BOOL mute;
-
-@property (nonatomic, strong) AVAudioPlayer *player;
 
 @property (nonatomic, strong) IFlySpeechSynthesizer *synthesizer;
 
@@ -117,8 +128,25 @@
 		_transportMode = mode;
 		_mute = mute;
 		if (!_mute) {
-			//[self initPlayer];
 			[self initSynthesizer];
+		}
+		[self initValueProperty];
+	}
+	return self;
+}
+
+- (instancetype)initWithSportParameter:(SportParameter*)param{
+	self = [super initWithNibName:nil bundle:nil];
+	if (self) {
+		_transportMode = param.mode;
+		_mute = param.mute;
+		_targetDistance = param.distance;
+		_targetTime = param.time;
+		if (!_mute) {
+			[self initSynthesizer];
+		}
+		if (_targetTime > 0) {
+			[self initTimer];
 		}
 		[self initValueProperty];
 	}
@@ -136,21 +164,18 @@
 	_startDate = [NSDate date];
 	_finishDate = [NSDate new];
 	_speed = 0;
-	_alertIntArray = [NSMutableArray arrayWithObjects:@1, @2, @3, @4, @5, @6, @7, @8, @9, @10, nil];
-}
-
-- (void)initPlayer{
-	NSString *path = [NSBundle.mainBundle pathForResource:@"start.m4a" ofType:@""];
-	NSURL *url = [NSURL fileURLWithPath:path];
-	_player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-	_player.volume = 1.0;
-	_player.rate = 1.0;
-	_player.numberOfLoops = 0;
-	[_player prepareToPlay];
+	for (int i = 1; i <= 100; i++) {
+		if (_targetDistance != i) {
+			[_alertIntArray addObject:@(i)];
+		}
+	}
+	_alertTime = NO;
+	_alertDistance = NO;
 }
 
 - (void)initSynthesizer{
 	_synthesizer = [IFlySpeechSynthesizer sharedInstance];
+	_synthesizer.delegate = self;
 	[_synthesizer setParameter:[IFlySpeechConstant TYPE_CLOUD] forKey:[IFlySpeechConstant ENGINE_TYPE]];
 	[_synthesizer setParameter:@"60" forKey:[IFlySpeechConstant VOLUME]];
 	[_synthesizer setParameter:@"aisjinger" forKey:[IFlySpeechConstant VOICE_NAME]];
@@ -168,6 +193,11 @@
 	_locationManager.allowsBackgroundLocationUpdates = YES;
 	_locationManager.locationTimeout = 10;
 	_locationManager.reGeocodeTimeout = 10;
+}
+
+- (void)initTimer{
+	_timer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(timerIsCounting) userInfo:nil repeats:YES];
+	[[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
 }
 	
 #pragma mark - Lift Circle
@@ -224,13 +254,9 @@
 		[self startService];
 	}
 	
-	if (_synthesizer != nil && !_mute) {
+	if (_synthesizer != nil) {
 		[_synthesizer startSpeaking:@"运动开始"];
 	}
-	
-//	if (_player != nil && !_mute) {
-//		[_player play];
-//	}
 }
 	
 - (void)viewWillDisappear:(BOOL)animated{
@@ -243,9 +269,6 @@
 	if (_timer) {
 		[_timer invalidate];
 		_timer = nil;
-	}
-	if (_player) {
-		_player = nil;
 	}
 }
 	
@@ -618,15 +641,55 @@
 	
 	NSNumber *numDistance = [NSNumber numberWithDouble: round(_distance / 1000)];
 	
-	if (_synthesizer != nil && !_mute && [_alertIntArray containsObject: numDistance]) {
+	if (_synthesizer == nil){
+		return;
+	}
+	
+	if ([_alertIntArray containsObject: numDistance]) {
 		[_alertIntArray removeObject:numDistance];
 		[self playVoiceAlertWithType: [numDistance integerValue]];
+	}
+	if (_targetDistance > 0 && _distance >= _targetDistance*1000 && !_alertDistance) {
+		_alertDistance = YES;
+		[self playDistanceVoiceAlert];
 	}
 }
 	
 - (void)refreshDisplayData{
 	_distanceLabel.text = [NSString stringWithFormat:@"%.2f", _distance / 1000];
 	_speedLabel.text = [NSString stringWithFormat:@"%.1f", _speed];
+}
+
+- (void)timerIsCounting{
+	if (_synthesizer == nil) {
+		[_timer invalidate];
+		_timer = nil;
+	}
+	
+	NSTimeInterval counted = [_timeCountingLabel getTimeCounted];
+	if (_targetTime > 0 && counted >= _targetTime*60 && !_alertTime) {
+		_alertTime = YES;
+		[_timer invalidate];
+		_timer = nil;
+		
+		if (_synthesizer == nil) {
+			return;
+		}
+		
+		[self playTimeVoiceAlert];
+	}
+}
+
+- (void)playTimeVoiceAlert{
+	int minute = _targetTime;
+	NSString *speechString = [NSString stringWithFormat:@"目标%d分钟已完成", minute];
+	[_synthesizer startSpeaking:speechString];
+}
+
+- (void)playDistanceVoiceAlert{
+	long intDistance = _targetDistance;
+	NSString *speechString = [NSString stringWithFormat:@"目标%ld公里已完成", intDistance];
+	[_synthesizer startSpeaking:speechString];
 }
 
 /*
@@ -649,7 +712,7 @@
 			[_synthesizer startSpeaking:@"运动继续"];
 		break;
 		case 30000:
-		[_synthesizer startSpeaking:@"运动结束"];
+			[_synthesizer startSpeaking:@"运动结束"];
 		break;
 			
 		default:
@@ -659,13 +722,6 @@
 			}
 			break;
 	}
-}
-
-- (void)configPlayer{
-	_player.volume = 1.0;
-	_player.rate = 1.0;
-	_player.numberOfLoops = 0;
-	[_player prepareToPlay];
 }
 	
 #pragma mark - BMKLocationManagerDelegate

@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "TransportModeEnum.h"
+#import "SportParameter.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CounterViewController : UIViewController
 	
--(instancetype)initWithTransportMode:(TransportModeEnum)mode Mute:(BOOL)mute;
+- (instancetype)initWithTransportMode:(TransportModeEnum)mode Mute:(BOOL)mute;
+
+- (instancetype)initWithSportParameter:(SportParameter*)param;
 
 @end
 

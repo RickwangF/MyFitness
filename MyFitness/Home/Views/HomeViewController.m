@@ -36,6 +36,7 @@
 #import "UIImage+UIColor.h"
 #import "HomeStepperView.h"
 #import <FFPopup/FFPopup.h>
+#import "SportParameter.h"
 
 
 @interface HomeViewController ()<BMKMapViewDelegate, BMKLocationManagerDelegate, SubViewControllerDelegate, CAPSPageMenuDelegate>
@@ -159,10 +160,12 @@
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
 	[BMKMapView enableCustomMapStyle:YES];
+	[_mapView viewWillAppear];
 }
     
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+	[_mapView viewWillDisappear];
     [BMKMapView enableCustomMapStyle:NO];
 	[_locationManager stopUpdatingHeading];
 	[_locationManager stopUpdatingLocation];
@@ -502,7 +505,12 @@
 		return;
 	}
 	
-	CounterViewController *counterVC = [[CounterViewController alloc] initWithTransportMode:_transportMode Mute:_mute];
+	NSInteger distance = [_distanceStepper getNumber];
+	NSInteger time = [_timeStepper getNumber];
+	
+	SportParameter *param = [[SportParameter alloc] initWithTransportMode:_transportMode Mute:_mute Distance:distance Time:time];
+	
+	CounterViewController *counterVC = [[CounterViewController alloc] initWithSportParameter:param];
 	[self.navigationController pushViewController:counterVC animated:YES];
 }
 
@@ -523,7 +531,7 @@
 	FFPopupShowType showType = FFPopupShowType_BounceIn;
 	FFPopupDismissType dismissType = FFPopupDismissType_BounceOut;
 	FFPopupMaskType maskType = FFPopupMaskType_Dimmed;
-	
+
 	FFPopupLayout layout = FFPopupLayoutMake(layoutH, layoutV);
 	FFPopup *popup = [FFPopup popupWithContentView:_alertView];
 	popup.showType = showType;

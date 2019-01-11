@@ -44,6 +44,7 @@
 		0F37102D21C0FEE100C334C8 /* LeftSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102C21C0FEE100C334C8 /* LeftSideViewController.m */; };
 		0F37103021C101B000C334C8 /* ButtonItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102F21C101B000C334C8 /* ButtonItemView.m */; };
 		0F4D041521E82CE10003DD5A /* custom_map.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F4D041421E82CE00003DD5A /* custom_map.json */; };
+		0F4D041821E86D7B0003DD5A /* SportParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4D041721E86D7B0003DD5A /* SportParameter.m */; };
 		0F6FD02921CA15360083D590 /* BodyDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6FD02821CA15360083D590 /* BodyDataViewController.m */; };
 		0F6FD02D21CA19530083D590 /* BodyTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6FD02B21CA19530083D590 /* BodyTableCell.m */; };
 		0F6FD02E21CA19530083D590 /* BodyTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6FD02C21CA19530083D590 /* BodyTableCell.xib */; };
@@ -192,6 +193,8 @@
 		0F37102E21C101B000C334C8 /* ButtonItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ButtonItemView.h; sourceTree = "<group>"; };
 		0F37102F21C101B000C334C8 /* ButtonItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ButtonItemView.m; sourceTree = "<group>"; };
 		0F4D041421E82CE00003DD5A /* custom_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = custom_map.json; sourceTree = "<group>"; };
+		0F4D041621E86D7B0003DD5A /* SportParameter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SportParameter.h; sourceTree = "<group>"; };
+		0F4D041721E86D7B0003DD5A /* SportParameter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SportParameter.m; sourceTree = "<group>"; };
 		0F6FD02721CA15360083D590 /* BodyDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BodyDataViewController.h; sourceTree = "<group>"; };
 		0F6FD02821CA15360083D590 /* BodyDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BodyDataViewController.m; sourceTree = "<group>"; };
 		0F6FD02A21CA19530083D590 /* BodyTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BodyTableCell.h; sourceTree = "<group>"; };
@@ -507,6 +510,8 @@
 				0F2AB59E21BDFC41006FB503 /* RegionInsets.h */,
 				0F2AB5A221BDFC41006FB503 /* TrackRecord.h */,
 				0F2AB5A721BDFC42006FB503 /* TrackRecord.m */,
+				0F4D041621E86D7B0003DD5A /* SportParameter.h */,
+				0F4D041721E86D7B0003DD5A /* SportParameter.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -916,6 +921,7 @@
 				0FA2EA1321C339C100A3DC4E /* SummaryTableCell.m in Sources */,
 				0F2AB5C121BDFC55006FB503 /* MZTimerLabel.m in Sources */,
 				0F85CE5F21E37421000BDEC6 /* LoginItemView.m in Sources */,
+				0F4D041821E86D7B0003DD5A /* SportParameter.m in Sources */,
 				0F2AB57021BDF1FD006FB503 /* AppDelegate.m in Sources */,
 				0F2AB5B421BDFC42006FB503 /* NSString+NSDate.m in Sources */,
 				0F2AB5AE21BDFC42006FB503 /* UIImage+UIColor.m in Sources */,
