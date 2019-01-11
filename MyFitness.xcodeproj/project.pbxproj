@@ -43,6 +43,7 @@
 		0F37102A21C0F21E00C334C8 /* ShadowCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102921C0F21E00C334C8 /* ShadowCircleButton.m */; };
 		0F37102D21C0FEE100C334C8 /* LeftSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102C21C0FEE100C334C8 /* LeftSideViewController.m */; };
 		0F37103021C101B000C334C8 /* ButtonItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102F21C101B000C334C8 /* ButtonItemView.m */; };
+		0F4D041521E82CE10003DD5A /* custom_map.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F4D041421E82CE00003DD5A /* custom_map.json */; };
 		0F6FD02921CA15360083D590 /* BodyDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6FD02821CA15360083D590 /* BodyDataViewController.m */; };
 		0F6FD02D21CA19530083D590 /* BodyTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6FD02B21CA19530083D590 /* BodyTableCell.m */; };
 		0F6FD02E21CA19530083D590 /* BodyTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6FD02C21CA19530083D590 /* BodyTableCell.xib */; };
@@ -98,12 +99,11 @@
 		0FE8B15F21D06DB000AF75A4 /* AAOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B13F21D06DB000AF75A4 /* AAOptions.m */; };
 		0FE8B16021D06DB000AF75A4 /* AASeriesElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B14021D06DB000AF75A4 /* AASeriesElement.m */; };
 		0FE8B16721D0AF8200AF75A4 /* start.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B16621D0AF8200AF75A4 /* start.m4a */; };
-		0FE8B16C21D0D05500AF75A4 /* DistanceStepperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B16B21D0D05500AF75A4 /* DistanceStepperView.m */; };
+		0FE8B16C21D0D05500AF75A4 /* HomeStepperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B16B21D0D05500AF75A4 /* HomeStepperView.m */; };
 		0FED06CA21C743A7000D41AC /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FED06C921C743A7000D41AC /* NavigationViewController.m */; };
 		0FED06CD21C7963C000D41AC /* MKDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FED06CB21C7963C000D41AC /* MKDropdownMenu.m */; };
 		0FED06CF21C7C07E000D41AC /* DropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FED06CE21C7C07E000D41AC /* DropDownMenu.swift */; };
 		0FF56B2721E4C95500891498 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F85CE6321E4C527000BDEC6 /* iflyMSC.framework */; };
-		0FF56B2F21E609C700891498 /* custom_map.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FF56B2E21E609C600891498 /* custom_map.json */; };
 		1D71F247864DED889DD73337 /* Pods_MyFitness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 813B8380172CDC392FFEE040 /* Pods_MyFitness.framework */; };
 /* End PBXBuildFile section */
 
@@ -191,6 +191,7 @@
 		0F37102C21C0FEE100C334C8 /* LeftSideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeftSideViewController.m; sourceTree = "<group>"; };
 		0F37102E21C101B000C334C8 /* ButtonItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ButtonItemView.h; sourceTree = "<group>"; };
 		0F37102F21C101B000C334C8 /* ButtonItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ButtonItemView.m; sourceTree = "<group>"; };
+		0F4D041421E82CE00003DD5A /* custom_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = custom_map.json; sourceTree = "<group>"; };
 		0F6FD02721CA15360083D590 /* BodyDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BodyDataViewController.h; sourceTree = "<group>"; };
 		0F6FD02821CA15360083D590 /* BodyDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BodyDataViewController.m; sourceTree = "<group>"; };
 		0F6FD02A21CA19530083D590 /* BodyTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BodyTableCell.h; sourceTree = "<group>"; };
@@ -295,14 +296,13 @@
 		0FE8B14221D06DB000AF75A4 /* AAChartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAChartModel.h; sourceTree = "<group>"; };
 		0FE8B16121D06EAD00AF75A4 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		0FE8B16621D0AF8200AF75A4 /* start.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = start.m4a; sourceTree = "<group>"; };
-		0FE8B16A21D0D05500AF75A4 /* DistanceStepperView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DistanceStepperView.h; sourceTree = "<group>"; };
-		0FE8B16B21D0D05500AF75A4 /* DistanceStepperView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DistanceStepperView.m; sourceTree = "<group>"; };
+		0FE8B16A21D0D05500AF75A4 /* HomeStepperView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeStepperView.h; sourceTree = "<group>"; };
+		0FE8B16B21D0D05500AF75A4 /* HomeStepperView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeStepperView.m; sourceTree = "<group>"; };
 		0FED06C821C743A7000D41AC /* NavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		0FED06C921C743A7000D41AC /* NavigationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
 		0FED06CB21C7963C000D41AC /* MKDropdownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDropdownMenu.m; sourceTree = "<group>"; };
 		0FED06CC21C7963C000D41AC /* MKDropdownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDropdownMenu.h; sourceTree = "<group>"; };
 		0FED06CE21C7C07E000D41AC /* DropDownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownMenu.swift; sourceTree = "<group>"; };
-		0FF56B2E21E609C600891498 /* custom_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = custom_map.json; sourceTree = "<group>"; };
 		59F9445866E2F2A94B5B1C20 /* Pods-MyFitness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFitness.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFitness/Pods-MyFitness.release.xcconfig"; sourceTree = "<group>"; };
 		813B8380172CDC392FFEE040 /* Pods_MyFitness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFitness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDD294776D9E4C7A886FEFC /* Pods-MyFitness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFitness.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFitness/Pods-MyFitness.debug.xcconfig"; sourceTree = "<group>"; };
@@ -325,9 +325,9 @@
 		0F2AB56221BDF1FD006FB503 = {
 			isa = PBXGroup;
 			children = (
-				0FF56B2E21E609C600891498 /* custom_map.json */,
-				0F85CE6321E4C527000BDEC6 /* iflyMSC.framework */,
+				0F4D041421E82CE00003DD5A /* custom_map.json */,
 				0F2AB5CE21BE326A006FB503 /* map_config.json */,
+				0F85CE6321E4C527000BDEC6 /* iflyMSC.framework */,
 				0F2AB59021BDF99F006FB503 /* BaiduTraceSDK.framework */,
 				0F2AB58921BDF6C4006FB503 /* mapapi.bundle */,
 				0F2AB56D21BDF1FD006FB503 /* MyFitness */,
@@ -453,8 +453,8 @@
 				0FED06CE21C7C07E000D41AC /* DropDownMenu.swift */,
 				0FA2A57B21C897B10035B333 /* RightImageButton.h */,
 				0FA2A57C21C897B10035B333 /* RightImageButton.m */,
-				0FE8B16A21D0D05500AF75A4 /* DistanceStepperView.h */,
-				0FE8B16B21D0D05500AF75A4 /* DistanceStepperView.m */,
+				0FE8B16A21D0D05500AF75A4 /* HomeStepperView.h */,
+				0FE8B16B21D0D05500AF75A4 /* HomeStepperView.m */,
 				0F85CE5D21E37421000BDEC6 /* LoginItemView.h */,
 				0F85CE5E21E37421000BDEC6 /* LoginItemView.m */,
 			);
@@ -754,7 +754,7 @@
 				0FA2EA1921C340ED00A3DC4E /* MonthSectionHeader.xib in Resources */,
 				0FA2A58521C9D4870035B333 /* AvatarTableCell.xib in Resources */,
 				0F2AB57621BDF1FD006FB503 /* Main.storyboard in Resources */,
-				0FF56B2F21E609C700891498 /* custom_map.json in Resources */,
+				0F4D041521E82CE10003DD5A /* custom_map.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -810,6 +810,7 @@
 				"${BUILT_PRODUCTS_DIR}/CHIPageControl/CHIPageControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
+				"${BUILT_PRODUCTS_DIR}/FFPopup/FFPopup.framework",
 				"${BUILT_PRODUCTS_DIR}/HMSegmentedControl/HMSegmentedControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/KMNavigationBarTransition/KMNavigationBarTransition.framework",
@@ -829,6 +830,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHIPageControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FFPopup.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HMSegmentedControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KMNavigationBarTransition.framework",
@@ -902,7 +904,7 @@
 				0F2AB5B321BDFC42006FB503 /* UIColor+UIColor_Hex.m in Sources */,
 				0F2AB5CA21BE0ECA006FB503 /* UIViewController+topVC.m in Sources */,
 				0FA2A58021C9D3040035B333 /* UserCenterViewController.m in Sources */,
-				0FE8B16C21D0D05500AF75A4 /* DistanceStepperView.m in Sources */,
+				0FE8B16C21D0D05500AF75A4 /* HomeStepperView.m in Sources */,
 				0F2AB5B021BDFC42006FB503 /* NSDate+NSString.m in Sources */,
 				0FE8B14D21D06DB000AF75A4 /* AASubtitle.m in Sources */,
 				0F37103021C101B000C334C8 /* ButtonItemView.m in Sources */,

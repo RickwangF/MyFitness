@@ -34,7 +34,8 @@
 #import "UserCenterViewController.h"
 #import "MyRecordViewController.h"
 #import "UIImage+UIColor.h"
-#import "DistanceStepperView.h"
+#import "HomeStepperView.h"
+#import <FFPopup/FFPopup.h>
 
 
 @interface HomeViewController ()<BMKMapViewDelegate, BMKLocationManagerDelegate, SubViewControllerDelegate, CAPSPageMenuDelegate>
@@ -53,7 +54,11 @@
 
 @property (nonatomic, strong) UIButton *muteBtn;
 
-@property (nonatomic, strong) DistanceStepperView *stepper;
+@property (nonatomic, strong) HomeStepperView *distanceStepper;
+
+@property (nonatomic, strong) HomeStepperView *timeStepper;
+
+@property (nonatomic, strong) UIView *testContentView;
 
 @property (nonatomic, strong) BMKLocationManager *locationManager;
     
@@ -131,8 +136,6 @@
 	
 	[self initModeControl];
 	
-	[self initStepper];
-	
 	[self initStartBtn];
 	
 	[self initSetBtn];
@@ -142,6 +145,8 @@
 	[self initlocationManager];
 	
 	[self initLeftSideViewController];
+	
+	[self initTestContentView];
     // Do any additional setup after loading the view.
 }
 	
@@ -280,19 +285,6 @@
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:bottomContainerView];
 }
 
-- (void)initStepper{
-	_stepper = [[DistanceStepperView alloc] initWithFrame:CGRectMake(0, 0, 250, 110)];
-	_stepper.hidden = YES;
-	[self.view addSubview:_stepper];
-	
-	[_stepper mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.top.equalTo(self.controlContainerView.mas_bottom).offset(70);
-		make.centerX.equalTo(self.view);
-		make.height.equalTo(@110);
-		make.width.equalTo(@250);
-	}];
-}
-
 - (void)initStartBtn{
 	_startBtn = [[ShadowCircleButton alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
 	_startBtn.backgroundColor = AppStyleSetting.sharedInstance.mainColor;
@@ -358,6 +350,76 @@
 	[SideMenuManager defaultManager].menuFadeStatusBar = NO;
 	[SideMenuManager defaultManager].menuAnimationFadeStrength = 0.6;
 	[SideMenuManager defaultManager].menuWidth = self.view.frame.size.width * 0.7;
+}
+
+- (void)initTestContentView{
+	CGFloat width = self.view.bounds.size.width - 30;
+	CGFloat height = 440;
+	_testContentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+	_testContentView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0];
+	_testContentView.layer.cornerRadius = 5.0;
+	_testContentView.layer.masksToBounds = YES;
+	
+	UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 20)];
+	titleLabel.text = @"提醒设置";
+	titleLabel.textColor = UIColor.whiteColor;
+	titleLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightSemibold];
+	[_testContentView addSubview:titleLabel];
+	
+	[titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.equalTo(self.testContentView).offset(15);
+		make.centerX.equalTo(self.testContentView);
+	}];
+	
+	UIView *firstContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width-30, 180)];
+	firstContainerView.backgroundColor = AppStyleSetting.sharedInstance.viewBgColor;
+	firstContainerView.layer.cornerRadius = 5.0;
+	firstContainerView.layer.masksToBounds = YES;
+	[_testContentView addSubview:firstContainerView];
+	
+	[firstContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.equalTo(self.testContentView).offset(50);
+		make.left.equalTo(self.testContentView).offset(15);
+		make.right.equalTo(self.testContentView).offset(-15);
+		make.height.equalTo(@180);
+	}];
+	
+	_distanceStepper = [[HomeStepperView alloc] initWithFrame:CGRectMake(0, 0, 175, 120)];
+	[_distanceStepper setAlertType:AlertTypeEnumDistance];
+	[_distanceStepper setTitleWithString:@"目标距离"];
+	[_distanceStepper setUnitWithString:@"公里"];
+	[firstContainerView addSubview:_distanceStepper];
+	
+	[_distanceStepper mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.center.equalTo(firstContainerView);
+		make.width.equalTo(@175);
+		make.height.equalTo(@120);
+	}];
+	
+	UIView *secondContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width-30, 180)];
+	secondContainerView.backgroundColor = AppStyleSetting.sharedInstance.viewBgColor;
+	secondContainerView.layer.cornerRadius = 5.0;
+	secondContainerView.layer.masksToBounds = YES;
+	[_testContentView addSubview:secondContainerView];
+	
+	[secondContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.equalTo(firstContainerView.mas_bottom).offset(15);
+		make.left.equalTo(self.testContentView).offset(15);
+		make.right.equalTo(self.testContentView).offset(-15);
+		make.height.equalTo(@180);
+	}];
+	
+	_timeStepper = [[HomeStepperView alloc] initWithFrame:CGRectMake(0, 0, 175, 120)];
+	[_timeStepper setAlertType:AlertTypeEnumTime];
+	[_timeStepper setTitleWithString:@"运动时间"];
+	[_timeStepper setUnitWithString:@"分钟"];
+	[secondContainerView addSubview:_timeStepper];
+	
+	[_timeStepper mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.center.equalTo(secondContainerView);
+		make.width.equalTo(@175);
+		make.height.equalTo(@120);
+	}];
 }
 
 #pragma mark - Request
@@ -461,13 +523,21 @@
 }
 
 - (void)setBtnClicked:(UIButton*)sender{
-	_showStepper = !_showStepper;
-	if (_showStepper) {
-		_stepper.hidden = NO;
-	}
-	else{
-		_stepper.hidden = YES;
-	}
+	
+	FFPopupHorizontalLayout layoutH = FFPopupHorizontalLayout_Center;
+	FFPopupVerticalLayout layoutV = FFPopupVerticalLayout_Center;
+	FFPopupShowType showType = FFPopupShowType_BounceIn;
+	FFPopupDismissType dismissType = FFPopupDismissType_BounceOut;
+	FFPopupMaskType maskType = FFPopupMaskType_Dimmed;
+	
+	FFPopupLayout layout = FFPopupLayoutMake(layoutH, layoutV);
+	FFPopup *popup = [FFPopup popupWithContentView:_testContentView];
+	popup.showType = showType;
+	popup.dismissType = dismissType;
+	popup.maskType = maskType;
+	popup.shouldDismissOnBackgroundTouch = YES;
+	popup.shouldDismissOnContentTouch = NO;
+	[popup showWithLayout:layout];
 }
     
 #pragma mark - BMKMapViewDelegate

@@ -39,6 +39,7 @@ PODS:
   - CHIPageControl/Paprika (0.1.7)
   - CHIPageControl/Puya (0.1.7)
   - DropDown (2.3.12)
+  - FFPopup (0.2.0)
   - Hero (1.4.0)
   - HMSegmentedControl (1.5.5)
   - KMNavigationBarTransition (1.1.5)
@@ -61,6 +62,7 @@ DEPENDENCIES:
   - Charts
   - CHIPageControl (from `https://github.com/RickwangF/CHIPageControl`)
   - DropDown (from `https://github.com/RickwangF/DropDown`)
+  - FFPopup
   - Hero
   - HMSegmentedControl
   - KMNavigationBarTransition
@@ -80,6 +82,7 @@ SPEC REPOS:
     - BaiduMapKit
     - BMKLocationKit
     - Charts
+    - FFPopup
     - Hero
     - HMSegmentedControl
     - KMNavigationBarTransition
@@ -114,6 +117,7 @@ SPEC CHECKSUMS:
   Charts: f122fb70b19847fa5817d018b77d6c5a2296ab25
   CHIPageControl: bbe1ddd0c688c02ec65b7f7e7d34551a3d16f37c
   DropDown: 0bcc278799ec11a3d34ce1aac9367fbbaf5423d9
+  FFPopup: 266b431aede035b4998251410984a12ca26dc2fa
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
   HMSegmentedControl: f514c6dad47aa3065e0ed2e8046b73efc71221b9
   KMNavigationBarTransition: 7a52c9bc25b39b6e3343e980b453facee1591b82
@@ -125,6 +129,6 @@ SPEC CHECKSUMS:
   STPopup: da1167250a01584af7bcccb898653185f223ec46
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: 2aaf500972ede74155aba9e188cfb93b4aa03ebc
+PODFILE CHECKSUM: 23937049dcadfeafa0053441a056a00d10e780b5
 
 COCOAPODS: 1.5.3
