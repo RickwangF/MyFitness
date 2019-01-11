@@ -263,8 +263,7 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 	[BMKMapView enableCustomMapStyle:NO];
 }
 
-- (void)dealloc
-{
+- (void)dealloc{
 	if (_timer) {
 		[_timer invalidate];
 		_timer = nil;
@@ -882,11 +881,15 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 
 // 初次渲染完成之后就开始绘制起点，轨迹和终点
 - (void)mapViewDidFinishRendering:(BMKMapView *)mapView{
-	if (!self.firstRendered && ((self.mfLocations.count > 0) || (self.locationArray.count > 0))) {
+	if (!_firstRendered && ((_mfLocations.count > 0) || (_locationArray.count > 0))) {
 		
-		self.firstRendered = YES;
+		_firstRendered = YES;
 		// 开始绘制起点，轨迹和终点
 		[[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+	}
+	else if (_mfLocations.count == 0 || _locationArray.count == 0){
+		[_timer invalidate];
+		_timer = nil;
 	}
 }
 
