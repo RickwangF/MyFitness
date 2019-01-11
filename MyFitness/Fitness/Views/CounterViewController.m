@@ -151,9 +151,8 @@
 
 - (void)initSynthesizer{
 	_synthesizer = [IFlySpeechSynthesizer sharedInstance];
-	_synthesizer.delegate = self;
 	[_synthesizer setParameter:[IFlySpeechConstant TYPE_CLOUD] forKey:[IFlySpeechConstant ENGINE_TYPE]];
-	[_synthesizer setParameter:@"100" forKey:[IFlySpeechConstant VOLUME]];
+	[_synthesizer setParameter:@"60" forKey:[IFlySpeechConstant VOLUME]];
 	[_synthesizer setParameter:@"aisjinger" forKey:[IFlySpeechConstant VOICE_NAME]];
 	[_synthesizer setParameter:nil forKey:[IFlySpeechConstant TTS_AUDIO_PATH]];
 }
