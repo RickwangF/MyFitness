@@ -7,6 +7,7 @@
 //
 
 #import "NavigationViewController.h"
+#import "CounterViewController.h"
 
 @interface NavigationViewController ()<UIGestureRecognizerDelegate>
 
@@ -23,7 +24,7 @@
 #pragma mark - UIGestureRecognizerDelegate
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
-	if (self.viewControllers.count <= 1) {
+	if (self.viewControllers.count <= 1 || [self.viewControllers.lastObject isKindOfClass:CounterViewController.class]) {
 		return NO;
 	}
 	return YES;

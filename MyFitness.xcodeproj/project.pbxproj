@@ -40,6 +40,15 @@
 		0F2AB5E321BF59E7006FB503 /* TrackDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5E221BF59E7006FB503 /* TrackDetailViewController.m */; };
 		0F2AB5E621BF8D12006FB503 /* FitnessItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5E521BF8D12006FB503 /* FitnessItemView.m */; };
 		0F2AB5E921BFEB30006FB503 /* TrackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2AB5E821BFEB30006FB503 /* TrackListViewController.m */; };
+		0F2FAAB521EC20FD00E6BB83 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FAAB421EC20FD00E6BB83 /* libsqlite3.0.tbd */; };
+		0F2FAAB721EC210E00E6BB83 /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FAAB621EC210E00E6BB83 /* libiconv.2.4.0.tbd */; };
+		0F2FAAB921EC212700E6BB83 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FAAB821EC212700E6BB83 /* libc++.tbd */; };
+		0F2FAABB21EC213F00E6BB83 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FAABA21EC213F00E6BB83 /* libz.1.2.5.tbd */; };
+		0F2FAAD921EC223000E6BB83 /* .gitIgnore in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FAAC421EC223000E6BB83 /* .gitIgnore */; };
+		0F2FAAE021EC22FA00E6BB83 /* Chinese_And_English_Speech_DYY.dat in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FAADD21EC22FA00E6BB83 /* Chinese_And_English_Speech_DYY.dat */; };
+		0F2FAAE121EC22FA00E6BB83 /* Chinese_And_English_Speech_Female.dat in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FAADE21EC22FA00E6BB83 /* Chinese_And_English_Speech_Female.dat */; };
+		0F2FAAE221EC22FA00E6BB83 /* Chinese_And_English_Text.dat in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FAADF21EC22FA00E6BB83 /* Chinese_And_English_Text.dat */; };
+		0F2FAAE621EC240C00E6BB83 /* libBaiduSpeechSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FAABD21EC221E00E6BB83 /* libBaiduSpeechSDK.a */; };
 		0F37102A21C0F21E00C334C8 /* ShadowCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102921C0F21E00C334C8 /* ShadowCircleButton.m */; };
 		0F37102D21C0FEE100C334C8 /* LeftSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102C21C0FEE100C334C8 /* LeftSideViewController.m */; };
 		0F37103021C101B000C334C8 /* ButtonItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102F21C101B000C334C8 /* ButtonItemView.m */; };
@@ -104,7 +113,6 @@
 		0FED06CA21C743A7000D41AC /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FED06C921C743A7000D41AC /* NavigationViewController.m */; };
 		0FED06CD21C7963C000D41AC /* MKDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FED06CB21C7963C000D41AC /* MKDropdownMenu.m */; };
 		0FED06CF21C7C07E000D41AC /* DropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FED06CE21C7C07E000D41AC /* DropDownMenu.swift */; };
-		0FF56B2721E4C95500891498 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F85CE6321E4C527000BDEC6 /* iflyMSC.framework */; };
 		1D71F247864DED889DD73337 /* Pods_MyFitness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 813B8380172CDC392FFEE040 /* Pods_MyFitness.framework */; };
 /* End PBXBuildFile section */
 
@@ -186,6 +194,36 @@
 		0F2AB5E521BF8D12006FB503 /* FitnessItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FitnessItemView.m; sourceTree = "<group>"; };
 		0F2AB5E721BFEB30006FB503 /* TrackListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrackListViewController.h; sourceTree = "<group>"; };
 		0F2AB5E821BFEB30006FB503 /* TrackListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackListViewController.m; sourceTree = "<group>"; };
+		0F2FAAB421EC20FD00E6BB83 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		0F2FAAB621EC210E00E6BB83 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
+		0F2FAAB821EC212700E6BB83 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		0F2FAABA21EC213F00E6BB83 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		0F2FAABD21EC221E00E6BB83 /* libBaiduSpeechSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBaiduSpeechSDK.a; path = BDSClientLib/libBaiduSpeechSDK.a; sourceTree = "<group>"; };
+		0F2FAAC121EC223000E6BB83 /* BDSWakeupParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSWakeupParameters.h; sourceTree = "<group>"; };
+		0F2FAAC221EC223000E6BB83 /* BDSASRParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSASRParameters.h; sourceTree = "<group>"; };
+		0F2FAAC321EC223000E6BB83 /* BDSEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSEventManager.h; sourceTree = "<group>"; };
+		0F2FAAC421EC223000E6BB83 /* .gitIgnore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitIgnore; sourceTree = "<group>"; };
+		0F2FAAC521EC223000E6BB83 /* BDSUploaderDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSUploaderDefines.h; sourceTree = "<group>"; };
+		0F2FAAC621EC223000E6BB83 /* BDSASRDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSASRDefines.h; sourceTree = "<group>"; };
+		0F2FAAC721EC223000E6BB83 /* BDSUploaderParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSUploaderParameters.h; sourceTree = "<group>"; };
+		0F2FAAC821EC223000E6BB83 /* BDSWakeupDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSWakeupDefines.h; sourceTree = "<group>"; };
+		0F2FAACA21EC223000E6BB83 /* BDRecognizerViewParamsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDRecognizerViewParamsObject.h; sourceTree = "<group>"; };
+		0F2FAACB21EC223000E6BB83 /* BDRecognizerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDRecognizerViewController.h; sourceTree = "<group>"; };
+		0F2FAACC21EC223000E6BB83 /* BDTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDTheme.h; sourceTree = "<group>"; };
+		0F2FAACD21EC223000E6BB83 /* BDRecognizerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDRecognizerViewDelegate.h; sourceTree = "<group>"; };
+		0F2FAACF21EC223000E6BB83 /* BDSSynthesizerStatusNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSynthesizerStatusNotifications.h; sourceTree = "<group>"; };
+		0F2FAAD021EC223000E6BB83 /* BDSSpeechSynthesizerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizerDelegate.h; sourceTree = "<group>"; };
+		0F2FAAD121EC223000E6BB83 /* BDS_EttsModelManagerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDS_EttsModelManagerInterface.h; sourceTree = "<group>"; };
+		0F2FAAD221EC223000E6BB83 /* BDSBuiltInPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSBuiltInPlayer.h; sourceTree = "<group>"; };
+		0F2FAAD321EC223000E6BB83 /* BDSMixedModeSynthesizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSMixedModeSynthesizer.h; sourceTree = "<group>"; };
+		0F2FAAD421EC223000E6BB83 /* BDSSpeechSynthesizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizer.h; sourceTree = "<group>"; };
+		0F2FAAD521EC223000E6BB83 /* BDSSpeechSynthesizerParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizerParams.h; sourceTree = "<group>"; };
+		0F2FAAD621EC223000E6BB83 /* BDSSynthesizerLogLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSynthesizerLogLevel.h; sourceTree = "<group>"; };
+		0F2FAAD721EC223000E6BB83 /* BDSTTSEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSTTSEventManager.h; sourceTree = "<group>"; };
+		0F2FAAD821EC223000E6BB83 /* BDSSpeechSynthesizerErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizerErrors.h; sourceTree = "<group>"; };
+		0F2FAADD21EC22FA00E6BB83 /* Chinese_And_English_Speech_DYY.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chinese_And_English_Speech_DYY.dat; sourceTree = "<group>"; };
+		0F2FAADE21EC22FA00E6BB83 /* Chinese_And_English_Speech_Female.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chinese_And_English_Speech_Female.dat; sourceTree = "<group>"; };
+		0F2FAADF21EC22FA00E6BB83 /* Chinese_And_English_Text.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chinese_And_English_Text.dat; sourceTree = "<group>"; };
 		0F37102821C0F21E00C334C8 /* ShadowCircleButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShadowCircleButton.h; sourceTree = "<group>"; };
 		0F37102921C0F21E00C334C8 /* ShadowCircleButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShadowCircleButton.m; sourceTree = "<group>"; };
 		0F37102B21C0FEE100C334C8 /* LeftSideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeftSideViewController.h; sourceTree = "<group>"; };
@@ -209,7 +247,6 @@
 		0F85CE5E21E37421000BDEC6 /* LoginItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginItemView.m; sourceTree = "<group>"; };
 		0F85CE6021E380C9000BDEC6 /* SFVerificationCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFVerificationCodeView.h; sourceTree = "<group>"; };
 		0F85CE6121E380C9000BDEC6 /* SFVerificationCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFVerificationCodeView.m; sourceTree = "<group>"; };
-		0F85CE6321E4C527000BDEC6 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
 		0FA2A57B21C897B10035B333 /* RightImageButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RightImageButton.h; sourceTree = "<group>"; };
 		0FA2A57C21C897B10035B333 /* RightImageButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RightImageButton.m; sourceTree = "<group>"; };
 		0FA2A57E21C9D3040035B333 /* UserCenterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserCenterViewController.h; sourceTree = "<group>"; };
@@ -316,7 +353,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FF56B2721E4C95500891498 /* iflyMSC.framework in Frameworks */,
+				0F2FAAE621EC240C00E6BB83 /* libBaiduSpeechSDK.a in Frameworks */,
+				0F2FAABB21EC213F00E6BB83 /* libz.1.2.5.tbd in Frameworks */,
+				0F2FAAB921EC212700E6BB83 /* libc++.tbd in Frameworks */,
+				0F2FAAB721EC210E00E6BB83 /* libiconv.2.4.0.tbd in Frameworks */,
+				0F2FAAB521EC20FD00E6BB83 /* libsqlite3.0.tbd in Frameworks */,
 				1D71F247864DED889DD73337 /* Pods_MyFitness.framework in Frameworks */,
 				0F2AB59121BDF99F006FB503 /* BaiduTraceSDK.framework in Frameworks */,
 			);
@@ -328,9 +369,11 @@
 		0F2AB56221BDF1FD006FB503 = {
 			isa = PBXGroup;
 			children = (
+				0F2FAADB21EC224A00E6BB83 /* BDSClientResource */,
+				0F2FAABF21EC223000E6BB83 /* BDSClientHeaders */,
+				0F2FAABC21EC217A00E6BB83 /* BDSClientLib */,
 				0F4D041421E82CE00003DD5A /* custom_map.json */,
 				0F2AB5CE21BE326A006FB503 /* map_config.json */,
-				0F85CE6321E4C527000BDEC6 /* iflyMSC.framework */,
 				0F2AB59021BDF99F006FB503 /* BaiduTraceSDK.framework */,
 				0F2AB58921BDF6C4006FB503 /* mapapi.bundle */,
 				0F2AB56D21BDF1FD006FB503 /* MyFitness */,
@@ -560,6 +603,84 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		0F2FAABC21EC217A00E6BB83 /* BDSClientLib */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BDSClientLib;
+			sourceTree = "<group>";
+		};
+		0F2FAABF21EC223000E6BB83 /* BDSClientHeaders */ = {
+			isa = PBXGroup;
+			children = (
+				0F2FAAC021EC223000E6BB83 /* ASR */,
+				0F2FAACE21EC223000E6BB83 /* TTS */,
+			);
+			path = BDSClientHeaders;
+			sourceTree = "<group>";
+		};
+		0F2FAAC021EC223000E6BB83 /* ASR */ = {
+			isa = PBXGroup;
+			children = (
+				0F2FAAC121EC223000E6BB83 /* BDSWakeupParameters.h */,
+				0F2FAAC221EC223000E6BB83 /* BDSASRParameters.h */,
+				0F2FAAC321EC223000E6BB83 /* BDSEventManager.h */,
+				0F2FAAC421EC223000E6BB83 /* .gitIgnore */,
+				0F2FAAC521EC223000E6BB83 /* BDSUploaderDefines.h */,
+				0F2FAAC621EC223000E6BB83 /* BDSASRDefines.h */,
+				0F2FAAC721EC223000E6BB83 /* BDSUploaderParameters.h */,
+				0F2FAAC821EC223000E6BB83 /* BDSWakeupDefines.h */,
+				0F2FAAC921EC223000E6BB83 /* UIHeaders */,
+			);
+			path = ASR;
+			sourceTree = "<group>";
+		};
+		0F2FAAC921EC223000E6BB83 /* UIHeaders */ = {
+			isa = PBXGroup;
+			children = (
+				0F2FAACA21EC223000E6BB83 /* BDRecognizerViewParamsObject.h */,
+				0F2FAACB21EC223000E6BB83 /* BDRecognizerViewController.h */,
+				0F2FAACC21EC223000E6BB83 /* BDTheme.h */,
+				0F2FAACD21EC223000E6BB83 /* BDRecognizerViewDelegate.h */,
+			);
+			path = UIHeaders;
+			sourceTree = "<group>";
+		};
+		0F2FAACE21EC223000E6BB83 /* TTS */ = {
+			isa = PBXGroup;
+			children = (
+				0F2FAACF21EC223000E6BB83 /* BDSSynthesizerStatusNotifications.h */,
+				0F2FAAD021EC223000E6BB83 /* BDSSpeechSynthesizerDelegate.h */,
+				0F2FAAD121EC223000E6BB83 /* BDS_EttsModelManagerInterface.h */,
+				0F2FAAD221EC223000E6BB83 /* BDSBuiltInPlayer.h */,
+				0F2FAAD321EC223000E6BB83 /* BDSMixedModeSynthesizer.h */,
+				0F2FAAD421EC223000E6BB83 /* BDSSpeechSynthesizer.h */,
+				0F2FAAD521EC223000E6BB83 /* BDSSpeechSynthesizerParams.h */,
+				0F2FAAD621EC223000E6BB83 /* BDSSynthesizerLogLevel.h */,
+				0F2FAAD721EC223000E6BB83 /* BDSTTSEventManager.h */,
+				0F2FAAD821EC223000E6BB83 /* BDSSpeechSynthesizerErrors.h */,
+			);
+			path = TTS;
+			sourceTree = "<group>";
+		};
+		0F2FAADB21EC224A00E6BB83 /* BDSClientResource */ = {
+			isa = PBXGroup;
+			children = (
+				0F2FAADC21EC228A00E6BB83 /* TTS */,
+			);
+			path = BDSClientResource;
+			sourceTree = "<group>";
+		};
+		0F2FAADC21EC228A00E6BB83 /* TTS */ = {
+			isa = PBXGroup;
+			children = (
+				0F2FAADD21EC22FA00E6BB83 /* Chinese_And_English_Speech_DYY.dat */,
+				0F2FAADE21EC22FA00E6BB83 /* Chinese_And_English_Speech_Female.dat */,
+				0F2FAADF21EC22FA00E6BB83 /* Chinese_And_English_Text.dat */,
+			);
+			path = TTS;
+			sourceTree = "<group>";
+		};
 		0FE8B10321D06DB000AF75A4 /* AAChartKitLib */ = {
 			isa = PBXGroup;
 			children = (
@@ -672,6 +793,11 @@
 		ADCE325A1E6387576528670D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F2FAABD21EC221E00E6BB83 /* libBaiduSpeechSDK.a */,
+				0F2FAABA21EC213F00E6BB83 /* libz.1.2.5.tbd */,
+				0F2FAAB821EC212700E6BB83 /* libc++.tbd */,
+				0F2FAAB621EC210E00E6BB83 /* libiconv.2.4.0.tbd */,
+				0F2FAAB421EC20FD00E6BB83 /* libsqlite3.0.tbd */,
 				813B8380172CDC392FFEE040 /* Pods_MyFitness.framework */,
 			);
 			name = Frameworks;
@@ -745,17 +871,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FA2A58A21C9D8040035B333 /* FounctionTableCell.xib in Resources */,
+				0F2FAAD921EC223000E6BB83 /* .gitIgnore in Resources */,
 				0FA2EA1E21C342B400A3DC4E /* TrackTableCell.xib in Resources */,
 				0F2AB57B21BDF1FF006FB503 /* LaunchScreen.storyboard in Resources */,
 				0FA2A58F21C9DB420035B333 /* RecordTableCell.xib in Resources */,
+				0F2FAAE021EC22FA00E6BB83 /* Chinese_And_English_Speech_DYY.dat in Resources */,
 				0FE8B14321D06DB000AF75A4 /* AAJSFiles.bundle in Resources */,
 				0F6FD02E21CA19530083D590 /* BodyTableCell.xib in Resources */,
 				0F2AB58A21BDF6C4006FB503 /* mapapi.bundle in Resources */,
+				0F2FAAE221EC22FA00E6BB83 /* Chinese_And_English_Text.dat in Resources */,
 				0F6FD03321CA1BB80083D590 /* DescriptionHeaderView.xib in Resources */,
 				0F2AB5CF21BE326B006FB503 /* map_config.json in Resources */,
 				0FA2EA1421C339C100A3DC4E /* SummaryTableCell.xib in Resources */,
 				0FE8B16721D0AF8200AF75A4 /* start.m4a in Resources */,
 				0F2AB57821BDF1FF006FB503 /* Assets.xcassets in Resources */,
+				0F2FAAE121EC22FA00E6BB83 /* Chinese_And_English_Speech_Female.dat in Resources */,
 				0FA2EA1921C340ED00A3DC4E /* MonthSectionHeader.xib in Resources */,
 				0FA2A58521C9D4870035B333 /* AvatarTableCell.xib in Resources */,
 				0F2AB57621BDF1FD006FB503 /* Main.storyboard in Resources */,
@@ -1097,6 +1227,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BDSClientLib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickwang.MyFitness;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyFitness/MyFitness-Bridging-Header.h";
@@ -1126,6 +1260,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BDSClientLib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickwang.MyFitness;
 				PRODUCT_NAME = "$(TARGET_NAME)";

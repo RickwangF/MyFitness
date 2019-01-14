@@ -22,10 +22,14 @@
 #import "TrackDetailViewController.h"
 #import "UIColor+UIColor_Hex.h"
 #import "UIDevice+Type.h"
-#import "IFlyMSC/IFlyMSC.h"
 #import "SportParameter.h"
+#import "BDSSpeechSynthesizer.h"
 
-@interface CounterViewController ()<BTKTraceDelegate, BMKLocationManagerDelegate, AVAudioPlayerDelegate, IFlySpeechSynthesizerDelegate>
+static NSString * const AppID = @"15411830";
+static NSString * const APIKey = @"Ow3ZUB9sDqgMMftvQvYpUFVD";
+static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
+
+@interface CounterViewController ()<BTKTraceDelegate, BMKLocationManagerDelegate, AVAudioPlayerDelegate, BDSSpeechSynthesizerDelegate>
 
 @property (nonatomic, strong) UIButton *backBtn;
 
@@ -102,7 +106,7 @@
 	
 @property (nonatomic, strong) AVObject *trackRecord;
 
-@property (nonatomic, strong) IFlySpeechSynthesizer *synthesizer;
+@property (nonatomic, strong) BDSSpeechSynthesizer *synthesizer;
 
 @property (nonatomic, strong) NSMutableArray *alertIntArray;
 	
@@ -174,12 +178,23 @@
 }
 
 - (void)initSynthesizer{
-	_synthesizer = [IFlySpeechSynthesizer sharedInstance];
-	_synthesizer.delegate = self;
-	[_synthesizer setParameter:[IFlySpeechConstant TYPE_CLOUD] forKey:[IFlySpeechConstant ENGINE_TYPE]];
-	[_synthesizer setParameter:@"60" forKey:[IFlySpeechConstant VOLUME]];
-	[_synthesizer setParameter:@"aisjinger" forKey:[IFlySpeechConstant VOICE_NAME]];
-	[_synthesizer setParameter:nil forKey:[IFlySpeechConstant TTS_AUDIO_PATH]];
+	// 设置在线合成
+	[BDSSpeechSynthesizer setLogLevel:BDS_PUBLIC_LOG_VERBOSE];
+	_synthesizer = [BDSSpeechSynthesizer sharedInstance];
+	[_synthesizer setSynthesizerDelegate:self];
+	[_synthesizer setApiKey:APIKey withSecretKey:SecretKey];
+	[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+	
+	// 设置离线合成
+	NSString *engineSpeechData = [[NSBundle mainBundle] pathForResource:@"Chinese_And_English_Text.dat" ofType:@""];
+	NSString *speechData = [[NSBundle mainBundle] pathForResource:@"Chinese_And_English_Speech_DYY.dat" ofType:@""];
+	[_synthesizer loadOfflineEngine:engineSpeechData speechDataPath:speechData licenseFilePath:nil withAppCode:AppID];
+	
+	// 设置合成参数
+	[_synthesizer setSynthParam:@(BDS_SYNTHESIZER_SPEAKER_DYY) forKey:BDS_SYNTHESIZER_PARAM_SPEAKER];
+	[_synthesizer setSynthParam:@10 forKey:BDS_SYNTHESIZER_PARAM_ONLINE_REQUEST_TIMEOUT];
+	[_synthesizer setSynthParam:@6 forKey:BDS_SYNTHESIZER_PARAM_VOLUME];
+	
 }
 	
 - (void)initlocationManager{
@@ -255,7 +270,7 @@
 	}
 	
 	if (_synthesizer != nil) {
-		[_synthesizer startSpeaking:@"运动开始"];
+		 [_synthesizer speakSentence:@"运动开始" withError:nil];
 	}
 }
 	
@@ -264,8 +279,7 @@
 	[self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
 }
 
-- (void)dealloc
-{
+- (void)dealloc{
 	if (_timer) {
 		[_timer invalidate];
 		_timer = nil;
@@ -619,10 +633,6 @@
 	
 - (void)stopBtnClicked{
 	
-	if (_synthesizer != nil && !_mute) {
-		[self playVoiceAlertWithType:30000];
-	}
-	
 	_finishDate = [NSDate date];
 	[self stopService];
 	[_locationManager stopUpdatingLocation];
@@ -683,13 +693,13 @@
 - (void)playTimeVoiceAlert{
 	int minute = _targetTime;
 	NSString *speechString = [NSString stringWithFormat:@"目标%d分钟已完成", minute];
-	[_synthesizer startSpeaking:speechString];
+	[_synthesizer speakSentence:speechString withError:nil];
 }
 
 - (void)playDistanceVoiceAlert{
 	long intDistance = _targetDistance;
 	NSString *speechString = [NSString stringWithFormat:@"目标%ld公里已完成", intDistance];
-	[_synthesizer startSpeaking:speechString];
+	[_synthesizer speakSentence:speechString withError:nil];
 }
 
 /*
@@ -703,22 +713,22 @@
 - (void)playVoiceAlertWithType:(NSInteger)type{
 	switch (type) {
 		case 0:
-			[_synthesizer startSpeaking:@"运动开始"];
+			[_synthesizer speakSentence:@"运动开始" withError:nil];
 		break;
 		case 10000:
-			[_synthesizer startSpeaking:@"运动暂停"];
+			[_synthesizer speakSentence:@"运动暂停" withError:nil];
 		break;
 		case 20000:
-			[_synthesizer startSpeaking:@"运动继续"];
+			[_synthesizer speakSentence:@"运动继续" withError:nil];
 		break;
 		case 30000:
-			[_synthesizer startSpeaking:@"运动结束"];
+			[_synthesizer speakSentence:@"运动结束" withError:nil];
 		break;
 			
 		default:
 			if (_distance / 1000 > 0) {
 				int intDistance = round(_distance / 1000);
-				[_synthesizer startSpeaking:[NSString stringWithFormat:@"%d公里", intDistance]];
+				[_synthesizer speakSentence:[NSString stringWithFormat:@"%d公里", intDistance] withError:nil];
 			}
 			break;
 	}
@@ -745,18 +755,6 @@
 	[self refreshDisplayData];
 }
 
-#pragma mark - IFlySpeechSynthesizerDelegate
-
-// 语音合成结束
-- (void)onCompleted:(IFlySpeechError *)error{
-	[self.view makeToast:@"说完话了"];
-}
-
-// 语音合成开始
-- (void)onSpeakBegin{
-	[self.view makeToast:@"开始说话啦"];
-}
-	
 /*
 #pragma mark - Navigation
 
