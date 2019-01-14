@@ -194,7 +194,6 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	[_synthesizer setSynthParam:@(BDS_SYNTHESIZER_SPEAKER_DYY) forKey:BDS_SYNTHESIZER_PARAM_SPEAKER];
 	[_synthesizer setSynthParam:@10 forKey:BDS_SYNTHESIZER_PARAM_ONLINE_REQUEST_TIMEOUT];
 	[_synthesizer setSynthParam:@6 forKey:BDS_SYNTHESIZER_PARAM_VOLUME];
-	
 }
 	
 - (void)initlocationManager{
@@ -692,14 +691,38 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 
 - (void)playTimeVoiceAlert{
 	int minute = _targetTime;
-	NSString *speechString = [NSString stringWithFormat:@"目标%d分钟已完成", minute];
+	NSString *paceString = [self calculatePaceString];
+	NSString *speechString = [NSString stringWithFormat:@"目标%d分钟已完成, %@", minute, paceString];
 	[_synthesizer speakSentence:speechString withError:nil];
 }
 
 - (void)playDistanceVoiceAlert{
 	long intDistance = _targetDistance;
-	NSString *speechString = [NSString stringWithFormat:@"目标%ld公里已完成", intDistance];
+	NSString *paceString = [self calculatePaceString];
+	NSString *speechString = [NSString stringWithFormat:@"目标%ld公里已完成, %@", intDistance, paceString];
 	[_synthesizer speakSentence:speechString withError:nil];
+}
+
+- (void)playIntegerKilometerAlert:(int)kilo{
+	NSString *paceString = [self calculatePaceString];
+	NSString *alertString = [NSString stringWithFormat:@"已完成%d公里, %@", kilo, paceString];
+	[_synthesizer speakSentence:alertString withError:nil];
+}
+
+- (NSString*)calculatePaceString{
+	int minute = 0;
+	int second = 0;
+	
+	NSTimeInterval interval = [_timeCountingLabel getTimeCounted];
+	double paceSpeed = interval / (_distance / 1000);
+	minute = floor(paceSpeed/60);
+	second = round(paceSpeed - (minute*60));
+	
+	int min = floor(interval/60);
+	int sec = round(interval - (min*60));
+	
+	NSString *paceString = [NSString stringWithFormat:@"平均配速%d分%d秒, 用时%d分%d秒", minute, second, min, sec];
+	return paceString;
 }
 
 /*
@@ -727,8 +750,8 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 			
 		default:
 			if (_distance / 1000 > 0) {
-				int intDistance = round(_distance / 1000);
-				[_synthesizer speakSentence:[NSString stringWithFormat:@"%d公里", intDistance] withError:nil];
+				int intDistance = floor(_distance / 1000);
+				[self playIntegerKilometerAlert:intDistance];
 			}
 			break;
 	}

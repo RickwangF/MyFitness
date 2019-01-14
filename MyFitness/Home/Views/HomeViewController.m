@@ -358,7 +358,7 @@
 	_alertView.layer.masksToBounds = YES;
 	
 	UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 20)];
-	titleLabel.text = @"提醒设置";
+	titleLabel.text = @"目标设置";
 	titleLabel.textColor = UIColor.whiteColor;
 	titleLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightSemibold];
 	[_alertView addSubview:titleLabel];
