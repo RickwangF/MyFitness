@@ -24,6 +24,7 @@
 #import "UIDevice+Type.h"
 #import "SportParameter.h"
 #import "BDSSpeechSynthesizer.h"
+#import <Hero/Hero-Swift.h>
 
 static NSString * const AppID = @"15411830";
 static NSString * const APIKey = @"Ow3ZUB9sDqgMMftvQvYpUFVD";
@@ -109,6 +110,9 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 @property (nonatomic, strong) BDSSpeechSynthesizer *synthesizer;
 
 @property (nonatomic, strong) NSMutableArray *alertIntArray;
+
+// cover test
+@property (nonatomic, strong) UIView *coverView;
 	
 @end
 
@@ -168,6 +172,7 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	_startDate = [NSDate date];
 	_finishDate = [NSDate new];
 	_speed = 0;
+	_alertIntArray = [NSMutableArray new];
 	for (int i = 1; i <= 100; i++) {
 		if (_targetDistance != i) {
 			[_alertIntArray addObject:@(i)];
@@ -193,7 +198,7 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	// 设置合成参数
 	[_synthesizer setSynthParam:@(BDS_SYNTHESIZER_SPEAKER_DYY) forKey:BDS_SYNTHESIZER_PARAM_SPEAKER];
 	[_synthesizer setSynthParam:@10 forKey:BDS_SYNTHESIZER_PARAM_ONLINE_REQUEST_TIMEOUT];
-	[_synthesizer setSynthParam:@6 forKey:BDS_SYNTHESIZER_PARAM_VOLUME];
+	[_synthesizer setSynthParam:@9 forKey:BDS_SYNTHESIZER_PARAM_VOLUME];
 }
 	
 - (void)initlocationManager{
@@ -225,6 +230,7 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	self.isHeroEnabled = YES;
 	self.automaticallyAdjustsScrollViewInsets = NO;
 	[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 	
@@ -246,6 +252,9 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	_stopOriginY = 35;
 	
 	[self initPauseBtn];
+	
+	// cover test
+	//[self initCoverView];
 	// Do any additional setup after loading the view.
 }
 	
@@ -289,6 +298,24 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	
 	
 #pragma mark - Init Views
+
+- (void)initCoverView{
+	CGFloat centerX = self.view.frame.size.width / 2;
+	CGFloat centerY = self.view.frame.size.height / 2;
+	CGFloat coverOriX = centerX - 750;
+	CGFloat coverOriY = centerY - 750;
+	_coverView = [[UIView alloc] initWithFrame:CGRectMake(coverOriX, coverOriY, 1500, 1500)];
+	_coverView.heroID = @"start";
+	_coverView.backgroundColor = AppStyleSetting.sharedInstance.homeNaviBarTintColor;
+	_coverView.layer.cornerRadius = 750;
+	_coverView.layer.masksToBounds = YES;
+	[self.view addSubview:_coverView];
+	
+	[_coverView mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.center.equalTo(self.view);
+		make.width.height.equalTo(@1500);
+	}];
+}
 
 - (void)initBackgroundView{
 	_bottomBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 375, 200)];
@@ -648,7 +675,7 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 		_distance += pointsDistance;
 	}
 	
-	NSNumber *numDistance = [NSNumber numberWithDouble: round(_distance / 1000)];
+	NSNumber *numDistance = [NSNumber numberWithDouble: floor(_distance / 1000)];
 	
 	if (_synthesizer == nil){
 		return;
@@ -691,7 +718,7 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 
 - (void)playTimeVoiceAlert{
 	int minute = _targetTime;
-	NSString *paceString = [self calculatePaceString];
+	NSString *paceString = [self calculateTargetTimeDistanceString];
 	NSString *speechString = [NSString stringWithFormat:@"目标%d分钟已完成, %@", minute, paceString];
 	[_synthesizer speakSentence:speechString withError:nil];
 }
@@ -722,6 +749,20 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	int sec = round(interval - (min*60));
 	
 	NSString *paceString = [NSString stringWithFormat:@"平均配速%d分%d秒, 用时%d分%d秒", minute, second, min, sec];
+	return paceString;
+}
+
+- (NSString*)calculateTargetTimeDistanceString{
+	int minute = 0;
+	int second = 0;
+	
+	NSTimeInterval interval = [_timeCountingLabel getTimeCounted];
+	double paceSpeed = interval / (_distance / 1000);
+	minute = floor(paceSpeed/60);
+	second = round(paceSpeed - (minute*60));
+	
+	NSString *distanceString = [NSString stringWithFormat:@"%.1f公里", (_distance / 1000)];
+	NSString *paceString = [NSString stringWithFormat:@"平均配速%d分%d秒, 完成%@", minute, second, distanceString];
 	return paceString;
 }
 

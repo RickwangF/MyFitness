@@ -8,6 +8,7 @@
 
 #import "NavigationViewController.h"
 #import "CounterViewController.h"
+#import <Hero/Hero-Swift.h>
 
 @interface NavigationViewController ()<UIGestureRecognizerDelegate>
 
@@ -18,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.interactivePopGestureRecognizer.delegate = self;
+	self.isHeroEnabled = YES;
     // Do any additional setup after loading the view.
 }
 

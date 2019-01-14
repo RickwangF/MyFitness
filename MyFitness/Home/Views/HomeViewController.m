@@ -37,9 +37,10 @@
 #import "HomeStepperView.h"
 #import <FFPopup/FFPopup.h>
 #import "SportParameter.h"
+#import <Hero/Hero-Swift.h>
 
 
-@interface HomeViewController ()<BMKMapViewDelegate, BMKLocationManagerDelegate, SubViewControllerDelegate, CAPSPageMenuDelegate>
+@interface HomeViewController ()<BMKMapViewDelegate, BMKLocationManagerDelegate, SubViewControllerDelegate>
     
 @property (nonatomic, strong) BMKMapView *mapView;
 
@@ -284,6 +285,7 @@
 
 - (void)initStartBtn{
 	_startBtn = [[ShadowCircleButton alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+	_startBtn.heroID = @"start";
 	_startBtn.backgroundColor = AppStyleSetting.sharedInstance.mainColor;
 	[_startBtn setTitle:@"GO!" forState:UIControlStateNormal];
 	[_startBtn setTitleColor:AppStyleSetting.sharedInstance.textColor forState:UIControlStateNormal];
@@ -622,24 +624,6 @@
 		}
 		default:
 			break;
-	}
-}
-
-	
-#pragma mark - CAPSPageMenuDelegate
-- (void)didMoveToPage:(UIViewController *)controller index:(NSInteger)index{
-	switch (index) {
-		case 0:
-		_transportMode = TransportModeRunning;
-		break;
-		case 1:
-		_transportMode = TransportModeWalking;
-		break;
-		case 2:
-		_transportMode = TransportModeRiding;
-		break;
-		default:
-		break;
 	}
 }
 	
