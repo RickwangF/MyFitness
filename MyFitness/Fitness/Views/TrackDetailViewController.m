@@ -280,10 +280,10 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 	_mapView.showsUserLocation = NO;
 	_mapView.userTrackingMode = BMKUserTrackingModeNone;
 	if ([[UIDevice currentDevice] fullScreen]) {
-		_mapView.mapPadding = UIEdgeInsetsMake(40, 10, 210, 10);
+		_mapView.mapPadding = UIEdgeInsetsMake(10, 10, 210, 10);
 	}
 	else{
-		_mapView.mapPadding = UIEdgeInsetsMake(40, 10, 200, 10);
+		_mapView.mapPadding = UIEdgeInsetsMake(10, 10, 200, 10);
 	}
 	
 	_mapView.updateTargetScreenPtWhenMapPaddingChanged = YES;
@@ -776,7 +776,7 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 		return;
 	}
 	if (!_drawTrackFlag) {
-		if(_endIndex == 0 && _startIndex == 1){
+		if(_endIndex == 0){
 			_drawTrackFlag = YES;
 		}
 		[self drawTrack];
@@ -806,44 +806,42 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 }
 
 - (void)drawTrack{
-	CLLocationCoordinate2D array[2];
-	CLLocationCoordinate2D startPoint = {};
-	CLLocationCoordinate2D endPoint = {};
-	UIColor *startColor = [UIColor new];
-	UIColor *endColor = [UIColor new];
 	
-	if ( _mfLocations.count > 0) {
-		MFLocation *startLoc = _mfLocations[self.startIndex];
-		MFLocation *endLoc = _mfLocations[self.endIndex];
-		
-		startPoint = CLLocationCoordinate2DMake(startLoc.latitute, startLoc.longitude);
-		endPoint = CLLocationCoordinate2DMake(endLoc.latitute, endLoc.longitude);
-		
-		startColor = [UIColor colorWithRed:(startLoc.speed*6.375)/255 green:1.0 blue:70.0/255 alpha:1.0];
-		endColor = [UIColor colorWithRed:(endLoc.speed*6.375)/255 green:1.0 blue:70.0/255 alpha:1.0];
+	long number = _startIndex - _endIndex;
+	CLLocationCoordinate2D array[number];
+	// 新增纹理数组
+	NSMutableArray *textureIndexArray = [[NSMutableArray alloc] init];
+	int index = 0;
+	// 新增绘制逻辑
+	if (_mfLocations.count > 0) {
+		NSArray *subLocations = [[[[_mfLocations subarrayWithRange:NSMakeRange(_startIndex - number, number)] reverseObjectEnumerator] allObjects] mutableCopy];
+		for (MFLocation *loc in subLocations) {
+			CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(loc.latitute, loc.longitude);
+			UIColor *locColor = [UIColor colorWithRed:(loc.speed*6.375)/255 green:1.0 blue:70.0/255 alpha:1.0];
+			array[index] = coordinate;
+			[_sectionColorArray addObject:locColor];
+			[textureIndexArray addObject:@(index)];
+			index++;
+		}
 	}
 	else if (_locationArray.count > 0) {
-		CLLocation *startLoc = _locationArray[_startIndex];
-		CLLocation *endLoc = _locationArray[_endIndex];
-		
-		startPoint = CLLocationCoordinate2DMake(startLoc.coordinate.latitude, startLoc.coordinate.longitude);
-		endPoint = CLLocationCoordinate2DMake(endLoc.coordinate.latitude, endLoc.coordinate.longitude);
-		
-		startColor = [UIColor colorWithRed:(startLoc.speed*6.375)/255 green:1.0 blue:70.0/255 alpha:1.0];
-		endColor = [UIColor colorWithRed:(endLoc.speed*6.375)/255 green:1.0 blue:70.0/255 alpha:1.0];
+		NSArray *subLocations = [[[[_locationArray subarrayWithRange:NSMakeRange(_startIndex - number, number)] reverseObjectEnumerator] allObjects] mutableCopy];
+		for (CLLocation *loc in subLocations) {
+			CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(loc.coordinate.latitude, loc.coordinate.longitude);
+			UIColor *locColor = [UIColor colorWithRed:(loc.speed*6.375)/255 green:1.0 blue:70.0/255 alpha:1.0];
+			array[index] = coordinate;
+			[_sectionColorArray addObject:locColor];
+			[textureIndexArray addObject:@(index)];
+			index++;
+		}
 	}
 	
-	array[0] = startPoint;
-	array[1] = endPoint;
-	self.sectionColorArray = [NSMutableArray arrayWithObjects:startColor,endColor, nil];
-	
-	BMKPolyline *line = [BMKPolyline polylineWithCoordinates:array count:2 textureIndex:@[[NSNumber numberWithInt:0], [NSNumber numberWithInt:1]]];
+	BMKPolyline *line = [BMKPolyline polylineWithCoordinates:array count:number textureIndex:textureIndexArray];
 	
 	[self.mapView addOverlay:line];
 	[self mapView:self.mapView viewForOverlay:line];
 	
 	self.endIndex--;
-	self.startIndex--;
 }
 
 - (void)drawEndPoint{
