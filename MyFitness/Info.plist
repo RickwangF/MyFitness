@@ -37,6 +37,7 @@
 	<string>MyFitness需要使用麦克风</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>audio</string>
 		<string>location</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
