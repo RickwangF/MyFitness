@@ -580,7 +580,7 @@
 	CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform"];
 	CATransform3D transform = CATransform3DMakeScale(15.0, 15.0, 1.0);
 	animation.toValue = [NSValue valueWithCATransform3D:transform];
-	animation.duration = 2.0;
+	animation.duration = 1.0;
 	animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
 	animation.fillMode = kCAFillModeForwards;
 	animation.removedOnCompletion = NO;

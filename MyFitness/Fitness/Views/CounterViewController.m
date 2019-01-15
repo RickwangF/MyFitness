@@ -30,7 +30,7 @@ static NSString * const AppID = @"15411830";
 static NSString * const APIKey = @"Ow3ZUB9sDqgMMftvQvYpUFVD";
 static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 
-@interface CounterViewController ()<BTKTraceDelegate, BMKLocationManagerDelegate, AVAudioPlayerDelegate, BDSSpeechSynthesizerDelegate>
+@interface CounterViewController ()<BTKTraceDelegate, BMKLocationManagerDelegate, AVAudioPlayerDelegate, BDSSpeechSynthesizerDelegate, CAAnimationDelegate>
 
 @property (nonatomic, strong) UIButton *backBtn;
 
@@ -110,12 +110,14 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 @property (nonatomic, strong) NSMutableArray *alertIntArray;
 
 @property (nonatomic, strong) NSTimer *animationTimer;
-// cover test
+// cover
 @property (nonatomic, strong) UIView *coverView;
 
 @property (nonatomic, assign) NSInteger number;
 
 @property (nonatomic, strong) UILabel *numberLabel;
+
+@property (nonatomic, assign) BOOL finishCountDown;
 	
 @end
 
@@ -160,6 +162,7 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	}
 	_alertTime = NO;
 	_alertDistance = NO;
+	_finishCountDown = NO;
 }
 
 - (void)initSynthesizer{
@@ -249,23 +252,10 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	
 - (void)viewDidAppear:(BOOL)animated{
 	[super viewDidAppear:animated];
-	
+	[self.navigationController setNavigationBarHidden:YES animated:animated];
 	[self initResumeBtn];
 	[self initStopBtn];
-	
-	// 第一次加载的时候默认开始
-	if (_firstLoad) {
-		_firstLoad = NO;
-		[_timeCountingLabel start];
-		[_locationManager startUpdatingLocation];
-		[self startService];
-	}
-	
 	[self initAnimationTimer];
-	
-	//if (_synthesizer != nil) {
-	//	 [_synthesizer speakSentence:@"运动开始" withError:nil];
-	//}
 }
 	
 - (void)viewWillDisappear:(BOOL)animated{
@@ -308,7 +298,6 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 }
 
 - (void)setUpNavigationBar{
-
 	_backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
 	[_backBtn setImage:[UIImage imageNamed:@"left_22#ff"] forState:UIControlStateNormal];
 	[_backBtn addTarget:self action:@selector(backBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -503,13 +492,72 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	scaleAni.toValue = [NSValue valueWithCATransform3D:transform];
 	scaleAni.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
 	
-	CAAnimationGroup *group = [CAAnimationGroup animation];
+	CAAnimationGroup *group  = [CAAnimationGroup animation];
+	if (_number == 0) {
+		group.delegate = self;
+		_finishCountDown = YES;
+	}
 	group.animations = @[positionAni, opacityAni, scaleAni];
 	group.duration = 0.9;
 	group.fillMode = kCAFillModeRemoved;
 	group.removedOnCompletion = YES;
 	
-	[_numberLabel.layer addAnimation:group forKey:@"group"];
+	[_numberLabel.layer addAnimation:group forKey:@"countdown"];
+	
+	if (_synthesizer != nil) {
+		[_synthesizer speakSentence:_numberLabel.text withError:nil];
+	}
+}
+
+- (void)showShrinkCoverAnimation{
+	CGFloat oriX = self.view.frame.size.width / 2;
+	CGFloat oriY = (self.view.frame.size.height - 200) + 35 + 45;
+	
+	CABasicAnimation *positionAni = [CABasicAnimation animationWithKeyPath:@"position"];
+	positionAni.toValue = [NSValue valueWithCGPoint:CGPointMake(oriX, oriY)];
+	positionAni.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+	
+	CABasicAnimation *scaleAni = [CABasicAnimation animationWithKeyPath:@"transform"];
+	CATransform3D transform = CATransform3DMakeScale(0.09, 0.09, 1.0);
+	scaleAni.toValue = [NSValue valueWithCATransform3D:transform];
+	
+	CAAnimationGroup *group = [CAAnimationGroup animation];
+	group.delegate = self;
+	group.animations = @[positionAni, scaleAni];
+	group.duration = 0.5;
+	group.fillMode = kCAFillModeForwards;
+	group.removedOnCompletion = NO;
+	
+	[_coverView.layer addAnimation:group forKey:@"shrink"];
+}
+
+#pragma mark - CAAnimationDelegate
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
+	if (![anim isKindOfClass:CAAnimationGroup.class]) {
+		return;
+	}
+	
+	if (_finishCountDown) {
+		_finishCountDown = NO;
+		[self showShrinkCoverAnimation];
+	}
+	else{
+		[_coverView removeFromSuperview];
+		[self.navigationController setNavigationBarHidden:NO animated:YES];
+		_numberLabel = nil;
+		_coverView = nil;
+		// 第一次加载的时候默认开始
+		if (_firstLoad) {
+			_firstLoad = NO;
+			[_timeCountingLabel start];
+			[_locationManager startUpdatingLocation];
+			[self startService];
+		}
+		if (_synthesizer != nil) {
+			 [_synthesizer speakSentence:@"运动开始" withError:nil];
+		}
+	}
 }
 
 	
@@ -691,11 +739,14 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 }
 	
 - (void)stopBtnClicked{
-	
 	_finishDate = [NSDate date];
 	[self stopService];
 	[_locationManager stopUpdatingLocation];
 	
+	if (_distance < 100) {
+		[self.navigationController popViewControllerAnimated:YES];
+		return;
+	}
 	//正式代码
 	[self saveTrackRecord];
 }
