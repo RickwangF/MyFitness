@@ -280,10 +280,10 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 	_mapView.showsUserLocation = NO;
 	_mapView.userTrackingMode = BMKUserTrackingModeNone;
 	if ([[UIDevice currentDevice] fullScreen]) {
-		_mapView.mapPadding = UIEdgeInsetsMake(10, 10, 210, 10);
+		_mapView.mapPadding = UIEdgeInsetsMake(40, 10, 210, 10);
 	}
 	else{
-		_mapView.mapPadding = UIEdgeInsetsMake(10, 10, 200, 10);
+		_mapView.mapPadding = UIEdgeInsetsMake(40, 10, 200, 10);
 	}
 	
 	_mapView.updateTargetScreenPtWhenMapPaddingChanged = YES;
@@ -509,7 +509,7 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 						self.beginLocation = [[CLLocation alloc] initWithCoordinate:coordinate altitude:location.altitude horizontalAccuracy:0 verticalAccuracy:0 course:location.course speed:location.speed timestamp:[NSDate dateFromString:location.timestamp]];
 					}
 				}];
-				
+				// 数组的最后一个点是起点，第一个点是终点
 				self.startIndex = self.mfLocations.count - 1;
 				self.endIndex = self.mfLocations.count - 2;
 				
@@ -724,8 +724,23 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 - (BMKCoordinateRegion)minMaxRegionToCoordinateRegion{
 	RegionInsets regionInsets = [self getMinMaxRegionCoordinate];
 	CLLocationCoordinate2D center = CLLocationCoordinate2DMake((regionInsets.maxLatitude + regionInsets.minLatitude)/2, (regionInsets.maxLongitude+regionInsets.minLongitude)/2);
-	CLLocationDegrees latitudeOffset = fabs(center.latitude - regionInsets.minLatitude)*2 + 0.03;
-	CLLocationDegrees longitudeOffset = fabs(center.longitude-regionInsets.minLongitude)*2 + 0.03;
+	CLLocationDegrees latitudeOffset = fabs(center.latitude - regionInsets.minLatitude)*2;
+	CLLocationDegrees longitudeOffset = fabs(center.longitude-regionInsets.minLongitude)*2;
+	
+	if (latitudeOffset < 0.01) {
+		latitudeOffset += 0.005;
+	}
+	else{
+		latitudeOffset += 0.03;
+	}
+	
+	if (longitudeOffset < 0.01) {
+		longitudeOffset += 0.005;
+	}
+	else{
+		longitudeOffset += 0.03;
+	}
+	
 	BMKCoordinateSpan span = {latitudeOffset, longitudeOffset};
 	BMKCoordinateRegion region = {center, span};
 	return region;

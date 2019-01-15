@@ -560,41 +560,8 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	}
 }
 
-	
-#pragma mark - Action
+#pragma mark - Save Record
 
-- (void)animationTimerIsCounting{
-	[self showCountDownAnimation];
-}
-
-- (void)backBtnClicked:(UIButton*)sender{
-	[self.navigationController popViewControllerAnimated:YES];
-}
-	
-- (void)startService{
-	NSString *userName = [AVUser currentUser].username;
-	BTKStartServiceOption *opt = [[BTKStartServiceOption alloc] initWithEntityName:userName];
-	[[BTKAction sharedInstance] startService:opt delegate:self];
-	[[BTKAction sharedInstance] startGather:self];
-	[self.view makeToast:@"开始服务并开始采集轨迹"];
-}
-	
-- (void)stopGather{
-	[[BTKAction sharedInstance] stopGather:self];
-	[self.view makeToast:@"停止采集轨迹"];
-}
-	
-- (void)startGather{
-	[[BTKAction sharedInstance] startGather:self];
-	[self.view makeToast:@"开始采集轨迹"];
-}
-	
-- (void)stopService{
-	[[BTKAction sharedInstance] stopGather:self];
-	[[BTKAction sharedInstance] stopService:self];
-	[self.view makeToast:@"关闭轨迹采集服务"];
-}
-	
 - (void)constructTrackRecord{
 	// 创建类名是TrackRecord的AVObject
 	_trackRecord = [AVObject objectWithClassName:@"TrackRecord"];
@@ -666,7 +633,7 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	[_trackRecord setObject:[NSNumber numberWithDouble:carbon] forKey:@"carbonSaving"];
 	[_trackRecord setObject:[NSNumber numberWithInt: _transportMode] forKey:@"transportMode"];
 }
-	
+
 - (void)saveTrackRecord{
 	// 构造轨迹记录模型
 	[self constructTrackRecord];
@@ -689,6 +656,126 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	}];
 }
 
+#pragma mark - Method
+
+// 目标时间的定时器
+- (void)timerIsCounting{
+	if (_synthesizer == nil) {
+		[_timer invalidate];
+		_timer = nil;
+	}
+	
+	NSTimeInterval counted = [_timeCountingLabel getTimeCounted];
+	if (_targetTime > 0 && counted >= _targetTime*60 && !_alertTime) {
+		_alertTime = YES;
+		[_timer invalidate];
+		_timer = nil;
+		
+		if (_synthesizer == nil) {
+			return;
+		}
+		
+		[self playTimeVoiceAlert];
+	}
+}
+
+// 执行倒计时动画的计时器
+- (void)animationTimerIsCounting{
+	[self showCountDownAnimation];
+}
+
+// 计算里程
+- (void)calculateDistance{
+	CLLocation *last = _lastLocation.location;
+	CLLocation *current = _currentLocation.location;
+	CLLocationDistance pointsDistance = [current distanceFromLocation:last];
+	if (pointsDistance > 0) {
+		_distance += pointsDistance;
+	}
+	
+	NSNumber *numDistance = [NSNumber numberWithDouble: floor(_distance / 1000)];
+	
+	if (_synthesizer == nil){
+		return;
+	}
+	
+	if ([_alertIntArray containsObject: numDistance]) {
+		[_alertIntArray removeObject:numDistance];
+		[self playVoiceAlertWithType: [numDistance integerValue]];
+	}
+	if (_targetDistance > 0 && _distance >= _targetDistance*1000 && !_alertDistance) {
+		_alertDistance = YES;
+		[self playDistanceVoiceAlert];
+	}
+}
+
+// 刷新显示信息
+- (void)refreshDisplayData{
+	_distanceLabel.text = [NSString stringWithFormat:@"%.2f", _distance / 1000];
+	_speedLabel.text = [NSString stringWithFormat:@"%.1f", _speed];
+}
+
+// 组织平均配速的文字信息
+- (NSString*)calculatePaceString{
+	int minute = 0;
+	int second = 0;
+	
+	NSTimeInterval interval = [_timeCountingLabel getTimeCounted];
+	double paceSpeed = interval / (_distance / 1000);
+	minute = floor(paceSpeed/60);
+	second = round(paceSpeed - (minute*60));
+	
+	int min = floor(interval/60);
+	int sec = round(interval - (min*60));
+	
+	NSString *paceString = [NSString stringWithFormat:@"平均配速%d分%d秒, 用时%d分%d秒", minute, second, min, sec];
+	return paceString;
+}
+
+// 组织目标时间玩完成里程的文字信息
+- (NSString*)calculateTargetTimeDistanceString{
+	int minute = 0;
+	int second = 0;
+	
+	NSTimeInterval interval = [_timeCountingLabel getTimeCounted];
+	double paceSpeed = interval / (_distance / 1000);
+	minute = floor(paceSpeed/60);
+	second = round(paceSpeed - (minute*60));
+	
+	NSString *distanceString = [NSString stringWithFormat:@"%.1f公里", (_distance / 1000)];
+	NSString *paceString = [NSString stringWithFormat:@"平均配速%d分%d秒, 完成%@", minute, second, distanceString];
+	return paceString;
+}
+	
+#pragma mark - Action
+
+- (void)backBtnClicked:(UIButton*)sender{
+	[self.navigationController popViewControllerAnimated:YES];
+}
+	
+- (void)startService{
+	NSString *userName = [AVUser currentUser].username;
+	BTKStartServiceOption *opt = [[BTKStartServiceOption alloc] initWithEntityName:userName];
+	[[BTKAction sharedInstance] startService:opt delegate:self];
+	[[BTKAction sharedInstance] startGather:self];
+	[self.view makeToast:@"开始服务并开始采集轨迹"];
+}
+	
+- (void)stopGather{
+	[[BTKAction sharedInstance] stopGather:self];
+	[self.view makeToast:@"停止采集轨迹"];
+}
+	
+- (void)startGather{
+	[[BTKAction sharedInstance] startGather:self];
+	[self.view makeToast:@"开始采集轨迹"];
+}
+	
+- (void)stopService{
+	[[BTKAction sharedInstance] stopGather:self];
+	[[BTKAction sharedInstance] stopService:self];
+	[self.view makeToast:@"关闭轨迹采集服务"];
+}
 	
 - (void)pauseBtnClicked:(UIButton*)sender{
 	[_timeCountingLabel pause];
@@ -750,55 +837,8 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	//正式代码
 	[self saveTrackRecord];
 }
-	
-- (void)calculateDistance{
-	CLLocation *last = _lastLocation.location;
-	CLLocation *current = _currentLocation.location;
-	CLLocationDistance pointsDistance = [current distanceFromLocation:last];
-	if (pointsDistance > 0) {
-		_distance += pointsDistance;
-	}
-	
-	NSNumber *numDistance = [NSNumber numberWithDouble: floor(_distance / 1000)];
-	
-	if (_synthesizer == nil){
-		return;
-	}
-	
-	if ([_alertIntArray containsObject: numDistance]) {
-		[_alertIntArray removeObject:numDistance];
-		[self playVoiceAlertWithType: [numDistance integerValue]];
-	}
-	if (_targetDistance > 0 && _distance >= _targetDistance*1000 && !_alertDistance) {
-		_alertDistance = YES;
-		[self playDistanceVoiceAlert];
-	}
-}
-	
-- (void)refreshDisplayData{
-	_distanceLabel.text = [NSString stringWithFormat:@"%.2f", _distance / 1000];
-	_speedLabel.text = [NSString stringWithFormat:@"%.1f", _speed];
-}
 
-- (void)timerIsCounting{
-	if (_synthesizer == nil) {
-		[_timer invalidate];
-		_timer = nil;
-	}
-	
-	NSTimeInterval counted = [_timeCountingLabel getTimeCounted];
-	if (_targetTime > 0 && counted >= _targetTime*60 && !_alertTime) {
-		_alertTime = YES;
-		[_timer invalidate];
-		_timer = nil;
-		
-		if (_synthesizer == nil) {
-			return;
-		}
-		
-		[self playTimeVoiceAlert];
-	}
-}
+#pragma mark - Play Voice Alert
 
 - (void)playTimeVoiceAlert{
 	int minute = _targetTime;
@@ -818,36 +858,6 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	NSString *paceString = [self calculatePaceString];
 	NSString *alertString = [NSString stringWithFormat:@"已完成%d公里, %@", kilo, paceString];
 	[_synthesizer speakSentence:alertString withError:nil];
-}
-
-- (NSString*)calculatePaceString{
-	int minute = 0;
-	int second = 0;
-	
-	NSTimeInterval interval = [_timeCountingLabel getTimeCounted];
-	double paceSpeed = interval / (_distance / 1000);
-	minute = floor(paceSpeed/60);
-	second = round(paceSpeed - (minute*60));
-	
-	int min = floor(interval/60);
-	int sec = round(interval - (min*60));
-	
-	NSString *paceString = [NSString stringWithFormat:@"平均配速%d分%d秒, 用时%d分%d秒", minute, second, min, sec];
-	return paceString;
-}
-
-- (NSString*)calculateTargetTimeDistanceString{
-	int minute = 0;
-	int second = 0;
-	
-	NSTimeInterval interval = [_timeCountingLabel getTimeCounted];
-	double paceSpeed = interval / (_distance / 1000);
-	minute = floor(paceSpeed/60);
-	second = round(paceSpeed - (minute*60));
-	
-	NSString *distanceString = [NSString stringWithFormat:@"%.1f公里", (_distance / 1000)];
-	NSString *paceString = [NSString stringWithFormat:@"平均配速%d分%d秒, 完成%@", minute, second, distanceString];
-	return paceString;
 }
 
 /*
