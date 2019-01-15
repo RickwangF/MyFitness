@@ -38,9 +38,10 @@
 #import <FFPopup/FFPopup.h>
 #import "SportParameter.h"
 #import <Hero/Hero-Swift.h>
+#import "RoundSolidView.h"
 
 
-@interface HomeViewController ()<BMKMapViewDelegate, BMKLocationManagerDelegate, SubViewControllerDelegate>
+@interface HomeViewController ()<BMKMapViewDelegate, BMKLocationManagerDelegate, SubViewControllerDelegate, CAAnimationDelegate>
     
 @property (nonatomic, strong) BMKMapView *mapView;
 
@@ -61,6 +62,8 @@
 @property (nonatomic, strong) HomeStepperView *timeStepper;
 
 @property (nonatomic, strong) UIView *alertView;
+
+@property (nonatomic, strong) RoundSolidView *coverView;
 
 @property (nonatomic, strong) BMKLocationManager *locationManager;
     
@@ -152,6 +155,8 @@
 	[self initLeftSideViewController];
 	
 	[self initAlertView];
+	
+	[self initCoverView];
 	
 	[_locationManager startUpdatingHeading];
 	[_locationManager startUpdatingLocation];
@@ -285,7 +290,7 @@
 
 - (void)initStartBtn{
 	_startBtn = [[ShadowCircleButton alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-	_startBtn.heroID = @"start";
+	//_startBtn.heroID = @"start";
 	_startBtn.backgroundColor = AppStyleSetting.sharedInstance.mainColor;
 	[_startBtn setTitle:@"GO!" forState:UIControlStateNormal];
 	[_startBtn setTitleColor:AppStyleSetting.sharedInstance.textColor forState:UIControlStateNormal];
@@ -421,6 +426,18 @@
 	}];
 }
 
+- (void)initCoverView{
+	_coverView = [[RoundSolidView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+	_coverView.alpha = 0;
+	[self.view addSubview:_coverView];
+	
+	[_coverView mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.bottom.equalTo(self.view).offset(-65);
+		make.centerX.equalTo(self.view);
+		make.width.height.equalTo(@100);
+	}];
+}
+
 #pragma mark - Request
 
 - (void)getTodayDistance{
@@ -507,13 +524,16 @@
 		return;
 	}
 	
-	NSInteger distance = [_distanceStepper getNumber];
-	NSInteger time = [_timeStepper getNumber];
+	_coverView.alpha = 1;
+	[self showCoverAnimation];
 	
-	SportParameter *param = [[SportParameter alloc] initWithTransportMode:_transportMode Mute:_mute Distance:distance Time:time];
+	//NSInteger distance = [_distanceStepper getNumber];
+	//NSInteger time = [_timeStepper getNumber];
 	
-	CounterViewController *counterVC = [[CounterViewController alloc] initWithSportParameter:param];
-	[self.navigationController pushViewController:counterVC animated:YES];
+	//SportParameter *param = [[SportParameter alloc] initWithTransportMode:_transportMode Mute:_mute Distance:distance Time:time];
+	
+	//CounterViewController *counterVC = [[CounterViewController alloc] initWithSportParameter:param];
+	//[self.navigationController pushViewController:counterVC animated:YES];
 }
 
 - (void)muteBtnClicked:(UIButton*)sender{
@@ -542,6 +562,39 @@
 	popup.shouldDismissOnBackgroundTouch = YES;
 	popup.shouldDismissOnContentTouch = NO;
 	[popup showWithLayout:layout];
+}
+
+- (void)openCounterView{
+	NSInteger distance = [_distanceStepper getNumber];
+	NSInteger time = [_timeStepper getNumber];
+	
+	SportParameter *param = [[SportParameter alloc] initWithTransportMode:_transportMode Mute:_mute Distance:distance Time:time];
+	
+	CounterViewController *counterVC = [[CounterViewController alloc] initWithSportParameter:param];
+	[self.navigationController pushViewController:counterVC animated:NO];
+}
+
+#pragma mark - Animation
+
+- (void)showCoverAnimation{
+	CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform"];
+	CATransform3D transform = CATransform3DMakeScale(15.0, 15.0, 1.0);
+	animation.toValue = [NSValue valueWithCATransform3D:transform];
+	animation.duration = 2.0;
+	animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+	animation.fillMode = kCAFillModeForwards;
+	animation.removedOnCompletion = NO;
+	animation.delegate = self;
+	[_coverView.layer addAnimation:animation forKey:@"scale"];
+}
+
+#pragma mark - CAAnimationDelegate
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
+	[self openCounterView];
+	
+	[_coverView.layer removeAnimationForKey:@"scale"];
+	_coverView.alpha = 0;
 }
     
 #pragma mark - BMKMapViewDelegate

@@ -13,8 +13,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CounterViewController : UIViewController
-	
-- (instancetype)initWithTransportMode:(TransportModeEnum)mode Mute:(BOOL)mute;
 
 - (instancetype)initWithSportParameter:(SportParameter*)param;
 

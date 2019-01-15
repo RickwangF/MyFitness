@@ -86,8 +86,6 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 // 时间提醒已播报
 @property (nonatomic, assign) BOOL alertTime;
 
-@property (nonatomic, assign) NSInteger number;
-
 @property (nonatomic, strong) NSTimer *timer;
 	
 @property (nonatomic, assign) BOOL firstLoad;
@@ -111,37 +109,19 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 
 @property (nonatomic, strong) NSMutableArray *alertIntArray;
 
+@property (nonatomic, strong) NSTimer *animationTimer;
 // cover test
 @property (nonatomic, strong) UIView *coverView;
+
+@property (nonatomic, assign) NSInteger number;
+
+@property (nonatomic, strong) UILabel *numberLabel;
 	
 @end
 
 @implementation CounterViewController
 
 #pragma  mark - Init
-	
-- (instancetype)init{
-	self = [super initWithNibName:nil bundle:nil];
-	if (self) {
-		_transportMode = TransportModeWalking;
-		_mute = YES;
-		[self initValueProperty];
-	}
-	return self;
-}
-	
-- (instancetype)initWithTransportMode:(TransportModeEnum)mode Mute:(BOOL)mute{
-	self = [super initWithNibName:nil bundle:nil];
-	if (self) {
-		_transportMode = mode;
-		_mute = mute;
-		if (!_mute) {
-			[self initSynthesizer];
-		}
-		[self initValueProperty];
-	}
-	return self;
-}
 
 - (instancetype)initWithSportParameter:(SportParameter*)param{
 	self = [super initWithNibName:nil bundle:nil];
@@ -218,6 +198,11 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	_timer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(timerIsCounting) userInfo:nil repeats:YES];
 	[[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
 }
+
+- (void)initAnimationTimer{
+	_animationTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(animationTimerIsCounting) userInfo:nil repeats:YES];
+	[[NSRunLoop currentRunLoop] addTimer:_animationTimer forMode:NSRunLoopCommonModes];
+}
 	
 #pragma mark - Lift Circle
 	
@@ -230,7 +215,6 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	self.isHeroEnabled = YES;
 	self.automaticallyAdjustsScrollViewInsets = NO;
 	[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 	
@@ -254,7 +238,7 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	[self initPauseBtn];
 	
 	// cover test
-	//[self initCoverView];
+	[self initCoverView];
 	// Do any additional setup after loading the view.
 }
 	
@@ -277,9 +261,11 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 		[self startService];
 	}
 	
-	if (_synthesizer != nil) {
-		 [_synthesizer speakSentence:@"运动开始" withError:nil];
-	}
+	[self initAnimationTimer];
+	
+	//if (_synthesizer != nil) {
+	//	 [_synthesizer speakSentence:@"运动开始" withError:nil];
+	//}
 }
 	
 - (void)viewWillDisappear:(BOOL)animated{
@@ -292,30 +278,14 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 		[_timer invalidate];
 		_timer = nil;
 	}
+	
+	if (_animationTimer) {
+		[_animationTimer invalidate];
+		_animationTimer = nil;
+	}
 }
-	
-#pragma mark - Animation
-	
-	
-#pragma mark - Init Views
 
-- (void)initCoverView{
-	CGFloat centerX = self.view.frame.size.width / 2;
-	CGFloat centerY = self.view.frame.size.height / 2;
-	CGFloat coverOriX = centerX - 750;
-	CGFloat coverOriY = centerY - 750;
-	_coverView = [[UIView alloc] initWithFrame:CGRectMake(coverOriX, coverOriY, 1500, 1500)];
-	_coverView.heroID = @"start";
-	_coverView.backgroundColor = AppStyleSetting.sharedInstance.homeNaviBarTintColor;
-	_coverView.layer.cornerRadius = 750;
-	_coverView.layer.masksToBounds = YES;
-	[self.view addSubview:_coverView];
-	
-	[_coverView mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.center.equalTo(self.view);
-		make.width.height.equalTo(@1500);
-	}];
-}
+#pragma mark - Init Views
 
 - (void)initBackgroundView{
 	_bottomBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 375, 200)];
@@ -483,8 +453,71 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	_stopBtn.alpha = 0;
 	[_bottomBackgroundView addSubview:_stopBtn];
 }
+
+- (void)initCoverView{
+	CGFloat centerX = self.view.center.x;
+	CGFloat centerY = self.view.center.y;
+	
+	CGFloat oriCoverX = centerX - 500;
+	CGFloat oriCoverY = centerY - 500;
+	
+	_coverView = [[UIView alloc] initWithFrame:CGRectMake(oriCoverX, oriCoverY, 1000, 1000)];
+	_coverView.backgroundColor = AppStyleSetting.sharedInstance.homeNaviBarTintColor;
+	_coverView.layer.cornerRadius = 500;
+	_coverView.layer.masksToBounds = YES;
+	[self.view addSubview:_coverView];
+	
+	CGFloat oriNumberX = 500 - 25;
+	CGFloat oriNumberY = 500 - (self.view.frame.size.height/2) + 150;
+	_numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(oriNumberX, oriNumberY, 50, 50)];
+	_numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_number];
+	_numberLabel.textColor = AppStyleSetting.sharedInstance.textColor;
+	_numberLabel.font = [UIFont systemFontOfSize:50 weight:UIFontWeightSemibold];
+	_numberLabel.textAlignment = NSTextAlignmentCenter;
+	_numberLabel.layer.opacity = 0;
+	_numberLabel.opaque = NO;
+	[_coverView addSubview:_numberLabel];
+}
+
+#pragma mark - Animation
+
+- (void)showCountDownAnimation{
+	if (_number <= 1) {
+		[_animationTimer invalidate];
+		_animationTimer = nil;
+	}
+	
+	_numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_number];
+	_number--;
+	
+	CABasicAnimation *positionAni = [CABasicAnimation animationWithKeyPath:@"position"];
+	positionAni.toValue = [NSValue valueWithCGPoint:CGPointMake(500, 500)];
+	positionAni.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+	
+	CABasicAnimation *opacityAni = [CABasicAnimation animationWithKeyPath:@"opacity"];
+	opacityAni.toValue = [NSNumber numberWithFloat:1.0];
+	opacityAni.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+	
+	CABasicAnimation *scaleAni = [CABasicAnimation animationWithKeyPath:@"transform"];
+	CATransform3D transform = CATransform3DMakeScale(4.0, 4.0, 1.0);
+	scaleAni.toValue = [NSValue valueWithCATransform3D:transform];
+	scaleAni.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+	
+	CAAnimationGroup *group = [CAAnimationGroup animation];
+	group.animations = @[positionAni, opacityAni, scaleAni];
+	group.duration = 0.9;
+	group.fillMode = kCAFillModeRemoved;
+	group.removedOnCompletion = YES;
+	
+	[_numberLabel.layer addAnimation:group forKey:@"group"];
+}
+
 	
 #pragma mark - Action
+
+- (void)animationTimerIsCounting{
+	[self showCountDownAnimation];
+}
 
 - (void)backBtnClicked:(UIButton*)sender{
 	[self.navigationController popViewControllerAnimated:YES];

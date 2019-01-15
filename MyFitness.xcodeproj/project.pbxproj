@@ -49,6 +49,7 @@
 		0F2FAAE121EC22FA00E6BB83 /* Chinese_And_English_Speech_Female.dat in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FAADE21EC22FA00E6BB83 /* Chinese_And_English_Speech_Female.dat */; };
 		0F2FAAE221EC22FA00E6BB83 /* Chinese_And_English_Text.dat in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FAADF21EC22FA00E6BB83 /* Chinese_And_English_Text.dat */; };
 		0F2FAAE621EC240C00E6BB83 /* libBaiduSpeechSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FAABD21EC221E00E6BB83 /* libBaiduSpeechSDK.a */; };
+		0F2FAB0D21ED6BEB00E6BB83 /* RoundSolidView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FAB0C21ED6BEB00E6BB83 /* RoundSolidView.m */; };
 		0F37102A21C0F21E00C334C8 /* ShadowCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102921C0F21E00C334C8 /* ShadowCircleButton.m */; };
 		0F37102D21C0FEE100C334C8 /* LeftSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102C21C0FEE100C334C8 /* LeftSideViewController.m */; };
 		0F37103021C101B000C334C8 /* ButtonItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102F21C101B000C334C8 /* ButtonItemView.m */; };
@@ -224,6 +225,8 @@
 		0F2FAADD21EC22FA00E6BB83 /* Chinese_And_English_Speech_DYY.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chinese_And_English_Speech_DYY.dat; sourceTree = "<group>"; };
 		0F2FAADE21EC22FA00E6BB83 /* Chinese_And_English_Speech_Female.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chinese_And_English_Speech_Female.dat; sourceTree = "<group>"; };
 		0F2FAADF21EC22FA00E6BB83 /* Chinese_And_English_Text.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chinese_And_English_Text.dat; sourceTree = "<group>"; };
+		0F2FAB0B21ED6BEB00E6BB83 /* RoundSolidView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoundSolidView.h; sourceTree = "<group>"; };
+		0F2FAB0C21ED6BEB00E6BB83 /* RoundSolidView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoundSolidView.m; sourceTree = "<group>"; };
 		0F37102821C0F21E00C334C8 /* ShadowCircleButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShadowCircleButton.h; sourceTree = "<group>"; };
 		0F37102921C0F21E00C334C8 /* ShadowCircleButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShadowCircleButton.m; sourceTree = "<group>"; };
 		0F37102B21C0FEE100C334C8 /* LeftSideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeftSideViewController.h; sourceTree = "<group>"; };
@@ -503,6 +506,8 @@
 				0FE8B16B21D0D05500AF75A4 /* HomeStepperView.m */,
 				0F85CE5D21E37421000BDEC6 /* LoginItemView.h */,
 				0F85CE5E21E37421000BDEC6 /* LoginItemView.m */,
+				0F2FAB0B21ED6BEB00E6BB83 /* RoundSolidView.h */,
+				0F2FAB0C21ED6BEB00E6BB83 /* RoundSolidView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1030,6 +1035,7 @@
 				0F2AB5DF21BE8BEB006FB503 /* RegisterViewController.m in Sources */,
 				0FE8B15F21D06DB000AF75A4 /* AAOptions.m in Sources */,
 				0FE8B14521D06DB000AF75A4 /* AALabels.m in Sources */,
+				0F2FAB0D21ED6BEB00E6BB83 /* RoundSolidView.m in Sources */,
 				0FE8B14C21D06DB000AF75A4 /* AATooltip.m in Sources */,
 				0F2AB5E321BF59E7006FB503 /* TrackDetailViewController.m in Sources */,
 				0FE8B15721D06DB000AF75A4 /* AALegend.m in Sources */,
