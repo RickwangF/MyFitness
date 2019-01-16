@@ -15,6 +15,7 @@
 	_containerView.layer.cornerRadius = 10;
 	_containerView.clipsToBounds = YES;
 	_topImageView.contentMode = UIViewContentModeScaleAspectFill;
+	self.selectionStyle = UITableViewCellSelectionStyleNone;
     // Initialization code
 }
 

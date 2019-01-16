@@ -15,6 +15,7 @@
 #import "AppStyleSetting.h"
 #import <SDWebImage//UIImageView+WebCache.h>
 #import "CooperationTableCell.h"
+#import "CooperationDetailViewController.h"
 
 @interface CooperationViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -52,7 +53,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithUIColor:UIColor.whiteColor] forBarMetrics:UIBarMetricsDefault];
+	self.navigationItem.backBarButtonItem = [UIBarButtonItem new];
 	self.title = @"合作伙伴";
 	
 	[self initCooerateTableView];
@@ -67,19 +69,21 @@
 
 - (void)insertData{
 	
-	NSString *title = @"全新国产宝马3系长轴距版官图发布";
-	NSString *content1 = @"日前，华晨宝马官方发布了全新一代3系长轴距版车型（代号G28）的官图。此次官图仅展示了M运动套件版本车型的造型，其沿用了海外版的设计。根据此前官方透露的信息，新车将于今年5月在华晨宝马铁西工厂正式投产。另据相关消息源透露，全新3系标准轴距版车型也将继续国产。";
-	NSString *content2 = @"作为国产长轴距版本，全新3系Li基本沿用了海外版全新3系标准轴距版车型的设计风格，锐利的LED前大灯组与尺寸经过加大的亮黑色双肾式前格栅相接，搭配更加夸张的前包围进气口和更具立体感的线条，营造出了极为动感的车头造型。";
-	NSString *content3 = @"虽然经过了加长，但新车侧面比例仍然协调，线条舒展而流畅。相比于现款车型，全新3系Li车型C柱处最新样式的霍夫迈斯特拐角取消了现款长轴距版专属的“小尾巴”造型，不再特殊。而在车尾部分，新车采用了平直锋利的尾灯组轮廓，内部L形的红色灯带营造出了凌厉的视觉效果。与此同时，M套件版本还拥有分色处理的黑色饰板及两侧的通风孔造型，搭配小型扰流板、双边共两出排气布局，视觉效果更为出色。";
-	NSString *content4 = @"此前我们已经曝光了新车的申报信息。在尺寸方面，全新3系Li的长宽高分别为4829/1827/1463mm，轴距为2961mm，整体尺寸相较于现款3系长轴距版得到了全面提升。而相比海外版车型，全新3系长轴距版的轴距有着110mm的大幅度增加。";
-	NSString *content5 = @"其它配置方面，新车还将根据车型配置的不同，提供普通版前/后包围、镀铬前格栅、车身同色或黑色外后视镜外壳、倒车影像/全景影像、多种样式轮圈以及不同车身标识等。动力方面，目前已经申报的全新3系Li搭载的是B48B20B型2.0T发动机，其最大功率与现款320i/Li同为184马力，但尾标已经变为了325Li。关于全新3系更多动力车型和配置方面的信息，我们也将持续关注。";
-	NSString *content6 = @"";
-	NSString *imageUrl = @"http://lc-gytbbdn5.cn-n1.lcfile.com/fb17f4c87cf7500fb727.JPG";
+	NSString *title = @"华为Mate20Pro新配色发布";
+	NSString *content1 = @"在泛审美爆发的今天，不论奢侈名品还是科技尖货，都在追寻着时尚的脚步。夯实品质的前提下，还要力求满足大众对产品外观的审美需求，只有经过潮流无数次冲刷后，留下的色彩才能称之为经典。正如经典的红蓝双色，诠释的不仅是色彩界的最佳CP，更蕴含着感性与理性的双面内涵。";
+	NSString *content2 = @"2019年1月10日，华为Mate 20 Pro携惊喜而来，连同众多时尚大咖，在北京三里屯CHAO酒店正式发布了两款诠释时尚经典的新色——馥蕾红、璨星蓝。发布会当天知名主持人、模特李艾，Grace Chen 品牌创始人、总设计师Grace Chen，国际超模、珠宝设计师、上市公司首席品牌官黄超燕，芭莎能量创始人兼总裁景璐等精英女性代表现身“红蓝知己”HUAWEI Mate 20系列新色沙龙现场。";
+	NSString *content3 = @"在新色沙龙现场，华为消费者业务手机产品线总裁何刚对两款新色的设计初衷进行了分享。何刚表示，此次华为Mate 20 Pro在原有时尚配色基础上推出了馥蕾红、璨星蓝两款新色，是希望让手机除了带来极致的科技体验，还承载起消费者的情感需求，以色彩对话内心，引发高端用户在审美和精神上的共鸣。";
+	NSString *content4 = @"说到馥蕾红，它的设计灵感源自象征热烈、浪漫的玫瑰，给人以“带着玫瑰色的梦和蓓蕾的温馨”，同时它也象征着精英女性特有的成熟魅力。华为手机正是将这一抹温润赋予在了华为Mate 20 Pro上，为科技产品增添了一份女性与时尚的气息。";
+	NSString *content5 = @"此次华为Mate 20 Pro带来的馥蕾红、璨星蓝两款新色，采用的是时下流行的渐变设计，而得益于全新的工艺，让机身具有着流光溢彩的绚烂感。";
+	NSString *content6 = @"比起纯色机身和常规工艺，华为手机更像是手机界的配色大师，华为Mate 20 Pro的两款新色首次采用了空间印膜工艺。为了保持机身的纤薄美感，研发团队需要以单层膜的厚度实现双层膜的立体空间光影颜色渐变，这在工艺技术难度上又上了一个台阶。在克服了诸多困难之后，才得以在不影响厚度的前提下，实现了空间渐变颜色效果和立体空间的光影颜色效果，馥蕾红的“味道”变得更为浓郁，而璨星蓝所演绎的“星空”也变得更加深邃。";
+	NSString *imageUrl = @"http://lc-gytbbdn5.cn-n1.lcfile.com/828c00e7936481756f57.jpg";
 	
 	AVObject *object = [AVObject objectWithClassName:@"Cooperation"];
 	[object setObject:title forKey:@"title"];
-	[object setObject:@[content1, content2, content3, content4, content5] forKey:@"content"];
+	[object setObject:@[content1, content2, content3, content4, content5, content6] forKey:@"content"];
 	[object setObject:imageUrl forKey:@"imageUrl"];
+	[object setObject:@(4) forKey:@"orderIndex"];
+	[object setObject:@(YES) forKey:@"darkImage"];
 	[object saveInBackground];
 }
 
@@ -159,6 +163,15 @@
 	}
 	[cell.topImageView sd_setImageWithURL:[NSURL URLWithString:cooper.imageUrl]];
 	return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+	
+	Cooperation *cooper = _cooperArray[indexPath.row];
+	CooperationDetailViewController *detailVC = [[CooperationDetailViewController alloc] initWithCooperation:cooper];
+	[self.navigationController pushViewController:detailVC animated:YES];
+	
+	[tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 /*

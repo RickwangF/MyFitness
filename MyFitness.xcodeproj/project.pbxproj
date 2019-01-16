@@ -54,6 +54,7 @@
 		0F2FAB1321EEC43B00E6BB83 /* Cooperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FAB1221EEC43B00E6BB83 /* Cooperation.m */; };
 		0F2FAB1721EECB6000E6BB83 /* CooperationTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FAB1521EECB6000E6BB83 /* CooperationTableCell.m */; };
 		0F2FAB1821EECB6000E6BB83 /* CooperationTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FAB1621EECB6000E6BB83 /* CooperationTableCell.xib */; };
+		0F2FAB1B21EF017F00E6BB83 /* CooperationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FAB1A21EF017F00E6BB83 /* CooperationDetailViewController.m */; };
 		0F37102A21C0F21E00C334C8 /* ShadowCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102921C0F21E00C334C8 /* ShadowCircleButton.m */; };
 		0F37102D21C0FEE100C334C8 /* LeftSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102C21C0FEE100C334C8 /* LeftSideViewController.m */; };
 		0F37103021C101B000C334C8 /* ButtonItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102F21C101B000C334C8 /* ButtonItemView.m */; };
@@ -238,6 +239,8 @@
 		0F2FAB1421EECB6000E6BB83 /* CooperationTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CooperationTableCell.h; sourceTree = "<group>"; };
 		0F2FAB1521EECB6000E6BB83 /* CooperationTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CooperationTableCell.m; sourceTree = "<group>"; };
 		0F2FAB1621EECB6000E6BB83 /* CooperationTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CooperationTableCell.xib; sourceTree = "<group>"; };
+		0F2FAB1921EF017F00E6BB83 /* CooperationDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CooperationDetailViewController.h; sourceTree = "<group>"; };
+		0F2FAB1A21EF017F00E6BB83 /* CooperationDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CooperationDetailViewController.m; sourceTree = "<group>"; };
 		0F37102821C0F21E00C334C8 /* ShadowCircleButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShadowCircleButton.h; sourceTree = "<group>"; };
 		0F37102921C0F21E00C334C8 /* ShadowCircleButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShadowCircleButton.m; sourceTree = "<group>"; };
 		0F37102B21C0FEE100C334C8 /* LeftSideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeftSideViewController.h; sourceTree = "<group>"; };
@@ -455,6 +458,8 @@
 				0F2FAB1421EECB6000E6BB83 /* CooperationTableCell.h */,
 				0F2FAB1521EECB6000E6BB83 /* CooperationTableCell.m */,
 				0F2FAB1621EECB6000E6BB83 /* CooperationTableCell.xib */,
+				0F2FAB1921EF017F00E6BB83 /* CooperationDetailViewController.h */,
+				0F2FAB1A21EF017F00E6BB83 /* CooperationDetailViewController.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1052,6 +1057,7 @@
 				0F2AB5C021BDFC55006FB503 /* CAPSPageMenu.m in Sources */,
 				0F6FD03721CC84430083D590 /* RecordViewController.m in Sources */,
 				0FE8B15321D06DB000AF75A4 /* AABar.m in Sources */,
+				0F2FAB1B21EF017F00E6BB83 /* CooperationDetailViewController.m in Sources */,
 				0FE8B15521D06DB000AF75A4 /* AAArea.m in Sources */,
 				0F2AB5DF21BE8BEB006FB503 /* RegisterViewController.m in Sources */,
 				0FE8B15F21D06DB000AF75A4 /* AAOptions.m in Sources */,

@@ -85,7 +85,23 @@
          contextName = "-[RecordViewController constructTimeSpan]:RecordViewController.m">
       </ContextState>
       <ContextState
+         contextName = "-[CooperationDetailViewController createTextViewWithContent:Index:]:CooperationDetailViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "textView.contentSize">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[BodyDataViewController openAgePickerViewWithAgeString:]:BodyDataViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[CooperationDetailViewController initMainScrollView]:CooperationDetailViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_imageView.frame.size.height">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[MyRecordViewController configLastSevenDaysView]:MyRecordViewController.m">
@@ -94,6 +110,9 @@
                value = "_dayArray">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[CooperationViewController tableView:cellForRowAtIndexPath:]:CooperationViewController.m">
       </ContextState>
       <ContextState
          contextName = "__47-[RecordViewController getLast7DaysTrackRecord]_block_invoke:RecordViewController.m">
