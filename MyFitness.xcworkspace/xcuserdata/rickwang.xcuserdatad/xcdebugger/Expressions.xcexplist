@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "__46-[CooperationViewController getAllCooperation]_block_invoke:CooperationViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.cooperArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__49-[TrackDetailViewController onQueryHistoryTrack:]_block_invoke.443:TrackDetailViewController.m">
       </ContextState>
       <ContextState
@@ -13,6 +21,25 @@
          <PersistentStrings>
             <PersistentString
                value = "subViewControllers.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ShadowCircleButton setShadow]:ShadowCircleButton.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.bounds;">
+            </PersistentString>
+            <PersistentString
+               value = "self.backgroundColor">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[TrackDetailViewController queryHistoryTrack]:TrackDetailViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.transportMode">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -28,29 +55,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[TrackDetailViewController queryHistoryTrack]:TrackDetailViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.transportMode">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "-[TrackDetailViewController onQueryHistoryTrack:]:TrackDetailViewController.m">
          <PersistentStrings>
             <PersistentString
                value = "self.locationArray">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[ShadowCircleButton setShadow]:ShadowCircleButton.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.bounds;">
-            </PersistentString>
-            <PersistentString
-               value = "self.backgroundColor">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

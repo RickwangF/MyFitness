@@ -83,6 +83,23 @@
 	}];
 }
 
+#pragma mark - Touches
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+	[super touchesBegan:touches withEvent:event];
+	self.backgroundColor = AppStyleSetting.sharedInstance.lightGrayViewBgColor;
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+	[super touchesEnded:touches withEvent:event];
+	self.backgroundColor = AppStyleSetting.sharedInstance.viewBgColor;
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+	[super touchesCancelled:touches withEvent:event];
+	self.backgroundColor = AppStyleSetting.sharedInstance.viewBgColor;
+}
+
 #pragma mark - Action
 
 - (void)setImage:(UIImage *)image{

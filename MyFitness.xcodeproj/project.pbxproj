@@ -50,6 +50,10 @@
 		0F2FAAE221EC22FA00E6BB83 /* Chinese_And_English_Text.dat in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FAADF21EC22FA00E6BB83 /* Chinese_And_English_Text.dat */; };
 		0F2FAAE621EC240C00E6BB83 /* libBaiduSpeechSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FAABD21EC221E00E6BB83 /* libBaiduSpeechSDK.a */; };
 		0F2FAB0D21ED6BEB00E6BB83 /* RoundSolidView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FAB0C21ED6BEB00E6BB83 /* RoundSolidView.m */; };
+		0F2FAB1021EEBE0D00E6BB83 /* CooperationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FAB0F21EEBE0D00E6BB83 /* CooperationViewController.m */; };
+		0F2FAB1321EEC43B00E6BB83 /* Cooperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FAB1221EEC43B00E6BB83 /* Cooperation.m */; };
+		0F2FAB1721EECB6000E6BB83 /* CooperationTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FAB1521EECB6000E6BB83 /* CooperationTableCell.m */; };
+		0F2FAB1821EECB6000E6BB83 /* CooperationTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FAB1621EECB6000E6BB83 /* CooperationTableCell.xib */; };
 		0F37102A21C0F21E00C334C8 /* ShadowCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102921C0F21E00C334C8 /* ShadowCircleButton.m */; };
 		0F37102D21C0FEE100C334C8 /* LeftSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102C21C0FEE100C334C8 /* LeftSideViewController.m */; };
 		0F37103021C101B000C334C8 /* ButtonItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102F21C101B000C334C8 /* ButtonItemView.m */; };
@@ -227,6 +231,13 @@
 		0F2FAADF21EC22FA00E6BB83 /* Chinese_And_English_Text.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chinese_And_English_Text.dat; sourceTree = "<group>"; };
 		0F2FAB0B21ED6BEB00E6BB83 /* RoundSolidView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoundSolidView.h; sourceTree = "<group>"; };
 		0F2FAB0C21ED6BEB00E6BB83 /* RoundSolidView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoundSolidView.m; sourceTree = "<group>"; };
+		0F2FAB0E21EEBE0D00E6BB83 /* CooperationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CooperationViewController.h; sourceTree = "<group>"; };
+		0F2FAB0F21EEBE0D00E6BB83 /* CooperationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CooperationViewController.m; sourceTree = "<group>"; };
+		0F2FAB1121EEC43B00E6BB83 /* Cooperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cooperation.h; sourceTree = "<group>"; };
+		0F2FAB1221EEC43B00E6BB83 /* Cooperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cooperation.m; sourceTree = "<group>"; };
+		0F2FAB1421EECB6000E6BB83 /* CooperationTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CooperationTableCell.h; sourceTree = "<group>"; };
+		0F2FAB1521EECB6000E6BB83 /* CooperationTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CooperationTableCell.m; sourceTree = "<group>"; };
+		0F2FAB1621EECB6000E6BB83 /* CooperationTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CooperationTableCell.xib; sourceTree = "<group>"; };
 		0F37102821C0F21E00C334C8 /* ShadowCircleButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShadowCircleButton.h; sourceTree = "<group>"; };
 		0F37102921C0F21E00C334C8 /* ShadowCircleButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShadowCircleButton.m; sourceTree = "<group>"; };
 		0F37102B21C0FEE100C334C8 /* LeftSideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeftSideViewController.h; sourceTree = "<group>"; };
@@ -439,6 +450,11 @@
 				0F2AB5DC21BE8BEB006FB503 /* RegisterViewController.m */,
 				0F37102B21C0FEE100C334C8 /* LeftSideViewController.h */,
 				0F37102C21C0FEE100C334C8 /* LeftSideViewController.m */,
+				0F2FAB0E21EEBE0D00E6BB83 /* CooperationViewController.h */,
+				0F2FAB0F21EEBE0D00E6BB83 /* CooperationViewController.m */,
+				0F2FAB1421EECB6000E6BB83 /* CooperationTableCell.h */,
+				0F2FAB1521EECB6000E6BB83 /* CooperationTableCell.m */,
+				0F2FAB1621EECB6000E6BB83 /* CooperationTableCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -446,6 +462,8 @@
 		0F2AB59521BDFA62006FB503 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0F2FAB1121EEC43B00E6BB83 /* Cooperation.h */,
+				0F2FAB1221EEC43B00E6BB83 /* Cooperation.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -878,6 +896,7 @@
 				0FA2A58A21C9D8040035B333 /* FounctionTableCell.xib in Resources */,
 				0F2FAAD921EC223000E6BB83 /* .gitIgnore in Resources */,
 				0FA2EA1E21C342B400A3DC4E /* TrackTableCell.xib in Resources */,
+				0F2FAB1821EECB6000E6BB83 /* CooperationTableCell.xib in Resources */,
 				0F2AB57B21BDF1FF006FB503 /* LaunchScreen.storyboard in Resources */,
 				0FA2A58F21C9DB420035B333 /* RecordTableCell.xib in Resources */,
 				0F2FAAE021EC22FA00E6BB83 /* Chinese_And_English_Speech_DYY.dat in Resources */,
@@ -1007,6 +1026,7 @@
 				0FE8B15B21D06DB000AF75A4 /* AAPie.m in Sources */,
 				0FE8B15621D06DB000AF75A4 /* AAAnimation.m in Sources */,
 				0F2AB5B221BDFC42006FB503 /* TrackRecord.m in Sources */,
+				0F2FAB1021EEBE0D00E6BB83 /* CooperationViewController.m in Sources */,
 				0F2AB5D621BE41F4006FB503 /* PageItemViewController.m in Sources */,
 				0F2AB57321BDF1FD006FB503 /* ViewController.m in Sources */,
 				0FE8B14721D06DB000AF75A4 /* AAXAxis.m in Sources */,
@@ -1018,6 +1038,7 @@
 				0F85CE6221E380C9000BDEC6 /* SFVerificationCodeView.m in Sources */,
 				0FA2A58D21C9DB260035B333 /* RecordTableCell.m in Sources */,
 				0F2AB5E621BF8D12006FB503 /* FitnessItemView.m in Sources */,
+				0F2FAB1321EEC43B00E6BB83 /* Cooperation.m in Sources */,
 				0FE8B15C21D06DB000AF75A4 /* AAChart.m in Sources */,
 				0F6FD02921CA15360083D590 /* BodyDataViewController.m in Sources */,
 				0FA2A58821C9D7DE0035B333 /* FounctionTableCell.m in Sources */,
@@ -1044,6 +1065,7 @@
 				0FE8B14621D06DB000AF75A4 /* AASeries.m in Sources */,
 				0F2AB5B321BDFC42006FB503 /* UIColor+UIColor_Hex.m in Sources */,
 				0F2AB5CA21BE0ECA006FB503 /* UIViewController+topVC.m in Sources */,
+				0F2FAB1721EECB6000E6BB83 /* CooperationTableCell.m in Sources */,
 				0FA2A58021C9D3040035B333 /* UserCenterViewController.m in Sources */,
 				0FE8B16C21D0D05500AF75A4 /* HomeStepperView.m in Sources */,
 				0F2AB5B021BDFC42006FB503 /* NSDate+NSString.m in Sources */,

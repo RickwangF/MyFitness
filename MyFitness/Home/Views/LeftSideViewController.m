@@ -269,7 +269,11 @@
 }
 
 - (void)cooperateItemViewClicked:(UIControl*)sender{
-	
+	[self dismissViewControllerAnimated:YES completion:^{
+		if (self.delegate != nil) {
+			[self.delegate leftSideViewControllerMakePushWithFlag:3];
+		}
+	}];
 }
 
 - (void)settingItemViewClicked:(UIControl*)sender{

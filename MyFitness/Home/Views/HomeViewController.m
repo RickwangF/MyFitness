@@ -39,6 +39,7 @@
 #import "SportParameter.h"
 #import <Hero/Hero-Swift.h>
 #import "RoundSolidView.h"
+#import "CooperationViewController.h"
 
 
 @interface HomeViewController ()<BMKMapViewDelegate, BMKLocationManagerDelegate, SubViewControllerDelegate, CAAnimationDelegate>
@@ -675,6 +676,14 @@
 			MyRecordViewController *recordVC = [[MyRecordViewController alloc] init];
 			[self.navigationController pushViewController:recordVC animated:YES];
 		}
+		break;
+			
+		case 3:{
+			CooperationViewController *cooperView = [[CooperationViewController alloc] init];
+			[self.navigationController pushViewController:cooperView animated:YES];
+		}
+		break;
+			
 		default:
 			break;
 	}
