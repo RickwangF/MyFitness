@@ -55,6 +55,7 @@
 		0F2FAB1721EECB6000E6BB83 /* CooperationTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FAB1521EECB6000E6BB83 /* CooperationTableCell.m */; };
 		0F2FAB1821EECB6000E6BB83 /* CooperationTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FAB1621EECB6000E6BB83 /* CooperationTableCell.xib */; };
 		0F2FAB1B21EF017F00E6BB83 /* CooperationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FAB1A21EF017F00E6BB83 /* CooperationDetailViewController.m */; };
+		0F2FAB1D21EF276600E6BB83 /* DropDismissNaviViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FAB1C21EF276600E6BB83 /* DropDismissNaviViewController.swift */; };
 		0F37102A21C0F21E00C334C8 /* ShadowCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102921C0F21E00C334C8 /* ShadowCircleButton.m */; };
 		0F37102D21C0FEE100C334C8 /* LeftSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102C21C0FEE100C334C8 /* LeftSideViewController.m */; };
 		0F37103021C101B000C334C8 /* ButtonItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102F21C101B000C334C8 /* ButtonItemView.m */; };
@@ -241,6 +242,7 @@
 		0F2FAB1621EECB6000E6BB83 /* CooperationTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CooperationTableCell.xib; sourceTree = "<group>"; };
 		0F2FAB1921EF017F00E6BB83 /* CooperationDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CooperationDetailViewController.h; sourceTree = "<group>"; };
 		0F2FAB1A21EF017F00E6BB83 /* CooperationDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CooperationDetailViewController.m; sourceTree = "<group>"; };
+		0F2FAB1C21EF276600E6BB83 /* DropDismissNaviViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDismissNaviViewController.swift; sourceTree = "<group>"; };
 		0F37102821C0F21E00C334C8 /* ShadowCircleButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShadowCircleButton.h; sourceTree = "<group>"; };
 		0F37102921C0F21E00C334C8 /* ShadowCircleButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShadowCircleButton.m; sourceTree = "<group>"; };
 		0F37102B21C0FEE100C334C8 /* LeftSideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeftSideViewController.h; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 				0FED06CC21C7963C000D41AC /* MKDropdownMenu.h */,
 				0FED06CB21C7963C000D41AC /* MKDropdownMenu.m */,
 				0F2AB58721BDF5DF006FB503 /* RootNaviViewController.swift */,
+				0F2FAB1C21EF276600E6BB83 /* DropDismissNaviViewController.swift */,
 				0F2AB5BA21BDFC55006FB503 /* CAPSPageMenu.h */,
 				0F2AB5BC21BDFC55006FB503 /* CAPSPageMenu.m */,
 				0F2AB5B521BDFC55006FB503 /* CircleProgressButton.h */,
@@ -1073,6 +1076,7 @@
 				0F2AB5CA21BE0ECA006FB503 /* UIViewController+topVC.m in Sources */,
 				0F2FAB1721EECB6000E6BB83 /* CooperationTableCell.m in Sources */,
 				0FA2A58021C9D3040035B333 /* UserCenterViewController.m in Sources */,
+				0F2FAB1D21EF276600E6BB83 /* DropDismissNaviViewController.swift in Sources */,
 				0FE8B16C21D0D05500AF75A4 /* HomeStepperView.m in Sources */,
 				0F2AB5B021BDFC42006FB503 /* NSDate+NSString.m in Sources */,
 				0FE8B14D21D06DB000AF75A4 /* AASubtitle.m in Sources */,
