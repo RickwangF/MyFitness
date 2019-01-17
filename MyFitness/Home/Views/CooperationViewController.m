@@ -185,6 +185,14 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+	return 20;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+	return [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
+}
+
 /*
 #pragma mark - Navigation
 

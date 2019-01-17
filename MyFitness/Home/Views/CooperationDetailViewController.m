@@ -64,6 +64,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.isHeroEnabled = YES;
 	self.view.heroID = _heroIdModel.containerId;
 	_availableWidth = self.view.frame.size.width;
 	[self initMainScrollView];
@@ -144,6 +145,7 @@
 						  };
 	textView.attributedText = [[NSAttributedString alloc] initWithString:content attributes:dic];
 	textView.frame = CGRectMake(20, _topOffset, _availableWidth - 40, textView.contentSize.height);
+	textView.heroModifierString = @"scale(0.8,0.8,1)";
 	[_mainScrollView addSubview:textView];
 	
 	_topOffset += textView.contentSize.height + 20;
