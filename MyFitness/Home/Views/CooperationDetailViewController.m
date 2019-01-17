@@ -33,6 +33,8 @@
 
 @property (nonatomic, strong) HeroIDModel *heroIdModel;
 
+@property (nonatomic, strong) UIButton *closeBtn;
+
 @end
 
 @implementation CooperationDetailViewController
@@ -50,7 +52,7 @@
 }
 
 - (void)initValueProperty{
-	_topOffset = 420;
+	_topOffset = 440;
 }
 
 #pragma mark - Lift Circle
@@ -68,6 +70,8 @@
 	self.view.heroID = _heroIdModel.containerId;
 	_availableWidth = self.view.frame.size.width;
 	[self initMainScrollView];
+	
+	[self initCloseBtn];
 	
 	if (_cooperation.content != nil && _cooperation.content.count > 0) {
 		[_cooperation.content enumerateObjectsUsingBlock:^(NSString* content, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -101,7 +105,7 @@
 		make.edges.equalTo(self.view);
 	}];
 	
-	_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _availableWidth, 400)];
+	_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _availableWidth, 420)];
 	_imageView.contentMode = UIViewContentModeScaleAspectFill;
 	[_imageView sd_setImageWithURL:[NSURL URLWithString:_cooperation.imageUrl]];
 	_imageView.clipsToBounds = YES;
@@ -121,14 +125,36 @@
 	
 	[_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
 		if ([[UIDevice currentDevice] fullScreen]) {
-			make.top.equalTo(self.imageView).offset(50);
+			make.top.equalTo(self.imageView).offset(75);
 		}
 		else{
-			make.top.equalTo(self.imageView).offset(40);
+			make.top.equalTo(self.imageView).offset(60);
 		}
 		make.left.equalTo(self.imageView).offset(20);
 		make.right.equalTo(self.imageView).offset(-20);
 		make.height.greaterThanOrEqualTo(@28);
+	}];
+}
+
+- (void)initCloseBtn{
+	_closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
+	[_closeBtn setImage:[UIImage imageNamed:@"close_22#42"] forState:UIControlStateNormal];
+	[_closeBtn setBackgroundColor:[UIColor colorWithWhite:1.0 alpha:0.8]];
+	[_closeBtn addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+	_closeBtn.layer.cornerRadius = 17.5;
+	_closeBtn.layer.masksToBounds = YES;
+	_closeBtn.heroModifierString = @"fade";
+	[self.view addSubview:_closeBtn];
+	
+	[_closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+		if ([[UIDevice currentDevice] fullScreen]) {
+			make.top.equalTo(self.view).offset(40);
+		}
+		else{
+			make.top.equalTo(self.view).offset(20);
+		}
+		make.right.equalTo(self.view).offset(-20);
+		make.width.height.equalTo(@35);
 	}];
 }
 
@@ -152,6 +178,12 @@
 	if (index == _cooperation.content.count - 1) {
 		_mainScrollView.contentSize = CGSizeMake(_availableWidth, _topOffset);
 	}
+}
+	 
+#pragma mark - Action
+	 
+- (void)closeBtnClicked:(UIButton*)sender{
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*
