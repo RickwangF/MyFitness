@@ -16,6 +16,9 @@
 #import <SDWebImage//UIImageView+WebCache.h>
 #import "CooperationTableCell.h"
 #import "CooperationDetailViewController.h"
+#import "MyFitness-Swift.h"
+#import <Hero/Hero-Swift.h>
+#import "HeroIDModel.h"
 
 @interface CooperationViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -157,10 +160,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 	CooperationTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cooperCell" forIndexPath:indexPath];
 	Cooperation *cooper = _cooperArray[indexPath.row];
+	cell.contentView.heroID = [NSString stringWithFormat:@"container%ld", (long)indexPath.row];
 	cell.titleLabel.text = cooper.title;
+	cell.titleLabel.heroID = [NSString stringWithFormat:@"title%ld", (long)indexPath.row];
 	if (cooper.darkImage) {
 		cell.titleLabel.textColor = UIColor.whiteColor;
 	}
+	cell.topImageView.heroID = [NSString stringWithFormat:@"image%ld", (long)indexPath.row];
 	[cell.topImageView sd_setImageWithURL:[NSURL URLWithString:cooper.imageUrl]];
 	return cell;
 }
@@ -168,8 +174,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	
 	Cooperation *cooper = _cooperArray[indexPath.row];
-	CooperationDetailViewController *detailVC = [[CooperationDetailViewController alloc] initWithCooperation:cooper];
-	[self.navigationController pushViewController:detailVC animated:YES];
+	HeroIDModel *model = [[HeroIDModel alloc] init];
+	model.containerId = [NSString stringWithFormat:@"container%ld", (long)indexPath.row];
+	model.imageId = [NSString stringWithFormat:@"image%ld", (long)indexPath.row];
+	model.titleId = [NSString stringWithFormat:@"title%ld", (long)indexPath.row];
+	CooperationDetailViewController *detailVC = [[CooperationDetailViewController alloc] initWithCooperation:cooper HeroId:model];
+	DropDismissNaviViewController *naviVC = [[DropDismissNaviViewController alloc] initWithRootViewController:detailVC];
+	[self presentViewController:naviVC animated:YES completion:nil];
 	
 	[tableView deselectRowAtIndexPath:indexPath animated:NO];
 }

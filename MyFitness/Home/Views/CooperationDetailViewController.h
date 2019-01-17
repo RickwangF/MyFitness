@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-@class Cooperation;
+@class Cooperation, HeroIDModel;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CooperationDetailViewController : UIViewController
 
-- (instancetype)initWithCooperation:(Cooperation*)cooperation;
+- (instancetype)initWithCooperation:(Cooperation*)cooperation HeroId:(HeroIDModel*)idModel;
 
 @end
 

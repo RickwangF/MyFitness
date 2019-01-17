@@ -13,12 +13,15 @@
 #import "AppStyleSetting.h"
 #import <SDWebImage//UIImageView+WebCache.h>
 #import "UIDevice+Type.h"
+#import <Hero/Hero-Swift.h>
+#import "TopDismissScrollView.h"
+#import "HeroIDModel.h"
 
 @interface CooperationDetailViewController ()
 
 @property (nonatomic, strong) Cooperation *cooperation;
 
-@property (nonatomic, strong) UIScrollView *mainScrollView;
+@property (nonatomic, strong) TopDismissScrollView *mainScrollView;
 
 @property (nonatomic, strong) UIImageView *imageView;
 
@@ -28,16 +31,19 @@
 
 @property (nonatomic, assign) CGFloat topOffset;
 
+@property (nonatomic, strong) HeroIDModel *heroIdModel;
+
 @end
 
 @implementation CooperationDetailViewController
 
 #pragma mark - Init
 
-- (instancetype)initWithCooperation:(Cooperation*)cooperation{
+- (instancetype)initWithCooperation:(Cooperation*)cooperation HeroId:(HeroIDModel*)idModel{
 	self = [super initWithNibName:nil bundle:nil];
 	if (self) {
 		_cooperation = cooperation;
+		_heroIdModel = idModel;
 		[self initValueProperty];
 	}
 	return self;
@@ -58,7 +64,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+	self.view.heroID = _heroIdModel.containerId;
 	_availableWidth = self.view.frame.size.width;
 	[self initMainScrollView];
 	
@@ -71,10 +77,15 @@
 	}
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+	[super viewWillAppear:animated];
+	[self.navigationController setNavigationBarHidden:YES animated:animated];
+}
+
 #pragma mark - Init View
 
 - (void)initMainScrollView{
-	_mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 375, 500)];
+	_mainScrollView = [[TopDismissScrollView alloc] initWithFrame:CGRectMake(0, 0, 375, 500)];
 	_mainScrollView.backgroundColor = AppStyleSetting.sharedInstance.viewBgColor;
 	_mainScrollView.contentSize = CGSizeMake(_availableWidth, 1200);
 	if (@available(iOS 11.0, *)) {
@@ -93,6 +104,7 @@
 	_imageView.contentMode = UIViewContentModeScaleAspectFill;
 	[_imageView sd_setImageWithURL:[NSURL URLWithString:_cooperation.imageUrl]];
 	_imageView.clipsToBounds = YES;
+	_imageView.heroID = _heroIdModel.imageId;
 	[_mainScrollView addSubview:_imageView];
 	
 	_titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 28)];
@@ -103,6 +115,7 @@
 		_titleLabel.textColor = UIColor.whiteColor;
 	}
 	_titleLabel.font = [UIFont systemFontOfSize:25 weight:UIFontWeightSemibold];
+	_titleLabel.heroID = _heroIdModel.titleId;
 	[_imageView addSubview:_titleLabel];
 	
 	[_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {

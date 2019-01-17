@@ -20,6 +20,13 @@ class DropDismissNaviViewController: UINavigationController {
 		self.hero.modalAnimationType = .selectBy(presenting: HeroDefaultAnimationType.zoom, dismissing: HeroDefaultAnimationType.zoomOut)
 	}
 	
+	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+		self.hero.isEnabled = true
+		self.modalPresentationStyle = .fullScreen
+		self.hero.modalAnimationType = .selectBy(presenting: HeroDefaultAnimationType.zoom, dismissing: HeroDefaultAnimationType.zoomOut)
+	}
+	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
@@ -30,12 +37,9 @@ class DropDismissNaviViewController: UINavigationController {
         // Do any additional setup after loading the view.
     }
 	
-	override func viewWillDisappear(_ animated: Bool) {
-		super.viewWillDisappear(animated)
-		if dismissGesture != nil {
-			self.view.removeGestureRecognizer(dismissGesture)
-			dismissGesture = nil
-		}
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		//self.navigationController?.setNavigationBarHidden(true, animated: animated)
 	}
 	
 	// MARK: - Init Gesture
@@ -46,9 +50,9 @@ class DropDismissNaviViewController: UINavigationController {
 	
 	@IBAction func dismissGestureRecognized(_ sender: UIPanGestureRecognizer){
 		let translation = sender.translation(in: nil)
-		let progress = translation.y / (0.4*self.view.frame.height)
+		let progress = (translation.y / 2) / self.view.frame.height
 		
-		if self.viewControllers.count == 0{
+		if self.viewControllers.count == 1{
 			if sender.state == .began{
 				self.dismiss(animated: true, completion: nil)
 			}
@@ -56,8 +60,8 @@ class DropDismissNaviViewController: UINavigationController {
 				Hero.shared.update(progress)
 			}
 			else if sender.state == .ended || sender.state == .cancelled{
-				if sender.velocity(in: nil).y / self.view.frame.height > 0.4 || progress > 0.5{
-					Hero.shared.finish()
+				if sender.velocity(in: nil).y / self.view.frame.height > 0.3 || progress > 0.3{
+					Hero.shared.finish(animate: true)
 				}
 				else{
 					Hero.shared.cancel()
