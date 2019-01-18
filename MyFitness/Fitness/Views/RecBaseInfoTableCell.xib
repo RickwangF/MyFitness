@@ -138,17 +138,17 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hco-mF-tsP">
-                        <rect key="frame" x="30" y="57.5" width="2" height="42"/>
+                        <rect key="frame" x="30.5" y="57.5" width="1" height="42"/>
                         <color key="backgroundColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="2" id="IOv-Re-uns"/>
+                            <constraint firstAttribute="width" constant="1" id="IOv-Re-uns"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dTK-Gx-Fme">
-                        <rect key="frame" x="30" y="0.0" width="2" height="42.5"/>
+                        <rect key="frame" x="30.5" y="0.0" width="1" height="42.5"/>
                         <color key="backgroundColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="2" id="fgd-aQ-YgV"/>
+                            <constraint firstAttribute="width" constant="1" id="fgd-aQ-YgV"/>
                         </constraints>
                     </view>
                 </subviews>

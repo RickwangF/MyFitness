@@ -16,6 +16,7 @@
 #import "MFLocation.h"
 #import "RecBaseInfoTableCell.h"
 #import "UIDevice+Type.h"
+#import "YearHeaderView.h"
 
 @interface NewRecordViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -90,7 +91,10 @@
 	
 	
 	UINib *recInfoNib = [UINib nibWithNibName:@"RecBaseInfoTableCell" bundle:NSBundle.mainBundle];
+	UINib *yeadrNib = [UINib nibWithNibName:@"YearHeaderView" bundle:NSBundle.mainBundle];
+	
 	[_recordTableView registerNib:recInfoNib forCellReuseIdentifier:@"recInfoCell"];
+	[_recordTableView registerNib:yeadrNib forHeaderFooterViewReuseIdentifier:@"yearHeader"];
 	
 	[self.view addSubview:_recordTableView];
 	[_recordTableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -152,6 +156,21 @@
 		[cell hideBelowLine];
 	}
 	return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+	return 40;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+	
+	YearHeaderView *yearHeader = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"yearHeader"];
+	yearHeader.yearLabel.text = @"2018";
+	return yearHeader;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 

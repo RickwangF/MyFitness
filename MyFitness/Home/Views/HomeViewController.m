@@ -101,7 +101,7 @@
 	_needRefreshMap = NO;
 	_mute = NO;
 	_showStepper = NO;
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"custom_map.json" ofType:@""];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"map_gray.json" ofType:@""];
     [BMKMapView customMapStyle:path];
 }
 
