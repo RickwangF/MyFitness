@@ -144,8 +144,8 @@
 	
 	RecBaseInfoTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recInfoCell" forIndexPath:indexPath];
 	if (indexPath.row == 0) {
-		cell.indicatorView.image = [UIImage imageNamed:@"startspot_35#ffe617"];
-		[cell changeIndicatorSize:CGSizeMake(35, 35)];
+		[cell changeIndicatorSize:CGSizeMake(30, 30)];
+		[cell setStartSpot];
 		[cell hideAboveLine];
 	}
 	else if (indexPath.row == 9) {

@@ -12,7 +12,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-	_indicatorView.image = [UIImage imageNamed:@"dot_15#87"];
     // Initialization code
 }
 
@@ -27,8 +26,10 @@
 	_belowLine.hidden = NO;
 	_indicatorWidth.constant = 15;
 	_indicatorHeight.constant = 15;
-	_indicatorLeading.constant = 16;
-	_indicatorView.image = [UIImage imageNamed:@"dot_15#87"];
+	_indicatorLeading.constant = 23.5;
+	if (_indicatorView.subviews.count > 0) {
+		[_indicatorView.subviews[0] removeFromSuperview];
+	}
 }
 
 #pragma mark - Action
@@ -44,9 +45,18 @@
 - (void)changeIndicatorSize:(CGSize)size{
 	_indicatorWidth.constant = size.width;
 	_indicatorHeight.constant = size.height;
-	_indicatorLeading.constant = 16 - ((size.width - 15) / 2);
+	_indicatorLeading.constant = 23.5 - ((size.width - 15)/2);
 	[self setNeedsLayout];
 	[self layoutIfNeeded];
+}
+
+- (void)setStartSpot{
+	UILabel *startLabel = [[UILabel alloc] initWithFrame:CGRectMake(6, 6, 18, 18)];
+	startLabel.text = @"起";
+	startLabel.textColor = UIColor.blackColor;
+	startLabel.font = [UIFont systemFontOfSize:16];
+	startLabel.textAlignment = NSTextAlignmentCenter;
+	[_indicatorView addSubview:startLabel];
 }
 
 @end

@@ -17,21 +17,25 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *infoLabel;
-@property (weak, nonatomic) IBOutlet UILabel *durationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *minuteNumLabel;
+@property (weak, nonatomic) IBOutlet UILabel *kmNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *paceLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *indicatorView;
-@property (weak, nonatomic) IBOutlet UIView *aboveLine;
-@property (weak, nonatomic) IBOutlet UIView *belowLine;
+
+@property (weak, nonatomic) IBOutlet UIView *indicatorView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *indicatorHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *indicatorWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *indicatorLeading;
+
+@property (weak, nonatomic) IBOutlet UIView *aboveLine;
+@property (weak, nonatomic) IBOutlet UIView *belowLine;
 
 - (void)hideAboveLine;
 
 - (void)hideBelowLine;
 
 - (void)changeIndicatorSize:(CGSize)size;
+
+- (void)setStartSpot;
 
 @end
 

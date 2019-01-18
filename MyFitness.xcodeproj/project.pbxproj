@@ -67,6 +67,8 @@
 		0F56050121F165DA00C955C8 /* TriangleRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F56050021F165DA00C955C8 /* TriangleRectView.m */; };
 		0F56050521F1663B00C955C8 /* RecBaseInfoTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F56050321F1663B00C955C8 /* RecBaseInfoTableCell.m */; };
 		0F56050621F1663B00C955C8 /* RecBaseInfoTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F56050421F1663B00C955C8 /* RecBaseInfoTableCell.xib */; };
+		0F56050921F19D0000C955C8 /* RoundIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F56050821F19D0000C955C8 /* RoundIndicatorView.m */; };
+		0F56050B21F1AB6100C955C8 /* map_blue.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F56050A21F1AB6100C955C8 /* map_blue.json */; };
 		0F6FD02921CA15360083D590 /* BodyDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6FD02821CA15360083D590 /* BodyDataViewController.m */; };
 		0F6FD02D21CA19530083D590 /* BodyTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6FD02B21CA19530083D590 /* BodyTableCell.m */; };
 		0F6FD02E21CA19530083D590 /* BodyTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6FD02C21CA19530083D590 /* BodyTableCell.xib */; };
@@ -269,6 +271,9 @@
 		0F56050221F1663B00C955C8 /* RecBaseInfoTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecBaseInfoTableCell.h; sourceTree = "<group>"; };
 		0F56050321F1663B00C955C8 /* RecBaseInfoTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecBaseInfoTableCell.m; sourceTree = "<group>"; };
 		0F56050421F1663B00C955C8 /* RecBaseInfoTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecBaseInfoTableCell.xib; sourceTree = "<group>"; };
+		0F56050721F19D0000C955C8 /* RoundIndicatorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoundIndicatorView.h; sourceTree = "<group>"; };
+		0F56050821F19D0000C955C8 /* RoundIndicatorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoundIndicatorView.m; sourceTree = "<group>"; };
+		0F56050A21F1AB6100C955C8 /* map_blue.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = map_blue.json; sourceTree = "<group>"; };
 		0F6FD02721CA15360083D590 /* BodyDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BodyDataViewController.h; sourceTree = "<group>"; };
 		0F6FD02821CA15360083D590 /* BodyDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BodyDataViewController.m; sourceTree = "<group>"; };
 		0F6FD02A21CA19530083D590 /* BodyTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BodyTableCell.h; sourceTree = "<group>"; };
@@ -410,6 +415,7 @@
 				0F2FAABC21EC217A00E6BB83 /* BDSClientLib */,
 				0F4D041421E82CE00003DD5A /* custom_map.json */,
 				0F2AB5CE21BE326A006FB503 /* map_config.json */,
+				0F56050A21F1AB6100C955C8 /* map_blue.json */,
 				0F2AB59021BDF99F006FB503 /* BaiduTraceSDK.framework */,
 				0F2AB58921BDF6C4006FB503 /* mapapi.bundle */,
 				0F2AB56D21BDF1FD006FB503 /* MyFitness */,
@@ -557,6 +563,8 @@
 				0F2FAB0C21ED6BEB00E6BB83 /* RoundSolidView.m */,
 				0F2FAB2A21F028CD00E6BB83 /* TopDismissScrollView.h */,
 				0F2FAB2B21F028CD00E6BB83 /* TopDismissScrollView.m */,
+				0F56050721F19D0000C955C8 /* RoundIndicatorView.h */,
+				0F56050821F19D0000C955C8 /* RoundIndicatorView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -947,6 +955,7 @@
 				0FE8B16721D0AF8200AF75A4 /* start.m4a in Resources */,
 				0F2AB57821BDF1FF006FB503 /* Assets.xcassets in Resources */,
 				0F2FAAE121EC22FA00E6BB83 /* Chinese_And_English_Speech_Female.dat in Resources */,
+				0F56050B21F1AB6100C955C8 /* map_blue.json in Resources */,
 				0FA2EA1921C340ED00A3DC4E /* MonthSectionHeader.xib in Resources */,
 				0FA2A58521C9D4870035B333 /* AvatarTableCell.xib in Resources */,
 				0F2AB57621BDF1FD006FB503 /* Main.storyboard in Resources */,
@@ -1076,6 +1085,7 @@
 				0F85CE6221E380C9000BDEC6 /* SFVerificationCodeView.m in Sources */,
 				0FA2A58D21C9DB260035B333 /* RecordTableCell.m in Sources */,
 				0F2AB5E621BF8D12006FB503 /* FitnessItemView.m in Sources */,
+				0F56050921F19D0000C955C8 /* RoundIndicatorView.m in Sources */,
 				0F2FAB1321EEC43B00E6BB83 /* Cooperation.m in Sources */,
 				0FE8B15C21D06DB000AF75A4 /* AAChart.m in Sources */,
 				0F6FD02921CA15360083D590 /* BodyDataViewController.m in Sources */,

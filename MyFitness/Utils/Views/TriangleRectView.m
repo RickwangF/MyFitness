@@ -38,14 +38,14 @@
 	CGFloat maxY = CGRectGetMaxY(bounds);
 	CGFloat midY = CGRectGetMidY(bounds);
 	[UIColor.whiteColor setFill];
-    UIBezierPath *rectPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(17, 0, maxX - 17, maxY) cornerRadius:5];
+    UIBezierPath *rectPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(10, 0, maxX - 10, maxY) cornerRadius:5];
 	[rectPath fill];
 	
 	UIBezierPath *trianglePath = [UIBezierPath bezierPath];
-	[trianglePath moveToPoint:CGPointMake(17, midY - 10)];
+	[trianglePath moveToPoint:CGPointMake(10, midY - 7.5)];
 	[trianglePath addLineToPoint:CGPointMake(2, midY - 2)];
 	[trianglePath addQuadCurveToPoint:CGPointMake(2, midY+2) controlPoint:CGPointMake(0, midY)];
-	[trianglePath addLineToPoint:CGPointMake(17, midY+10)];
+	[trianglePath addLineToPoint:CGPointMake(10, midY+7.5)];
 	[trianglePath closePath];
 	[trianglePath fill];
 }
