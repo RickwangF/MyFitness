@@ -63,6 +63,10 @@
 		0F37103021C101B000C334C8 /* ButtonItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37102F21C101B000C334C8 /* ButtonItemView.m */; };
 		0F4D041521E82CE10003DD5A /* custom_map.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F4D041421E82CE00003DD5A /* custom_map.json */; };
 		0F4D041821E86D7B0003DD5A /* SportParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4D041721E86D7B0003DD5A /* SportParameter.m */; };
+		0F5604FE21F15D1300C955C8 /* NewRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F5604FD21F15D1300C955C8 /* NewRecordViewController.m */; };
+		0F56050121F165DA00C955C8 /* TriangleRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F56050021F165DA00C955C8 /* TriangleRectView.m */; };
+		0F56050521F1663B00C955C8 /* RecBaseInfoTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F56050321F1663B00C955C8 /* RecBaseInfoTableCell.m */; };
+		0F56050621F1663B00C955C8 /* RecBaseInfoTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F56050421F1663B00C955C8 /* RecBaseInfoTableCell.xib */; };
 		0F6FD02921CA15360083D590 /* BodyDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6FD02821CA15360083D590 /* BodyDataViewController.m */; };
 		0F6FD02D21CA19530083D590 /* BodyTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6FD02B21CA19530083D590 /* BodyTableCell.m */; };
 		0F6FD02E21CA19530083D590 /* BodyTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6FD02C21CA19530083D590 /* BodyTableCell.xib */; };
@@ -258,6 +262,13 @@
 		0F4D041421E82CE00003DD5A /* custom_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = custom_map.json; sourceTree = "<group>"; };
 		0F4D041621E86D7B0003DD5A /* SportParameter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SportParameter.h; sourceTree = "<group>"; };
 		0F4D041721E86D7B0003DD5A /* SportParameter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SportParameter.m; sourceTree = "<group>"; };
+		0F5604FC21F15D1300C955C8 /* NewRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewRecordViewController.h; sourceTree = "<group>"; };
+		0F5604FD21F15D1300C955C8 /* NewRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewRecordViewController.m; sourceTree = "<group>"; };
+		0F5604FF21F165DA00C955C8 /* TriangleRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleRectView.h; sourceTree = "<group>"; };
+		0F56050021F165DA00C955C8 /* TriangleRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TriangleRectView.m; sourceTree = "<group>"; };
+		0F56050221F1663B00C955C8 /* RecBaseInfoTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecBaseInfoTableCell.h; sourceTree = "<group>"; };
+		0F56050321F1663B00C955C8 /* RecBaseInfoTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecBaseInfoTableCell.m; sourceTree = "<group>"; };
+		0F56050421F1663B00C955C8 /* RecBaseInfoTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecBaseInfoTableCell.xib; sourceTree = "<group>"; };
 		0F6FD02721CA15360083D590 /* BodyDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BodyDataViewController.h; sourceTree = "<group>"; };
 		0F6FD02821CA15360083D590 /* BodyDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BodyDataViewController.m; sourceTree = "<group>"; };
 		0F6FD02A21CA19530083D590 /* BodyTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BodyTableCell.h; sourceTree = "<group>"; };
@@ -512,6 +523,8 @@
 		0F2AB59721BDFAB2006FB503 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0F5604FF21F165DA00C955C8 /* TriangleRectView.h */,
+				0F56050021F165DA00C955C8 /* TriangleRectView.m */,
 				0F85CE6021E380C9000BDEC6 /* SFVerificationCodeView.h */,
 				0F85CE6121E380C9000BDEC6 /* SFVerificationCodeView.m */,
 				0FED06CC21C7963C000D41AC /* MKDropdownMenu.h */,
@@ -581,6 +594,11 @@
 				0F6FD03621CC84430083D590 /* RecordViewController.m */,
 				0FE8B10021D06A2B00AF75A4 /* MyRecordViewController.h */,
 				0FE8B10121D06A2B00AF75A4 /* MyRecordViewController.m */,
+				0F5604FC21F15D1300C955C8 /* NewRecordViewController.h */,
+				0F5604FD21F15D1300C955C8 /* NewRecordViewController.m */,
+				0F56050221F1663B00C955C8 /* RecBaseInfoTableCell.h */,
+				0F56050321F1663B00C955C8 /* RecBaseInfoTableCell.m */,
+				0F56050421F1663B00C955C8 /* RecBaseInfoTableCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -917,6 +935,7 @@
 				0F2FAB1821EECB6000E6BB83 /* CooperationTableCell.xib in Resources */,
 				0F2AB57B21BDF1FF006FB503 /* LaunchScreen.storyboard in Resources */,
 				0FA2A58F21C9DB420035B333 /* RecordTableCell.xib in Resources */,
+				0F56050621F1663B00C955C8 /* RecBaseInfoTableCell.xib in Resources */,
 				0F2FAAE021EC22FA00E6BB83 /* Chinese_And_English_Speech_DYY.dat in Resources */,
 				0FE8B14321D06DB000AF75A4 /* AAJSFiles.bundle in Resources */,
 				0F6FD02E21CA19530083D590 /* BodyTableCell.xib in Resources */,
@@ -1035,6 +1054,7 @@
 				0FE8B14E21D06DB000AF75A4 /* AAYAxis.m in Sources */,
 				0FE8B15821D06DB000AF75A4 /* AAMarker.m in Sources */,
 				0FED06CD21C7963C000D41AC /* MKDropdownMenu.m in Sources */,
+				0F56050121F165DA00C955C8 /* TriangleRectView.m in Sources */,
 				0FA2A57D21C897B10035B333 /* RightImageButton.m in Sources */,
 				0F2AB5E021BE8BEB006FB503 /* LoginViewController.m in Sources */,
 				0F37102D21C0FEE100C334C8 /* LeftSideViewController.m in Sources */,
@@ -1091,6 +1111,7 @@
 				0F2FAB1D21EF276600E6BB83 /* DropDismissNaviViewController.swift in Sources */,
 				0FE8B16C21D0D05500AF75A4 /* HomeStepperView.m in Sources */,
 				0F2AB5B021BDFC42006FB503 /* NSDate+NSString.m in Sources */,
+				0F5604FE21F15D1300C955C8 /* NewRecordViewController.m in Sources */,
 				0FE8B14D21D06DB000AF75A4 /* AASubtitle.m in Sources */,
 				0F37103021C101B000C334C8 /* ButtonItemView.m in Sources */,
 				0FE8B10221D06A2B00AF75A4 /* MyRecordViewController.m in Sources */,
@@ -1107,6 +1128,7 @@
 				0F2AB5AE21BDFC42006FB503 /* UIImage+UIColor.m in Sources */,
 				0FA2EA1721C340A200A3DC4E /* MonthSectionHeader.m in Sources */,
 				0FE8B14F21D06DB000AF75A4 /* AACrosshair.m in Sources */,
+				0F56050521F1663B00C955C8 /* RecBaseInfoTableCell.m in Sources */,
 				0FE8B14B21D06DB000AF75A4 /* AALine.m in Sources */,
 				0FE8B15221D06DB000AF75A4 /* AAStyle.m in Sources */,
 				0F2AB5BF21BDFC55006FB503 /* UIScrollView+GestureRecognizer.m in Sources */,

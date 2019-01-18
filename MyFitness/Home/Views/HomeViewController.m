@@ -40,6 +40,7 @@
 #import <Hero/Hero-Swift.h>
 #import "RoundSolidView.h"
 #import "CooperationViewController.h"
+#import "NewRecordViewController.h"
 
 
 @interface HomeViewController ()<BMKMapViewDelegate, BMKLocationManagerDelegate, SubViewControllerDelegate, CAAnimationDelegate>
@@ -673,7 +674,8 @@
 		break;
 		
 		case 2:{
-			MyRecordViewController *recordVC = [[MyRecordViewController alloc] init];
+			//MyRecordViewController *recordVC = [[MyRecordViewController alloc] init];
+			NewRecordViewController *recordVC = [[NewRecordViewController alloc] init];
 			[self.navigationController pushViewController:recordVC animated:YES];
 		}
 		break;
