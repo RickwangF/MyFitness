@@ -12,15 +12,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="recMapCell" rowHeight="225" id="KGk-i7-Jjw" customClass="RecMapTableCell">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="recMapCell" rowHeight="365" id="KGk-i7-Jjw" customClass="RecMapTableCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="365"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="224.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="364.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ltZ-Un-EEg" customClass="TriangleRectView">
-                        <rect key="frame" x="55" y="17" width="300" height="191"/>
+                        <rect key="frame" x="55" y="17" width="300" height="331"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="YBB-OJ-vIg">
                                 <rect key="frame" x="25" y="12" width="234" height="17"/>
@@ -119,9 +119,9 @@
                                 </constraints>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zjw-Yf-9Mw">
-                                <rect key="frame" x="25" y="66" width="250" height="110"/>
+                                <rect key="frame" x="25" y="66" width="250" height="250"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="110" id="A8M-nx-cib"/>
+                                    <constraint firstAttribute="height" constant="250" id="p7K-d6-DBJ"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -140,7 +140,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I5s-Ei-hga" customClass="RoundIndicatorView">
-                        <rect key="frame" x="23.5" y="105" width="15" height="15"/>
+                        <rect key="frame" x="23.5" y="175" width="15" height="15"/>
                         <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="15" id="MaE-EY-OTf"/>
@@ -148,20 +148,21 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQA-AF-zpJ">
-                        <rect key="frame" x="30.5" y="0.0" width="1" height="105"/>
+                        <rect key="frame" x="30.5" y="0.0" width="1" height="175"/>
                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="1" id="TkC-TP-We8"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZRT-LZ-hJD">
-                        <rect key="frame" x="30.5" y="120" width="1" height="104"/>
+                        <rect key="frame" x="30.5" y="190" width="1" height="174"/>
                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="1" id="Whj-zq-YeS"/>
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="ZRT-LZ-hJD" firstAttribute="centerX" secondItem="I5s-Ei-hga" secondAttribute="centerX" id="5bI-fj-904"/>
                     <constraint firstItem="ltZ-Un-EEg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16.75" id="8Un-tr-ECm"/>
@@ -177,6 +178,7 @@
                     <constraint firstAttribute="trailing" secondItem="ltZ-Un-EEg" secondAttribute="trailing" constant="20" id="zjb-rs-Dto"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="aboveLine" destination="oQA-AF-zpJ" id="Mjx-3D-aLR"/>
@@ -190,11 +192,12 @@
                 <outlet property="infoLabel" destination="DHc-f2-dTl" id="YgR-Mw-bMn"/>
                 <outlet property="kmNumLabel" destination="1jf-lZ-u8a" id="E5H-yr-cpK"/>
                 <outlet property="minuteNumLabel" destination="Lhd-P5-orq" id="LFF-mB-jr3"/>
+                <outlet property="modeLabel" destination="e9o-Q3-O8J" id="Wdw-vD-WTE"/>
                 <outlet property="paceLabel" destination="0Ea-ZA-gJ2" id="x4B-4n-h5d"/>
                 <outlet property="timeLabel" destination="XD0-ut-eOy" id="afh-Jq-IZV"/>
                 <outlet property="trackImageView" destination="Zjw-Yf-9Mw" id="ftM-Ay-SLZ"/>
             </connections>
-            <point key="canvasLocation" x="128.80000000000001" y="273.01349325337333"/>
+            <point key="canvasLocation" x="136.80000000000001" y="322.48875562218893"/>
         </tableViewCell>
     </objects>
 </document>

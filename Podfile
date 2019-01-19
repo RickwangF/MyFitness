@@ -23,5 +23,6 @@ pod 'SDWebImage', '~> 4.0'
 pod 'ActionSheetPicker-3.0', '~> 2.3.0'
 pod 'Charts'
 pod 'FFPopup'
+pod 'YLProgressBar', '~> 3.11.0'
 
 end

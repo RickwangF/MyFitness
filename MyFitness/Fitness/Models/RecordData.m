@@ -62,7 +62,7 @@
 	self = [super init];
 	if (self) {
 		_info = @"配速最快的运动";
-		_type = RecordTypeEnumLongestSport;
+		_type = RecordTypeEnumFastestPace;
 		_avgSpeed = avgSpeed;
 		[self initBaseInfo:trackRecord];
 	}
@@ -94,13 +94,13 @@
 	_mode = trackRecord.transportMode;
 	switch (_mode) {
 		case TransportModeWalking:
-			_modeString = @"健走";
+			_modeString = @"健走:";
 		break;
 		case TransportModeRunning:
-			_modeString = @"跑步";
+			_modeString = @"跑步:";
 		break;
 		case TransportModeRiding:
-			_modeString = @"骑行";
+			_modeString = @"骑行:";
 		break;
 		default:
 			break;

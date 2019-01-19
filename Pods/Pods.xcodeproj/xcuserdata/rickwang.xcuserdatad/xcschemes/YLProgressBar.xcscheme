@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "387252C0885E0C10F08E452A954F9A13"
-               BlueprintName = "SideMenu"
+               BlueprintIdentifier = "FFC2373529438724065EA8C9033B568F"
+               BlueprintName = "YLProgressBar"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "SideMenu.framework">
+               BuildableName = "YLProgressBar.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

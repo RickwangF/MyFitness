@@ -142,7 +142,57 @@
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RR3-FU-hc2">
                                 <rect key="frame" x="25" y="66" width="254" height="86.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="平均配速" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M6W-ub-52h">
+                                        <rect key="frame" x="0.0" y="0.0" width="41" height="12"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="12" id="KX0-Rj-aHJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最快配速" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hC-KZ-FBq">
+                                        <rect key="frame" x="0.0" y="47" width="41" height="12"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="12" id="ewV-Td-AZS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Szv-5L-sw6" customClass="YLProgressBar">
+                                        <rect key="frame" x="0.0" y="17" width="254" height="20"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="WpX-WD-eSw"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="hideStripes" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="hideTrack" value="NO"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6PW-L8-YLv" customClass="YLProgressBar">
+                                        <rect key="frame" x="0.0" y="64" width="254" height="20"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="HSZ-0G-53G"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Szv-5L-sw6" secondAttribute="trailing" id="CQP-S5-7vN"/>
+                                    <constraint firstItem="6PW-L8-YLv" firstAttribute="top" secondItem="1hC-KZ-FBq" secondAttribute="bottom" constant="5" id="MBW-3H-BGl"/>
+                                    <constraint firstItem="Szv-5L-sw6" firstAttribute="leading" secondItem="RR3-FU-hc2" secondAttribute="leading" id="Txi-Zi-KJH"/>
+                                    <constraint firstItem="Szv-5L-sw6" firstAttribute="top" secondItem="M6W-ub-52h" secondAttribute="bottom" constant="5" id="VEb-13-4gt"/>
+                                    <constraint firstItem="M6W-ub-52h" firstAttribute="leading" secondItem="RR3-FU-hc2" secondAttribute="leading" id="b3p-lA-27f"/>
+                                    <constraint firstItem="6PW-L8-YLv" firstAttribute="leading" secondItem="RR3-FU-hc2" secondAttribute="leading" id="f8S-zb-lWS"/>
+                                    <constraint firstAttribute="trailing" secondItem="6PW-L8-YLv" secondAttribute="trailing" id="pYx-Vx-0V6"/>
+                                    <constraint firstItem="1hC-KZ-FBq" firstAttribute="top" secondItem="Szv-5L-sw6" secondAttribute="bottom" constant="10" id="qnC-fg-43U"/>
+                                    <constraint firstItem="1hC-KZ-FBq" firstAttribute="leading" secondItem="RR3-FU-hc2" secondAttribute="leading" id="uW6-rk-GEF"/>
+                                    <constraint firstItem="M6W-ub-52h" firstAttribute="top" secondItem="RR3-FU-hc2" secondAttribute="top" id="ueV-Yn-Kb9"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -160,6 +210,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="1e3-Ch-f4c" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="55" id="6fK-AZ-e2e"/>
                     <constraint firstAttribute="bottom" secondItem="Kgg-kD-2r3" secondAttribute="bottom" id="86g-Pv-MW9"/>
@@ -175,12 +226,15 @@
                     <constraint firstItem="Kgg-kD-2r3" firstAttribute="top" secondItem="CoC-Zu-Bpu" secondAttribute="bottom" id="vRN-DB-JbO"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="aboveLine" destination="In1-w6-xNu" id="Ve4-Xs-6QF"/>
+                <outlet property="avgProgressBar" destination="Szv-5L-sw6" id="0J7-GR-oLp"/>
                 <outlet property="belowLine" destination="Kgg-kD-2r3" id="pzJ-cL-ok0"/>
                 <outlet property="chartWrapView" destination="RR3-FU-hc2" id="Okd-sq-20T"/>
                 <outlet property="dateLabel" destination="dVk-js-TlX" id="U4F-An-HPh"/>
+                <outlet property="fastProgressBar" destination="6PW-L8-YLv" id="Py2-P3-a6a"/>
                 <outlet property="indicatorHeight" destination="dJx-Ba-6cD" id="ZV3-0p-UvU"/>
                 <outlet property="indicatorLeading" destination="9Ag-BG-xUN" id="znF-F8-qmy"/>
                 <outlet property="indicatorView" destination="CoC-Zu-Bpu" id="X2z-dv-U3X"/>
@@ -189,6 +243,7 @@
                 <outlet property="infoLabel" destination="T77-BC-MzL" id="Tqh-Sm-j8I"/>
                 <outlet property="kmNumLabel" destination="nFR-zd-19g" id="oXi-Bv-1Pu"/>
                 <outlet property="minuteNumLabel" destination="fev-1F-B0x" id="Cte-Ut-waA"/>
+                <outlet property="modeLabel" destination="MY5-DF-2TO" id="ijk-Hd-cFB"/>
                 <outlet property="paceLabel" destination="8rH-uG-ikO" id="EEJ-Eq-d77"/>
                 <outlet property="timeLabel" destination="hK0-xK-M77" id="0JI-Sh-rTd"/>
             </connections>

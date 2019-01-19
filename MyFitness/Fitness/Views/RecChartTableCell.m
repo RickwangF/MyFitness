@@ -12,6 +12,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+	
+	[self initAvgProgressBar];
+	[self initFastestProgressBar];
     // Initialization code
 }
 
@@ -19,6 +22,20 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)prepareForReuse{
+	[super prepareForReuse];
+	_aboveLine.hidden = NO;
+	_belowLine.hidden = NO;
+	_indicatorWidth.constant = 15;
+	_indicatorHeight.constant = 15;
+	_indicatorLeading.constant = 23.5;
+	if (_indicatorView.subviews.count > 0) {
+		[_indicatorView.subviews[0] removeFromSuperview];
+	}
+	_avgProgressBar.progress = 0;
+	_fastProgressBar.progress = 0;
 }
 
 #pragma mark - Action
@@ -46,6 +63,36 @@
 	startLabel.font = [UIFont systemFontOfSize:16];
 	startLabel.textAlignment = NSTextAlignmentCenter;
 	[_indicatorView addSubview:startLabel];
+}
+
+- (void)initAvgProgressBar{
+	_avgProgressBar.type = YLProgressBarTypeRounded;
+	_avgProgressBar.hideStripes = YES;
+	_avgProgressBar.hideGloss = YES;
+	_avgProgressBar.uniformTintColor = YES;
+	_avgProgressBar.progressTintColor = [UIColor colorWithRed:254.0/255 green:182.0/255 blue:60.0/255 alpha:1.0];
+	_avgProgressBar.cornerRadius = 10.0;
+	_avgProgressBar.trackTintColor = UIColor.whiteColor;
+	_avgProgressBar.hideInnerWhiteShadow = YES;
+}
+
+- (void)initFastestProgressBar{
+	_fastProgressBar.type = YLProgressBarTypeRounded;
+	_fastProgressBar.hideStripes = YES;
+	_fastProgressBar.hideGloss = YES;
+	_fastProgressBar.uniformTintColor = YES;
+	_fastProgressBar.progressTintColor = [UIColor colorWithRed:39.0/255 green:217.0/255 blue:148.0/255 alpha:1.0];
+	_fastProgressBar.cornerRadius = 10.0;
+	_fastProgressBar.trackTintColor = UIColor.whiteColor;
+	_fastProgressBar.hideInnerWhiteShadow = YES;
+}
+
+- (void)setAvgProgress:(CGFloat)progress{
+	_avgProgressBar.progress = progress;
+}
+
+- (void)setFastestProgress:(CGFloat)progress{
+	_fastProgressBar.progress = progress;
 }
 
 @end

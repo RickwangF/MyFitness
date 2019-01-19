@@ -52,6 +52,7 @@ PODS:
   - SideMenu (4.0.0)
   - STPopup (1.8.3)
   - Toast (4.0.0)
+  - YLProgressBar (3.11.0)
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (~> 2.3.0)
@@ -73,6 +74,7 @@ DEPENDENCIES:
   - SideMenu (~> 4.0)
   - STPopup
   - Toast (~> 4.0.0)
+  - YLProgressBar (~> 3.11.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -93,6 +95,7 @@ SPEC REPOS:
     - SideMenu
     - STPopup
     - Toast
+    - YLProgressBar
 
 EXTERNAL SOURCES:
   CHIPageControl:
@@ -128,7 +131,8 @@ SPEC CHECKSUMS:
   SideMenu: 70ee5657df63ec3382660ec4ef470bf1cf5db07d
   STPopup: da1167250a01584af7bcccb898653185f223ec46
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+  YLProgressBar: 0c0796a6e9b5e5d5040d15c8911e802b67ccb939
 
-PODFILE CHECKSUM: 23937049dcadfeafa0053441a056a00d10e780b5
+PODFILE CHECKSUM: 934c696bc0438b42f913b5bbe0cf60890ce8efd9
 
 COCOAPODS: 1.5.3

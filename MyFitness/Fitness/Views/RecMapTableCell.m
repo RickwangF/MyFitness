@@ -12,6 +12,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+	_trackImageView.contentMode = UIViewContentModeScaleAspectFill;
+	_trackImageView.clipsToBounds = YES;
     // Initialization code
 }
 
@@ -31,6 +33,7 @@
 	if (_indicatorView.subviews.count > 0) {
 		[_indicatorView.subviews[0] removeFromSuperview];
 	}
+	_trackImageView.image = nil;
 }
 
 #pragma mark - Action

@@ -168,7 +168,7 @@
                     <constraint firstAttribute="bottom" secondItem="hco-mF-tsP" secondAttribute="bottom" id="ya5-Ur-FTT"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="0.0" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="aboveLine" destination="dTK-Gx-Fme" id="HEd-rt-u92"/>
@@ -182,6 +182,7 @@
                 <outlet property="infoLabel" destination="DB1-mW-Ghu" id="KpR-QY-Fhv"/>
                 <outlet property="kmNumLabel" destination="j4a-ew-8K1" id="q1f-o4-bqw"/>
                 <outlet property="minuteNumLabel" destination="NrM-db-u0y" id="5HT-Ce-OOC"/>
+                <outlet property="modeLabel" destination="0gR-sR-CcL" id="oYz-hs-Kgs"/>
                 <outlet property="paceLabel" destination="CUd-nn-OvO" id="Pxv-9H-ZlF"/>
                 <outlet property="timeLabel" destination="5Dp-c3-YgC" id="S0Y-F9-t1o"/>
             </connections>

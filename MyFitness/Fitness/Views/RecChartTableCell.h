@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RoundIndicatorView.h"
 #import "TriangleRectView.h"
+#import "YLProgressBar.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *infoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *modeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *minuteNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *kmNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *paceLabel;
@@ -28,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *indicatorWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *indicatorHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *indicatorLeading;
+@property (weak, nonatomic) IBOutlet YLProgressBar *avgProgressBar;
+@property (weak, nonatomic) IBOutlet YLProgressBar *fastProgressBar;
 
 - (void)hideAboveLine;
 
@@ -36,6 +40,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)changeIndicatorSize:(CGSize)size;
 
 - (void)setStartSpot;
+
+- (void)setAvgProgress:(CGFloat)progress;
+
+- (void)setFastestProgress:(CGFloat)progress;
 
 @end
 

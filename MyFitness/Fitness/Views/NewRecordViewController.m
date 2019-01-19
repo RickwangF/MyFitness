@@ -10,6 +10,7 @@
 #import <Masonry/Masonry.h>
 #import <Toast/Toast.h>
 #import <AVOSCloud/AVOSCloud.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "AppStyleSetting.h"
 #import "UIImage+UIColor.h"
 #import "TrackRecord.h"
@@ -94,8 +95,6 @@
 	else{
 		self.automaticallyAdjustsScrollViewInsets = NO;
 	}
-	
-	_recordTableView.rowHeight = 100;
 	
 	_recordTableView.estimatedRowHeight = 0;
 	_recordTableView.estimatedSectionHeaderHeight = 0;
@@ -278,7 +277,7 @@
 			[self constructLongestSport];
 			[self constructFastestSport];
 			[self constructLastSport];
-			//[self.recordTableView reloadData];
+			[self.recordTableView reloadData];
 		}
 	}];
 }
@@ -286,18 +285,60 @@
 #pragma mark - Cell For Row
 
 - (RecBaseInfoTableCell*)baseInfoCellData:(RecordData*)data WithTable:(UITableView*)tableView IndexPath:(NSIndexPath*)indexPath{
-	
 	RecBaseInfoTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recInfoCell" forIndexPath:indexPath];
+	if (indexPath.section == 0 && indexPath.row == 0){
+		[cell hideAboveLine];
+		[cell changeIndicatorSize:CGSizeMake(30, 30)];
+		[cell setStartSpot];
+	}
+	cell.dateLabel.text = data.dateString;
+	cell.timeLabel.text = data.timeString;
+	cell.infoLabel.text = data.info;
+	cell.modeLabel.text = data.modeString;
+	cell.minuteNumLabel.text = data.minute;
+	cell.kmNumLabel.text = data.kiloMeter;
+	cell.paceLabel.text = data.pace;
 	return cell;
 }
 
 - (RecMapTableCell*)mapCellData:(RecordData*)data WithTable:(UITableView*)tableView IndexPath:(NSIndexPath*)indexPath{
 	RecMapTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recMapCell" forIndexPath:indexPath];
+	if (indexPath.section == 0 && indexPath.row == 0){
+		[cell hideAboveLine];
+		[cell changeIndicatorSize:CGSizeMake(30, 30)];
+		[cell setStartSpot];
+	}
+	cell.dateLabel.text = data.dateString;
+	cell.timeLabel.text = data.timeString;
+	cell.infoLabel.text = data.info;
+	cell.modeLabel.text = data.modeString;
+	cell.minuteNumLabel.text = data.minute;
+	cell.kmNumLabel.text = data.kiloMeter;
+	cell.paceLabel.text = data.pace;
+	[cell.trackImageView sd_setImageWithURL:[NSURL URLWithString:data.imageUrl]];
 	return cell;
 }
 
 - (RecChartTableCell*)chartCellData:(RecordData*)data WithTable:(UITableView*)tableView IndexPath:(NSIndexPath*)indexPath{
 	RecChartTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recChartCell" forIndexPath:indexPath];
+	if (indexPath.section == 0 && indexPath.row == 0){
+		[cell hideAboveLine];
+		[cell changeIndicatorSize:CGSizeMake(30, 30)];
+		[cell setStartSpot];
+	}
+	cell.dateLabel.text = data.dateString;
+	cell.timeLabel.text = data.timeString;
+	cell.infoLabel.text = data.info;
+	cell.modeLabel.text = data.modeString;
+	cell.minuteNumLabel.text = data.minute;
+	cell.kmNumLabel.text = data.kiloMeter;
+	cell.paceLabel.text = data.pace;
+	
+	CGFloat avgProgress = (CGFloat)_avgSpeed / 20;
+	CGFloat fastProgress = (CGFloat)data.speed / 20;
+	[cell setAvgProgress:avgProgress];
+	[cell setFastestProgress:fastProgress];
+	
 	return cell;
 }
 
@@ -319,6 +360,30 @@
 	}
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+	
+	NSString *year = _yearIndexArray[indexPath.section];
+	NSMutableArray *yearRecArray = [_recordDictionary objectForKey:year];
+	RecordData *data = yearRecArray[indexPath.row];
+	switch (data.type) {
+		case RecordTypeEnumFirstSport:
+			return 100;
+			break;
+		case RecordTypeEnumLongestSport:
+			return 365;
+			break;
+		case RecordTypeEnumFastestPace:
+			return 200;
+			break;
+		case RecordTypeEnumLastSport:
+			return 100;
+			break;
+		default:
+			return 100;
+			break;
+	}
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 	
 	NSString *year = _yearIndexArray[indexPath.section];
@@ -326,24 +391,31 @@
 	RecordData *data = yearRecArray[indexPath.row];
 	
 	switch (data.type) {
-		case RecordTypeEnumFirstSport:
-			return [self baseInfoCellData:data WithTable:tableView IndexPath:indexPath];
+		case RecordTypeEnumFirstSport:{
+			RecBaseInfoTableCell *cell = [self baseInfoCellData:data WithTable:tableView IndexPath:indexPath];
+			return cell;
+		}
 		break;
-			
+		case RecordTypeEnumLongestSport:{
+			RecMapTableCell *cell = [self mapCellData:data WithTable:tableView IndexPath:indexPath];
+			return cell;
+		}
+		break;
+		case RecordTypeEnumFastestPace:{
+			RecChartTableCell *cell = [self chartCellData:data WithTable:tableView IndexPath:indexPath];
+			return cell;
+		}
+		break;
+		case RecordTypeEnumLastSport:{
+			RecBaseInfoTableCell *cell = [self baseInfoCellData:data WithTable:tableView IndexPath:indexPath];
+			[cell hideBelowLine];
+			return cell;
+		}
+		break;
 		default:
-			break;
+			return nil;
+		break;
 	}
-	
-	RecBaseInfoTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recInfoCell" forIndexPath:indexPath];
-	if (indexPath.row == 0) {
-		[cell changeIndicatorSize:CGSizeMake(30, 30)];
-		[cell setStartSpot];
-		[cell hideAboveLine];
-	}
-	else if (indexPath.row == 9) {
-		[cell hideBelowLine];
-	}
-	return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -351,10 +423,30 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-	
 	YearHeaderView *yearHeader = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"yearHeader"];
-	yearHeader.yearLabel.text = @"2018";
+	NSString *year = _yearIndexArray[section];
+	yearHeader.yearLabel.text = year;
 	return yearHeader;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+	if (section == _yearIndexArray.count - 1) {
+		return 50;
+	}
+	else{
+		return 0.0001;
+	}
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+	if (section == _yearIndexArray.count - 1) {
+		MessageFooterView *messageFooter = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"messageFooter"];
+		return messageFooter;
+	}
+	else{
+		return nil;
+	}
+	
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

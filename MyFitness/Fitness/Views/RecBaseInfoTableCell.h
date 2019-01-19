@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *infoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *modeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *minuteNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *kmNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *paceLabel;
