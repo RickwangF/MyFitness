@@ -35,6 +35,8 @@
 //@property (nonatomic, assign) RecordTypeEnum type;
 //
 //@property (nonatomic, assign) TransportModeEnum mode;
+//
+//@property (nonatomic, copy) NSString *modeString;
 
 @implementation RecordData
 
@@ -51,7 +53,7 @@
 - (instancetype)initLongestSportWithTrackRecord:(TrackRecord *)trackRecord{
 	self = [super init];
 	if (self) {
-		_info = @"距离最长的运动";
+		_info = @"历史距离最长的运动";
 		_type = RecordTypeEnumLongestSport;
 		[self initBaseInfo:trackRecord];
 	}
@@ -61,7 +63,7 @@
 - (instancetype)initFastestSportWithTrackRecord:(TrackRecord*)trackRecord AvgSpeed:(double)avgSpeed{
 	self = [super init];
 	if (self) {
-		_info = @"配速最快的运动";
+		_info = @"历史配速最快的运动";
 		_type = RecordTypeEnumFastestPace;
 		_avgSpeed = avgSpeed;
 		[self initBaseInfo:trackRecord];
@@ -87,7 +89,7 @@
 	_timeString = [self timeStringFromDate:trackRecord.startTime];
 	_startTime = trackRecord.startTime;
 	_minute = [trackRecord.minuteString substringToIndex:2];
-	_kiloMeter = [NSString stringWithFormat:@"%.1f", round(trackRecord.mileage / 1000)];
+	_kiloMeter = [NSString stringWithFormat:@"%.1f", trackRecord.mileage / 1000];
 	_pace = trackRecord.paceString;
 	_imageUrl = trackRecord.imageUrl;
 	_speed = trackRecord.avgSpeed;

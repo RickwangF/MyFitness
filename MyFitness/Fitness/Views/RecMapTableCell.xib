@@ -119,7 +119,7 @@
                                 </constraints>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zjw-Yf-9Mw">
-                                <rect key="frame" x="25" y="66" width="250" height="250"/>
+                                <rect key="frame" x="25" y="66" width="255" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="p7K-d6-DBJ"/>
                                 </constraints>
@@ -134,7 +134,7 @@
                             <constraint firstItem="lIn-uj-Kff" firstAttribute="leading" secondItem="ltZ-Un-EEg" secondAttribute="leading" constant="25" id="Gp0-QE-DEg"/>
                             <constraint firstItem="YBB-OJ-vIg" firstAttribute="top" secondItem="ltZ-Un-EEg" secondAttribute="top" constant="12" id="KJJ-kK-kff"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YBB-OJ-vIg" secondAttribute="trailing" constant="15" id="Nws-2o-CIc"/>
-                            <constraint firstAttribute="trailing" secondItem="Zjw-Yf-9Mw" secondAttribute="trailing" constant="25" id="ZlT-2A-Vwh"/>
+                            <constraint firstAttribute="trailing" secondItem="Zjw-Yf-9Mw" secondAttribute="trailing" constant="20" id="ZlT-2A-Vwh"/>
                             <constraint firstItem="lIn-uj-Kff" firstAttribute="top" secondItem="YBB-OJ-vIg" secondAttribute="bottom" constant="10" id="nz3-Fz-y9s"/>
                             <constraint firstItem="Zjw-Yf-9Mw" firstAttribute="top" secondItem="lIn-uj-Kff" secondAttribute="bottom" constant="10" id="ynq-sK-DSc"/>
                         </constraints>
