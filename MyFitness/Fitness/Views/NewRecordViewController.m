@@ -17,14 +17,24 @@
 #import "RecBaseInfoTableCell.h"
 #import "UIDevice+Type.h"
 #import "YearHeaderView.h"
+#import "RecMapTableCell.h"
+#import "RecChartTableCell.h"
+#import "MessageFooterView.h"
+#import "RecordData.h"
 
 @interface NewRecordViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *recordTableView;
 
-@property (nonatomic, strong) NSMutableDictionary *recordDic;
+// 键是年份字符串, 值是年份对应的记录数组
+@property (nonatomic, strong) NSMutableDictionary *recordDictionary;
+
+@property (nonatomic, strong) NSMutableArray *yearIndexArray;
 
 @property (nonatomic, strong) NSMutableArray *trackArray;
+
+// 历史平均速度
+@property (nonatomic, assign) double avgSpeed;
 
 @end
 
@@ -36,14 +46,16 @@
 {
 	self = [super init];
 	if (self) {
-		
+		[self initValueProperty];
 	}
 	return self;
 }
 
 - (void)initValueProperty{
-	_recordDic = [[NSMutableDictionary alloc] init];
+	_recordDictionary = [[NSMutableDictionary alloc] init];
+	_yearIndexArray = [[NSMutableArray alloc] init];
 	_trackArray = [[NSMutableArray alloc] init];
+	_avgSpeed = 0;
 }
 
 #pragma mark - Lift Circle
@@ -62,6 +74,8 @@
 	self.title = @"我的记录";
 	
 	[self initRecordTableView];
+	
+	[self getAllMyTrackRecords];
     // Do any additional setup after loading the view.
 }
 
@@ -90,11 +104,17 @@
 	_recordTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 	
 	
-	UINib *recInfoNib = [UINib nibWithNibName:@"RecBaseInfoTableCell" bundle:NSBundle.mainBundle];
 	UINib *yeadrNib = [UINib nibWithNibName:@"YearHeaderView" bundle:NSBundle.mainBundle];
+	UINib *recInfoNib = [UINib nibWithNibName:@"RecBaseInfoTableCell" bundle:NSBundle.mainBundle];
+	UINib *mapNib = [UINib nibWithNibName:@"RecMapTableCell" bundle:NSBundle.mainBundle];
+	UINib *chartNib = [UINib nibWithNibName:@"RecChartTableCell" bundle:NSBundle.mainBundle];
+	UINib *messageNib = [UINib nibWithNibName:@"MessageFooterView" bundle:NSBundle.mainBundle];
 	
-	[_recordTableView registerNib:recInfoNib forCellReuseIdentifier:@"recInfoCell"];
 	[_recordTableView registerNib:yeadrNib forHeaderFooterViewReuseIdentifier:@"yearHeader"];
+	[_recordTableView registerNib:recInfoNib forCellReuseIdentifier:@"recInfoCell"];
+	[_recordTableView registerNib:mapNib forCellReuseIdentifier:@"recMapCell"];
+	[_recordTableView registerNib:chartNib forCellReuseIdentifier:@"recChartCell"];
+	[_recordTableView registerNib:messageNib forHeaderFooterViewReuseIdentifier:@"messageFooter"];
 	
 	[self.view addSubview:_recordTableView];
 	[_recordTableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -108,43 +128,211 @@
 	}];
 }
 
+#pragma mark - Method
+
+- (void)constructYearIndexArray{
+	
+	if (_trackArray.count == 0) {
+		return;
+	}
+	
+	NSInteger maxYear = [[_trackArray valueForKeyPath:@"@max.year"] integerValue];
+	NSInteger minYear = [[_trackArray valueForKeyPath:@"@min.year"] integerValue];
+	
+	if (maxYear == minYear) {
+		[_yearIndexArray addObject:[NSString stringWithFormat:@"%ld", (long)maxYear]];
+	}
+	else if (maxYear > minYear) {
+		for (NSInteger i = minYear; i<=maxYear; i++) {
+			NSString *yearString = [NSString stringWithFormat:@"%ld", (long)i];
+			[_yearIndexArray addObject: yearString];
+		}
+	}
+	
+}
+
+- (void)initRecordDictionary{
+	if (_yearIndexArray.count == 0) {
+		return;
+	}
+	
+	for (NSString *year in _yearIndexArray) {
+		[_recordDictionary setObject:[NSMutableArray new] forKey: year];
+	}
+}
+
+- (void)calculateAvgSpeed{
+	if (_trackArray.count == 0) {
+		return;
+	}
+	
+	_avgSpeed = [[_trackArray valueForKeyPath:@"@avg.avgSpeed"] doubleValue];
+}
+
+- (void)constructFirstSport{
+	if (_trackArray.count == 0) {
+		return;
+	}
+	
+	TrackRecord *firstRecord = _trackArray[0];
+	RecordData *data = [[RecordData alloc] initFirstSportWithTrackRecord:firstRecord];
+	[self insertRecordData:data];
+}
+
+- (void)constructLongestSport{
+	if (_trackArray.count == 0) {
+		return;
+	}
+	
+	double mile = [[_trackArray valueForKeyPath:@"@max.mileage"] doubleValue];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.mileage >= %f", mile - 0.001];
+	TrackRecord *longestRecord = [_trackArray filteredArrayUsingPredicate:predicate].firstObject;
+	if (longestRecord == nil) {
+		return;
+	}
+	
+	RecordData *data = [[RecordData alloc] initLongestSportWithTrackRecord:longestRecord];
+	[self insertRecordData:data];
+}
+
+- (void)constructFastestSport{
+	if (_trackArray.count == 0) {
+		return;
+	}
+	
+	double maxSpeed = [[_trackArray valueForKeyPath:@"@max.avgSpeed"] doubleValue];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.avgSpeed >= %f", maxSpeed - 0.001];
+	TrackRecord *fastestRecord = [_trackArray filteredArrayUsingPredicate:predicate].firstObject;
+	if (fastestRecord == nil) {
+		return;
+	}
+	
+	RecordData *data = [[RecordData alloc] initFastestSportWithTrackRecord:fastestRecord AvgSpeed:_avgSpeed];
+	[self insertRecordData:data];
+}
+
+- (void)constructLastSport{
+	if (_trackArray.count == 0) {
+		return;
+	}
+	
+	TrackRecord *lastRecord = [_trackArray lastObject];
+	if (lastRecord == nil) {
+		return;
+	}
+	
+	RecordData *data = [[RecordData alloc] initLastSportWithTrackRecord:lastRecord];
+	[self insertRecordData:data];
+}
+
+- (void)insertRecordData:(RecordData*)recordData{
+	if (_yearIndexArray.count == 0){
+		return;
+	}
+	
+	NSString *year = recordData.year;
+	if (year == nil || [year isEqualToString:@""]) {
+		return;
+	}
+	
+	NSMutableArray *yearRecArray = [_recordDictionary objectForKey:year];
+	[yearRecArray addObject:recordData];
+	
+	if (yearRecArray.count > 1) {
+		[yearRecArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+			RecordData *data1 = obj1;
+			RecordData *data2 = obj2;
+			
+			return [data1.startTime compare:data2.startTime];
+		}];
+	}
+}
+
+
 #pragma mark - Request
 
 - (void)getAllMyTrackRecords{
 	AVQuery *query = [AVQuery queryWithClassName:@"TrackRecord"];
 	[query whereKey:@"user" equalTo:[AVUser currentUser]];
+	[query orderByAscending:@"startTime"];
 	
 	[query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
 		if (error != nil) {
 			[self.view makeToast:error.localizedDescription];
 		}
 		else{
-			if (objects == nil) {
-				[self.view makeToast:@"您最近7天都没有运动了"];
+			if (objects == nil || objects.count == 0) {
+				[self.view makeToast:@"你没有运动记录"];
 				return;
 			}
 			
-			if (objects.count > 0) {
-				for (NSDictionary *dic in objects) {
-					TrackRecord *track = [TrackRecord trackWithDictionary:dic];
-					[self.trackArray addObject:track];
-				}
+			for (NSDictionary *dic in objects) {
+				TrackRecord *track = [TrackRecord trackWithDictionary:dic];
+				[self.trackArray addObject:track];
 			}
+			
+			[self constructYearIndexArray];
+			[self initRecordDictionary];
+			[self calculateAvgSpeed];
+			[self constructFirstSport];
+			[self constructLongestSport];
+			[self constructFastestSport];
+			[self constructLastSport];
+			//[self.recordTableView reloadData];
 		}
 	}];
+}
+
+#pragma mark - Cell For Row
+
+- (RecBaseInfoTableCell*)baseInfoCellData:(RecordData*)data WithTable:(UITableView*)tableView IndexPath:(NSIndexPath*)indexPath{
+	
+	RecBaseInfoTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recInfoCell" forIndexPath:indexPath];
+	return cell;
+}
+
+- (RecMapTableCell*)mapCellData:(RecordData*)data WithTable:(UITableView*)tableView IndexPath:(NSIndexPath*)indexPath{
+	RecMapTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recMapCell" forIndexPath:indexPath];
+	return cell;
+}
+
+- (RecChartTableCell*)chartCellData:(RecordData*)data WithTable:(UITableView*)tableView IndexPath:(NSIndexPath*)indexPath{
+	RecChartTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recChartCell" forIndexPath:indexPath];
+	return cell;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-	return 1;
+	return _yearIndexArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-	return 10;
+	
+	if (_yearIndexArray.count > 0) {
+		NSString *year = _yearIndexArray[section];
+		NSMutableArray *yearRecArray = [_recordDictionary objectForKey:year];
+		return yearRecArray.count;
+	}
+	else{
+		return 0;
+	}
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+	
+	NSString *year = _yearIndexArray[indexPath.section];
+	NSMutableArray *yearRecArray = [_recordDictionary objectForKey:year];
+	RecordData *data = yearRecArray[indexPath.row];
+	
+	switch (data.type) {
+		case RecordTypeEnumFirstSport:
+			return [self baseInfoCellData:data WithTable:tableView IndexPath:indexPath];
+		break;
+			
+		default:
+			break;
+	}
 	
 	RecBaseInfoTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recInfoCell" forIndexPath:indexPath];
 	if (indexPath.row == 0) {

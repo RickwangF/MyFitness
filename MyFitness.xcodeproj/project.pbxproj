@@ -76,6 +76,9 @@
 		0F56051D21F1C4B100C955C8 /* RecMapTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F56051B21F1C4B100C955C8 /* RecMapTableCell.xib */; };
 		0F56052121F1CC5900C955C8 /* RecChartTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F56051F21F1CC5900C955C8 /* RecChartTableCell.m */; };
 		0F56052221F1CC5900C955C8 /* RecChartTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F56052021F1CC5900C955C8 /* RecChartTableCell.xib */; };
+		0F56052521F29FB300C955C8 /* MessageFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F56052421F29FB300C955C8 /* MessageFooterView.m */; };
+		0F56052721F2A00500C955C8 /* MessageFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F56052621F2A00500C955C8 /* MessageFooterView.xib */; };
+		0F56052A21F2A67400C955C8 /* RecordData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F56052921F2A67400C955C8 /* RecordData.m */; };
 		0F6FD02921CA15360083D590 /* BodyDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6FD02821CA15360083D590 /* BodyDataViewController.m */; };
 		0F6FD02D21CA19530083D590 /* BodyTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6FD02B21CA19530083D590 /* BodyTableCell.m */; };
 		0F6FD02E21CA19530083D590 /* BodyTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6FD02C21CA19530083D590 /* BodyTableCell.xib */; };
@@ -291,6 +294,11 @@
 		0F56051E21F1CC5900C955C8 /* RecChartTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecChartTableCell.h; sourceTree = "<group>"; };
 		0F56051F21F1CC5900C955C8 /* RecChartTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecChartTableCell.m; sourceTree = "<group>"; };
 		0F56052021F1CC5900C955C8 /* RecChartTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecChartTableCell.xib; sourceTree = "<group>"; };
+		0F56052321F29FB300C955C8 /* MessageFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageFooterView.h; sourceTree = "<group>"; };
+		0F56052421F29FB300C955C8 /* MessageFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageFooterView.m; sourceTree = "<group>"; };
+		0F56052621F2A00500C955C8 /* MessageFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageFooterView.xib; sourceTree = "<group>"; };
+		0F56052821F2A67400C955C8 /* RecordData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordData.h; sourceTree = "<group>"; };
+		0F56052921F2A67400C955C8 /* RecordData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordData.m; sourceTree = "<group>"; };
 		0F6FD02721CA15360083D590 /* BodyDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BodyDataViewController.h; sourceTree = "<group>"; };
 		0F6FD02821CA15360083D590 /* BodyDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BodyDataViewController.m; sourceTree = "<group>"; };
 		0F6FD02A21CA19530083D590 /* BodyTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BodyTableCell.h; sourceTree = "<group>"; };
@@ -634,6 +642,9 @@
 				0F56051E21F1CC5900C955C8 /* RecChartTableCell.h */,
 				0F56051F21F1CC5900C955C8 /* RecChartTableCell.m */,
 				0F56052021F1CC5900C955C8 /* RecChartTableCell.xib */,
+				0F56052321F29FB300C955C8 /* MessageFooterView.h */,
+				0F56052421F29FB300C955C8 /* MessageFooterView.m */,
+				0F56052621F2A00500C955C8 /* MessageFooterView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -649,6 +660,8 @@
 				0F2AB5A721BDFC42006FB503 /* TrackRecord.m */,
 				0F4D041621E86D7B0003DD5A /* SportParameter.h */,
 				0F4D041721E86D7B0003DD5A /* SportParameter.m */,
+				0F56052821F2A67400C955C8 /* RecordData.h */,
+				0F56052921F2A67400C955C8 /* RecordData.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -973,6 +986,7 @@
 				0F56050621F1663B00C955C8 /* RecBaseInfoTableCell.xib in Resources */,
 				0F2FAAE021EC22FA00E6BB83 /* Chinese_And_English_Speech_DYY.dat in Resources */,
 				0FE8B14321D06DB000AF75A4 /* AAJSFiles.bundle in Resources */,
+				0F56052721F2A00500C955C8 /* MessageFooterView.xib in Resources */,
 				0F6FD02E21CA19530083D590 /* BodyTableCell.xib in Resources */,
 				0F56052221F1CC5900C955C8 /* RecChartTableCell.xib in Resources */,
 				0F56051D21F1C4B100C955C8 /* RecMapTableCell.xib in Resources */,
@@ -1090,6 +1104,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F56052A21F2A67400C955C8 /* RecordData.m in Sources */,
 				0F56051121F1BC7D00C955C8 /* YearHeaderView.m in Sources */,
 				0F2AB5DA21BE54C8006FB503 /* CounterViewController.m in Sources */,
 				0FE8B14E21D06DB000AF75A4 /* AAYAxis.m in Sources */,
@@ -1182,6 +1197,7 @@
 				0FE8B14921D06DB000AF75A4 /* AADataLabels.m in Sources */,
 				0FED06CF21C7C07E000D41AC /* DropDownMenu.swift in Sources */,
 				0F2AB5D321BE3B86006FB503 /* AppStyleSetting.m in Sources */,
+				0F56052521F29FB300C955C8 /* MessageFooterView.m in Sources */,
 				0FE8B15421D06DB000AF75A4 /* AATitle.m in Sources */,
 				0FED06CA21C743A7000D41AC /* NavigationViewController.m in Sources */,
 			);
