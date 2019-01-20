@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -152,7 +148,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最快配速" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hC-KZ-FBq">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本次配速" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hC-KZ-FBq">
                                         <rect key="frame" x="0.0" y="47" width="41" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="12" id="ewV-Td-AZS"/>
@@ -234,7 +230,7 @@
                 <outlet property="belowLine" destination="Kgg-kD-2r3" id="pzJ-cL-ok0"/>
                 <outlet property="chartWrapView" destination="RR3-FU-hc2" id="Okd-sq-20T"/>
                 <outlet property="dateLabel" destination="dVk-js-TlX" id="U4F-An-HPh"/>
-                <outlet property="fastProgressBar" destination="6PW-L8-YLv" id="Py2-P3-a6a"/>
+                <outlet property="firstInnerLabel" destination="M6W-ub-52h" id="Hca-R2-IsB"/>
                 <outlet property="indicatorHeight" destination="dJx-Ba-6cD" id="ZV3-0p-UvU"/>
                 <outlet property="indicatorLeading" destination="9Ag-BG-xUN" id="znF-F8-qmy"/>
                 <outlet property="indicatorView" destination="CoC-Zu-Bpu" id="X2z-dv-U3X"/>
@@ -244,7 +240,9 @@
                 <outlet property="kmNumLabel" destination="nFR-zd-19g" id="oXi-Bv-1Pu"/>
                 <outlet property="minuteNumLabel" destination="fev-1F-B0x" id="Cte-Ut-waA"/>
                 <outlet property="modeLabel" destination="MY5-DF-2TO" id="ijk-Hd-cFB"/>
+                <outlet property="mostProgressBar" destination="6PW-L8-YLv" id="Py2-P3-a6a"/>
                 <outlet property="paceLabel" destination="8rH-uG-ikO" id="EEJ-Eq-d77"/>
+                <outlet property="secondInnerLabel" destination="1hC-KZ-FBq" id="JLG-Y3-ksu"/>
                 <outlet property="timeLabel" destination="hK0-xK-M77" id="0JI-Sh-rTd"/>
             </connections>
             <point key="canvasLocation" x="96.799999999999997" y="223.98800599700152"/>

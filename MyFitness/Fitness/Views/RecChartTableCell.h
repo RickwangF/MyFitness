@@ -30,8 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *indicatorWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *indicatorHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *indicatorLeading;
+@property (weak, nonatomic) IBOutlet UILabel *firstInnerLabel;
 @property (weak, nonatomic) IBOutlet YLProgressBar *avgProgressBar;
-@property (weak, nonatomic) IBOutlet YLProgressBar *fastProgressBar;
+@property (weak, nonatomic) IBOutlet UILabel *secondInnerLabel;
+@property (weak, nonatomic) IBOutlet YLProgressBar *mostProgressBar;
 
 - (void)hideAboveLine;
 
@@ -43,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setAvgProgress:(CGFloat)progress;
 
-- (void)setFastestProgress:(CGFloat)progress;
+- (void)setMostProgress:(CGFloat)progress;
 
 @end
 

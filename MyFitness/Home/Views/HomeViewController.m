@@ -129,7 +129,7 @@
     
 - (void)viewDidLoad {
     [super viewDidLoad];
-	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithUIColor:AppStyleSetting.sharedInstance.homeNaviBarTintColor] forBarMetrics:UIBarMetricsDefault];
+	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithUIColor:[UIColor colorWithRed:1.0 green:227.0/255 blue:11.0/255 alpha:1.0]] forBarMetrics:UIBarMetricsDefault];
 	self.navigationItem.backBarButtonItem = [UIBarButtonItem new];
 	
 	[self initTitleView];
@@ -137,8 +137,6 @@
 	[self initLeftSideBtn];
 	
 	[self initTodayDistanceBtn];
-	
-	[self getTodayDistance];
 	
 	[self initMapView];
 	
@@ -169,6 +167,7 @@
 	[super viewWillAppear:animated];
 	[BMKMapView enableCustomMapStyle:YES];
 	[_mapView viewWillAppear];
+	[self getTodayDistance];
 }
     
 - (void)viewWillDisappear:(BOOL)animated{

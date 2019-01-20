@@ -78,6 +78,7 @@
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
 	[self.navigationController setNavigationBarHidden:YES animated:NO];
+	[self refreshUserInfo];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -239,6 +240,17 @@
 		make.width.height.equalTo(@25);
 		make.centerY.equalTo(self.privacyItemView);
 	}];
+}
+
+#pragma mark - Method
+
+- (void)refreshUserInfo{
+	if ([AVUser currentUser]) {
+		[_userNameBtn setTitle:[AVUser currentUser].username forState:UIControlStateNormal];
+	}
+	else{
+		[_userNameBtn setTitle:@"未登录" forState:UIControlStateNormal];
+	}
 }
 
 #pragma mark - Action

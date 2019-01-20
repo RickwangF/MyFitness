@@ -37,6 +37,9 @@
 // 历史平均速度
 @property (nonatomic, assign) double avgSpeed;
 
+// 历史平均用时
+@property (nonatomic, assign) double avgDuration;
+
 @end
 
 @implementation NewRecordViewController
@@ -168,6 +171,14 @@
 	_avgSpeed = [[_trackArray valueForKeyPath:@"@avg.avgSpeed"] doubleValue];
 }
 
+- (void)calculateAvgDuration{
+	if (_trackArray.count == 0) {
+		return;
+	}
+	
+	_avgDuration = [[_trackArray valueForKeyPath:@"@avg.interval"] doubleValue];
+}
+
 - (void)constructFirstSport{
 	if (_trackArray.count == 0) {
 		return;
@@ -207,6 +218,22 @@
 	}
 	
 	RecordData *data = [[RecordData alloc] initFastestSportWithTrackRecord:fastestRecord AvgSpeed:_avgSpeed];
+	[self insertRecordData:data];
+}
+
+- (void)constructDurationSport{
+	if (_trackArray.count == 0) {
+		return;
+	}
+	
+	double maxDuration = [[_trackArray valueForKeyPath:@"@max.interval"] doubleValue];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.interval >= %f", maxDuration - 0.001];
+	TrackRecord *durationRecord = [_trackArray filteredArrayUsingPredicate:predicate].firstObject;
+	if (durationRecord == nil) {
+		return;
+	}
+	
+	RecordData *data = [[RecordData alloc] initDurationSportWithTrackRecord:durationRecord AvgDuration:_avgDuration];
 	[self insertRecordData:data];
 }
 
@@ -273,9 +300,11 @@
 			[self constructYearIndexArray];
 			[self initRecordDictionary];
 			[self calculateAvgSpeed];
+			[self calculateAvgDuration];
 			[self constructFirstSport];
 			[self constructLongestSport];
 			[self constructFastestSport];
+			[self constructDurationSport];
 			[self constructLastSport];
 			[self.recordTableView reloadData];
 		}
@@ -334,11 +363,6 @@
 	cell.kmNumLabel.text = data.kiloMeter;
 	cell.paceLabel.text = data.pace;
 	
-	CGFloat avgProgress = (CGFloat)_avgSpeed / 20;
-	CGFloat fastProgress = (CGFloat)data.speed / 20;
-	[cell setAvgProgress:avgProgress];
-	[cell setFastestProgress:fastProgress];
-	
 	return cell;
 }
 
@@ -375,6 +399,9 @@
 		case RecordTypeEnumFastestPace:
 			return 200;
 			break;
+		case RecordTypeEnumDurationSport:
+			return 200;
+			break;
 		case RecordTypeEnumLastSport:
 			return 100;
 			break;
@@ -403,9 +430,23 @@
 		break;
 		case RecordTypeEnumFastestPace:{
 			RecChartTableCell *cell = [self chartCellData:data WithTable:tableView IndexPath:indexPath];
+			CGFloat avgProgress = (CGFloat)_avgSpeed / 20;
+			CGFloat fastProgress = (CGFloat)data.speed / 20;
+			[cell setAvgProgress:avgProgress];
+			[cell setMostProgress:fastProgress];
 			return cell;
 		}
 		break;
+		case RecordTypeEnumDurationSport:{
+			RecChartTableCell *cell = [self chartCellData:data WithTable:tableView IndexPath:indexPath];
+			cell.firstInnerLabel.text = @"平均时长";
+			cell.secondInnerLabel.text = @"本次时长";
+			CGFloat avgProgress = (CGFloat)_avgDuration / 4000;
+			CGFloat longestProgress = (CGFloat)data.duration / 4000;
+			[cell setAvgProgress:avgProgress];
+			[cell setMostProgress:longestProgress];
+			return cell;
+		}
 		case RecordTypeEnumLastSport:{
 			RecBaseInfoTableCell *cell = [self baseInfoCellData:data WithTable:tableView IndexPath:indexPath];
 			[cell hideBelowLine];
@@ -431,7 +472,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
 	if (section == _yearIndexArray.count - 1) {
-		return 50;
+		return 80;
 	}
 	else{
 		return 0.0001;

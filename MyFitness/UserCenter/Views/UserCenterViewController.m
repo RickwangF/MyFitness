@@ -20,7 +20,7 @@
 #import "BodyDataViewController.h"
 #import "TransportModeEnum.h"
 #import "TrackListViewController.h"
-#import "MyRecordViewController.h"
+#import "NewRecordViewController.h"
 
 @interface UserCenterViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -58,8 +58,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
+
 	[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"logout_22#ff"] style:UIBarButtonItemStylePlain target:self action:@selector(logoutBarButtonClicked:)];
+	self.navigationItem.backBarButtonItem = [UIBarButtonItem new];
 	
 	[self initInfoTableView];
     // Do any additional setup after loading the view.
@@ -122,13 +124,25 @@
 }
 
 - (void)openRecordView{
-	MyRecordViewController *recordVC = [[MyRecordViewController alloc] init];
+	NewRecordViewController *recordVC = [[NewRecordViewController alloc] init];
 	[self.navigationController pushViewController:recordVC animated:YES];
 }
 
 - (void)openBodyDataView{
 	BodyDataViewController *bodyVC = [[BodyDataViewController alloc] init];
 	[self.navigationController pushViewController:bodyVC animated:YES];
+}
+
+- (void)logoutBarButtonClicked:(UIBarButtonItem*)sender{
+	UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"你确定要退出登录吗" message:@"点击“确定”退出登录" preferredStyle:UIAlertControllerStyleAlert];
+	UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+		[AVUser logOut];
+		[self.navigationController popViewControllerAnimated:YES];
+	}];
+	UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+	[alertController addAction:confirm];
+	[alertController addAction:cancel];
+	[self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - UITableViewDelegate

@@ -10,6 +10,8 @@
 #import "TransportModeEnum.h"
 #import "TrackRecord.h"
 
+//@property (nonatomic, copy) NSString *objectId;
+//
 //@property (nonatomic, copy) NSString *year;
 //
 //@property (nonatomic, copy) NSString *dateString;
@@ -31,6 +33,10 @@
 //@property (nonatomic, assign) double avgSpeed;
 //
 //@property (nonatomic, assign) double speed;
+//
+//@property (nonatomic, assign) double duration;
+//
+//@property (nonatomic, assign) double avgDuration;
 //
 //@property (nonatomic, assign) RecordTypeEnum type;
 //
@@ -71,6 +77,17 @@
 	return self;
 }
 
+- (instancetype)initDurationSportWithTrackRecord:(TrackRecord *)trackRecord AvgDuration:(double)avgDuration{
+	self = [super init];
+	if (self) {
+		_info = @"历史时间最长的运动";
+		_type = RecordTypeEnumDurationSport;
+		_avgDuration = avgDuration;
+		[self initBaseInfo:trackRecord];
+	}
+	return self;
+}
+
 - (instancetype)initLastSportWithTrackRecord:(TrackRecord *)trackRecord{
 	self = [super init];
 	if (self) {
@@ -82,6 +99,7 @@
 }
 
 - (void)initBaseInfo:(TrackRecord*)trackRecord{
+	_objectId = trackRecord.objectId;
 	_year = [NSString stringWithFormat:@"%ld", (long)trackRecord.year];
 	NSCalendar *calendar = [NSCalendar currentCalendar];
 	NSDateComponents *components = [calendar components: NSCalendarUnitMonth | NSCalendarUnitDay fromDate:trackRecord.startTime];
@@ -94,6 +112,7 @@
 	_imageUrl = trackRecord.imageUrl;
 	_speed = trackRecord.avgSpeed;
 	_mode = trackRecord.transportMode;
+	_duration = trackRecord.interval;
 	switch (_mode) {
 		case TransportModeWalking:
 			_modeString = @"健走:";

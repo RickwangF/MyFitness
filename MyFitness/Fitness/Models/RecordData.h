@@ -10,7 +10,7 @@
 #import "TransportModeEnum.h"
 
 typedef NS_ENUM(NSInteger, RecordTypeEnum) {
-	RecordTypeEnumFirstSport = 1,
+	RecordTypeEnumFirstSport = 1, // now
 	RecordTypeEnumLongestSport, // now
 	RecordTypeEnumLongestWalk,
 	RecordTypeEnumLongestRun,
@@ -19,6 +19,10 @@ typedef NS_ENUM(NSInteger, RecordTypeEnum) {
 	RecordTypeEnumFastestWalk,
 	RecordTypeEnumFastestRun,
 	RecordTypeEnumFastestRide,
+	RecordTypeEnumDurationSport, // now
+	RecordTypeEnumDurationWalk,
+	RecordTypeEnumDurationRun,
+	RecordTypeEnumDurationRide,
 	RecordTypeEnumLastSport, // now
 	RecordTypeEnumYearSummary
 };
@@ -28,6 +32,8 @@ typedef NS_ENUM(NSInteger, RecordTypeEnum) {
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RecordData : NSObject
+
+@property (nonatomic, copy) NSString *objectId;
 
 @property (nonatomic, copy) NSString *year;
 
@@ -51,6 +57,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) double speed;
 
+@property (nonatomic, assign) double duration;
+
+@property (nonatomic, assign) double avgDuration;
+
 @property (nonatomic, assign) RecordTypeEnum type;
 
 @property (nonatomic, assign) TransportModeEnum mode;
@@ -64,6 +74,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initFastestSportWithTrackRecord:(TrackRecord*)trackRecord AvgSpeed:(double)avgSpeed;
 
 - (instancetype)initLastSportWithTrackRecord:(TrackRecord*)trackRecord;
+
+- (instancetype)initDurationSportWithTrackRecord:(TrackRecord*)trackRecord AvgDuration:(double)avgDuration;
 
 @end
 

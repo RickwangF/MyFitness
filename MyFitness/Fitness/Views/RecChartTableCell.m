@@ -35,7 +35,9 @@
 		[_indicatorView.subviews[0] removeFromSuperview];
 	}
 	_avgProgressBar.progress = 0;
-	_fastProgressBar.progress = 0;
+	_mostProgressBar.progress = 0;
+	_firstInnerLabel.text = @"平均配速";
+	_secondInnerLabel.text = @"本次配速";
 }
 
 #pragma mark - Action
@@ -77,22 +79,22 @@
 }
 
 - (void)initFastestProgressBar{
-	_fastProgressBar.type = YLProgressBarTypeRounded;
-	_fastProgressBar.hideStripes = YES;
-	_fastProgressBar.hideGloss = YES;
-	_fastProgressBar.uniformTintColor = YES;
-	_fastProgressBar.progressTintColor = [UIColor colorWithRed:39.0/255 green:217.0/255 blue:148.0/255 alpha:1.0];
-	_fastProgressBar.cornerRadius = 10.0;
-	_fastProgressBar.trackTintColor = UIColor.whiteColor;
-	_fastProgressBar.hideInnerWhiteShadow = YES;
+	_mostProgressBar.type = YLProgressBarTypeRounded;
+	_mostProgressBar.hideStripes = YES;
+	_mostProgressBar.hideGloss = YES;
+	_mostProgressBar.uniformTintColor = YES;
+	_mostProgressBar.progressTintColor = [UIColor colorWithRed:39.0/255 green:217.0/255 blue:148.0/255 alpha:1.0];
+	_mostProgressBar.cornerRadius = 10.0;
+	_mostProgressBar.trackTintColor = UIColor.whiteColor;
+	_mostProgressBar.hideInnerWhiteShadow = YES;
 }
 
 - (void)setAvgProgress:(CGFloat)progress{
 	_avgProgressBar.progress = progress;
 }
 
-- (void)setFastestProgress:(CGFloat)progress{
-	_fastProgressBar.progress = progress;
+- (void)setMostProgress:(CGFloat)progress{
+	_mostProgressBar.progress = progress;
 }
 
 @end
