@@ -28,6 +28,7 @@
 #import "UIDevice+Type.h"
 #import "TrackListViewController.h"
 #import "CounterViewController.h"
+#import "LeftBarButton.h"
 
 static NSString* const startLocIdentifier = @"startLoc";
 static NSString* const stopLocIdentifier = @"stopLoc";
@@ -294,12 +295,20 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 }
 
 - (void)initBackBtn{
-	_backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-	_backBtn.layer.cornerRadius = 20;
+	_backBtn = [[LeftBarButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
+	_backBtn.layer.cornerRadius = 17.5;
 	_backBtn.backgroundColor = [UIColor colorWithHexString:@"#d7d7d7"];
 	[_backBtn setImage:[UIImage imageNamed:@"left_22#00"] forState:UIControlStateNormal];
 	[_backBtn addTarget:self action:@selector(backBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_backBtn];
+	_backBtn.translatesAutoresizingMaskIntoConstraints = NO;
+	[_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.width.height.equalTo(@35);
+	}];
+	
+	UIBarButtonItem *spaceBar = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+	spaceBar.width = -8;
+	
+	self.navigationItem.leftBarButtonItems = @[spaceBar, [[UIBarButtonItem alloc] initWithCustomView:_backBtn]];
 }
 	
 - (void)initBottomContainerView{

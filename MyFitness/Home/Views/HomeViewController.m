@@ -41,6 +41,7 @@
 #import "RoundSolidView.h"
 #import "CooperationViewController.h"
 #import "NewRecordViewController.h"
+#import "LeftBarButton.h"
 
 
 @interface HomeViewController ()<BMKMapViewDelegate, BMKLocationManagerDelegate, SubViewControllerDelegate, CAAnimationDelegate>
@@ -191,13 +192,21 @@
 }
     
 - (void)initLeftSideBtn{
-    UIButton *leftSideBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    UIButton *leftSideBtn = [[LeftBarButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     [leftSideBtn setImage:[UIImage imageNamed:@"avatar_20#ff"] forState:UIControlStateNormal];
 	leftSideBtn.backgroundColor = [UIColor colorWithRed:220.0/255 green:214.0/255 blue:214.0/255 alpha:1.0];
 	leftSideBtn.layer.cornerRadius = 15;
 	leftSideBtn.layer.masksToBounds = YES;
     [leftSideBtn addTarget:self action:@selector(leftSideBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftSideBtn];
+	leftSideBtn.translatesAutoresizingMaskIntoConstraints = NO;
+	[leftSideBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.width.height.equalTo(@30);
+	}];
+	
+	UIBarButtonItem *spaceBar = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+	spaceBar.width = -8;
+	
+    self.navigationItem.leftBarButtonItems = @[spaceBar, [[UIBarButtonItem alloc] initWithCustomView:leftSideBtn]];
 }
     
 - (void)initMapView{

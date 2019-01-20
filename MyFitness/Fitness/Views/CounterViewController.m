@@ -25,6 +25,7 @@
 #import "SportParameter.h"
 #import "BDSSpeechSynthesizer.h"
 #import <Hero/Hero-Swift.h>
+#import "LeftBarButton.h"
 
 static NSString * const AppID = @"15411830";
 static NSString * const APIKey = @"Ow3ZUB9sDqgMMftvQvYpUFVD";
@@ -298,10 +299,17 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 }
 
 - (void)setUpNavigationBar{
-	_backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+	_backBtn = [[LeftBarButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
 	[_backBtn setImage:[UIImage imageNamed:@"left_22#ff"] forState:UIControlStateNormal];
 	[_backBtn addTarget:self action:@selector(backBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_backBtn];
+	_backBtn.translatesAutoresizingMaskIntoConstraints = NO;
+	[_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.width.height.equalTo(@44);
+	}];
+	
+	UIBarButtonItem *spaceBar = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+	spaceBar.width = -8;
+	self.navigationItem.leftBarButtonItems = @[spaceBar, [[UIBarButtonItem alloc] initWithCustomView:_backBtn]];
 	
 	_modeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 22)];
 	_modeLabel.textColor = UIColor.whiteColor;

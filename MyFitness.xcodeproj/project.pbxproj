@@ -102,6 +102,7 @@
 		0FA2EA1921C340ED00A3DC4E /* MonthSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1821C340ED00A3DC4E /* MonthSectionHeader.xib */; };
 		0FA2EA1D21C342B400A3DC4E /* TrackTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1B21C342B400A3DC4E /* TrackTableCell.m */; };
 		0FA2EA1E21C342B400A3DC4E /* TrackTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2EA1C21C342B400A3DC4E /* TrackTableCell.xib */; };
+		0FAF021921F4796500BC7829 /* LeftBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF021821F4796500BC7829 /* LeftBarButton.m */; };
 		0FE8B10221D06A2B00AF75A4 /* MyRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B10121D06A2B00AF75A4 /* MyRecordViewController.m */; };
 		0FE8B14321D06DB000AF75A4 /* AAJSFiles.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0FE8B10421D06DB000AF75A4 /* AAJSFiles.bundle */; };
 		0FE8B14421D06DB000AF75A4 /* AAAreaspline.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE8B10721D06DB000AF75A4 /* AAAreaspline.m */; };
@@ -337,6 +338,8 @@
 		0FA2EA1A21C342B400A3DC4E /* TrackTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrackTableCell.h; sourceTree = "<group>"; };
 		0FA2EA1B21C342B400A3DC4E /* TrackTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackTableCell.m; sourceTree = "<group>"; };
 		0FA2EA1C21C342B400A3DC4E /* TrackTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackTableCell.xib; sourceTree = "<group>"; };
+		0FAF021721F4796500BC7829 /* LeftBarButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeftBarButton.h; sourceTree = "<group>"; };
+		0FAF021821F4796500BC7829 /* LeftBarButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeftBarButton.m; sourceTree = "<group>"; };
 		0FE8B10021D06A2B00AF75A4 /* MyRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyRecordViewController.h; sourceTree = "<group>"; };
 		0FE8B10121D06A2B00AF75A4 /* MyRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyRecordViewController.m; sourceTree = "<group>"; };
 		0FE8B10421D06DB000AF75A4 /* AAJSFiles.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AAJSFiles.bundle; sourceTree = "<group>"; };
@@ -591,6 +594,8 @@
 				0F2FAB2B21F028CD00E6BB83 /* TopDismissScrollView.m */,
 				0F56050721F19D0000C955C8 /* RoundIndicatorView.h */,
 				0F56050821F19D0000C955C8 /* RoundIndicatorView.m */,
+				0FAF021721F4796500BC7829 /* LeftBarButton.h */,
+				0FAF021821F4796500BC7829 /* LeftBarButton.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1140,6 +1145,7 @@
 				0FE8B15C21D06DB000AF75A4 /* AAChart.m in Sources */,
 				0F6FD02921CA15360083D590 /* BodyDataViewController.m in Sources */,
 				0FA2A58821C9D7DE0035B333 /* FounctionTableCell.m in Sources */,
+				0FAF021921F4796500BC7829 /* LeftBarButton.m in Sources */,
 				0F2AB57E21BDF1FF006FB503 /* main.m in Sources */,
 				0F2AB5BE21BDFC55006FB503 /* CircleProgressButton.m in Sources */,
 				0F2AB5CD21BE2EFD006FB503 /* HomeViewController.m in Sources */,
