@@ -5,6 +5,7 @@
 ## Build generated
 build/
 DerivedData/
+BDSClientLib/
 
 ## Various settings
 *.pbxuser
