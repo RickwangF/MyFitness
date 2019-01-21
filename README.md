@@ -7,51 +7,48 @@ MyFitness会记录运动的时间，轨迹，速度，卡路里消耗量等信�
 ### 首页
 在首页可以设置目标距离和时间，可以开启或关闭语音提示，可以选择运动的方式。
 
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/752b585eeeb3acc144ca.jpg)
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/6fef4e60357580f46c85.jpg)
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/6c4f97047c8dadd05b2b.jpg)
-
-首页的运行效果展示：
-
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/12276b770c57dc103466.gif)
-
-开始运动的效果展示：
-
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/54f783458dc6cef4713c.gif)
+![image](http://lc-gytbbdn5.cn-n1.lcfile.com/49f3dc461c9489b6f4f4.png)
+![image](http://lc-gytbbdn5.cn-n1.lcfile.com/b64fecdeb13577b7167b.png)
+![image](http://lc-gytbbdn5.cn-n1.lcfile.com/61f27841d186e2affba9.png)
+![image](http://lc-gytbbdn5.cn-n1.lcfile.com/b0104db18b973c83ed5e.png)
 
 ### 里程
 
 里程中详细展示了用户使用MyFitness进行运动的里程列表和运动轨迹。
 
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/64c4927461ab82d5adea.jpg)
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/2d2bd3de33ef199615bc.jpg)
+![image](http://lc-gytbbdn5.cn-n1.lcfile.com/0a71d192d37d67d3186f.png)
+![image](http://lc-gytbbdn5.cn-n1.lcfile.com/af8dddade606fc738d39.png)
 
 ### 记录
 
 记录中展示了用户一段时间以来的运动的小记录。
 
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/33f779f42ef36a369ef8.jpg)
+![image](http://lc-gytbbdn5.cn-n1.lcfile.com/9904ca1d9d84401c6569.png)
 
 ### 计时器
 
 计时器会记录用户的GPS轨迹和运动时间，速度并上传到LeanCloud。
 
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/b7fbc90f6ed3aefb4f56.jpg)
+![image](http://lc-gytbbdn5.cn-n1.lcfile.com/ad039b11dcf51a9a565f.png)
+![image](http://lc-gytbbdn5.cn-n1.lcfile.com/24ac91fb74515a09d106.png)
 
 ### 登录和注册
 
 没什么特别的，就是注册和登录。
 
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/5ced1f461cdb7a7009a5.jpg)
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/a341e85e93e52cce92d1.jpg)
+![image](http://lc-gytbbdn5.cn-n1.lcfile.com/dddada9d5f83b2236189.png)
+![image](http://lc-gytbbdn5.cn-n1.lcfile.com/1bfc01be24ce61a4e822.png)
 
 ### 个人中心
 
 个人信息设置和关于我们功能还没有做。
 
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/a961c60f47add5367d43.jpg)
+![image](http://lc-gytbbdn5.cn-n1.lcfile.com/4501156ab2acb5648a61.png)
 
 ### 合作
+
+![image](http://lc-gytbbdn5.cn-n1.lcfile.com/b9e7b493597d20b02150.png)
+![image](http://lc-gytbbdn5.cn-n1.lcfile.com/7c58653ee9fed3798220.png)
 
 合作功能中展示了我的一些个人简介和App UI设计师的个人简介，还有一些有意思的东西。转场动画效果模仿AppStore。
 
@@ -66,6 +63,7 @@ Xcode10
 下载地址[：https://ai.baidu.com/sdk#tts/](https://ai.baidu.com/sdk#tts/)
 
 存放目录截图：
+
 ![image](http://lc-gytbbdn5.cn-n1.lcfile.com/e9da7ec74f3ece1be00d.png)
 
 重新编译即可运行。

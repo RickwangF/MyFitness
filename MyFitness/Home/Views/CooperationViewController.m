@@ -71,21 +71,18 @@
 #pragma mark - Insert Data
 
 - (void)insertData{
-	
-	NSString *title = @"华为Mate20Pro新配色发布";
-	NSString *content1 = @"在泛审美爆发的今天，不论奢侈名品还是科技尖货，都在追寻着时尚的脚步。夯实品质的前提下，还要力求满足大众对产品外观的审美需求，只有经过潮流无数次冲刷后，留下的色彩才能称之为经典。正如经典的红蓝双色，诠释的不仅是色彩界的最佳CP，更蕴含着感性与理性的双面内涵。";
-	NSString *content2 = @"2019年1月10日，华为Mate 20 Pro携惊喜而来，连同众多时尚大咖，在北京三里屯CHAO酒店正式发布了两款诠释时尚经典的新色——馥蕾红、璨星蓝。发布会当天知名主持人、模特李艾，Grace Chen 品牌创始人、总设计师Grace Chen，国际超模、珠宝设计师、上市公司首席品牌官黄超燕，芭莎能量创始人兼总裁景璐等精英女性代表现身“红蓝知己”HUAWEI Mate 20系列新色沙龙现场。";
-	NSString *content3 = @"在新色沙龙现场，华为消费者业务手机产品线总裁何刚对两款新色的设计初衷进行了分享。何刚表示，此次华为Mate 20 Pro在原有时尚配色基础上推出了馥蕾红、璨星蓝两款新色，是希望让手机除了带来极致的科技体验，还承载起消费者的情感需求，以色彩对话内心，引发高端用户在审美和精神上的共鸣。";
-	NSString *content4 = @"说到馥蕾红，它的设计灵感源自象征热烈、浪漫的玫瑰，给人以“带着玫瑰色的梦和蓓蕾的温馨”，同时它也象征着精英女性特有的成熟魅力。华为手机正是将这一抹温润赋予在了华为Mate 20 Pro上，为科技产品增添了一份女性与时尚的气息。";
-	NSString *content5 = @"此次华为Mate 20 Pro带来的馥蕾红、璨星蓝两款新色，采用的是时下流行的渐变设计，而得益于全新的工艺，让机身具有着流光溢彩的绚烂感。";
-	NSString *content6 = @"比起纯色机身和常规工艺，华为手机更像是手机界的配色大师，华为Mate 20 Pro的两款新色首次采用了空间印膜工艺。为了保持机身的纤薄美感，研发团队需要以单层膜的厚度实现双层膜的立体空间光影颜色渐变，这在工艺技术难度上又上了一个台阶。在克服了诸多困难之后，才得以在不影响厚度的前提下，实现了空间渐变颜色效果和立体空间的光影颜色效果，馥蕾红的“味道”变得更为浓郁，而璨星蓝所演绎的“星空”也变得更加深邃。";
-	NSString *imageUrl = @"http://lc-gytbbdn5.cn-n1.lcfile.com/828c00e7936481756f57.jpg";
+	NSString *title = @"MyFitness 开发者RickWang";
+	NSString *content1 = @"RickWang今年28岁，现居昆明，从事iOS开发一年多，之前有三年的.Net后端开发经验，也参与过一个Android原生项目的开发，有一定的项目管理经验和项目设计经验。";
+	NSString *content2 = @"现在，我能熟练使用Swift和Objective-C进行iOS App的开发，在业余时间还学习了使用Vue和Webpack开发WebApp，也成功将公司原生iOS App的一个模块使用WebApp的形式实现了。具体的实现效果请在AppStore中搜索“导游助考宝”，由于公司规模有限，iOS的开发工作也都是我独立完成。";
+	NSString *content3 = @"开发MyFitness项目的初衷是为了锻炼自己的Objective-C的编程能力，由于之前学习iOS使用的是Swift语言，后来成功上架的App也是使用的Swift，没有经过实战的编程能力是无法令人信服的，所以利用一个月的业余时间开了这个App。MyFitness没有组件化，没有使用MVP结构，使用的还是经典的MVC结构。项目中使用了一部分的Swift开源库，也做了一定的混编来实现预期效果。";
+	NSString *content4 = @"希望在2019年进入到一个更大的公司继续从事并学习iOS开发，Flutter1.0版本已经发布了，新的一年我还将致力于学习和实践跨平台开发和前端工程化，在Facebook重构完ReactNative后，也一定会抽时间跟进学习。";
+	NSString *imageUrl = @"http://lc-gytbbdn5.cn-n1.lcfile.com/3c5e606823278a7be9f1.png";
 	
 	AVObject *object = [AVObject objectWithClassName:@"Cooperation"];
 	[object setObject:title forKey:@"title"];
-	[object setObject:@[content1, content2, content3, content4, content5, content6] forKey:@"content"];
+	[object setObject:@[content1, content2, content3, content4] forKey:@"content"];
 	[object setObject:imageUrl forKey:@"imageUrl"];
-	[object setObject:@(4) forKey:@"orderIndex"];
+	[object setObject:@(0) forKey:@"orderIndex"];
 	[object setObject:@(YES) forKey:@"darkImage"];
 	[object saveInBackground];
 }
