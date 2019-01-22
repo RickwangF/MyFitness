@@ -42,7 +42,7 @@ MyFitness会记录运动的时间，轨迹，速度，卡路里消耗量等信�
 
 ### 计时器
 
-计时器会记录用户的GPS轨迹和运动时间，速度并上传到LeanCloud。
+计时器会记录用户的GPS轨迹，运动时间，运动速度并上传到服务器，如果开启语音提示，还会根据设置的距离和时间进行j语音提示，每公里都会进行提示。
 
 <table>
 <tr>
@@ -66,12 +66,21 @@ MyFitness会记录运动的时间，轨迹，速度，卡路里消耗量等信�
 
 个人信息设置和关于我们功能还没有做。
 
-<div>
-<img style="width:500px;" src="http://lc-gytbbdn5.cn-n1.lcfile.com/4501156ab2acb5648a61.png" />
-</div>
+<table>
+<tr>
+<td>
+<img src="http://lc-gytbbdn5.cn-n1.lcfile.com/4501156ab2acb5648a61.png"" style="width:500px;" />
+</td>
+<td>
+<img src="http://lc-gytbbdn5.cn-n1.lcfile.com/6fdefe0f9a7f68c0b7cf.png" style="width:500px;" />
+</td>
+</tr>
+</table>
 
 
 ### 合作
+
+合作功能中展示了我的一些个人简介和App UI设计师的个人简介，还有一些有意思的东西。转场动画效果模仿AppStore。
 
 <table>
 <tr>
@@ -80,7 +89,7 @@ MyFitness会记录运动的时间，轨迹，速度，卡路里消耗量等信�
 </tr>
 </table>
 
-合作功能中展示了我的一些个人简介和App UI设计师的个人简介，还有一些有意思的东西。转场动画效果模仿AppStore。
+以上展示了所有MyFitness现在完成的功能，App的基本功能已经全部完成，可以下载测试使用。
 
 ### 系统要求
 iOS9 - iOS12
