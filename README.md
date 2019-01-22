@@ -66,8 +66,9 @@ MyFitness会记录运动的时间，轨迹，速度，卡路里消耗量等信�
 
 个人信息设置和关于我们功能还没有做。
 
-
-<img style="width:500px;" src="http://lc-gytbbdn5.cn-n1.lcfile.com/4501156ab2acb5648a61.png" />
+<div>
+<img style="width:500px;" src="http://lc-gytbbdn5.cn-n1.lcfile.com/0d70df8540e587aec423.png" />
+</div>
 
 
 ### 合作
