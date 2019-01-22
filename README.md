@@ -7,48 +7,77 @@ MyFitness会记录运动的时间，轨迹，速度，卡路里消耗量等信�
 ### 首页
 在首页可以设置目标距离和时间，可以开启或关闭语音提示，可以选择运动的方式。
 
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/49f3dc461c9489b6f4f4.png)
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/b64fecdeb13577b7167b.png)
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/61f27841d186e2affba9.png)
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/b0104db18b973c83ed5e.png)
+<table>
+<tr>
+<td><img style="width:500px;" src="http://lc-gytbbdn5.cn-n1.lcfile.com/49f3dc461c9489b6f4f4.png" /></td>
+<td><img style="width:500px;" src="http://lc-gytbbdn5.cn-n1.lcfile.com/b64fecdeb13577b7167b.png" /></td>
+</tr>
+<tr>
+<td><img style="width:500px;" src="http://lc-gytbbdn5.cn-n1.lcfile.com/61f27841d186e2affba9.png" /></td>
+<td><img style="width:500px;" src="http://lc-gytbbdn5.cn-n1.lcfile.com/b0104db18b973c83ed5e.png" /></td>
+</tr>
+</table>
 
 ### 里程
 
 里程中详细展示了用户使用MyFitness进行运动的里程列表和运动轨迹。
 
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/0a71d192d37d67d3186f.png)
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/af8dddade606fc738d39.png)
+<table>
+<tr>
+<td><img style="width:500px;" src="http://lc-gytbbdn5.cn-n1.lcfile.com/0a71d192d37d67d3186f.png" /></td>
+<td><img style="width:500px;" src="http://lc-gytbbdn5.cn-n1.lcfile.com/af8dddade606fc738d39.png" /></td>
+</tr>
+</table>
 
 ### 记录
 
 记录中展示了用户一段时间以来的运动的小记录。
 
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/9904ca1d9d84401c6569.png)
+<table>
+<tr>
+<td><img style="width:500px;" src="http://lc-gytbbdn5.cn-n1.lcfile.com/9904ca1d9d84401c6569.png" /></td>
+<td><img style="width:500px;" src="http://lc-gytbbdn5.cn-n1.lcfile.com/41b2ad877943ee400646.png" /></td>
+</tr>
+</table>
 
 ### 计时器
 
 计时器会记录用户的GPS轨迹和运动时间，速度并上传到LeanCloud。
 
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/ad039b11dcf51a9a565f.png)
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/24ac91fb74515a09d106.png)
+<table>
+<tr>
+<td><img style="width:500px;" src="http://lc-gytbbdn5.cn-n1.lcfile.com/ad039b11dcf51a9a565f.png" /></td>
+<td><img style="width:500px;" src="http://lc-gytbbdn5.cn-n1.lcfile.com/24ac91fb74515a09d106.png" /></td>
+</tr>
+</table>
 
 ### 登录和注册
 
 没什么特别的，就是注册和登录。
 
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/dddada9d5f83b2236189.png)
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/1bfc01be24ce61a4e822.png)
+<table>
+<tr>
+<td><img style="width:500px;" src="http://lc-gytbbdn5.cn-n1.lcfile.com/dddada9d5f83b2236189.png" /></td>
+<td><img style="width:500px;" src="http://lc-gytbbdn5.cn-n1.lcfile.com/1bfc01be24ce61a4e822.png" /></td>
+</tr>
+</table>
 
 ### 个人中心
 
 个人信息设置和关于我们功能还没有做。
 
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/4501156ab2acb5648a61.png)
+
+<img style="width:500px;" src="http://lc-gytbbdn5.cn-n1.lcfile.com/4501156ab2acb5648a61.png" />
+
 
 ### 合作
 
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/b9e7b493597d20b02150.png)
-![image](http://lc-gytbbdn5.cn-n1.lcfile.com/7c58653ee9fed3798220.png)
+<table>
+<tr>
+<td><img style="width:500px;" src="http://lc-gytbbdn5.cn-n1.lcfile.com/b9e7b493597d20b02150.png" /></td>
+<td><img style="width:500px;" src="http://lc-gytbbdn5.cn-n1.lcfile.com/7c58653ee9fed3798220.png" /></td>
+</tr>
+</table>
 
 合作功能中展示了我的一些个人简介和App UI设计师的个人简介，还有一些有意思的东西。转场动画效果模仿AppStore。
 
