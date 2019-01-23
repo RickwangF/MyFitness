@@ -89,6 +89,16 @@ MyFitness会记录运动的时间，轨迹，速度，卡路里消耗量等信�
 </tr>
 </table>
 
+### 实际使用效果展示
+
+<table>
+<tr>
+<td><img style="width:333px;" src="/ScreenShots/start.gif" /></td>
+<td><img style="width:333px;" src="/ScreenShots/cooper.gif" /></td>
+<td><img style="width:333px;" src="/ScreenShots/track.gif" /></td>
+</tr>
+</table>
+
 以上展示了所有MyFitness现在完成的功能，App的基本功能已经全部完成，可以下载测试使用。
 
 ### 系统要求
