@@ -38,7 +38,7 @@
 
 @property (nonatomic, strong) ButtonItemView *privacyItemView;
 
-@property (nonatomic, strong) UIButton *arrowBtn;
+@property (nonatomic, strong) UIImageView *arrowImageView;
 
 @end
 
@@ -188,6 +188,21 @@
 		make.width.equalTo(self.view);
 		make.height.equalTo(@40);
 	}];
+	
+	UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0.5)];
+	separator.backgroundColor = AppStyleSetting.sharedInstance.lightSeparatorColor;
+	[self.view addSubview:separator];
+	
+	[separator mas_makeConstraints:^(MASConstraintMaker *make) {
+		if ([[UIDevice currentDevice] fullScreen]) {
+			make.bottom.equalTo(self.view.mas_bottom).offset(-75.5);
+		}
+		else{
+			make.bottom.equalTo(self.view.mas_bottom).offset(-50.5);
+		}
+		make.height.equalTo(@(0.5));
+		make.left.right.equalTo(self.view);
+	}];
 }
 
 - (void)initBottomContainerView{
@@ -203,10 +218,6 @@
 			make.height.equalTo(@50);
 		}
 	}];
-	
-	UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0.5)];
-	separator.backgroundColor = AppStyleSetting.sharedInstance.lightSeparatorColor;
-	[_bottomContainerView addSubview:separator];
 	
 	_privacyItemView = [[ButtonItemView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
 	[_privacyItemView setItemHeight:16];
@@ -230,14 +241,13 @@
 		}
 	}];
 	
-	_arrowBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
-	[_arrowBtn setImage:[UIImage imageNamed:@"right_18#91"] forState:UIControlStateNormal];
-	[_arrowBtn addTarget:self action:@selector(privacyItemViewClicked:) forControlEvents:UIControlEventTouchUpInside];
-	[_bottomContainerView addSubview:_arrowBtn];
+	_arrowImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 19, 19)];
+	_arrowImageView.image = [UIImage imageNamed:@"right_18#91"];
+	[_privacyItemView addSubview:_arrowImageView];
 	
-	[_arrowBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.right.equalTo(self.bottomContainerView).offset(-15);
-		make.width.height.equalTo(@25);
+	[_arrowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.right.equalTo(self.privacyItemView).offset(-15);
+		make.width.height.equalTo(@19);
 		make.centerY.equalTo(self.privacyItemView);
 	}];
 }
