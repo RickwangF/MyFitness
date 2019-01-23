@@ -24,5 +24,6 @@ pod 'ActionSheetPicker-3.0', '~> 2.3.0'
 pod 'Charts'
 pod 'FFPopup'
 pod 'YLProgressBar', '~> 3.11.0'
+pod 'DZNEmptyDataSet'
 
 end

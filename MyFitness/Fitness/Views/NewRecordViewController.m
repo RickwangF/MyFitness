@@ -22,14 +22,16 @@
 #import "RecChartTableCell.h"
 #import "MessageFooterView.h"
 #import "RecordData.h"
+#import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 
-@interface NewRecordViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface NewRecordViewController ()<UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
 
 @property (nonatomic, strong) UITableView *recordTableView;
 
 // 键是年份字符串, 值是年份对应的记录数组
 @property (nonatomic, strong) NSMutableDictionary *recordDictionary;
 
+// 记录的年份数组
 @property (nonatomic, strong) NSMutableArray *yearIndexArray;
 
 @property (nonatomic, strong) NSMutableArray *trackArray;
@@ -91,6 +93,8 @@
 	_recordTableView.backgroundView = nil;
 	_recordTableView.delegate = self;
 	_recordTableView.dataSource = self;
+	_recordTableView.emptyDataSetDelegate = self;
+	_recordTableView.emptyDataSetSource = self;
 	_recordTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	if (@available(iOS 11.0, *)) {
 		_recordTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -288,7 +292,7 @@
 		}
 		else{
 			if (objects == nil || objects.count == 0) {
-				[self.view makeToast:@"你没有运动记录"];
+				[self.recordTableView reloadData];
 				return;
 			}
 			
@@ -315,6 +319,7 @@
 
 - (RecBaseInfoTableCell*)baseInfoCellData:(RecordData*)data WithTable:(UITableView*)tableView IndexPath:(NSIndexPath*)indexPath{
 	RecBaseInfoTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recInfoCell" forIndexPath:indexPath];
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	if (indexPath.section == 0 && indexPath.row == 0){
 		[cell hideAboveLine];
 		[cell changeIndicatorSize:CGSizeMake(30, 30)];
@@ -332,6 +337,7 @@
 
 - (RecMapTableCell*)mapCellData:(RecordData*)data WithTable:(UITableView*)tableView IndexPath:(NSIndexPath*)indexPath{
 	RecMapTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recMapCell" forIndexPath:indexPath];
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	if (indexPath.section == 0 && indexPath.row == 0){
 		[cell hideAboveLine];
 		[cell changeIndicatorSize:CGSizeMake(30, 30)];
@@ -350,6 +356,7 @@
 
 - (RecChartTableCell*)chartCellData:(RecordData*)data WithTable:(UITableView*)tableView IndexPath:(NSIndexPath*)indexPath{
 	RecChartTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recChartCell" forIndexPath:indexPath];
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	if (indexPath.section == 0 && indexPath.row == 0){
 		[cell hideAboveLine];
 		[cell changeIndicatorSize:CGSizeMake(30, 30)];
@@ -494,6 +501,22 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+#pragma mark - DZNEmptyDataSetDelegate
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
+	return [UIImage imageNamed:@"nodata_150#bf"];
+}
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
+	NSString *title = @"暂时没有你的记录数据";
+	
+	NSDictionary *attributedDic = @{
+									NSFontAttributeName: [UIFont systemFontOfSize:20 weight:UIFontWeightSemibold],
+									NSForegroundColorAttributeName: [UIColor colorWithRed:191.0/255 green:191.0/255 blue:191.0/255 alpha:1.0]
+									};
+	
+	return [[NSAttributedString alloc] initWithString:title attributes:attributedDic];
+}
 
 /*
 #pragma mark - Navigation

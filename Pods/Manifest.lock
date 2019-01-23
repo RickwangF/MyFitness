@@ -39,6 +39,7 @@ PODS:
   - CHIPageControl/Paprika (0.1.7)
   - CHIPageControl/Puya (0.1.7)
   - DropDown (2.3.12)
+  - DZNEmptyDataSet (1.8.1)
   - FFPopup (0.2.0)
   - Hero (1.4.0)
   - HMSegmentedControl (1.5.5)
@@ -63,6 +64,7 @@ DEPENDENCIES:
   - Charts
   - CHIPageControl (from `https://github.com/RickwangF/CHIPageControl`)
   - DropDown (from `https://github.com/RickwangF/DropDown`)
+  - DZNEmptyDataSet
   - FFPopup
   - Hero
   - HMSegmentedControl
@@ -84,6 +86,7 @@ SPEC REPOS:
     - BaiduMapKit
     - BMKLocationKit
     - Charts
+    - DZNEmptyDataSet
     - FFPopup
     - Hero
     - HMSegmentedControl
@@ -120,6 +123,7 @@ SPEC CHECKSUMS:
   Charts: f122fb70b19847fa5817d018b77d6c5a2296ab25
   CHIPageControl: bbe1ddd0c688c02ec65b7f7e7d34551a3d16f37c
   DropDown: 0bcc278799ec11a3d34ce1aac9367fbbaf5423d9
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FFPopup: 266b431aede035b4998251410984a12ca26dc2fa
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
   HMSegmentedControl: f514c6dad47aa3065e0ed2e8046b73efc71221b9
@@ -133,6 +137,6 @@ SPEC CHECKSUMS:
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   YLProgressBar: 0c0796a6e9b5e5d5040d15c8911e802b67ccb939
 
-PODFILE CHECKSUM: 934c696bc0438b42f913b5bbe0cf60890ce8efd9
+PODFILE CHECKSUM: 4ebf21293dee5a6d8e3189e3936e6a84e96a61ea
 
 COCOAPODS: 1.5.3

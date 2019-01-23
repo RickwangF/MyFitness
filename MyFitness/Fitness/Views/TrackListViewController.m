@@ -24,13 +24,14 @@
 #import "RightImageButton.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NewRecordViewController.h"
+#import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 
 /*
  里程页面的数据按照“年-月”组成的键分类，存储在字典中，有多少个“年-月”的组合就有多少个section
  “年-月”的组合存储在yearMonthArray中，在trackDic中“年-月”是键，值是该年改月的轨迹记录数组
  */
 
-@interface TrackListViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface TrackListViewController ()<UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
 	
 @property (nonatomic, strong) NSMutableArray<TrackRecord*> *trackList;
 	
@@ -198,6 +199,8 @@
 	_tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 300, 300) style:UITableViewStyleGrouped];
 	_tableView.delegate = self;
 	_tableView.dataSource = self;
+	_tableView.emptyDataSetDelegate = self;
+	_tableView.emptyDataSetSource = self;
 	_tableView.backgroundColor = [UIColor whiteColor];
 	_tableView.sectionFooterHeight = 0;
 	_tableView.estimatedRowHeight = 0;
@@ -262,7 +265,7 @@
 		}
 		else{
 			if (objects == nil || objects.count == 0) {
-				[self.view makeToast:@"记录为空"];
+				[self.tableView reloadData];
 				return;
 			}
 			
@@ -423,10 +426,19 @@
 #pragma mark - UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+	if (_yearMonthArray.count == 0) {
+		return 0;
+	}
+	
 	return 1 + _yearMonthArray.count;
 }
 	
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+	
+	if (_yearMonthArray.count == 0) {
+		return 0;
+	}
+	
 	if (section == 0){
 		return 1;
 	}
@@ -543,6 +555,25 @@
 		[self.navigationController pushViewController:detailVC animated:YES];
 	}
 	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - DZNEmptyDataSetDelegate
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
+	
+	return [UIImage imageNamed:@"nodata_150#bf"];
+}
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
+	
+	NSString *title = @"暂时没有你的里程数据";
+	
+	NSDictionary *attributedDic = @{
+								   NSFontAttributeName: [UIFont systemFontOfSize:20 weight:UIFontWeightSemibold],
+								   NSForegroundColorAttributeName: [UIColor colorWithRed:191.0/255 green:191.0/255 blue:191.0/255 alpha:1.0]
+								   };
+	
+	return [[NSAttributedString alloc] initWithString:title attributes:attributedDic];
 }
 
 /*

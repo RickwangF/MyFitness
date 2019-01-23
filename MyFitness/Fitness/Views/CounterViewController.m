@@ -648,7 +648,6 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	
 	[_trackRecord saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
 		if (succeeded) {
-			[self.view makeToast:@"记录保存成功"];
 			// 打开轨迹记录的详细
 			TrackDetailViewController *detailVC = [[TrackDetailViewController alloc] initWithStartTime:self.startDate FinishedTime:self.finishDate TransportMode:self.transportMode TrackId:self.trackRecord.objectId openList:YES];
 			[self.navigationController pushViewController:detailVC animated:YES];
@@ -766,23 +765,19 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	BTKStartServiceOption *opt = [[BTKStartServiceOption alloc] initWithEntityName:userName];
 	[[BTKAction sharedInstance] startService:opt delegate:self];
 	[[BTKAction sharedInstance] startGather:self];
-	[self.view makeToast:@"开始服务并开始采集轨迹"];
 }
 	
 - (void)stopGather{
 	[[BTKAction sharedInstance] stopGather:self];
-	[self.view makeToast:@"停止采集轨迹"];
 }
 	
 - (void)startGather{
 	[[BTKAction sharedInstance] startGather:self];
-	[self.view makeToast:@"开始采集轨迹"];
 }
 	
 - (void)stopService{
 	[[BTKAction sharedInstance] stopGather:self];
 	[[BTKAction sharedInstance] stopService:self];
-	[self.view makeToast:@"关闭轨迹采集服务"];
 }
 	
 - (void)pauseBtnClicked:(UIButton*)sender{
@@ -910,7 +905,7 @@ static NSString * const SecretKey = @"vZThgqUIC5pwIthyRxPgngj1QygriOqD";
 	}
 	
 	if (location == nil) {
-		[self.navigationController.view makeToast:@"定位失败"];
+		[self.view makeToast:@"定位失败"];
 		return;
 	}
 	

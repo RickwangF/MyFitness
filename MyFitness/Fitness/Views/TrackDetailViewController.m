@@ -587,7 +587,6 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 		
 		[AVObject saveAllInBackground:self.trackPoints block:^(BOOL succeeded, NSError * _Nullable error) {
 			if (succeeded) {
-				[self.view makeToast:@"插入轨迹点成功"];
 				[self saveTrackRecordLocationArray];
 			}
 			else{
@@ -607,7 +606,7 @@ static NSString* const stopLocIdentifier = @"stopLoc";
 	[_trackRecord setObject:self.trackPoints forKey:@"locationArray"];
 	[_trackRecord saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
 		if (succeeded) {
-			[self.view makeToast:@"保存轨迹点关联成功"];
+			NSLog(@"轨迹点关联成功");
 		}
 		else{
 			if (error != nil) {

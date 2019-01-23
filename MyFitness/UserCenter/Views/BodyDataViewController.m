@@ -395,7 +395,7 @@
 		if (indexPath.row == 0) {
 			BodyTableCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 			NSString *heightString;
-			if (![_ageArray containsObject: cell.valueLabel.text]) {
+			if (![_heightArray containsObject: cell.valueLabel.text]) {
 				heightString = @"175 厘米";
 			}
 			else{
@@ -406,7 +406,7 @@
 		else{
 			BodyTableCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 			NSString *weightString;
-			if (![_ageArray containsObject: cell.valueLabel.text]) {
+			if (![_weightArray containsObject: cell.valueLabel.text]) {
 				weightString = @"65 公斤";
 			}
 			else{

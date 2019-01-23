@@ -280,7 +280,7 @@
                 return;
             }
             
-            [self.view makeToast:[NSString stringWithFormat:@"注册失败，%@", error.localizedDescription]];
+            [self.view makeToast:[NSString stringWithFormat:@"登录失败，%@", error.localizedDescription]];
         }
     }];
 }
