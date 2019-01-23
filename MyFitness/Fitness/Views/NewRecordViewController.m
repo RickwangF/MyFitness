@@ -42,6 +42,9 @@
 // 历史平均用时
 @property (nonatomic, assign) double avgDuration;
 
+// 正在加载的标志
+@property (nonatomic, assign) BOOL loadingFlag;
+
 @end
 
 @implementation NewRecordViewController
@@ -62,6 +65,7 @@
 	_yearIndexArray = [[NSMutableArray alloc] init];
 	_trackArray = [[NSMutableArray alloc] init];
 	_avgSpeed = 0;
+	_loadingFlag = YES;
 }
 
 #pragma mark - Lift Circle
@@ -289,13 +293,16 @@
 	[query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
 		if (error != nil) {
 			[self.view makeToast:error.localizedDescription];
+			self.loadingFlag = NO;
 		}
 		else{
 			if (objects == nil || objects.count == 0) {
+				self.loadingFlag = NO;
 				[self.recordTableView reloadData];
 				return;
 			}
 			
+			self.loadingFlag = NO;
 			for (NSDictionary *dic in objects) {
 				TrackRecord *track = [TrackRecord trackWithDictionary:dic];
 				[self.trackArray addObject:track];
@@ -502,6 +509,15 @@
 }
 
 #pragma mark - DZNEmptyDataSetDelegate
+
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView{
+	if (_loadingFlag) {
+		return NO;
+	}
+	else{
+		return YES;
+	}
+}
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
 	return [UIImage imageNamed:@"nodata_150#bf"];

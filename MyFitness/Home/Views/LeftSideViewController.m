@@ -221,7 +221,7 @@
 	[_privacyItemView mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.left.equalTo(self.bottomContainerView);
 		make.width.equalTo(self.view);
-		make.height.equalTo(@20);
+		make.height.equalTo(@50);
 		if ([[UIDevice currentDevice] fullScreen]) {
 			make.centerY.equalTo(self.bottomContainerView).offset(-12.5);
 		}

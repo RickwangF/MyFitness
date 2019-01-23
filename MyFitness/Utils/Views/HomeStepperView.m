@@ -147,7 +147,13 @@
 - (void)minusBtnClicked:(UIButton*)sender{
 	
 	if (_alertType == AlertTypeEnumDistance) {
-		_number -= 1;
+		
+		if (_number > 5) {
+			_number -= 5;
+		}
+		else{
+			_number -= 1;
+		}
 	}
 	else{
 		_number -= 5;
@@ -162,7 +168,13 @@
 
 - (void)addBtnClicked:(UIButton*)sender{
 	if (_alertType == AlertTypeEnumDistance) {
-		_number += 1;
+		
+		if (_number >= 5){
+			_number += 5;
+		}
+		else{
+			_number += 1;
+		}
 	}
 	else{
 		_number += 5;

@@ -55,6 +55,8 @@
 
 @property (nonatomic, strong) NSMutableString *totalDistanceString;
 
+@property (nonatomic, assign) BOOL loadingFlag;
+
 @end
 
 @implementation TrackListViewController
@@ -92,6 +94,7 @@
 	_trackDic = [[NSMutableDictionary alloc] init];
 	_avgPaceString = [NSMutableString string];
 	_totalDistanceString = [NSMutableString string];
+	_loadingFlag = YES;
 }
 
 #pragma mark - Life Circle
@@ -261,14 +264,17 @@
 	[query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
 		if (error != nil) {
 			[self.view makeToast:[NSString stringWithFormat:@"获取记录失败 ==> %@", error.localizedDescription]];
+			self.loadingFlag = NO;
 			return;
 		}
 		else{
 			if (objects == nil || objects.count == 0) {
+				self.loadingFlag = NO;
 				[self.tableView reloadData];
 				return;
 			}
 			
+			self.loadingFlag = NO;
 			if (self.trackList.count > 0){
 				[self.trackList removeAllObjects];
 			}
@@ -558,6 +564,15 @@
 }
 
 #pragma mark - DZNEmptyDataSetDelegate
+
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView{
+	if (_loadingFlag) {
+		return NO;
+	}
+	else{
+		return YES;
+	}
+}
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
 	
