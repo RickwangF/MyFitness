@@ -556,7 +556,9 @@
 	
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	if (indexPath.section > 0) {
-		TrackRecord *trackRecord = self.trackList[indexPath.row];
+		NSString *key = _yearMonthArray[indexPath.section - 1];
+		NSArray *array = _trackDic[key];
+		TrackRecord *trackRecord = array[indexPath.row];
 		TrackDetailViewController *detailVC = [[TrackDetailViewController alloc] initWithStartTime:trackRecord.startTime FinishedTime:trackRecord.finishedTime TransportMode:trackRecord.transportMode TrackId:trackRecord.objectId];
 		[self.navigationController pushViewController:detailVC animated:YES];
 	}
